@@ -1,3 +1,5 @@
+-- TODO this file should not exist (same for Game base class)
+
 local Game = require("Game");
 
 local ARPG = Class("ARPG", Game);
