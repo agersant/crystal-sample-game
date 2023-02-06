@@ -1,3 +1,4 @@
-package.path = package.path .. ";crystal/runtime/?.lua" -- TODO remove this when engine files don't get included all over the place anymore
+-- TODO Find a way for crystal/init.lua to do this itself
+package.path = package.path .. ";crystal/runtime/?.lua"
 
-require("crystal");
+require("crystal/runtime");
