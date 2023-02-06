@@ -1,0 +1,3 @@
+[submodule "runtime/crystal"]
+	path = runtime/crystal
+	url = https://github.com/agersant/crystal
