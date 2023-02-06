@@ -1,4 +1,4 @@
-local MovementControls = require("arpg/field/controls/MovementControls");
+local MovementControls = require("field/controls/MovementControls");
 local System = require("ecs/System");
 local AllComponents = require("ecs/query/AllComponents");
 local InputListener = require("mapscene/behavior/InputListener");

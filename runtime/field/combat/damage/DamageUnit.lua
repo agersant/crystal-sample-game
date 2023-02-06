@@ -1,7 +1,7 @@
-local DamageTypes = require("arpg/field/combat/damage/DamageTypes");
-local Elements = require("arpg/field/combat/damage/Elements");
-local DamageScalingSource = require("arpg/field/combat/damage/DamageScalingSource");
-local ScalingSources = require("arpg/field/combat/stats/ScalingSources");
+local DamageTypes = require("field/combat/damage/DamageTypes");
+local Elements = require("field/combat/damage/Elements");
+local DamageScalingSource = require("field/combat/damage/DamageScalingSource");
+local ScalingSources = require("field/combat/stats/ScalingSources");
 
 local DamageUnit = Class("DamageUnit");
 

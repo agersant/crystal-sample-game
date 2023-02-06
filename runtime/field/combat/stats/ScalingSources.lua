@@ -1,4 +1,4 @@
-local Stats = require("arpg/field/combat/stats/Stats");
+local Stats = require("field/combat/stats/Stats");
 local TableUtils = require("utils/TableUtils");
 
 local ScalingSources = {};

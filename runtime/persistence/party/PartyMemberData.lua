@@ -1,4 +1,4 @@
-local PartyMember = require("arpg/persistence/party/PartyMember");
+local PartyMember = require("persistence/party/PartyMember");
 local InputListener = require("mapscene/behavior/InputListener");
 
 local PartyMemberData = Class("PartyMemberData");

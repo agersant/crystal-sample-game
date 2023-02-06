@@ -1,4 +1,4 @@
-local FlinchAmounts = require("arpg/field/combat/hit-reactions/FlinchAmounts");
+local FlinchAmounts = require("field/combat/hit-reactions/FlinchAmounts");
 local Component = require("ecs/Component");
 local Collision = require("mapscene/physics/Collision");
 local CollisionFilters = require("mapscene/physics/CollisionFilters");

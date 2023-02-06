@@ -1,4 +1,4 @@
-local PartyMemberData = require("arpg/persistence/party/PartyMemberData");
+local PartyMemberData = require("persistence/party/PartyMemberData");
 local TableUtils = require("utils/TableUtils");
 
 local Party = Class("Party");

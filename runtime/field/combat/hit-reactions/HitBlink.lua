@@ -1,5 +1,5 @@
 local Behavior = require("mapscene/behavior/Behavior");
-local Palette = require("arpg/graphics/Palette");
+local Palette = require("graphics/Palette");
 
 local HitBlink = Class("HitBlink", Behavior);
 

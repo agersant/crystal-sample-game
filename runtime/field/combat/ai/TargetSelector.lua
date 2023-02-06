@@ -1,5 +1,5 @@
-local CombatData = require("arpg/field/combat/CombatData");
-local Teams = require("arpg/field/combat/Teams");
+local CombatData = require("field/combat/CombatData");
+local Teams = require("field/combat/Teams");
 local Component = require("ecs/Component");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 

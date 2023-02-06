@@ -1,7 +1,7 @@
-local FlinchAmounts = require("arpg/field/combat/hit-reactions/FlinchAmounts");
-local FlinchEffect = require("arpg/field/combat/hit-reactions/FlinchEffect");
-local DamageUnit = require("arpg/field/combat/damage/DamageUnit");
-local Skill = require("arpg/field/combat/skill/Skill");
+local FlinchAmounts = require("field/combat/hit-reactions/FlinchAmounts");
+local FlinchEffect = require("field/combat/hit-reactions/FlinchEffect");
+local DamageUnit = require("field/combat/damage/DamageUnit");
+local Skill = require("field/combat/skill/Skill");
 
 local ComboAttack = Class("ComboAttack", Skill);
 

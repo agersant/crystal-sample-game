@@ -1,5 +1,5 @@
-local DamageEvent = require("arpg/field/combat/damage/DamageEvent");
-local HitWidgetEntity = require("arpg/field/hud/damage/HitWidgetEntity");
+local DamageEvent = require("field/combat/damage/DamageEvent");
+local HitWidgetEntity = require("field/hud/damage/HitWidgetEntity");
 local System = require("ecs/System");
 
 local DamageNumbersSystem = Class("DamageNumbersSystem", System);

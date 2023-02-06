@@ -3,7 +3,7 @@ local Image = require("ui/bricks/elements/Image");
 local Overlay = require("ui/bricks/elements/Overlay");
 local Text = require("ui/bricks/elements/Text");
 local Widget = require("ui/bricks/elements/Widget");
-local Palette = require("arpg/graphics/Palette");
+local Palette = require("graphics/Palette");
 
 local DialogBox = Class("DialogBox", Widget);
 

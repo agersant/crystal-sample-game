@@ -1,5 +1,5 @@
 local Shader = require("mapscene/display/Shader");
-local Palette = require("arpg/graphics/Palette");
+local Palette = require("graphics/Palette");
 
 local CommonShader = Class("CommonShader", Shader);
 

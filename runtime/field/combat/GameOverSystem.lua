@@ -1,6 +1,6 @@
-local CombatData = require("arpg/field/combat/CombatData");
-local TitleScreen = require("arpg/frontend/TitleScreen");
-local PartyMember = require("arpg/persistence/party/PartyMember");
+local CombatData = require("field/combat/CombatData");
+local TitleScreen = require("frontend/TitleScreen");
+local PartyMember = require("persistence/party/PartyMember");
 local AllComponents = require("ecs/query/AllComponents");
 local System = require("ecs/System");
 

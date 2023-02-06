@@ -1,5 +1,5 @@
-local IdleAnimation = require("arpg/field/animation/IdleAnimation");
-local Dialog = require("arpg/field/hud/dialog/Dialog");
+local IdleAnimation = require("field/animation/IdleAnimation");
+local Dialog = require("field/hud/dialog/Dialog");
 local ScriptRunner = require("mapscene/behavior/ScriptRunner");
 local Sprite = require("mapscene/display/Sprite");
 local SpriteAnimator = require("mapscene/display/SpriteAnimator");

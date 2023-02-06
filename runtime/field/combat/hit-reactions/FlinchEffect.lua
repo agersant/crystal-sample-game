@@ -1,6 +1,6 @@
-local OnHitEffect = require("arpg/field/combat/effects/OnHitEffect");
-local Flinch = require("arpg/field/combat/hit-reactions/Flinch");
-local FlinchAmounts = require("arpg/field/combat/hit-reactions/FlinchAmounts");
+local OnHitEffect = require("field/combat/effects/OnHitEffect");
+local Flinch = require("field/combat/hit-reactions/Flinch");
+local FlinchAmounts = require("field/combat/hit-reactions/FlinchAmounts");
 
 local FlinchEffect = Class("FlinchEffect", OnHitEffect);
 

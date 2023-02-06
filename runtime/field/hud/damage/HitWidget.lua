@@ -2,7 +2,7 @@ local Overlay = require("ui/bricks/elements/Overlay");
 local Text = require("ui/bricks/elements/Text");
 local Widget = require("ui/bricks/elements/Widget");
 local Script = require("script/Script");
-local Palette = require("arpg/graphics/Palette");
+local Palette = require("graphics/Palette");
 
 local HitWidget = Class("HitWidget", Widget);
 

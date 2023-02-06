@@ -1,4 +1,4 @@
-local PartyMember = require("arpg/persistence/party/PartyMember");
+local PartyMember = require("persistence/party/PartyMember");
 local Persistence = require("persistence/Persistence");
 local MapSystem = require("mapscene/MapSystem");
 local ScriptRunner = require("mapscene/behavior/ScriptRunner");
@@ -7,7 +7,7 @@ local TouchTrigger = require("mapscene/physics/TouchTrigger");
 local Entity = require("ecs/Entity");
 local Script = require("script/Script");
 local StringUtils = require("utils/StringUtils");
-local Field = require("arpg/field/Field");
+local Field = require("field/Field");
 
 local Teleport = Class("Teleport", Entity);
 local TeleportTouchTrigger = Class("TeleportTouchTrigger", TouchTrigger);

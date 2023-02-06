@@ -1,4 +1,4 @@
-local DialogBox = require("arpg/field/hud/dialog/DialogBox");
+local DialogBox = require("field/hud/dialog/DialogBox");
 local Overlay = require("ui/bricks/elements/Overlay");
 local Widget = require("ui/bricks/elements/Widget");
 

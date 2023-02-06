@@ -5,8 +5,8 @@ local InputListener = require("mapscene/behavior/InputListener");
 local ScriptRunner = require("mapscene/behavior/ScriptRunner");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local Entity = require("ecs/Entity");
-local Dialog = require("arpg/field/hud/dialog/Dialog");
-local DialogBox = require("arpg/field/hud/dialog/DialogBox");
+local Dialog = require("field/hud/dialog/Dialog");
+local DialogBox = require("field/hud/dialog/DialogBox");
 
 local tests = {};
 

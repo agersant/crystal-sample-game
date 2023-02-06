@@ -1,4 +1,4 @@
-local HitWidget = require("arpg/field/hud/damage/HitWidget");
+local HitWidget = require("field/hud/damage/HitWidget");
 local Entity = require("ecs/Entity");
 local ScriptRunner = require("mapscene/behavior/ScriptRunner");
 local WorldWidget = require("mapscene/display/WorldWidget");

@@ -1,7 +1,7 @@
-local DamageUnit = require("arpg/field/combat/damage/DamageUnit");
-local FlinchAmounts = require("arpg/field/combat/hit-reactions/FlinchAmounts");
-local FlinchEffect = require("arpg/field/combat/hit-reactions/FlinchEffect");
-local Skill = require("arpg/field/combat/skill/Skill");
+local DamageUnit = require("field/combat/damage/DamageUnit");
+local FlinchAmounts = require("field/combat/hit-reactions/FlinchAmounts");
+local FlinchEffect = require("field/combat/hit-reactions/FlinchEffect");
+local Skill = require("field/combat/skill/Skill");
 
 local Dash = Class("Dash", Skill);
 

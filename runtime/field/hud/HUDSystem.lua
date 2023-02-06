@@ -1,5 +1,5 @@
 local System = require("ecs/System");
-local HUD = require("arpg/field/hud/HUD");
+local HUD = require("field/hud/HUD");
 
 local HUDSystem = Class("HUDSystem", System);
 
