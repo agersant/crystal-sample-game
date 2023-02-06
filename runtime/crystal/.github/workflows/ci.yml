@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  tests:
+    name: Run Tests
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Install Mesa
+        run: |
+          curl.exe -L --output mesa.7z --url https://github.com/pal1000/mesa-dist-win/releases/download/22.3.4/mesa3d-22.3.4-release-msvc.7z
+          & "C:\Program Files\7-Zip\7z.exe" x mesa.7z
+          $setup_script = Get-Content -Path systemwidedeploy.cmd
+          $setup_script = $setup_script -replace '^.*deployment choice.*$', '@GOTO desktopgl'
+          $setup_script = $setup_script -replace '^.*deploy complete.*$', '@exit'
+          $setup_script | Set-Content -Path systemwidedeploy.cmd
+          cmd /c systemwidedeploy.cmd
+      - name: Build game
+        run: .\build.ps1
+      - name: Run Rust tests
+        run: cargo test --release
+        working-directory: lib
+      - name: Run Lua tests
+        run: .\bin\lovec.exe game /test-unit /test-gfx
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: test-output
+          path: game/test-output
