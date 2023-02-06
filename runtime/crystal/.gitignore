@@ -1,6 +1,0 @@
-luacov.report.out
-luacov.stats.out
-
-bin
-lib/target
-test-output/
