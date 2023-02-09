@@ -74,4 +74,4 @@ end);
 
 --#endregion
 
-return Party;
+return PartyData;

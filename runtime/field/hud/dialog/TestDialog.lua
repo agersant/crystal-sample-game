@@ -10,8 +10,7 @@ local DialogBox = require("field/hud/dialog/DialogBox");
 
 local tests = {};
 
-tests[#tests + 1] = { name = "Blocks script during dialog", gfx = "mock" };
-tests[#tests].body = function()
+crystal.test.add("Blocks script during dialog", { gfx = "mock" }, function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
 	local dialogBox = DialogBox:new();
@@ -56,10 +55,9 @@ tests[#tests].body = function()
 	frame();
 
 	assert(a == 2);
-end
+end);
 
-tests[#tests + 1] = { name = "Can't start concurrent dialogs", gfx = "mock" };
-tests[#tests].body = function()
+crystal.test.add("Can't start concurrent dialogs", { gfx = "mock" }, function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
 	local dialogBox = DialogBox:new();
@@ -101,10 +99,9 @@ tests[#tests].body = function()
 	inputDevice:keyReleased("q");
 	frame();
 	assert(Dialog:new(dialogBox):beginDialog(player));
-end
+end);
 
-tests[#tests + 1] = { name = "Dialog is cleaned up if entity despawns while speaking", gfx = "mock" };
-tests[#tests].body = function()
+crystal.test.add("Dialog is cleaned up if entity despawns while speaking", { gfx = "mock" }, function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
 	local dialogBox = DialogBox:new();
@@ -139,6 +136,6 @@ tests[#tests].body = function()
 	npc:despawn();
 	frame();
 	assert(Dialog:new(dialogBox):beginDialog(player));
-end
+end);
 
 return tests;

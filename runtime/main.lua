@@ -1,3 +1,5 @@
+love.filesystem.setIdentity("crystal-sample-game");
+
 require("crystal/runtime");
 
 crystal.configure({
@@ -26,5 +28,3 @@ INPUT:applyBindings({
 		r = { "useSkill4" },
 	},
 });
-
-love.filesystem.setIdentity("crystal-sample-game");
