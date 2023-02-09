@@ -43,4 +43,23 @@ PartyMemberData.fromEntity = function(self, entity)
 	return partyMemberData;
 end
 
+--#region Test
+
+crystal.test.add("Instance class", function()
+	local original = PartyMemberData:new("Sailor");
+	assert(original:getInstanceClass() == "Sailor");
+	local copy = PartyMemberData:fromPOD(original:toPOD());
+	assert(copy:getInstanceClass() == original:getInstanceClass());
+end);
+
+crystal.test.add("Assigned player", function()
+	local original = PartyMemberData:new("Sailor");
+	original:setAssignedPlayer(2);
+	assert(original:getAssignedPlayer() == 2);
+	local copy = PartyMemberData:fromPOD(original:toPOD());
+	assert(copy:getAssignedPlayer() == original:getAssignedPlayer());
+end);
+
+--#endregion
+
 return PartyMemberData;

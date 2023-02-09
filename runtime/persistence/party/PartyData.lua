@@ -1,18 +1,18 @@
 local PartyMemberData = require("persistence/party/PartyMemberData");
 local TableUtils = require("utils/TableUtils");
 
-local Party = Class("Party");
+local PartyData = Class("PartyData");
 
-Party.init = function(self)
+PartyData.init = function(self)
 	self._members = {};
 end
 
-Party.addMember = function(self, member)
+PartyData.addMember = function(self, member)
 	assert(not TableUtils.contains(self._members, member));
 	table.insert(self._members, member);
 end
 
-Party.removeMember = function(self, member)
+PartyData.removeMember = function(self, member)
 	assert(TableUtils.contains(self._members, member));
 	for i, partyMember in ipairs(self._members) do
 		if partyMember == member then
@@ -21,11 +21,11 @@ Party.removeMember = function(self, member)
 	end
 end
 
-Party.getMembers = function(self)
+PartyData.getMembers = function(self)
 	return TableUtils.shallowCopy(self._members);
 end
 
-Party.toPOD = function(self)
+PartyData.toPOD = function(self)
 	local pod = {};
 	pod.members = {};
 	for i, partyMember in ipairs(self._members) do
@@ -34,8 +34,8 @@ Party.toPOD = function(self)
 	return pod;
 end
 
-Party.fromPOD = function(self, pod)
-	local party = Party:new();
+PartyData.fromPOD = function(self, pod)
+	local party = PartyData:new();
 	assert(pod.members);
 	for i, memberPOD in ipairs(pod.members) do
 		local member = PartyMemberData:fromPOD(memberPOD);
@@ -43,5 +43,35 @@ Party.fromPOD = function(self, pod)
 	end
 	return party;
 end
+
+--#region Tests
+
+crystal.test.add("Add member", function()
+	local party = PartyData:new();
+	local member = PartyMemberData:new("Thief");
+	party:addMember(member);
+	assert(#party:getMembers() == 1);
+	assert(party:getMembers()[1] == member);
+end);
+
+crystal.test.add("Remove member", function()
+	local party = PartyData:new();
+	local member = PartyMemberData:new("Thief");
+	party:addMember(member);
+	party:removeMember(member);
+	assert(#party:getMembers() == 0);
+end);
+
+crystal.test.add("Save and load", function()
+	local original = PartyData:new();
+	local member = PartyMemberData:new("Thief");
+	original:addMember(member);
+	local copy = PartyData:fromPOD(original:toPOD());
+	assert(#copy:getMembers() == 1);
+	assert(copy:getMembers()[1]:getInstanceClass() == original:getMembers()[1]:getInstanceClass());
+	assert(copy:getMembers()[1]:getAssignedPlayer() == original:getMembers()[1]:getAssignedPlayer());
+end);
+
+--#endregion
 
 return Party;
