@@ -1,7 +1,7 @@
 return {
 	type = "spritesheet",
 	content = {
-		texture = "arpg/assets/texture/sprite/sahagin.png",
+		texture = "assets/texture/sprite/sahagin.png",
 		frames = {
 			frame_0 = { x = 118, y = 98, w = 26, h = 25, },
 			frame_1 = { x = 0, y = 24, w = 23, h = 46, },

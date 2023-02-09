@@ -36,7 +36,7 @@ end
 Warrior.init = function(self, scene)
 	Warrior.super.init(self, scene);
 
-	local sheet = ASSETS:getSpritesheet("arpg/assets/spritesheet/duran.lua");
+	local sheet = ASSETS:getSpritesheet("assets/spritesheet/duran.lua");
 	local sprite = self:addComponent(Sprite:new());
 	self:addComponent(SpriteAnimator:new(sprite, sheet));
 	self:addComponent(CommonShader:new());

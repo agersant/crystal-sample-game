@@ -1,7 +1,10 @@
 require("crystal/runtime");
 
 crystal.configure({
-	assetsDirectory = "assets/"
+	assetsDirectory = "assets/",
+	mapDirectory = "assets/map/",
+	mapSceneClass = "Field",
+	saveDataClass = "SaveData",
 });
 
 local Fonts = require("resources/Fonts");

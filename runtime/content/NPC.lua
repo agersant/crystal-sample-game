@@ -24,7 +24,7 @@ end
 
 NPC.init = function(self, scene)
 	NPC.super.init(self, scene);
-	local sheet = ASSETS:getSpritesheet("arpg/assets/spritesheet/sahagin.lua");
+	local sheet = ASSETS:getSpritesheet("assets/spritesheet/sahagin.lua");
 	local sprite = self:addComponent(Sprite:new());
 	self:addComponent(SpriteAnimator:new(sprite, sheet));
 	self:addComponent(IdleAnimation:new("idle"));
