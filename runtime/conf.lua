@@ -1,6 +1,8 @@
+require("crystal/runtime");
+
 love.conf = function(options)
 	options.console = not love.filesystem.isFused();
-	options.window = false;
+	options.modules.audio = not crystal.test.isRunningTests();
 	options.modules.touch = false;
 	options.modules.video = false;
 	options.modules.thread = false;
