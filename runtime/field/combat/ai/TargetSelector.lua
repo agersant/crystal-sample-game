@@ -94,68 +94,70 @@ end
 
 --#region Tests
 
--- TODO repair tests
--- tests[#tests + 1] = { name = "Get Nearest Enemy", gfx = "mock" };
--- tests[#tests].body = function()
--- 	local scene = MapScene:new("test-data/empty_map.lua");
+-- TODO these tests should not use a map from engine test-data
 
--- 	local me = scene:spawn(Entity);
--- 	local friend = scene:spawn(Entity);
--- 	local enemyA = scene:spawn(Entity);
--- 	local enemyB = scene:spawn(Entity);
--- 	for _, entity in ipairs({ me, friend, enemyA, enemyB }) do
--- 		entity:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
--- 		entity:addComponent(CombatData:new());
--- 		entity:addComponent(TargetSelector:new());
--- 	end
+local Entity = require("ecs/Entity");
+local MapScene = require("mapscene/MapScene");
 
--- 	me:setTeam(Teams.party);
--- 	friend:setTeam(Teams.party);
--- 	enemyA:setTeam(Teams.wild);
--- 	enemyB:setTeam(Teams.wild);
+crystal.test.add("Get Nearest Enemy", { gfx = "mock" }, function()
+	local scene = MapScene:new("test-data/empty_map.lua");
 
--- 	me:setPosition(10, 10);
--- 	friend:setPosition(8, 8);
--- 	enemyA:setPosition(100, 100);
--- 	enemyB:setPosition(15, 5);
+	local me = scene:spawn(Entity);
+	local friend = scene:spawn(Entity);
+	local enemyA = scene:spawn(Entity);
+	local enemyB = scene:spawn(Entity);
+	for _, entity in ipairs({ me, friend, enemyA, enemyB }) do
+		entity:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
+		entity:addComponent(CombatData:new());
+		entity:addComponent(TargetSelector:new());
+	end
 
--- 	scene:update(0);
--- 	local nearest = me:getNearestEnemy();
--- 	assert(nearest == enemyB);
--- end
+	me:setTeam(Teams.party);
+	friend:setTeam(Teams.party);
+	enemyA:setTeam(Teams.wild);
+	enemyB:setTeam(Teams.wild);
 
--- tests[#tests + 1] = { name = "Get Nearest Ally", gfx = "mock" };
--- tests[#tests].body = function()
--- 	local scene = MapScene:new("test-data/empty_map.lua");
+	me:setPosition(10, 10);
+	friend:setPosition(8, 8);
+	enemyA:setPosition(100, 100);
+	enemyB:setPosition(15, 5);
 
--- 	local me = scene:spawn(Entity);
--- 	local friendA = scene:spawn(Entity);
--- 	local friendB = scene:spawn(Entity);
--- 	local enemy = scene:spawn(Entity);
--- 	for _, entity in ipairs({ me, friendA, friendB, enemy }) do
--- 		entity:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
--- 		entity:addComponent(CombatData:new());
--- 		entity:addComponent(TargetSelector:new());
--- 	end
+	scene:update(0);
+	local nearest = me:getNearestEnemy();
+	assert(nearest == enemyB);
+end);
 
--- 	me:setTeam(Teams.wild);
--- 	friendA:setTeam(Teams.wild);
--- 	friendB:setTeam(Teams.wild);
--- 	enemy:setTeam(Teams.party);
+crystal.test.add("Get Nearest Ally", { gfx = "mock" }, function()
+	local scene = MapScene:new("test-data/empty_map.lua");
 
--- 	me:setPosition(10, 10);
--- 	friendA:setPosition(100, 100);
--- 	friendB:setPosition(8, 8);
--- 	enemy:setPosition(15, 5);
+	local me = scene:spawn(Entity);
+	local friendA = scene:spawn(Entity);
+	local friendB = scene:spawn(Entity);
+	local enemy = scene:spawn(Entity);
+	for _, entity in ipairs({ me, friendA, friendB, enemy }) do
+		entity:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
+		entity:addComponent(CombatData:new());
+		entity:addComponent(TargetSelector:new());
+	end
 
--- 	scene:update(0);
--- 	local nearest = me:getNearestAlly();
--- 	assert(nearest == friendB);
+	me:setTeam(Teams.wild);
+	friendA:setTeam(Teams.wild);
+	friendB:setTeam(Teams.wild);
+	enemy:setTeam(Teams.party);
 
--- 	friendB:kill();
--- 	local nearest = me:getNearestAlly();
--- 	assert(nearest == friendA);
--- end
+	me:setPosition(10, 10);
+	friendA:setPosition(100, 100);
+	friendB:setPosition(8, 8);
+	enemy:setPosition(15, 5);
+
+	scene:update(0);
+	local nearest = me:getNearestAlly();
+	assert(nearest == friendB);
+
+	friendB:kill();
+	local nearest = me:getNearestAlly();
+	assert(nearest == friendA);
+end);
 
 --#endregion
 
