@@ -1,7 +1,5 @@
 love.filesystem.setIdentity("crystal-sample-game");
 
-require("crystal/runtime");
-
 crystal.configure({
 	assetsDirectory = "assets/",
 	mapDirectory = "assets/map/",
