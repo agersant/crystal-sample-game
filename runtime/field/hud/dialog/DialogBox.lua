@@ -46,32 +46,32 @@ end
 
 DialogBox.sayLine = function(self, targetText)
 	assert(targetText);
-	LOG:info("Displaying dialogbox: " .. targetText);
+	crystal.log.info("Displaying dialogbox: " .. targetText);
 
 	local duration = #targetText / self._textSpeed;
 
 	self._script:signal("sayLine");
 	return self._script:addThread(function(self)
-		self:endOn("sayLine");
-		self:endOn("skipped");
+			self:endOn("sayLine");
+			self:endOn("skipped");
 
-		self:thread(function(self)
-			self:waitFor("fastForward");
-			self:setContent(targetText);
-			self:signal("skipped");
-		end);
+			self:thread(function(self)
+				self:waitFor("fastForward");
+				self:setContent(targetText);
+				self:signal("skipped");
+			end);
 
-		self:setContent("");
-		self:waitTween(0, #targetText, duration, "linear", function(numGlyphs)
-			local numGlyphs = math.floor(numGlyphs);
-			if numGlyphs > 1 then
-				-- TODO: This assumes each glyph is one byte, not UTF-8 aware (so does the duration calculation above)
-				self:setContent(string.sub(targetText, 1, numGlyphs));
-			else
-				self:setContent("");
-			end
+			self:setContent("");
+			self:waitTween(0, #targetText, duration, "linear", function(numGlyphs)
+				local numGlyphs = math.floor(numGlyphs);
+				if numGlyphs > 1 then
+					-- TODO: This assumes each glyph is one byte, not UTF-8 aware (so does the duration calculation above)
+					self:setContent(string.sub(targetText, 1, numGlyphs));
+				else
+					self:setContent("");
+				end
+			end);
 		end);
-	end);
 end
 
 DialogBox.fastForward = function(self)
