@@ -1,7 +1,7 @@
 love.filesystem.setIdentity("crystal-sample-game");
 
 crystal.configure({
-	assetsDirectory = "assets/",
+	assetsDirectories = { "assets/", "test-data/" },
 	mapDirectory = "assets/map/",
 	mapSceneClass = "Field",
 	saveDataClass = "SaveData",
