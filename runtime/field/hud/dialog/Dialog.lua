@@ -87,7 +87,7 @@ local ScriptRunner = require("mapscene/behavior/ScriptRunner");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local DialogBox = require("field/hud/dialog/DialogBox");
 
-crystal.test.add("Blocks script during dialog", { gfx = "mock" }, function()
+crystal.test.add("Blocks script during dialog", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
 	local dialogBox = DialogBox:new();
@@ -134,7 +134,7 @@ crystal.test.add("Blocks script during dialog", { gfx = "mock" }, function()
 	assert(a == 2);
 end);
 
-crystal.test.add("Can't start concurrent dialogs", { gfx = "mock" }, function()
+crystal.test.add("Can't start concurrent dialogs", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
 	local dialogBox = DialogBox:new();
@@ -178,7 +178,7 @@ crystal.test.add("Can't start concurrent dialogs", { gfx = "mock" }, function()
 	assert(Dialog:new(dialogBox):beginDialog(player));
 end);
 
-crystal.test.add("Dialog is cleaned up if entity despawns while speaking", { gfx = "mock" }, function()
+crystal.test.add("Dialog is cleaned up if entity despawns while speaking", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
 	local dialogBox = DialogBox:new();

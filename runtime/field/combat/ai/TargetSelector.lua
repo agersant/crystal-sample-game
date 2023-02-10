@@ -99,7 +99,7 @@ end
 local Entity = require("ecs/Entity");
 local MapScene = require("mapscene/MapScene");
 
-crystal.test.add("Get Nearest Enemy", { gfx = "mock" }, function()
+crystal.test.add("Get Nearest Enemy", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
 	local me = scene:spawn(Entity);
@@ -127,7 +127,7 @@ crystal.test.add("Get Nearest Enemy", { gfx = "mock" }, function()
 	assert(nearest == enemyB);
 end);
 
-crystal.test.add("Get Nearest Ally", { gfx = "mock" }, function()
+crystal.test.add("Get Nearest Ally", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
 	local me = scene:spawn(Entity);
