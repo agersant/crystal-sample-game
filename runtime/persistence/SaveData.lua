@@ -50,7 +50,7 @@ end
 SaveData.save = function(self, scene)
 	SaveData.super.save(self);
 
-	if scene:isInstanceOf(Field) then
+	if scene:is_instance_of(Field) then
 		local partyEntities = scene:getECS():getAllEntitiesWith(PartyMember);
 
 		local partyLeader;

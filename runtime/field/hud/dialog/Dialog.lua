@@ -22,7 +22,7 @@ end
 
 Dialog.beginDialog = function(self, player)
 	assert(player);
-	assert(player:isInstanceOf(Entity));
+	assert(player:is_instance_of(Entity));
 	assert(player:getComponent(InputListener));
 	assert(not self._inputListener);
 	assert(not self._inputContext);

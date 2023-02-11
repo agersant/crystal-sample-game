@@ -17,7 +17,7 @@ local computeScalingSourceAmount, computeScalingSourceAmountInternal;
 
 local evaluateStatInternal = function(self, statObject, guards)
 	assert(statObject);
-	assert(statObject:isInstanceOf(Stat));
+	assert(statObject:is_instance_of(Stat));
 
 	local stat = self._statsReverseLookups[statObject];
 	assert(stat);
@@ -176,8 +176,8 @@ end
 CombatData.inflictDamage = function(self, intent, target)
 	assert(intent);
 	assert(target);
-	assert(target:isInstanceOf(CombatData));
-	assert(intent:isInstanceOf(DamageIntent));
+	assert(target:is_instance_of(CombatData));
+	assert(intent:is_instance_of(DamageIntent));
 	local damage = computeDamage(self, intent, target);
 	local onHitEffects = {};
 	for _, onHitEffect in ipairs(intent:getOnHitEffects()) do
