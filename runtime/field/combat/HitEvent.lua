@@ -1,6 +1,4 @@
-local Event = require("ecs/Event");
-
-local HitEvent = Class("HitEvent", Event);
+local HitEvent = Class("HitEvent", crystal.Event);
 
 HitEvent.init = function(self, entity, targetEntity)
 	HitEvent.super.init(self, entity);

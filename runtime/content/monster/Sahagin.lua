@@ -11,7 +11,6 @@ local IdleAnimation = require("field/animation/IdleAnimation");
 local WalkAnimation = require("field/animation/WalkAnimation");
 local CommonShader = require("graphics/CommonShader");
 local Navigation = require("mapscene/behavior/ai/Navigation");
-local Entity = require("ecs/Entity");
 local Actor = require("mapscene/behavior/Actor");
 local ScriptRunner = require("mapscene/behavior/ScriptRunner");
 local Sprite = require("mapscene/display/Sprite");
@@ -22,7 +21,7 @@ local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local Weakbox = require("mapscene/physics/Weakbox");
 local Script = require("script/Script");
 
-local Sahagin = Class("Sahagin", Entity);
+local Sahagin = Class("Sahagin", crystal.Entity);
 
 local attack = function(self)
 	self:endOn("disrupted");
@@ -95,29 +94,29 @@ Sahagin.init = function(self, scene)
 	Sahagin.super.init(self, scene);
 
 	local sheet = ASSETS:getSpritesheet("assets/spritesheet/sahagin.lua");
-	local sprite = self:addComponent(Sprite:new());
-	self:addComponent(SpriteAnimator:new(sprite, sheet));
-	self:addComponent(CommonShader:new());
-	self:addComponent(FlinchAnimation:new("knockback"));
-	self:addComponent(IdleAnimation:new("idle"));
-	self:addComponent(WalkAnimation:new("walk"));
+	local sprite = self:add_component(Sprite);
+	self:add_component(SpriteAnimator, sprite, sheet);
+	self:add_component(CommonShader);
+	self:add_component(FlinchAnimation, "knockback");
+	self:add_component(IdleAnimation, "idle");
+	self:add_component(WalkAnimation, "walk");
 
-	self:addComponent(ScriptRunner:new());
-	self:addComponent(Actor:new());
+	self:add_component(ScriptRunner);
+	self:add_component(Actor);
 
-	local physicsBody = self:addComponent(PhysicsBody:new(scene:getPhysicsWorld(), "dynamic"));
-	self:addComponent(Locomotion:new());
-	self:addComponent(Navigation:new());
-	self:addComponent(Collision:new(physicsBody, 4));
+	local physicsBody = self:add_component(PhysicsBody, scene:getPhysicsWorld(), "dynamic");
+	self:add_component(Locomotion);
+	self:add_component(Navigation);
+	self:add_component(Collision, physicsBody, 4);
 
-	self:addComponent(CombatData:new());
-	self:addComponent(DamageIntent:new());
-	self:addComponent(CombatHitbox:new(physicsBody));
-	self:addComponent(Weakbox:new(physicsBody));
-	self:addComponent(TargetSelector:new());
+	self:add_component(CombatData);
+	self:add_component(DamageIntent);
+	self:add_component(CombatHitbox, physicsBody);
+	self:add_component(Weakbox, physicsBody);
+	self:add_component(TargetSelector);
 
-	self:addComponent(Flinch:new());
-	self:addComponent(HitBlink:new());
+	self:add_component(Flinch);
+	self:add_component(HitBlink);
 
 	local ai = self:addScript(Script:new(ai));
 	ai:addThread(handleDeath);

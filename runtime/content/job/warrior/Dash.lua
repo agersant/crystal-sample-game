@@ -26,7 +26,7 @@ local action = function(self)
 	local dy = math.sin(angle);
 
 	self:waitTween(buildupPeakSpeed, 0, buildupDuration, "outCubic", function(speed)
-		self:setLinearVelocity(-dx * speed, -dy * speed);
+		self:setLinearVelocity( -dx * speed, -dy * speed);
 	end);
 	self:waitTween(peakSpeed, recoveryBeginSpeed, dashDuration, "outQuartic", function(speed)
 		self:setLinearVelocity(dx * speed, dy * speed);
@@ -45,8 +45,8 @@ local dashScript = function(self)
 	end
 end
 
-Dash.init = function(self, skillSlot)
-	Dash.super.init(self, skillSlot, dashScript);
+Dash.init = function(self, entity, skillSlot)
+	Dash.super.init(self, entity, skillSlot, dashScript);
 end
 
 return Dash;

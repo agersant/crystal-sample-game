@@ -1,9 +1,3 @@
-local Event = require("ecs/Event");
-
-local DeathEvent = Class("DeathEvent", Event);
-
-DeathEvent.init = function(self, entity)
-	DeathEvent.super.init(self, entity);
-end
+local DeathEvent = Class("DeathEvent", crystal.Event);
 
 return DeathEvent;

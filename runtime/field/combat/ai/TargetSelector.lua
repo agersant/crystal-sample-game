@@ -1,17 +1,12 @@
 local CombatData = require("field/combat/CombatData");
 local Teams = require("field/combat/Teams");
-local Component = require("ecs/Component");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 
-local TargetSelector = Class("TargetSelector", Component);
-
-TargetSelector.init = function(self)
-	TargetSelector.super.init(self);
-end
+local TargetSelector = Class("TargetSelector", crystal.Component);
 
 local getAllPossibleTargets = function(self)
-	local ecs = self:getEntity():getECS();
-	return ecs:getAllEntitiesWith(CombatData);
+	local ecs = self:entity():ecs();
+	return ecs:entities_with(CombatData);
 end
 
 local passesFilters = function(self, filters, target)
@@ -49,19 +44,19 @@ local getFittest = function(self, filters, rank)
 end
 
 local isAllyOf = function(self, target)
-	return Teams:areAllies(self:getEntity():getTeam(), target:getTeam());
+	return Teams:areAllies(self:entity():getTeam(), target:getTeam());
 end
 
 local isEnemyOf = function(self, target)
-	return Teams:areEnemies(self:getEntity():getTeam(), target:getTeam());
+	return Teams:areEnemies(self:entity():getTeam(), target:getTeam());
 end
 
 local isNotSelf = function(self, target)
-	return self:getEntity() ~= target;
+	return self:entity() ~= target;
 end
 
 local rankByDistance = function(self, target)
-	local physicsBody = self:getEntity():getComponent(PhysicsBody);
+	local physicsBody = self:entity():component(PhysicsBody);
 	if not physicsBody then
 		return -math.huge;
 	end
@@ -69,7 +64,7 @@ local rankByDistance = function(self, target)
 end
 
 local isAlive = function(self, target)
-	local combatData = target:getComponent(CombatData);
+	local combatData = target:component(CombatData);
 	if not combatData then
 		return false;
 	end
@@ -96,20 +91,19 @@ end
 
 -- TODO these tests should not use a map from engine test-data
 
-local Entity = require("ecs/Entity");
 local MapScene = require("mapscene/MapScene");
 
 crystal.test.add("Get Nearest Enemy", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
-	local me = scene:spawn(Entity);
-	local friend = scene:spawn(Entity);
-	local enemyA = scene:spawn(Entity);
-	local enemyB = scene:spawn(Entity);
+	local me = scene:spawn(crystal.Entity);
+	local friend = scene:spawn(crystal.Entity);
+	local enemyA = scene:spawn(crystal.Entity);
+	local enemyB = scene:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friend, enemyA, enemyB }) do
-		entity:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
-		entity:addComponent(CombatData:new());
-		entity:addComponent(TargetSelector:new());
+		entity:add_component(PhysicsBody, scene:getPhysicsWorld());
+		entity:add_component(CombatData);
+		entity:add_component(TargetSelector);
 	end
 
 	me:setTeam(Teams.party);
@@ -130,14 +124,14 @@ end);
 crystal.test.add("Get Nearest Ally", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 
-	local me = scene:spawn(Entity);
-	local friendA = scene:spawn(Entity);
-	local friendB = scene:spawn(Entity);
-	local enemy = scene:spawn(Entity);
+	local me = scene:spawn(crystal.Entity);
+	local friendA = scene:spawn(crystal.Entity);
+	local friendB = scene:spawn(crystal.Entity);
+	local enemy = scene:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friendA, friendB, enemy }) do
-		entity:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
-		entity:addComponent(CombatData:new());
-		entity:addComponent(TargetSelector:new());
+		entity:add_component(PhysicsBody, scene:getPhysicsWorld());
+		entity:add_component(CombatData);
+		entity:add_component(TargetSelector);
 	end
 
 	me:setTeam(Teams.wild);

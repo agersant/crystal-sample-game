@@ -1,11 +1,10 @@
-local Entity = require("ecs/Entity");
 local Behavior = require("mapscene/behavior/Behavior");
 local InputListener = require("mapscene/behavior/InputListener");
 
 local Dialog = Class("Dialog", Behavior);
 
-Dialog.init = function(self, dialogBox)
-	Dialog.super.init(self);
+Dialog.init = function(self, entity, dialogBox)
+	Dialog.super.init(self, entity);
 	assert(dialogBox);
 	self._dialogBox = dialogBox;
 	self._inputListener = nil;
@@ -22,12 +21,12 @@ end
 
 Dialog.beginDialog = function(self, player)
 	assert(player);
-	assert(player:is_instance_of(Entity));
-	assert(player:getComponent(InputListener));
+	assert(player:is_instance_of(crystal.Entity));
+	assert(player:component(InputListener));
 	assert(not self._inputListener);
 	assert(not self._inputContext);
 	if self._dialogBox:open() then
-		self._inputListener = player:getComponent(InputListener);
+		self._inputListener = player:component(InputListener);
 		self._inputContext = self._inputListener:pushContext(self._script);
 		return true;
 	end
@@ -51,14 +50,14 @@ Dialog.sayLine = function(self, text)
 	end
 
 	local lineDelivery = self._script:addThreadAndRun(function(self)
-			self:thread(function()
-				waitForInput(self);
-				dialogBox:fastForward(text);
-			end);
-
-			self:join(dialogBox:sayLine(text));
+		self:thread(function()
 			waitForInput(self);
+			dialogBox:fastForward(text);
 		end);
+
+		self:join(dialogBox:sayLine(text));
+		waitForInput(self);
+	end);
 
 	return lineDelivery;
 end
@@ -92,18 +91,18 @@ crystal.test.add("Blocks script during dialog", function()
 
 	local dialogBox = DialogBox:new();
 
-	local player = scene:spawn(Entity);
+	local player = scene:spawn(crystal.Entity);
 
 	local inputDevice = InputDevice:new(1);
 	inputDevice:addBinding("advanceDialog", "q");
-	player:addComponent(InputListener:new(inputDevice));
+	player:add_component(InputListener, inputDevice);
 
-	player:addComponent(ScriptRunner:new());
-	player:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
+	player:add_component(ScriptRunner);
+	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
-	local npc = scene:spawn(Entity);
-	npc:addComponent(ScriptRunner:new());
-	npc:addComponent(Dialog:new(dialogBox));
+	local npc = scene:spawn(crystal.Entity);
+	npc:add_component(ScriptRunner);
+	npc:add_component(Dialog, dialogBox);
 
 	local a;
 	npc:addScript(Script:new(function(self)
@@ -139,18 +138,18 @@ crystal.test.add("Can't start concurrent dialogs", function()
 
 	local dialogBox = DialogBox:new();
 
-	local player = scene:spawn(Entity);
+	local player = scene:spawn(crystal.Entity);
 
 	local inputDevice = InputDevice:new(1);
 	inputDevice:addBinding("advanceDialog", "q");
-	player:addComponent(InputListener:new(inputDevice));
+	player:add_component(InputListener, inputDevice);
 
-	player:addComponent(ScriptRunner:new());
-	player:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
+	player:add_component(ScriptRunner);
+	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
-	local npc = scene:spawn(Entity);
-	npc:addComponent(ScriptRunner:new());
-	npc:addComponent(Dialog:new(dialogBox));
+	local npc = scene:spawn(crystal.Entity);
+	npc:add_component(ScriptRunner);
+	npc:add_component(Dialog, dialogBox);
 
 	npc:addScript(Script:new(function(self)
 		self:beginDialog(player);
@@ -183,18 +182,18 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 
 	local dialogBox = DialogBox:new();
 
-	local player = scene:spawn(Entity);
+	local player = scene:spawn(crystal.Entity);
 
 	local inputDevice = InputDevice:new(1);
 	inputDevice:addBinding("advanceDialog", "q");
-	player:addComponent(InputListener:new(inputDevice));
+	player:add_component(InputListener, inputDevice);
 
-	player:addComponent(ScriptRunner:new());
-	player:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
+	player:add_component(ScriptRunner);
+	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
-	local npc = scene:spawn(Entity);
-	npc:addComponent(ScriptRunner:new());
-	npc:addComponent(Dialog:new(dialogBox));
+	local npc = scene:spawn(crystal.Entity);
+	npc:add_component(ScriptRunner);
+	npc:add_component(Dialog, dialogBox);
 
 	npc:addScript(Script:new(function(self)
 		self:beginDialog(player);

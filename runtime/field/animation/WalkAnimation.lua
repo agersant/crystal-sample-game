@@ -1,9 +1,7 @@
-local Component = require("ecs/Component");
+local WalkAnimation = Class("WalkAnimation", crystal.Component);
 
-local WalkAnimation = Class("WalkAnimation", Component);
-
-WalkAnimation.init = function(self, animationName)
-	WalkAnimation.super.init(self);
+WalkAnimation.init = function(self, entity, animationName)
+	WalkAnimation.super.init(self, entity);
 	self._animationName = animationName;
 end
 

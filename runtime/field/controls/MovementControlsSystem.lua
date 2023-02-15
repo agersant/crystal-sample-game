@@ -1,34 +1,32 @@
 local MovementControls = require("field/controls/MovementControls");
-local System = require("ecs/System");
 local AllComponents = require("ecs/query/AllComponents");
 local InputListener = require("mapscene/behavior/InputListener");
 local Locomotion = require("mapscene/physics/Locomotion");
 
-local MovementControlsSystem = Class("MovementControlsSystem", System);
+local MovementControlsSystem = Class("MovementControlsSystem", crystal.System);
 
 MovementControlsSystem.init = function(self, ecs)
 	MovementControlsSystem.super.init(self, ecs);
 	self._withLocomotion = AllComponents:new({ InputListener, Locomotion, MovementControls });
-	self:getECS():addQuery(self._withLocomotion);
+	self:ecs():add_query(self._withLocomotion);
 end
 
 MovementControlsSystem.beforeScripts = function(self, dt)
-
 	local entities = self._withLocomotion:getEntities();
 	for entity in pairs(entities) do
-		local inputListener = entity:getComponent(InputListener);
+		local inputListener = entity:component(InputListener);
 		local left = inputListener:isCommandActive("moveLeft");
 		local right = inputListener:isCommandActive("moveRight");
 		local up = inputListener:isCommandActive("moveUp");
 		local down = inputListener:isCommandActive("moveDown");
 
-		local movementControls = entity:getComponent(MovementControls);
+		local movementControls = entity:component(MovementControls);
 		movementControls:setIsInputtingLeft(left);
 		movementControls:setIsInputtingRight(right);
 		movementControls:setIsInputtingUp(up);
 		movementControls:setIsInputtingDown(down);
 
-		local locomotion = entity:getComponent(Locomotion);
+		local locomotion = entity:component(Locomotion);
 
 		if left or right or up or down then
 			local xDir, yDir;

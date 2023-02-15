@@ -1,9 +1,7 @@
-local Component = require("ecs/Component");
+local FlinchAnimation = Class("FlinchAnimation", crystal.Component);
 
-local FlinchAnimation = Class("FlinchAnimation", Component);
-
-FlinchAnimation.init = function(self, animationName)
-	FlinchAnimation.super.init(self);
+FlinchAnimation.init = function(self, entity, animationName)
+	FlinchAnimation.super.init(self, entity);
 	self._animationName = animationName;
 end
 

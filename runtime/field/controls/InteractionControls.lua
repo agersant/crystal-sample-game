@@ -8,7 +8,7 @@ local InteractionControls = Class("InteractionControls", Behavior);
 
 local scriptFunction = function(self)
 	while true do
-		local inputListener = self:getComponent(InputListener);
+		local inputListener = self:component(InputListener);
 		if not inputListener then
 			self:waitFrame();
 		end
@@ -20,14 +20,14 @@ local scriptFunction = function(self)
 		end
 		self:waitFor("+interact");
 
-		local actor = self:getComponent(Actor);
+		local actor = self:component(Actor);
 		if not actor or actor:isIdle() then
-			local collision = self:getComponent(Collision);
+			local collision = self:component(Collision);
 			if collision then
 				for entity in pairs(collision:getContactEntities()) do
-					local scriptRunner = entity:getComponent(ScriptRunner);
+					local scriptRunner = entity:component(ScriptRunner);
 					if scriptRunner then
-						scriptRunner:signalAllScripts("interact", self:getEntity());
+						scriptRunner:signalAllScripts("interact", self:entity());
 					end
 				end
 			end
@@ -35,8 +35,8 @@ local scriptFunction = function(self)
 	end
 end
 
-InteractionControls.init = function(self)
-	InteractionControls.super.init(self, scriptFunction)
+InteractionControls.init = function(self, entity)
+	InteractionControls.super.init(self, entity, scriptFunction)
 end
 
 return InteractionControls;

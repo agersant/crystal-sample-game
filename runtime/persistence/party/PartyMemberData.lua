@@ -33,8 +33,8 @@ end
 
 PartyMemberData.fromEntity = function(self, entity)
 	local className = entity:getClassName();
-	assert(entity:getComponent(PartyMember));
-	local inputListener = entity:getComponent(InputListener);
+	assert(entity:component(PartyMember));
+	local inputListener = entity:component(InputListener);
 
 	local partyMemberData = PartyMemberData:new(className);
 	if inputListener then

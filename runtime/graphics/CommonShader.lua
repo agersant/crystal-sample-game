@@ -3,8 +3,8 @@ local Palette = require("graphics/Palette");
 
 local CommonShader = Class("CommonShader", Shader);
 
-CommonShader.init = function(self)
-	Shader.super.init(self);
+CommonShader.init = function(self, entity)
+	Shader.super.init(self, entity);
 	self:setShaderResource(ASSETS:getShader("assets/shader/common.glsl"));
 	self:setHighlightColor();
 end

@@ -1,7 +1,6 @@
-local System = require("ecs/System");
 local HUD = require("field/hud/HUD");
 
-local HUDSystem = Class("HUDSystem", System);
+local HUDSystem = Class("HUDSystem", crystal.System);
 
 HUDSystem.init = function(self, ecs, viewport)
 	HUDSystem.super.init(self, ecs);

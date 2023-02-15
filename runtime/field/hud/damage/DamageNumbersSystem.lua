@@ -1,20 +1,19 @@
 local DamageEvent = require("field/combat/damage/DamageEvent");
 local HitWidgetEntity = require("field/hud/damage/HitWidgetEntity");
-local System = require("ecs/System");
 
-local DamageNumbersSystem = Class("DamageNumbersSystem", System);
+local DamageNumbersSystem = Class("DamageNumbersSystem", crystal.System);
 
 DamageNumbersSystem.init = function(self, ecs)
 	DamageNumbersSystem.super.init(self, ecs);
 end
 
 DamageNumbersSystem.afterScripts = function(self, dt)
-	for _, event in pairs(self:getECS():getEvents(DamageEvent)) do
-		local victim = event:getEntity();
+	for _, event in pairs(self:ecs():events(DamageEvent)) do
+		local victim = event:entity();
 		assert(victim);
 		local amount = event:getDamage():getTotal();
 		assert(amount);
-		self:getECS():spawn(HitWidgetEntity, victim, amount);
+		self:ecs():spawn(HitWidgetEntity, victim, amount);
 	end
 end
 

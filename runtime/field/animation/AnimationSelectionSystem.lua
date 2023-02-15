@@ -2,40 +2,38 @@ local FlinchAnimation = require("field/animation/FlinchAnimation");
 local IdleAnimation = require("field/animation/IdleAnimation");
 local WalkAnimation = require("field/animation/WalkAnimation");
 local Flinch = require("field/combat/hit-reactions/Flinch");
-local System = require("ecs/System");
 local AllComponents = require("ecs/query/AllComponents");
 local Actor = require("mapscene/behavior/Actor");
 local SpriteAnimator = require("mapscene/display/SpriteAnimator");
 local Locomotion = require("mapscene/physics/Locomotion");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 
-local AnimationSelectionSystem = Class("AnimationSelectionSystem", System);
+local AnimationSelectionSystem = Class("AnimationSelectionSystem", crystal.System);
 
 AnimationSelectionSystem.init = function(self, ecs)
 	AnimationSelectionSystem.super.init(self, ecs);
 	self._idles = AllComponents:new({ SpriteAnimator, PhysicsBody, IdleAnimation });
 	self._walks = AllComponents:new({ SpriteAnimator, PhysicsBody, Locomotion, WalkAnimation });
 	self._flinches = AllComponents:new({ SpriteAnimator, PhysicsBody, Flinch, FlinchAnimation });
-	self:getECS():addQuery(self._idles);
-	self:getECS():addQuery(self._walks);
-	self:getECS():addQuery(self._flinches);
+	self:ecs():add_query(self._idles);
+	self:ecs():add_query(self._walks);
+	self:ecs():add_query(self._flinches);
 end
 
 AnimationSelectionSystem.afterScripts = function(self)
-
 	local walkEntities = self._walks:getEntities();
 	local idleEntities = self._idles:getEntities();
 	local flinchEntities = self._flinches:getEntities();
 
 	-- FLINCH
 	for entity in pairs(flinchEntities) do
-		local flinch = entity:getComponent(Flinch);
+		local flinch = entity:component(Flinch);
 		if flinch:getFlinchAmount() then
-			local flinchAnimation = entity:getComponent(FlinchAnimation);
+			local flinchAnimation = entity:component(FlinchAnimation);
 			local animation = flinchAnimation:getFlinchAnimation();
 			if animation then
-				local animator = entity:getComponent(SpriteAnimator);
-				local physicsBody = entity:getComponent(PhysicsBody);
+				local animator = entity:component(SpriteAnimator);
+				local physicsBody = entity:component(PhysicsBody);
 				animator:setAnimation(animation, physicsBody:getAngle4());
 				walkEntities[entity] = nil;
 				idleEntities[entity] = nil;
@@ -45,15 +43,15 @@ AnimationSelectionSystem.afterScripts = function(self)
 
 	-- WALK
 	for entity in pairs(walkEntities) do
-		local locomotion = entity:getComponent(Locomotion);
+		local locomotion = entity:component(Locomotion);
 		if locomotion:getMovementAngle() then
-			local actor = entity:getComponent(Actor);
-			local walkAnimation = entity:getComponent(WalkAnimation);
+			local actor = entity:component(Actor);
+			local walkAnimation = entity:component(WalkAnimation);
 			if not actor or actor:isIdle() then
 				local animation = walkAnimation:getWalkAnimation();
 				if animation then
-					local animator = entity:getComponent(SpriteAnimator);
-					local physicsBody = entity:getComponent(PhysicsBody);
+					local animator = entity:component(SpriteAnimator);
+					local physicsBody = entity:component(PhysicsBody);
 					animator:setAnimation(animation, physicsBody:getAngle4());
 					idleEntities[entity] = nil;
 				end
@@ -63,18 +61,17 @@ AnimationSelectionSystem.afterScripts = function(self)
 
 	-- IDLE
 	for entity in pairs(idleEntities) do
-		local actor = entity:getComponent(Actor);
-		local idleAnimation = entity:getComponent(IdleAnimation);
+		local actor = entity:component(Actor);
+		local idleAnimation = entity:component(IdleAnimation);
 		if not actor or actor:isIdle() then
 			local animation = idleAnimation:getIdleAnimation();
 			if animation then
-				local animator = entity:getComponent(SpriteAnimator);
-				local physicsBody = entity:getComponent(PhysicsBody);
+				local animator = entity:component(SpriteAnimator);
+				local physicsBody = entity:component(PhysicsBody);
 				animator:setAnimation(animation, physicsBody:getAngle4());
 			end
 		end
 	end
-
 end
 
 return AnimationSelectionSystem;

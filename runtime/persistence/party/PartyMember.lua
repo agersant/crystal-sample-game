@@ -1,9 +1,3 @@
-local Component = require("ecs/Component");
-
-local PartyMember = Class("PartyMember", Component);
-
-PartyMember.init = function(self)
-	PartyMember.super.init(self);
-end
+local PartyMember = Class("PartyMember", crystal.Component);
 
 return PartyMember;

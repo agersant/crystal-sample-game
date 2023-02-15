@@ -3,16 +3,15 @@ local MapSystem = require("mapscene/MapSystem");
 local ScriptRunner = require("mapscene/behavior/ScriptRunner");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local TouchTrigger = require("mapscene/physics/TouchTrigger");
-local Entity = require("ecs/Entity");
 local Script = require("script/Script");
 local StringUtils = require("utils/StringUtils");
 local Field = require("field/Field");
 
-local Teleport = Class("Teleport", Entity);
+local Teleport = Class("Teleport", crystal.Entity);
 local TeleportTouchTrigger = Class("TeleportTouchTrigger", TouchTrigger);
 
 local doTeleport = function(self, triggeredBy)
-	local teleportEntity = self:getEntity();
+	local teleportEntity = self:entity();
 	local finalX, finalY = teleportEntity._targetX, teleportEntity._targetY;
 
 	local targetMap = StringUtils.mergePaths(crystal.conf.mapDirectory, teleportEntity._targetMap);
@@ -21,24 +20,24 @@ local doTeleport = function(self, triggeredBy)
 end
 
 local teleportScript = function(self)
-	local teleportEntity = self:getEntity();
+	local teleportEntity = self:entity();
 	self:endOn("teleportActivated");
 	while true do
 		local triggeredBy = self:waitFor("+trigger");
 		local watchDirectionThread = self:thread(function(self)
-				while true do
-					self:waitFrame();
-					if triggeredBy:getComponent(PartyMember) then
-						local teleportAngle = teleportEntity:getAngle();
-						local entityAngle = triggeredBy:getAngle();
-						local correctDirection = math.abs(teleportAngle - entityAngle) < math.pi / 2;
-						if correctDirection then
-							doTeleport(self, triggeredBy);
-							self:signal("teleportActivated");
-						end
+			while true do
+				self:waitFrame();
+				if triggeredBy:component(PartyMember) then
+					local teleportAngle = teleportEntity:getAngle();
+					local entityAngle = triggeredBy:getAngle();
+					local correctDirection = math.abs(teleportAngle - entityAngle) < math.pi / 2;
+					if correctDirection then
+						doTeleport(self, triggeredBy);
+						self:signal("teleportActivated");
 					end
 				end
-			end);
+			end
+		end);
 		self:thread(function(self)
 			while true do
 				local noLongerTriggering = self:waitFor("-trigger");
@@ -51,16 +50,16 @@ local teleportScript = function(self)
 	end
 end
 
-TeleportTouchTrigger.init = function(self, physicsBody, shape)
-	TeleportTouchTrigger.super.init(self, physicsBody, shape);
+TeleportTouchTrigger.init = function(self, entity, physicsBody, shape)
+	TeleportTouchTrigger.super.init(self, entity, physicsBody, shape);
 end
 
 TeleportTouchTrigger.onBeginTouch = function(self, component)
-	self:getEntity():signalAllScripts("+trigger", component:getEntity());
+	self:entity():signalAllScripts("+trigger", component:entity());
 end
 
 TeleportTouchTrigger.onEndTouch = function(self, component)
-	self:getEntity():signalAllScripts("-trigger", component:getEntity());
+	self:entity():signalAllScripts("-trigger", component:entity());
 end
 
 Teleport.init = function(self, scene, options)
@@ -69,9 +68,9 @@ Teleport.init = function(self, scene, options)
 	assert(options.targetY);
 
 	Teleport.super.init(self, scene);
-	local physicsBody = self:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
-	self:addComponent(TeleportTouchTrigger:new(physicsBody, options.shape));
-	self:addComponent(ScriptRunner:new());
+	local physicsBody = self:add_component(PhysicsBody, scene:getPhysicsWorld());
+	self:add_component(TeleportTouchTrigger, physicsBody, options.shape);
+	self:add_component(ScriptRunner);
 	self:addScript(Script:new(teleportScript));
 
 	self._targetMap = options.targetMap;

@@ -8,10 +8,9 @@ local DamageTypes = require("field/combat/damage/DamageTypes");
 local Elements = require("field/combat/damage/Elements");
 local ScalingSources = require("field/combat/stats/ScalingSources");
 local Teams = require("field/combat/Teams");
-local Component = require("ecs/Component");
 local TableUtils = require("utils/TableUtils");
 
-local CombatData = Class("CombatData", Component);
+local CombatData = Class("CombatData", crystal.Component);
 
 local computeScalingSourceAmount, computeScalingSourceAmountInternal;
 
@@ -130,8 +129,8 @@ local addStat = function(self, stat, statObject)
 	return statObject;
 end
 
-CombatData.init = function(self)
-	CombatData.super.init(self);
+CombatData.init = function(self, entity)
+	CombatData.super.init(self, entity);
 	self:setTeam(Teams.wild);
 
 	self._stats = {};
@@ -165,7 +164,7 @@ CombatData.init = function(self)
 end
 
 CombatData.setTeam = function(self, team)
-	assert(Teams:isValid(team));
+	assert(Teams:is_valid(team));
 	self._team = team;
 end
 
@@ -199,9 +198,9 @@ CombatData.receiveDamage = function(self, attacker, damage, onHitEffects)
 	local effectiveDamage = mitigateDamage(self, damage);
 	local health = self:getStat(Stats.HEALTH);
 	health:substract(effectiveDamage:getTotal());
-	self:getEntity():createEvent(DamageEvent, attacker, effectiveDamage, onHitEffects);
+	self:entity():create_event(DamageEvent, attacker, effectiveDamage, onHitEffects);
 	if self:isDead() then
-		self:getEntity():createEvent(DeathEvent);
+		self:entity():create_event(DeathEvent);
 	end
 	return effectiveDamage;
 end
@@ -267,39 +266,37 @@ end
 local DamageScalingSource = require("field/combat/damage/DamageScalingSource");
 local DamageUnit = require("field/combat/damage/DamageUnit");
 local StatModifier = require("field/combat/stats/StatModifier");
-local Entity = require("ecs/Entity");
-local ECS = require("ecs/ECS");
 
 crystal.test.add("Kill", function()
-	local ecs = ECS:new();
-	local entity = ecs:spawn(Entity);
-	entity:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local entity = ecs:spawn(crystal.Entity);
+	entity:add_component(CombatData);
 	assert(not entity:isDead());
 	entity:kill();
 	assert(entity:isDead());
 end);
 
 crystal.test.add("Inflict flat damage", function()
-	local ecs = ECS:new();
-	local attacker = ecs:spawn(Entity);
-	local victim = ecs:spawn(Entity);
-	attacker:addComponent(CombatData:new());
-	victim:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local attacker = ecs:spawn(crystal.Entity);
+	local victim = ecs:spawn(crystal.Entity);
+	attacker:add_component(CombatData);
+	victim:add_component(CombatData);
 	ecs:update(0);
 
 	local intent = DamageIntent:new();
 	intent:setDamagePayload({ DamageUnit:new(10) });
 
-	attacker:inflictDamage(intent, victim:getComponent(CombatData));
+	attacker:inflictDamage(intent, victim:component(CombatData));
 	assert(victim:getCurrentHealth() == 90);
 end);
 
 crystal.test.add("Inflict scaling physical damage", function()
-	local ecs = ECS:new();
-	local attacker = ecs:spawn(Entity);
-	local victim = ecs:spawn(Entity);
-	attacker:addComponent(CombatData:new());
-	victim:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local attacker = ecs:spawn(crystal.Entity);
+	local victim = ecs:spawn(crystal.Entity);
+	attacker:add_component(CombatData);
+	victim:add_component(CombatData);
 	ecs:update(0);
 
 	local intent = DamageIntent:new();
@@ -307,70 +304,70 @@ crystal.test.add("Inflict scaling physical damage", function()
 	unit:setScalingAmount(2, DamageScalingSource:new(ScalingSources.OFFENSE_PHYSICAL));
 	intent:setDamagePayload({ unit });
 
-	attacker:inflictDamage(intent, victim:getComponent(CombatData));
+	attacker:inflictDamage(intent, victim:component(CombatData));
 	assert(victim:getCurrentHealth() == 100);
 
 	attacker:getStat(Stats.OFFENSE_PHYSICAL):setBaseValue(3);
-	attacker:inflictDamage(intent, victim:getComponent(CombatData));
+	attacker:inflictDamage(intent, victim:component(CombatData));
 	assert(victim:getCurrentHealth() == 94);
 end);
 
 crystal.test.add("Mitigate physical damage", function()
-	local ecs = ECS:new();
-	local attacker = ecs:spawn(Entity);
-	local victim = ecs:spawn(Entity);
-	attacker:addComponent(CombatData:new());
-	victim:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local attacker = ecs:spawn(crystal.Entity);
+	local victim = ecs:spawn(crystal.Entity);
+	attacker:add_component(CombatData);
+	victim:add_component(CombatData);
 	ecs:update(0);
 
 	local intent = DamageIntent:new();
 	victim:getStat(Stats.DEFENSE_PHYSICAL):setBaseValue(100);
 
 	intent:setDamagePayload({ DamageUnit:new(100) });
-	attacker:inflictDamage(intent, victim:getComponent(CombatData));
+	attacker:inflictDamage(intent, victim:component(CombatData));
 	assert(victim:getCurrentHealth() == 50);
 
 	intent:setDamagePayload({ DamageUnit:new(50) });
-	attacker:inflictDamage(intent, victim:getComponent(CombatData));
+	attacker:inflictDamage(intent, victim:component(CombatData));
 	assert(victim:getCurrentHealth() == 25);
 end);
 
 crystal.test.add("Elemental affinity multiplies damage", function()
-	local ecs = ECS:new();
-	local attacker = ecs:spawn(Entity);
-	local victim = ecs:spawn(Entity);
-	attacker:addComponent(CombatData:new());
-	victim:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local attacker = ecs:spawn(crystal.Entity);
+	local victim = ecs:spawn(crystal.Entity);
+	attacker:add_component(CombatData);
+	victim:add_component(CombatData);
 	ecs:update(0);
 
 	local intent = DamageIntent:new();
 	intent:setDamagePayload({ DamageUnit:new(10, DamageTypes.MAGIC, Elements.FIRE) });
 
 	attacker:getStat(Stats.AFFINITY_FIRE):setBaseValue(0.5);
-	attacker:inflictDamage(intent, victim:getComponent(CombatData));
+	attacker:inflictDamage(intent, victim:component(CombatData));
 	assert(victim:getCurrentHealth() == 85);
 end);
 
 crystal.test.add("Elemental resistance multiplies damage", function()
-	local ecs = ECS:new();
-	local attacker = ecs:spawn(Entity);
-	local victim = ecs:spawn(Entity);
-	attacker:addComponent(CombatData:new());
-	victim:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local attacker = ecs:spawn(crystal.Entity);
+	local victim = ecs:spawn(crystal.Entity);
+	attacker:add_component(CombatData);
+	victim:add_component(CombatData);
 	ecs:update(0);
 
 	local intent = DamageIntent:new();
 	intent:setDamagePayload({ DamageUnit:new(10, DamageTypes.MAGIC, Elements.FIRE) });
 
 	victim:getStat(Stats.RESISTANCE_FIRE):setBaseValue(0.5);
-	attacker:inflictDamage(intent, victim:getComponent(CombatData));
+	attacker:inflictDamage(intent, victim:component(CombatData));
 	assert(victim:getCurrentHealth() == 95);
 end);
 
 crystal.test.add("Flat stat modifiers", function()
-	local ecs = ECS:new();
-	local entity = ecs:spawn(Entity);
-	entity:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local entity = ecs:spawn(crystal.Entity);
+	entity:add_component(CombatData);
 	ecs:update(0);
 
 	entity:addStatModifier(StatModifier:new(Stats.OFFENSE_MAGIC, 20));
@@ -380,9 +377,9 @@ crystal.test.add("Flat stat modifiers", function()
 end);
 
 crystal.test.add("Flat + same-stat percentage modifier", function()
-	local ecs = ECS:new();
-	local entity = ecs:spawn(Entity);
-	entity:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local entity = ecs:spawn(crystal.Entity);
+	entity:add_component(CombatData);
 	ecs:update(0);
 
 	local modifier = StatModifier:new(Stats.OFFENSE_MAGIC, 20);
@@ -392,9 +389,9 @@ crystal.test.add("Flat + same-stat percentage modifier", function()
 end);
 
 crystal.test.add("Convert 10% of offense into defense and vice versa", function()
-	local ecs = ECS:new();
-	local entity = ecs:spawn(Entity);
-	entity:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local entity = ecs:spawn(crystal.Entity);
+	entity:add_component(CombatData);
 	ecs:update(0);
 
 	local offenseModifier = StatModifier:new(Stats.OFFENSE_PHYSICAL, 0);
@@ -413,9 +410,9 @@ crystal.test.add("Convert 10% of offense into defense and vice versa", function(
 end);
 
 crystal.test.add("Swap offense and defense", function()
-	local ecs = ECS:new();
-	local entity = ecs:spawn(Entity);
-	entity:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local entity = ecs:spawn(crystal.Entity);
+	entity:add_component(CombatData);
 	ecs:update(0);
 
 	local offenseNullify = StatModifier:new(Stats.OFFENSE_PHYSICAL, 0);
@@ -440,9 +437,9 @@ crystal.test.add("Swap offense and defense", function()
 end);
 
 crystal.test.add("Three way +10% stat modifiers", function()
-	local ecs = ECS:new();
-	local entity = ecs:spawn(Entity);
-	entity:addComponent(CombatData:new());
+	local ecs = crystal.ECS:new();
+	local entity = ecs:spawn(crystal.Entity);
+	entity:add_component(CombatData);
 	ecs:update(0);
 
 	local offenseFromDefense = StatModifier:new(Stats.OFFENSE_PHYSICAL, 0);

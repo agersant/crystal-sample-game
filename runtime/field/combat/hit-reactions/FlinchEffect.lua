@@ -10,9 +10,9 @@ FlinchEffect.init = function(self, amount)
 end
 
 FlinchEffect.apply = function(self, attacker, victim, damage)
-	local attacker = attacker:getEntity();
-	local victim = victim:getEntity();
-	local flinch = victim:getComponent(Flinch);
+	local attacker = attacker:entity();
+	local victim = victim:entity();
+	local flinch = victim:component(Flinch);
 	if flinch then
 		flinch:beginFlinch(attacker:getAngle(), self._amount);
 	end

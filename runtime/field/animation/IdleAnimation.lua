@@ -1,9 +1,7 @@
-local Component = require("ecs/Component");
+local IdleAnimation = Class("IdleAnimation", crystal.Component);
 
-local IdleAnimation = Class("IdleAnimation", Component);
-
-IdleAnimation.init = function(self, animationName)
-	IdleAnimation.super.init(self);
+IdleAnimation.init = function(self, entity, animationName)
+	IdleAnimation.super.init(self, entity);
 	self._animationName = animationName;
 end
 

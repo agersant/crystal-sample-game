@@ -1,6 +1,4 @@
-local Event = require("ecs/Event");
-
-local DamageEvent = Class("DamageEvent", Event);
+local DamageEvent = Class("DamageEvent", crystal.Event);
 
 DamageEvent.init = function(self, victim, attacker, damage, onHitEffects)
 	DamageEvent.super.init(self, victim);

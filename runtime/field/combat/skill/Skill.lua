@@ -3,10 +3,10 @@ local Script = require("script/Script");
 
 local Skill = Class("Skill", Behavior);
 
-Skill.init = function(self, skillSlot, scriptContent)
+Skill.init = function(self, entity, skillSlot, scriptContent)
 	assert(skillSlot);
 	assert(scriptContent);
-	Skill.super.init(self, scriptContent);
+	Skill.super.init(self, entity, scriptContent);
 
 	local command = "useSkill" .. skillSlot
 

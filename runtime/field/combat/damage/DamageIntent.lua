@@ -1,10 +1,9 @@
-local Component = require("ecs/Component");
 local TableUtils = require("utils/TableUtils");
 
-local DamageIntent = Class("DamageIntent", Component);
+local DamageIntent = Class("DamageIntent", crystal.Component);
 
-DamageIntent.init = function(self)
-	DamageIntent.super.init(self);
+DamageIntent.init = function(self, entity)
+	DamageIntent.super.init(self, entity);
 	self._units = {};
 	self._onHitEffects = {};
 end

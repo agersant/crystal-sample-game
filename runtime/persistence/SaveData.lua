@@ -51,7 +51,7 @@ SaveData.save = function(self, scene)
 	SaveData.super.save(self);
 
 	if scene:is_instance_of(Field) then
-		local partyEntities = scene:getECS():getAllEntitiesWith(PartyMember);
+		local partyEntities = scene:ecs():entities_with(PartyMember);
 
 		local partyLeader;
 		local partyLeaderPlayerIndex;

@@ -5,10 +5,9 @@ local Sprite = require("mapscene/display/Sprite");
 local SpriteAnimator = require("mapscene/display/SpriteAnimator");
 local Collision = require("mapscene/physics/Collision");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
-local Entity = require("ecs/Entity");
 local Script = require("script/Script");
 
-local NPC = Class("NPC", Entity);
+local NPC = Class("NPC", crystal.Entity);
 
 local script = function(self)
 	while true do
@@ -25,14 +24,14 @@ end
 NPC.init = function(self, scene)
 	NPC.super.init(self, scene);
 	local sheet = ASSETS:getSpritesheet("assets/spritesheet/sahagin.lua");
-	local sprite = self:addComponent(Sprite:new());
-	self:addComponent(SpriteAnimator:new(sprite, sheet));
-	self:addComponent(IdleAnimation:new("idle"));
+	local sprite = self:add_component(Sprite);
+	self:add_component(SpriteAnimator, sprite, sheet);
+	self:add_component(IdleAnimation, "idle");
 
-	local physicsBody = self:addComponent(PhysicsBody:new(scene:getPhysicsWorld()));
-	self:addComponent(Collision:new(physicsBody, 4));
-	self:addComponent(ScriptRunner:new());
-	self:addComponent(Dialog:new(scene:getHUD():getDialogBox()));
+	local physicsBody = self:add_component(PhysicsBody, scene:getPhysicsWorld());
+	self:add_component(Collision, physicsBody, 4);
+	self:add_component(ScriptRunner);
+	self:add_component(Dialog, scene:getHUD():getDialogBox());
 	self:addScript(Script:new(script));
 end
 

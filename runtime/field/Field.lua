@@ -23,11 +23,11 @@ local spawnParty = function(self, x, y, startAngle)
 		assert(class);
 
 		local entity = self:spawn(class, {});
-		entity:addComponent(PartyMember:new());
+		entity:add_component(PartyMember);
 		if assignedPlayerIndex then
-			entity:addComponent(InputListener:new(INPUT:getDevice(assignedPlayerIndex)));
-			entity:addComponent(MovementControls:new());
-			entity:addComponent(InteractionControls:new());
+			entity:add_component(InputListener, INPUT:getDevice(assignedPlayerIndex));
+			entity:add_component(MovementControls);
+			entity:add_component(InteractionControls);
 		end
 		entity:setTeam(Teams.party);
 		entity:setPosition(x, y);
@@ -47,19 +47,19 @@ Field.init = function(self, mapName, startX, startY, startAngle)
 	spawnParty(self, startX, startY, startAngle);
 end
 
-Field.addSystems = function(self)
-	Field.super.addSystems(self);
-	local ecs = self:getECS();
-	ecs:addSystem(AnimationSelectionSystem:new(ecs));
-	ecs:addSystem(MovementControlsSystem:new(ecs));
-	ecs:addSystem(CombatSystem:new(ecs));
-	ecs:addSystem(DamageNumbersSystem:new(ecs));
-	ecs:addSystem(GameOverSystem:new(ecs));
-	ecs:addSystem(HUDSystem:new(ecs, self._renderer:getViewport()));
+Field.add_systems = function(self)
+	Field.super.add_systems(self);
+	local ecs = self:ecs();
+	ecs:add_system(AnimationSelectionSystem:new(ecs));
+	ecs:add_system(MovementControlsSystem:new(ecs));
+	ecs:add_system(CombatSystem:new(ecs));
+	ecs:add_system(DamageNumbersSystem:new(ecs));
+	ecs:add_system(GameOverSystem:new(ecs));
+	ecs:add_system(HUDSystem:new(ecs, self._renderer:getViewport()));
 end
 
 Field.getHUD = function(self)
-	return self._ecs:getSystem(HUDSystem):getHUD();
+	return self._ecs:system(HUDSystem):getHUD();
 end
 
 return Field;

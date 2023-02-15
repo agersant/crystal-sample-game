@@ -1,23 +1,18 @@
 local FlinchAmounts = require("field/combat/hit-reactions/FlinchAmounts");
-local Component = require("ecs/Component");
 local Collision = require("mapscene/physics/Collision");
 local CollisionFilters = require("mapscene/physics/CollisionFilters");
 local Actor = require("mapscene/behavior/Actor");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local Locomotion = require("mapscene/physics/Locomotion");
 
-local Flinch = Class("Flinch", Component);
-
-Flinch.init = function(self)
-	Flinch.super.init(self);
-end
+local Flinch = Class("Flinch", crystal.Component);
 
 local smallFlinch = function(self, direction)
-	if self:getComponent(Locomotion) then
+	if self:component(Locomotion) then
 		self:scope(self:disableLocomotion());
 	end
 
-	if self:getComponent(Collision) then
+	if self:component(Collision) then
 		self:scope(self:pushCollisionState());
 		self:setCollideWithOthers(false);
 		self:setRestitution(.4);
@@ -37,11 +32,11 @@ local smallFlinch = function(self, direction)
 end
 
 local largeFlinch = function(self, direction)
-	if self:getComponent(Locomotion) then
+	if self:component(Locomotion) then
 		self:scope(self:disableLocomotion());
 	end
 
-	if self:getComponent(Collision) then
+	if self:component(Collision) then
 		self:scope(self:pushCollisionState());
 		self:setCollideWithOthers(false);
 		self:setRestitution(.4);
@@ -74,9 +69,9 @@ Flinch.beginFlinch = function(self, direction, amount)
 		return;
 	end
 
-	local entity = self:getEntity();
-	assert(entity:getComponent(Actor));
-	assert(entity:getComponent(PhysicsBody));
+	local entity = self:entity();
+	assert(entity:component(Actor));
+	assert(entity:component(PhysicsBody));
 
 	if entity:isIdle() or self._flinchAmount then
 		entity:stopAction();

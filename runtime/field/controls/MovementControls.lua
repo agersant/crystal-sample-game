@@ -1,9 +1,7 @@
-local Component = require("ecs/Component");
+local MovementControls = Class("MovementControls", crystal.Component);
 
-local MovementControls = Class("MovementControls", Component);
-
-MovementControls.init = function(self)
-	MovementControls.super.init(self);
+MovementControls.init = function(self, entity)
+	MovementControls.super.init(self, entity);
 	self._isInputtingLeft = false;
 	self._isInputtingRight = false;
 	self._isInputtingUp = false;
