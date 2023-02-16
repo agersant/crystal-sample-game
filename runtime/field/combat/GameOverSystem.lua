@@ -10,7 +10,7 @@ GameOverSystem.init = function(self, ecs)
 end
 
 GameOverSystem.afterScripts = function(self)
-	local entities = self._query:getEntities();
+	local entities = self._query:entities();
 	for entity in pairs(entities) do
 		local combatData = entity:component(CombatData);
 		if not combatData:isDead() then

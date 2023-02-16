@@ -19,7 +19,7 @@ CombatSystem.init = function(self, ecs)
 end
 
 CombatSystem.beforeScripts = function(self, dt)
-	local entities = self._locomotionQuery:getEntities();
+	local entities = self._locomotionQuery:entities();
 	for entity in pairs(entities) do
 		local actor = entity:component(Actor);
 		if not actor or actor:isIdle() then

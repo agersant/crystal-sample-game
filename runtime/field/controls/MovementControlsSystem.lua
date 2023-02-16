@@ -10,7 +10,7 @@ MovementControlsSystem.init = function(self, ecs)
 end
 
 MovementControlsSystem.beforeScripts = function(self, dt)
-	local entities = self._withLocomotion:getEntities();
+	local entities = self._withLocomotion:entities();
 	for entity in pairs(entities) do
 		local inputListener = entity:component(InputListener);
 		local left = inputListener:isCommandActive("moveLeft");

@@ -17,9 +17,9 @@ AnimationSelectionSystem.init = function(self, ecs)
 end
 
 AnimationSelectionSystem.afterScripts = function(self)
-	local walkEntities = self._walks:getEntities();
-	local idleEntities = self._idles:getEntities();
-	local flinchEntities = self._flinches:getEntities();
+	local walkEntities = self._walks:entities();
+	local idleEntities = self._idles:entities();
+	local flinchEntities = self._flinches:entities();
 
 	-- FLINCH
 	for entity in pairs(flinchEntities) do
