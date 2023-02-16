@@ -4,7 +4,6 @@ local DamageIntent = require("field/combat/damage/DamageIntent");
 local DeathEvent = require("field/combat/damage/DeathEvent");
 local HitEvent = require("field/combat/HitEvent");
 local Teams = require("field/combat/Teams");
-local AllComponents = require("ecs/query/AllComponents");
 local Actor = require("mapscene/behavior/Actor");
 local InputListener = require("mapscene/behavior/InputListener");
 local ScriptRunner = require("mapscene/behavior/ScriptRunner");
@@ -14,12 +13,9 @@ local CombatSystem = Class("CombatSystem", crystal.System);
 
 CombatSystem.init = function(self, ecs)
 	CombatSystem.super.init(self, ecs);
-	self._scriptRunnerQuery = AllComponents:new({ ScriptRunner });
-	self._locomotionQuery = AllComponents:new({ CombatData, Locomotion });
-	self._inputQuery = AllComponents:new({ CombatData, InputListener });
-	self:ecs():add_query(self._scriptRunnerQuery);
-	self:ecs():add_query(self._locomotionQuery);
-	self:ecs():add_query(self._inputQuery);
+	self._scriptRunnerQuery = self:ecs():add_query({ ScriptRunner });
+	self._locomotionQuery = self:ecs():add_query({ CombatData, Locomotion });
+	self._inputQuery = self:ecs():add_query({ CombatData, InputListener });
 end
 
 CombatSystem.beforeScripts = function(self, dt)

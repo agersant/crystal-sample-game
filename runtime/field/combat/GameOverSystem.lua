@@ -1,14 +1,12 @@
 local CombatData = require("field/combat/CombatData");
 local TitleScreen = require("frontend/TitleScreen");
 local PartyMember = require("persistence/party/PartyMember");
-local AllComponents = require("ecs/query/AllComponents");
 
 local GameOverSystem = Class("GameOverSystem", crystal.System);
 
 GameOverSystem.init = function(self, ecs)
 	GameOverSystem.super.init(self, ecs);
-	self._query = AllComponents:new({ CombatData, PartyMember });
-	self:ecs():add_query(self._query);
+	self._query = self:ecs():add_query({ CombatData, PartyMember });
 end
 
 GameOverSystem.afterScripts = function(self)

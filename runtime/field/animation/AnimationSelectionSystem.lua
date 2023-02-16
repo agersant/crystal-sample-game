@@ -2,7 +2,6 @@ local FlinchAnimation = require("field/animation/FlinchAnimation");
 local IdleAnimation = require("field/animation/IdleAnimation");
 local WalkAnimation = require("field/animation/WalkAnimation");
 local Flinch = require("field/combat/hit-reactions/Flinch");
-local AllComponents = require("ecs/query/AllComponents");
 local Actor = require("mapscene/behavior/Actor");
 local SpriteAnimator = require("mapscene/display/SpriteAnimator");
 local Locomotion = require("mapscene/physics/Locomotion");
@@ -12,12 +11,9 @@ local AnimationSelectionSystem = Class("AnimationSelectionSystem", crystal.Syste
 
 AnimationSelectionSystem.init = function(self, ecs)
 	AnimationSelectionSystem.super.init(self, ecs);
-	self._idles = AllComponents:new({ SpriteAnimator, PhysicsBody, IdleAnimation });
-	self._walks = AllComponents:new({ SpriteAnimator, PhysicsBody, Locomotion, WalkAnimation });
-	self._flinches = AllComponents:new({ SpriteAnimator, PhysicsBody, Flinch, FlinchAnimation });
-	self:ecs():add_query(self._idles);
-	self:ecs():add_query(self._walks);
-	self:ecs():add_query(self._flinches);
+	self._idles = self:ecs():add_query({ SpriteAnimator, PhysicsBody, IdleAnimation });
+	self._walks = self:ecs():add_query({ SpriteAnimator, PhysicsBody, Locomotion, WalkAnimation });
+	self._flinches = self:ecs():add_query({ SpriteAnimator, PhysicsBody, Flinch, FlinchAnimation });
 end
 
 AnimationSelectionSystem.afterScripts = function(self)

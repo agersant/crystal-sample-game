@@ -1,5 +1,4 @@
 local MovementControls = require("field/controls/MovementControls");
-local AllComponents = require("ecs/query/AllComponents");
 local InputListener = require("mapscene/behavior/InputListener");
 local Locomotion = require("mapscene/physics/Locomotion");
 
@@ -7,8 +6,7 @@ local MovementControlsSystem = Class("MovementControlsSystem", crystal.System);
 
 MovementControlsSystem.init = function(self, ecs)
 	MovementControlsSystem.super.init(self, ecs);
-	self._withLocomotion = AllComponents:new({ InputListener, Locomotion, MovementControls });
-	self:ecs():add_query(self._withLocomotion);
+	self._withLocomotion = self:ecs():add_query({ InputListener, Locomotion, MovementControls });
 end
 
 MovementControlsSystem.beforeScripts = function(self, dt)
