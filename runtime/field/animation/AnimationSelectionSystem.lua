@@ -11,9 +11,9 @@ local AnimationSelectionSystem = Class("AnimationSelectionSystem", crystal.Syste
 
 AnimationSelectionSystem.init = function(self, ecs)
 	AnimationSelectionSystem.super.init(self, ecs);
-	self._idles = self:ecs():add_query({ SpriteAnimator, PhysicsBody, IdleAnimation });
-	self._walks = self:ecs():add_query({ SpriteAnimator, PhysicsBody, Locomotion, WalkAnimation });
-	self._flinches = self:ecs():add_query({ SpriteAnimator, PhysicsBody, Flinch, FlinchAnimation });
+	self._idles = self:add_query({ SpriteAnimator, PhysicsBody, IdleAnimation });
+	self._walks = self:add_query({ SpriteAnimator, PhysicsBody, Locomotion, WalkAnimation });
+	self._flinches = self:add_query({ SpriteAnimator, PhysicsBody, Flinch, FlinchAnimation });
 end
 
 AnimationSelectionSystem.afterScripts = function(self)

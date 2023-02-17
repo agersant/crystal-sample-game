@@ -6,7 +6,7 @@ local MovementControlsSystem = Class("MovementControlsSystem", crystal.System);
 
 MovementControlsSystem.init = function(self, ecs)
 	MovementControlsSystem.super.init(self, ecs);
-	self._withLocomotion = self:ecs():add_query({ InputListener, Locomotion, MovementControls });
+	self._withLocomotion = self:add_query({ InputListener, Locomotion, MovementControls });
 end
 
 MovementControlsSystem.beforeScripts = function(self, dt)

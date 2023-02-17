@@ -1,24 +1,6 @@
-local TargetSelector = require("field/combat/ai/TargetSelector");
-local CombatData = require("field/combat/CombatData");
-local DamageUnit = require("field/combat/damage/DamageUnit");
-local CombatHitbox = require("field/combat/CombatHitbox");
-local DamageIntent = require("field/combat/damage/DamageIntent");
-local Flinch = require("field/combat/hit-reactions/Flinch");
-local FlinchEffect = require("field/combat/hit-reactions/FlinchEffect");
-local HitBlink = require("field/combat/hit-reactions/HitBlink");
-local FlinchAnimation = require("field/animation/FlinchAnimation");
-local IdleAnimation = require("field/animation/IdleAnimation");
-local WalkAnimation = require("field/animation/WalkAnimation");
-local CommonShader = require("graphics/CommonShader");
 local Navigation = require("mapscene/behavior/ai/Navigation");
-local Actor = require("mapscene/behavior/Actor");
-local ScriptRunner = require("mapscene/behavior/ScriptRunner");
-local Sprite = require("mapscene/display/Sprite");
-local SpriteAnimator = require("mapscene/display/SpriteAnimator");
-local Collision = require("mapscene/physics/Collision");
-local Locomotion = require("mapscene/physics/Locomotion");
-local PhysicsBody = require("mapscene/physics/PhysicsBody");
-local Weakbox = require("mapscene/physics/Weakbox");
+local DamageUnit = require("field/combat/damage/DamageUnit");
+local FlinchEffect = require("field/combat/hit-reactions/FlinchEffect");
 local Script = require("script/Script");
 
 local Sahagin = Class("Sahagin", crystal.Entity);
@@ -94,29 +76,29 @@ Sahagin.init = function(self, scene)
 	Sahagin.super.init(self, scene);
 
 	local sheet = ASSETS:getSpritesheet("assets/spritesheet/sahagin.lua");
-	local sprite = self:add_component(Sprite);
-	self:add_component(SpriteAnimator, sprite, sheet);
-	self:add_component(CommonShader);
-	self:add_component(FlinchAnimation, "knockback");
-	self:add_component(IdleAnimation, "idle");
-	self:add_component(WalkAnimation, "walk");
+	local sprite = self:add_component("Sprite");
+	self:add_component("SpriteAnimator", sprite, sheet);
+	self:add_component("CommonShader");
+	self:add_component("FlinchAnimation", "knockback");
+	self:add_component("IdleAnimation", "idle");
+	self:add_component("WalkAnimation", "walk");
 
-	self:add_component(ScriptRunner);
-	self:add_component(Actor);
+	self:add_component("ScriptRunner");
+	self:add_component("Actor");
 
-	local physicsBody = self:add_component(PhysicsBody, scene:getPhysicsWorld(), "dynamic");
-	self:add_component(Locomotion);
-	self:add_component(Navigation);
-	self:add_component(Collision, physicsBody, 4);
+	local physicsBody = self:add_component("PhysicsBody", scene:getPhysicsWorld(), "dynamic");
+	self:add_component("Locomotion");
+	self:add_component("Navigation");
+	self:add_component("Collision", physicsBody, 4);
 
-	self:add_component(CombatData);
-	self:add_component(DamageIntent);
-	self:add_component(CombatHitbox, physicsBody);
-	self:add_component(Weakbox, physicsBody);
-	self:add_component(TargetSelector);
+	self:add_component("CombatData");
+	self:add_component("DamageIntent");
+	self:add_component("CombatHitbox", physicsBody);
+	self:add_component("Weakbox", physicsBody);
+	self:add_component("TargetSelector");
 
-	self:add_component(Flinch);
-	self:add_component(HitBlink);
+	self:add_component("Flinch");
+	self:add_component("HitBlink");
 
 	local ai = self:addScript(Script:new(ai));
 	ai:addThread(handleDeath);

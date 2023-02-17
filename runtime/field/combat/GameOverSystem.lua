@@ -6,7 +6,7 @@ local GameOverSystem = Class("GameOverSystem", crystal.System);
 
 GameOverSystem.init = function(self, ecs)
 	GameOverSystem.super.init(self, ecs);
-	self._query = self:ecs():add_query({ CombatData, PartyMember });
+	self._query = self:add_query({ CombatData, PartyMember });
 end
 
 GameOverSystem.afterScripts = function(self)

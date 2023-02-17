@@ -1,7 +1,5 @@
 local PartyMember = require("persistence/party/PartyMember");
 local MapSystem = require("mapscene/MapSystem");
-local ScriptRunner = require("mapscene/behavior/ScriptRunner");
-local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local TouchTrigger = require("mapscene/physics/TouchTrigger");
 local Script = require("script/Script");
 local StringUtils = require("utils/StringUtils");
@@ -68,9 +66,9 @@ Teleport.init = function(self, scene, options)
 	assert(options.targetY);
 
 	Teleport.super.init(self, scene);
-	local physicsBody = self:add_component(PhysicsBody, scene:getPhysicsWorld());
+	local physicsBody = self:add_component("PhysicsBody", scene:getPhysicsWorld());
 	self:add_component(TeleportTouchTrigger, physicsBody, options.shape);
-	self:add_component(ScriptRunner);
+	self:add_component("ScriptRunner");
 	self:addScript(Script:new(teleportScript));
 
 	self._targetMap = options.targetMap;

@@ -1,10 +1,3 @@
-local IdleAnimation = require("field/animation/IdleAnimation");
-local Dialog = require("field/hud/dialog/Dialog");
-local ScriptRunner = require("mapscene/behavior/ScriptRunner");
-local Sprite = require("mapscene/display/Sprite");
-local SpriteAnimator = require("mapscene/display/SpriteAnimator");
-local Collision = require("mapscene/physics/Collision");
-local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local Script = require("script/Script");
 
 local NPC = Class("NPC", crystal.Entity);
@@ -24,14 +17,14 @@ end
 NPC.init = function(self, scene)
 	NPC.super.init(self, scene);
 	local sheet = ASSETS:getSpritesheet("assets/spritesheet/sahagin.lua");
-	local sprite = self:add_component(Sprite);
-	self:add_component(SpriteAnimator, sprite, sheet);
-	self:add_component(IdleAnimation, "idle");
+	local sprite = self:add_component("Sprite");
+	self:add_component("SpriteAnimator", sprite, sheet);
+	self:add_component("IdleAnimation", "idle");
 
-	local physicsBody = self:add_component(PhysicsBody, scene:getPhysicsWorld());
-	self:add_component(Collision, physicsBody, 4);
-	self:add_component(ScriptRunner);
-	self:add_component(Dialog, scene:getHUD():getDialogBox());
+	local physicsBody = self:add_component("PhysicsBody", scene:getPhysicsWorld());
+	self:add_component("Collision", physicsBody, 4);
+	self:add_component("ScriptRunner");
+	self:add_component("Dialog", scene:getHUD():getDialogBox());
 	self:addScript(Script:new(script));
 end
 

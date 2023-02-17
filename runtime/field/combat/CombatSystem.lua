@@ -13,9 +13,9 @@ local CombatSystem = Class("CombatSystem", crystal.System);
 
 CombatSystem.init = function(self, ecs)
 	CombatSystem.super.init(self, ecs);
-	self._scriptRunnerQuery = self:ecs():add_query({ ScriptRunner });
-	self._locomotionQuery = self:ecs():add_query({ CombatData, Locomotion });
-	self._inputQuery = self:ecs():add_query({ CombatData, InputListener });
+	self._scriptRunnerQuery = self:add_query({ ScriptRunner });
+	self._locomotionQuery = self:add_query({ CombatData, Locomotion });
+	self._inputQuery = self:add_query({ CombatData, InputListener });
 end
 
 CombatSystem.beforeScripts = function(self, dt)
