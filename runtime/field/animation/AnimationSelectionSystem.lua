@@ -9,8 +9,7 @@ local PhysicsBody = require("mapscene/physics/PhysicsBody");
 
 local AnimationSelectionSystem = Class("AnimationSelectionSystem", crystal.System);
 
-AnimationSelectionSystem.init = function(self, ecs)
-	AnimationSelectionSystem.super.init(self, ecs);
+AnimationSelectionSystem.init = function(self)
 	self._idles = self:add_query({ SpriteAnimator, PhysicsBody, IdleAnimation });
 	self._walks = self:add_query({ SpriteAnimator, PhysicsBody, Locomotion, WalkAnimation });
 	self._flinches = self:add_query({ SpriteAnimator, PhysicsBody, Flinch, FlinchAnimation });

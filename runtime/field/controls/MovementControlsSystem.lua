@@ -4,8 +4,7 @@ local Locomotion = require("mapscene/physics/Locomotion");
 
 local MovementControlsSystem = Class("MovementControlsSystem", crystal.System);
 
-MovementControlsSystem.init = function(self, ecs)
-	MovementControlsSystem.super.init(self, ecs);
+MovementControlsSystem.init = function(self)
 	self._withLocomotion = self:add_query({ InputListener, Locomotion, MovementControls });
 end
 

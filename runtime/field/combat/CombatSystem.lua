@@ -11,8 +11,7 @@ local Locomotion = require("mapscene/physics/Locomotion");
 
 local CombatSystem = Class("CombatSystem", crystal.System);
 
-CombatSystem.init = function(self, ecs)
-	CombatSystem.super.init(self, ecs);
+CombatSystem.init = function(self)
 	self._scriptRunnerQuery = self:add_query({ ScriptRunner });
 	self._locomotionQuery = self:add_query({ CombatData, Locomotion });
 	self._inputQuery = self:add_query({ CombatData, InputListener });

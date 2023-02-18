@@ -2,8 +2,7 @@ local HUD = require("field/hud/HUD");
 
 local HUDSystem = Class("HUDSystem", crystal.System);
 
-HUDSystem.init = function(self, ecs, viewport)
-	HUDSystem.super.init(self, ecs);
+HUDSystem.init = function(self, viewport)
 	assert(viewport);
 	self._viewport = viewport;
 	self._hud = HUD:new();

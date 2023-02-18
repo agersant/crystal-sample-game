@@ -3,10 +3,6 @@ local HitWidgetEntity = require("field/hud/damage/HitWidgetEntity");
 
 local DamageNumbersSystem = Class("DamageNumbersSystem", crystal.System);
 
-DamageNumbersSystem.init = function(self, ecs)
-	DamageNumbersSystem.super.init(self, ecs);
-end
-
 DamageNumbersSystem.afterScripts = function(self, dt)
 	for _, event in pairs(self:ecs():events(DamageEvent)) do
 		local victim = event:entity();

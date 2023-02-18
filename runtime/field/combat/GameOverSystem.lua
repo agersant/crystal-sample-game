@@ -4,8 +4,7 @@ local PartyMember = require("persistence/party/PartyMember");
 
 local GameOverSystem = Class("GameOverSystem", crystal.System);
 
-GameOverSystem.init = function(self, ecs)
-	GameOverSystem.super.init(self, ecs);
+GameOverSystem.init = function(self)
 	self._query = self:add_query({ CombatData, PartyMember });
 end
 
