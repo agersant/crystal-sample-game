@@ -50,12 +50,12 @@ end
 Field.add_systems = function(self)
 	Field.super.add_systems(self);
 	local ecs = self:ecs();
-	ecs:add_system(AnimationSelectionSystem:new(ecs));
-	ecs:add_system(MovementControlsSystem:new(ecs));
-	ecs:add_system(CombatSystem:new(ecs));
-	ecs:add_system(DamageNumbersSystem:new(ecs));
-	ecs:add_system(GameOverSystem:new(ecs));
-	ecs:add_system(HUDSystem:new(ecs, self._renderer:getViewport()));
+	ecs:add_system(AnimationSelectionSystem);
+	ecs:add_system(MovementControlsSystem);
+	ecs:add_system(CombatSystem);
+	ecs:add_system(DamageNumbersSystem);
+	ecs:add_system(GameOverSystem);
+	ecs:add_system(HUDSystem, self._renderer:getViewport());
 end
 
 Field.getHUD = function(self)
