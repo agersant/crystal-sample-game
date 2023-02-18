@@ -1,7 +1,6 @@
 local WalkAnimation = Class("WalkAnimation", crystal.Component);
 
-WalkAnimation.init = function(self, entity, animationName)
-	WalkAnimation.super.init(self, entity);
+WalkAnimation.init = function(self, animationName)
 	self._animationName = animationName;
 end
 

@@ -59,8 +59,8 @@ local comboAttackScript = function(self)
 	end
 end
 
-ComboAttack.init = function(self, entity, skillSlot)
-	ComboAttack.super.init(self, entity, skillSlot, comboAttackScript);
+ComboAttack.init = function(self, skillSlot)
+	ComboAttack.super.init(self, skillSlot, comboAttackScript);
 end
 
 return ComboAttack;

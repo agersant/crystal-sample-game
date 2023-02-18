@@ -3,8 +3,8 @@ local InputListener = require("mapscene/behavior/InputListener");
 
 local Dialog = Class("Dialog", Behavior);
 
-Dialog.init = function(self, entity, dialogBox)
-	Dialog.super.init(self, entity);
+Dialog.init = function(self, dialogBox)
+	Dialog.super.init(self);
 	assert(dialogBox);
 	self._dialogBox = dialogBox;
 	self._inputListener = nil;

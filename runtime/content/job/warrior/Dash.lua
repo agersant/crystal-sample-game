@@ -45,8 +45,8 @@ local dashScript = function(self)
 	end
 end
 
-Dash.init = function(self, entity, skillSlot)
-	Dash.super.init(self, entity, skillSlot, dashScript);
+Dash.init = function(self, skillSlot)
+	Dash.super.init(self, skillSlot, dashScript);
 end
 
 return Dash;

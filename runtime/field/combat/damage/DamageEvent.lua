@@ -1,7 +1,6 @@
 local DamageEvent = Class("DamageEvent", crystal.Event);
 
-DamageEvent.init = function(self, victim, attacker, damage, onHitEffects)
-	DamageEvent.super.init(self, victim);
+DamageEvent.init = function(self, attacker, damage, onHitEffects)
 	assert(damage);
 	assert(onHitEffects);
 	self._attacker = attacker;

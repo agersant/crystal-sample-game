@@ -13,9 +13,8 @@ local hitReactions = function(self)
 	end
 end
 
-Warrior.init = function(self, scene)
-	Warrior.super.init(self, scene);
-
+Warrior.init = function(self)
+	local scene = self:ecs();
 	local sheet = ASSETS:getSpritesheet("assets/spritesheet/duran.lua");
 	local sprite = self:add_component("Sprite");
 	self:add_component("SpriteAnimator", sprite, sheet);

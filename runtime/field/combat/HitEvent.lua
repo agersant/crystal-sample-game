@@ -1,7 +1,6 @@
 local HitEvent = Class("HitEvent", crystal.Event);
 
-HitEvent.init = function(self, entity, targetEntity)
-	HitEvent.super.init(self, entity);
+HitEvent.init = function(self, targetEntity)
 	assert(targetEntity);
 	self._targetEntity = targetEntity;
 end

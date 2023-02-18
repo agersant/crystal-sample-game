@@ -2,8 +2,7 @@ local TableUtils = require("utils/TableUtils");
 
 local DamageIntent = Class("DamageIntent", crystal.Component);
 
-DamageIntent.init = function(self, entity)
-	DamageIntent.super.init(self, entity);
+DamageIntent.init = function(self)
 	self._units = {};
 	self._onHitEffects = {};
 end

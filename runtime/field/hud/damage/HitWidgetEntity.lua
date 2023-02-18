@@ -7,10 +7,9 @@ local Script = require("script/Script");
 
 local HitWidgetEntity = Class("HitWidgetEntity", crystal.Entity);
 
-HitWidgetEntity.init = function(self, scene, victim, amount)
+HitWidgetEntity.init = function(self, victim, amount)
 	assert(amount);
-	HitWidgetEntity.super.init(self, scene);
-
+	local scene = self:ecs();
 	local hitWidget = HitWidget:new(amount);
 	self:add_component(PhysicsBody, scene:getPhysicsWorld());
 	self:add_component(WorldWidget, hitWidget);

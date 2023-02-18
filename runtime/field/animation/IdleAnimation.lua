@@ -1,7 +1,6 @@
 local IdleAnimation = Class("IdleAnimation", crystal.Component);
 
-IdleAnimation.init = function(self, entity, animationName)
-	IdleAnimation.super.init(self, entity);
+IdleAnimation.init = function(self, animationName)
 	self._animationName = animationName;
 end
 

@@ -1,7 +1,6 @@
 local FlinchAnimation = Class("FlinchAnimation", crystal.Component);
 
-FlinchAnimation.init = function(self, entity, animationName)
-	FlinchAnimation.super.init(self, entity);
+FlinchAnimation.init = function(self, animationName)
 	self._animationName = animationName;
 end
 

@@ -35,8 +35,8 @@ local scriptFunction = function(self)
 	end
 end
 
-InteractionControls.init = function(self, entity)
-	InteractionControls.super.init(self, entity, scriptFunction)
+InteractionControls.init = function(self)
+	InteractionControls.super.init(self, scriptFunction)
 end
 
 return InteractionControls;

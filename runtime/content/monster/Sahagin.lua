@@ -72,8 +72,8 @@ local handleDeath = function(self)
 	end
 end
 
-Sahagin.init = function(self, scene)
-	Sahagin.super.init(self, scene);
+Sahagin.init = function(self)
+	local scene = self:ecs();
 
 	local sheet = ASSETS:getSpritesheet("assets/spritesheet/sahagin.lua");
 	local sprite = self:add_component("Sprite");

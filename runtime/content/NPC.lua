@@ -14,8 +14,8 @@ local script = function(self)
 	end
 end
 
-NPC.init = function(self, scene)
-	NPC.super.init(self, scene);
+NPC.init = function(self)
+	local scene = self:ecs();
 	local sheet = ASSETS:getSpritesheet("assets/spritesheet/sahagin.lua");
 	local sprite = self:add_component("Sprite");
 	self:add_component("SpriteAnimator", sprite, sheet);

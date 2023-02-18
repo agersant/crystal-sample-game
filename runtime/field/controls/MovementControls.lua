@@ -1,7 +1,6 @@
 local MovementControls = Class("MovementControls", crystal.Component);
 
-MovementControls.init = function(self, entity)
-	MovementControls.super.init(self, entity);
+MovementControls.init = function(self)
 	self._isInputtingLeft = false;
 	self._isInputtingRight = false;
 	self._isInputtingUp = false;

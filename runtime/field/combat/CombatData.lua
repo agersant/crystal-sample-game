@@ -129,8 +129,7 @@ local addStat = function(self, stat, statObject)
 	return statObject;
 end
 
-CombatData.init = function(self, entity)
-	CombatData.super.init(self, entity);
+CombatData.init = function(self)
 	self:setTeam(Teams.wild);
 
 	self._stats = {};

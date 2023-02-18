@@ -20,8 +20,8 @@ local script = function(self)
 	end
 end
 
-HitBlink.init = function(self, entity)
-	HitBlink.super.init(self, entity, script);
+HitBlink.init = function(self)
+	HitBlink.super.init(self, script);
 end
 
 return HitBlink;
