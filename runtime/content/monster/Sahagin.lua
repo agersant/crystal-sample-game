@@ -9,7 +9,7 @@ local attack = function(self)
 	self:setMovementAngle(nil);
 	self:resetMultiHitTracking();
 	local onHitEffects = { FlinchEffect:new() };
-	self:setDamagePayload({ DamageUnit:new(10) }, onHitEffects);
+	self:setDamagePayload({ DamageUnit:new(2) }, onHitEffects);
 	self:join(self:playAnimation("attack", self:getAngle4(), true));
 end
 
