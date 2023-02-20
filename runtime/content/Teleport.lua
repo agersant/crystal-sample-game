@@ -1,7 +1,6 @@
 local PartyMember = require("persistence/party/PartyMember");
 local MapSystem = require("mapscene/MapSystem");
 local TouchTrigger = require("mapscene/physics/TouchTrigger");
-local Script = require("script/Script");
 local StringUtils = require("utils/StringUtils");
 local Field = require("field/Field");
 
@@ -19,12 +18,12 @@ end
 
 local teleportScript = function(self)
 	local teleportEntity = self:entity();
-	self:endOn("teleportActivated");
+	self:end_on("teleportActivated");
 	while true do
-		local triggeredBy = self:waitFor("+trigger");
+		local triggeredBy = self:wait_for("+trigger");
 		local watchDirectionThread = self:thread(function(self)
 			while true do
-				self:waitFrame();
+				self:wait_frame();
 				if triggeredBy:component(PartyMember) then
 					local teleportAngle = teleportEntity:getAngle();
 					local entityAngle = triggeredBy:getAngle();
@@ -38,7 +37,7 @@ local teleportScript = function(self)
 		end);
 		self:thread(function(self)
 			while true do
-				local noLongerTriggering = self:waitFor("-trigger");
+				local noLongerTriggering = self:wait_for("-trigger");
 				if noLongerTriggering == triggeredBy then
 					watchDirectionThread:stop();
 					break
@@ -69,7 +68,7 @@ Teleport.init = function(self, options)
 	local physicsBody = self:add_component("PhysicsBody", scene:getPhysicsWorld());
 	self:add_component(TeleportTouchTrigger, physicsBody, options.shape);
 	self:add_component("ScriptRunner");
-	self:addScript(Script:new(teleportScript));
+	self:add_script(crystal.Script:new(teleportScript));
 
 	self._targetMap = options.targetMap;
 	self._targetX = options.targetX;

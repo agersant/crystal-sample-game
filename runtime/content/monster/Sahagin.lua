@@ -1,12 +1,11 @@
 local Navigation = require("mapscene/behavior/ai/Navigation");
 local DamageUnit = require("field/combat/damage/DamageUnit");
 local FlinchEffect = require("field/combat/hit-reactions/FlinchEffect");
-local Script = require("script/Script");
 
 local Sahagin = Class("Sahagin", crystal.Entity);
 
 local attack = function(self)
-	self:endOn("disrupted");
+	self:end_on("disrupted");
 	self:setMovementAngle(nil);
 	self:resetMultiHitTracking();
 	local onHitEffects = { FlinchEffect:new() };
@@ -15,12 +14,12 @@ local attack = function(self)
 end
 
 local reachAndAttack = function(self)
-	self:endOn("disrupted");
-	self:endOn("died");
+	self:end_on("disrupted");
+	self:end_on("died");
 
 	local target = self:getNearestEnemy();
 	if not target then
-		self:waitFrame();
+		self:wait_frame();
 		return;
 	end
 
@@ -48,26 +47,26 @@ end
 local ai = function(self)
 	while true do
 		while not self:isIdle() do
-			self:waitFor("idle");
+			self:wait_for("idle");
 		end
 		if self:isDead() then
 			break
 		end
 		local taskThread = self:thread(reachAndAttack);
 		self:join(taskThread);
-		self:waitFrame();
+		self:wait_frame();
 	end
 end
 
 local handleDeath = function(self)
 	while true do
-		self:waitFor("died");
+		self:wait_for("died");
 		self:stopAction();
 		self:doAction(function(self)
 			self:setAnimation("smashed");
 			self:wait(2);
 			self:despawn();
-			self:waitFrame();
+			self:wait_frame();
 		end);
 	end
 end
@@ -100,8 +99,8 @@ Sahagin.init = function(self)
 	self:add_component("Flinch");
 	self:add_component("HitBlink");
 
-	local ai = self:addScript(Script:new(ai));
-	ai:addThread(handleDeath);
+	local ai = self:add_script(crystal.Script:new(ai));
+	ai:add_thread(handleDeath);
 end
 
 return Sahagin;

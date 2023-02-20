@@ -6,13 +6,12 @@ local HitEvent = require("field/combat/HitEvent");
 local Teams = require("field/combat/Teams");
 local Actor = require("mapscene/behavior/Actor");
 local InputListener = require("mapscene/behavior/InputListener");
-local ScriptRunner = require("mapscene/behavior/ScriptRunner");
 local Locomotion = require("mapscene/physics/Locomotion");
 
 local CombatSystem = Class("CombatSystem", crystal.System);
 
 CombatSystem.init = function(self)
-	self._scriptRunnerQuery = self:add_query({ ScriptRunner });
+	self._scriptRunnerQuery = self:add_query({ crystal.ScriptRunner });
 	self._locomotionQuery = self:add_query({ CombatData, Locomotion });
 	self._inputQuery = self:add_query({ CombatData, InputListener });
 end
@@ -65,7 +64,7 @@ CombatSystem.duringScripts = function(self, dt)
 	for _, deathEvent in ipairs(deathEvents) do
 		local victim = deathEvent:entity();
 		if self._scriptRunnerQuery:contains(victim) then
-			local scriptRunner = victim:component(ScriptRunner);
+			local scriptRunner = victim:component(crystal.ScriptRunner);
 			scriptRunner:signalAllScripts("died");
 		end
 		if self._inputQuery:contains(victim) then

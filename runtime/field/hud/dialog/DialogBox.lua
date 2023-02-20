@@ -1,4 +1,3 @@
-local Script = require("script/Script");
 local Image = require("ui/bricks/elements/Image");
 local Overlay = require("ui/bricks/elements/Overlay");
 local Text = require("ui/bricks/elements/Text");
@@ -12,7 +11,7 @@ DialogBox.init = function(self)
 	self._textSpeed = 25;
 	self._owner = nil;
 	self._player = nil;
-	self._script = self:addScript(Script:new());
+	self._script = self:add_script(crystal.Script:new());
 
 	self:setAlpha(0);
 
@@ -51,27 +50,27 @@ DialogBox.sayLine = function(self, targetText)
 	local duration = #targetText / self._textSpeed;
 
 	self._script:signal("sayLine");
-	return self._script:addThread(function(self)
-			self:endOn("sayLine");
-			self:endOn("skipped");
+	return self._script:add_thread(function(self)
+		self:end_on("sayLine");
+		self:end_on("skipped");
 
-			self:thread(function(self)
-				self:waitFor("fastForward");
-				self:setContent(targetText);
-				self:signal("skipped");
-			end);
-
-			self:setContent("");
-			self:waitTween(0, #targetText, duration, "linear", function(numGlyphs)
-				local numGlyphs = math.floor(numGlyphs);
-				if numGlyphs > 1 then
-					-- TODO: This assumes each glyph is one byte, not UTF-8 aware (so does the duration calculation above)
-					self:setContent(string.sub(targetText, 1, numGlyphs));
-				else
-					self:setContent("");
-				end
-			end);
+		self:thread(function(self)
+			self:wait_for("fastForward");
+			self:setContent(targetText);
+			self:signal("skipped");
 		end);
+
+		self:setContent("");
+		self:wait_tween(0, #targetText, duration, "linear", function(numGlyphs)
+			local numGlyphs = math.floor(numGlyphs);
+			if numGlyphs > 1 then
+				-- TODO: This assumes each glyph is one byte, not UTF-8 aware (so does the duration calculation above)
+				self:setContent(string.sub(targetText, 1, numGlyphs));
+			else
+				self:setContent("");
+			end
+		end);
+	end);
 end
 
 DialogBox.fastForward = function(self)

@@ -26,20 +26,20 @@ local getComboSwingAction = function(swingCount)
 end
 
 local performCombo = function(self)
-	self:endOn("disrupted");
+	self:end_on("disrupted");
 	local comboCounter = 0;
 	while self:isIdle() and comboCounter < 4 do
 		local swing = self:doAction(getComboSwingAction(comboCounter));
 		comboCounter = comboCounter + 1;
 		local didInputNextMove = false;
 		local inputWatch = self:thread(function(self)
-			self:waitFor("+useSkill");
+			self:wait_for("+useSkill");
 			didInputNextMove = true;
 		end);
 		if not self:join(swing) or not self:isIdle() then
 			break
 		end
-		if not inputWatch:isDead() then
+		if not inputWatch:is_dead() then
 			inputWatch:stop();
 		end
 		if not didInputNextMove then
@@ -50,7 +50,7 @@ end
 
 local comboAttackScript = function(self)
 	while true do
-		self:waitFor("+useSkill");
+		self:wait_for("+useSkill");
 		local comboThread = self:thread(performCombo);
 		local finished = self:join(comboThread);
 		if not finished then

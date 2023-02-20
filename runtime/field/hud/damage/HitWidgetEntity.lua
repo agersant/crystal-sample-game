@@ -1,9 +1,7 @@
 local HitWidget = require("field/hud/damage/HitWidget");
-local ScriptRunner = require("mapscene/behavior/ScriptRunner");
 local WorldWidget = require("mapscene/display/WorldWidget");
 local Parent = require("mapscene/physics/Parent");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
-local Script = require("script/Script");
 
 local HitWidgetEntity = Class("HitWidgetEntity", crystal.Entity);
 
@@ -14,9 +12,9 @@ HitWidgetEntity.init = function(self, victim, amount)
 	self:add_component(PhysicsBody, scene:getPhysicsWorld());
 	self:add_component(WorldWidget, hitWidget);
 	self:add_component(Parent, victim);
-	self:add_component(ScriptRunner);
+	self:add_component(crystal.ScriptRunner);
 
-	self:addScript(Script:new(function(self)
+	self:add_script(crystal.Script:new(function(self)
 		self:join(hitWidget:animate());
 		self:despawn();
 	end));

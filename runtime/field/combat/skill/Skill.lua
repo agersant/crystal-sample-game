@@ -1,7 +1,4 @@
-local Behavior = require("mapscene/behavior/Behavior");
-local Script = require("script/Script");
-
-local Skill = Class("Skill", Behavior);
+local Skill = Class("Skill", crystal.Behavior);
 
 Skill.init = function(self, skillSlot, scriptContent)
 	assert(skillSlot);
@@ -10,16 +7,16 @@ Skill.init = function(self, skillSlot, scriptContent)
 
 	local command = "useSkill" .. skillSlot
 
-	self._script:addThread(function(self)
+	self._script:add_thread(function(self)
 		while true do
-			self:waitFor("+" .. command);
+			self:wait_for("+" .. command);
 			self:signal("+useSkill");
 		end
 	end);
 
-	self._script:addThread(function(self)
+	self._script:add_thread(function(self)
 		while true do
-			self:waitFor("-" .. command);
+			self:wait_for("-" .. command);
 			self:signal("-useSkill");
 		end
 	end);

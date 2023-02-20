@@ -13,7 +13,7 @@ local action = function(self)
 	local recoveryBeginSpeed = 60;
 	local recoveryDuration = 0.2;
 
-	self:scope(self:disableLocomotion());
+	self:defer(self:disableLocomotion());
 
 	self:resetMultiHitTracking();
 	local onHitEffects = { FlinchEffect:new(FlinchAmounts.LARGE) };
@@ -25,20 +25,20 @@ local action = function(self)
 	local dx = math.cos(angle);
 	local dy = math.sin(angle);
 
-	self:waitTween(buildupPeakSpeed, 0, buildupDuration, "outCubic", function(speed)
+	self:wait_tween(buildupPeakSpeed, 0, buildupDuration, "outCubic", function(speed)
 		self:setLinearVelocity( -dx * speed, -dy * speed);
 	end);
-	self:waitTween(peakSpeed, recoveryBeginSpeed, dashDuration, "outQuartic", function(speed)
+	self:wait_tween(peakSpeed, recoveryBeginSpeed, dashDuration, "outQuartic", function(speed)
 		self:setLinearVelocity(dx * speed, dy * speed);
 	end);
-	self:waitTween(recoveryBeginSpeed, 0, recoveryDuration, "outQuadratic", function(speed)
+	self:wait_tween(recoveryBeginSpeed, 0, recoveryDuration, "outQuadratic", function(speed)
 		self:setLinearVelocity(dx * speed, dy * speed);
 	end);
 end
 
 local dashScript = function(self)
 	while true do
-		self:waitFor("+useSkill");
+		self:wait_for("+useSkill");
 		if self:isIdle() then
 			self:doAction(action);
 		end

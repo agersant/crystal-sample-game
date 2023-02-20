@@ -1,7 +1,6 @@
 local Overlay = require("ui/bricks/elements/Overlay");
 local Text = require("ui/bricks/elements/Text");
 local Widget = require("ui/bricks/elements/Widget");
-local Script = require("script/Script");
 local Palette = require("graphics/Palette");
 
 local HitWidget = Class("HitWidget", Widget);
@@ -26,17 +25,17 @@ HitWidget.init = function(self, amount)
 	self._textWidget:setTextAlignment("center");
 	self._textWidget:setContent(amount);
 
-	self._animation = self:addScript(Script:new());
+	self._animation = self:add_script(crystal.Script:new());
 end
 
 HitWidget.animate = function(self)
 	local widget = self;
 	self._animation:signal("animate");
-	return self._animation:addThread(function(self)
-		self:endOn("animate");
+	return self._animation:add_thread(function(self)
+		self:end_on("animate");
 		self:tween(0, -8 + 16 * math.random(), .6, "linear", widget.setXTranslation, widget);
-		self:waitTween(0, -15, .2, "outQuadratic", widget.setYTranslation, widget);
-		self:waitTween(-15, 0, .4, "outBounce", widget.setYTranslation, widget);
+		self:wait_tween(0, -15, .2, "outQuadratic", widget.setYTranslation, widget);
+		self:wait_tween( -15, 0, .4, "outBounce", widget.setYTranslation, widget);
 		self:wait(0.5);
 		local shrink = self:tween(1, 0, 0.2, "inQuadratic", widget.setXScale, widget);
 		local flyOut = self:tween(0, -15, 0.2, "inQuartic", widget.setYTranslation, widget);

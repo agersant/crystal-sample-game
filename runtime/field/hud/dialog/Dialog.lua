@@ -1,7 +1,6 @@
-local Behavior = require("mapscene/behavior/Behavior");
 local InputListener = require("mapscene/behavior/InputListener");
 
-local Dialog = Class("Dialog", Behavior);
+local Dialog = Class("Dialog", crystal.Behavior);
 
 Dialog.init = function(self, dialogBox)
 	Dialog.super.init(self);
@@ -11,8 +10,8 @@ Dialog.init = function(self, dialogBox)
 	self._inputContext = nil;
 
 	local dialog = self;
-	self._script:addThread(function(self)
-		self:scope(function()
+	self._script:add_thread(function(self)
+		self:defer(function()
 			dialog:cleanup();
 		end);
 		self:hang();
@@ -44,12 +43,12 @@ Dialog.sayLine = function(self, text)
 
 	local waitForInput = function(self)
 		if inputListener:isCommandActive("advanceDialog", inputContext) then
-			self:waitFor("-advanceDialog");
+			self:wait_for("-advanceDialog");
 		end
-		self:waitFor("+advanceDialog");
+		self:wait_for("+advanceDialog");
 	end
 
-	local lineDelivery = self._script:addThreadAndRun(function(self)
+	local lineDelivery = self._script:run_thread(function(self)
 		self:thread(function()
 			waitForInput(self);
 			dialogBox:fastForward(text);
@@ -81,8 +80,6 @@ end
 
 local MapScene = require("mapscene/MapScene");
 local InputDevice = require("input/InputDevice");
-local Script = require("script/Script");
-local ScriptRunner = require("mapscene/behavior/ScriptRunner");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local DialogBox = require("field/hud/dialog/DialogBox");
 
@@ -97,15 +94,15 @@ crystal.test.add("Blocks script during dialog", function()
 	inputDevice:addBinding("advanceDialog", "q");
 	player:add_component(InputListener, inputDevice);
 
-	player:add_component(ScriptRunner);
+	player:add_component(crystal.ScriptRunner);
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
 	local npc = scene:spawn(crystal.Entity);
-	npc:add_component(ScriptRunner);
+	npc:add_component(crystal.ScriptRunner);
 	npc:add_component(Dialog, dialogBox);
 
 	local a;
-	npc:addScript(Script:new(function(self)
+	npc:add_script(crystal.Script:new(function(self)
 		a = 1;
 		self:beginDialog(player);
 		self:join(self:sayLine("Test dialog."));
@@ -144,14 +141,14 @@ crystal.test.add("Can't start concurrent dialogs", function()
 	inputDevice:addBinding("advanceDialog", "q");
 	player:add_component(InputListener, inputDevice);
 
-	player:add_component(ScriptRunner);
+	player:add_component(crystal.ScriptRunner);
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
 	local npc = scene:spawn(crystal.Entity);
-	npc:add_component(ScriptRunner);
+	npc:add_component(crystal.ScriptRunner);
 	npc:add_component(Dialog, dialogBox);
 
-	npc:addScript(Script:new(function(self)
+	npc:add_script(crystal.Script:new(function(self)
 		self:beginDialog(player);
 		self:join(self:sayLine("Test dialog."));
 		self:endDialog();
@@ -188,14 +185,14 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 	inputDevice:addBinding("advanceDialog", "q");
 	player:add_component(InputListener, inputDevice);
 
-	player:add_component(ScriptRunner);
+	player:add_component(crystal.ScriptRunner);
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
 	local npc = scene:spawn(crystal.Entity);
-	npc:add_component(ScriptRunner);
+	npc:add_component(crystal.ScriptRunner);
 	npc:add_component(Dialog, dialogBox);
 
-	npc:addScript(Script:new(function(self)
+	npc:add_script(crystal.Script:new(function(self)
 		self:beginDialog(player);
 		self:join(self:sayLine("Test dialog."));
 	end));

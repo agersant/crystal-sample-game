@@ -1,10 +1,8 @@
-local Script = require("script/Script");
-
 local Warrior = Class("Warrior", crystal.Entity);
 
 local hitReactions = function(self)
 	while true do
-		self:waitFor("died");
+		self:wait_for("died");
 		self:stopAction();
 		self:doAction(function(self)
 			self:setAnimation("death");
@@ -41,7 +39,7 @@ Warrior.init = function(self)
 	self:add_component("ComboAttack", 1);
 	self:add_component("Dash", 2);
 
-	self:addScript(Script:new(hitReactions));
+	self:add_script(crystal.Script:new(hitReactions));
 end
 
 return Warrior;

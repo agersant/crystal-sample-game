@@ -1,10 +1,8 @@
-local Script = require("script/Script");
-
 local NPC = Class("NPC", crystal.Entity);
 
 local script = function(self)
 	while true do
-		local player = self:waitFor("interact");
+		local player = self:wait_for("interact");
 		if self:beginDialog(player) then
 			self:join(self:sayLine(
 				"The harvest this year was meager, there is no spare bread for a stranger like you. If I cannot feed my children, why would I feed you? Extra lines of text to get to line four, come on just a little more."));
@@ -25,7 +23,7 @@ NPC.init = function(self)
 	self:add_component("Collision", physicsBody, 4);
 	self:add_component("ScriptRunner");
 	self:add_component("Dialog", scene:getHUD():getDialogBox());
-	self:addScript(Script:new(script));
+	self:add_script(crystal.Script:new(script));
 end
 
 return NPC;
