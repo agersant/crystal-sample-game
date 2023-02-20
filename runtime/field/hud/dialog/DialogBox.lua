@@ -11,7 +11,6 @@ DialogBox.init = function(self)
 	self._textSpeed = 25;
 	self._owner = nil;
 	self._player = nil;
-	self._script = self:add_script(crystal.Script:new());
 
 	self:setAlpha(0);
 
@@ -49,8 +48,8 @@ DialogBox.sayLine = function(self, targetText)
 
 	local duration = #targetText / self._textSpeed;
 
-	self._script:signal("sayLine");
-	return self._script:add_thread(function(self)
+	self:script():signal("sayLine");
+	return self:script():add_thread(function(self)
 		self:end_on("sayLine");
 		self:end_on("skipped");
 
@@ -74,7 +73,7 @@ DialogBox.sayLine = function(self, targetText)
 end
 
 DialogBox.fastForward = function(self)
-	self._script:signal("fastForward");
+	self:script():signal("fastForward");
 end
 
 DialogBox.close = function(self)

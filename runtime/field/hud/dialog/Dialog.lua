@@ -10,7 +10,7 @@ Dialog.init = function(self, dialogBox)
 	self._inputContext = nil;
 
 	local dialog = self;
-	self._script:add_thread(function(self)
+	self:script():add_thread(function(self)
 		self:defer(function()
 			dialog:cleanup();
 		end);
@@ -26,7 +26,7 @@ Dialog.beginDialog = function(self, player)
 	assert(not self._inputContext);
 	if self._dialogBox:open() then
 		self._inputListener = player:component(InputListener);
-		self._inputContext = self._inputListener:pushContext(self._script);
+		self._inputContext = self._inputListener:pushContext(self:script());
 		return true;
 	end
 	return false;
@@ -48,7 +48,7 @@ Dialog.sayLine = function(self, text)
 		self:wait_for("+advanceDialog");
 	end
 
-	local lineDelivery = self._script:run_thread(function(self)
+	local lineDelivery = self:script():run_thread(function(self)
 		self:thread(function()
 			waitForInput(self);
 			dialogBox:fastForward(text);
@@ -102,12 +102,12 @@ crystal.test.add("Blocks script during dialog", function()
 	npc:add_component(Dialog, dialogBox);
 
 	local a;
-	npc:add_script(crystal.Script:new(function(self)
+	npc:add_script(function(self)
 		a = 1;
 		self:beginDialog(player);
 		self:join(self:sayLine("Test dialog."));
 		a = 2;
-	end));
+	end);
 
 	local frame = function(self)
 		scene:update(0);
@@ -148,11 +148,11 @@ crystal.test.add("Can't start concurrent dialogs", function()
 	npc:add_component(crystal.ScriptRunner);
 	npc:add_component(Dialog, dialogBox);
 
-	npc:add_script(crystal.Script:new(function(self)
+	npc:add_script(function(self)
 		self:beginDialog(player);
 		self:join(self:sayLine("Test dialog."));
 		self:endDialog();
-	end));
+	end);
 
 	local inputDevice = player:getInputDevice();
 	local frame = function(self)
@@ -192,10 +192,10 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 	npc:add_component(crystal.ScriptRunner);
 	npc:add_component(Dialog, dialogBox);
 
-	npc:add_script(crystal.Script:new(function(self)
+	npc:add_script(function(self)
 		self:beginDialog(player);
 		self:join(self:sayLine("Test dialog."));
-	end));
+	end);
 
 	local inputDevice = player:getInputDevice();
 	local frame = function(self)

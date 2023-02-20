@@ -99,7 +99,7 @@ Sahagin.init = function(self)
 	self:add_component("Flinch");
 	self:add_component("HitBlink");
 
-	local ai = self:add_script(crystal.Script:new(ai));
+	local ai = self:add_script(ai);
 	ai:add_thread(handleDeath);
 end
 

@@ -24,14 +24,12 @@ HitWidget.init = function(self, amount)
 	self._textWidget:setColor(Palette.barbadosCherry);
 	self._textWidget:setTextAlignment("center");
 	self._textWidget:setContent(amount);
-
-	self._animation = self:add_script(crystal.Script:new());
 end
 
 HitWidget.animate = function(self)
 	local widget = self;
-	self._animation:signal("animate");
-	return self._animation:add_thread(function(self)
+	self:script():signal("animate");
+	return self:script():add_thread(function(self)
 		self:end_on("animate");
 		self:tween(0, -8 + 16 * math.random(), .6, "linear", widget.setXTranslation, widget);
 		self:wait_tween(0, -15, .2, "outQuadratic", widget.setYTranslation, widget);

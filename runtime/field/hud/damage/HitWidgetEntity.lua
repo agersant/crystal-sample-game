@@ -14,10 +14,10 @@ HitWidgetEntity.init = function(self, victim, amount)
 	self:add_component(Parent, victim);
 	self:add_component(crystal.ScriptRunner);
 
-	self:add_script(crystal.Script:new(function(self)
+	self:add_script(function(self)
 		self:join(hitWidget:animate());
 		self:despawn();
-	end));
+	end);
 end
 
 return HitWidgetEntity;

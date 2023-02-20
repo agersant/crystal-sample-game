@@ -39,7 +39,7 @@ Warrior.init = function(self)
 	self:add_component("ComboAttack", 1);
 	self:add_component("Dash", 2);
 
-	self:add_script(crystal.Script:new(hitReactions));
+	self:add_script(hitReactions);
 end
 
 return Warrior;

@@ -1,6 +1,6 @@
 local NPC = Class("NPC", crystal.Entity);
 
-local script = function(self)
+local npc_script = function(self)
 	while true do
 		local player = self:wait_for("interact");
 		if self:beginDialog(player) then
@@ -23,7 +23,7 @@ NPC.init = function(self)
 	self:add_component("Collision", physicsBody, 4);
 	self:add_component("ScriptRunner");
 	self:add_component("Dialog", scene:getHUD():getDialogBox());
-	self:add_script(crystal.Script:new(script));
+	self:add_script(npc_script);
 end
 
 return NPC;

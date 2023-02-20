@@ -68,7 +68,7 @@ Teleport.init = function(self, options)
 	local physicsBody = self:add_component("PhysicsBody", scene:getPhysicsWorld());
 	self:add_component(TeleportTouchTrigger, physicsBody, options.shape);
 	self:add_component("ScriptRunner");
-	self:add_script(crystal.Script:new(teleportScript));
+	self:add_script(teleportScript);
 
 	self._targetMap = options.targetMap;
 	self._targetX = options.targetX;
