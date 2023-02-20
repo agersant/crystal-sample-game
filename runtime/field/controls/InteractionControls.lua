@@ -25,7 +25,7 @@ local scriptFunction = function(self)
 				for entity in pairs(collision:getContactEntities()) do
 					local scriptRunner = entity:component(crystal.ScriptRunner);
 					if scriptRunner then
-						scriptRunner:signalAllScripts("interact", self:entity());
+						scriptRunner:signal_all_scripts("interact", self:entity());
 					end
 				end
 			end

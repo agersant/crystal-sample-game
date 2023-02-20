@@ -52,11 +52,11 @@ CombatSystem.duringScripts = function(self, dt)
 			assert(attacker);
 			local effectiveDamage = damageEvent:getDamage();
 			assert(effectiveDamage);
-			victim:signalAllScripts("disrupted");
+			victim:signal_all_scripts("disrupted");
 			for _, onHitEffect in ipairs(damageEvent:getOnHitEffects()) do
 				onHitEffect:apply(attacker, victim, effectiveDamage);
 			end
-			victim:signalAllScripts("receivedDamage", effectiveDamage);
+			victim:signal_all_scripts("receivedDamage", effectiveDamage);
 		end
 	end
 
@@ -65,7 +65,7 @@ CombatSystem.duringScripts = function(self, dt)
 		local victim = deathEvent:entity();
 		if self._scriptRunnerQuery:contains(victim) then
 			local scriptRunner = victim:component(crystal.ScriptRunner);
-			scriptRunner:signalAllScripts("died");
+			scriptRunner:signal_all_scripts("died");
 		end
 		if self._inputQuery:contains(victim) then
 			local inputListener = victim:component(InputListener);

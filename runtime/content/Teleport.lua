@@ -52,11 +52,11 @@ TeleportTouchTrigger.init = function(self, physicsBody, shape)
 end
 
 TeleportTouchTrigger.onBeginTouch = function(self, component)
-	self:entity():signalAllScripts("+trigger", component:entity());
+	self:entity():signal_all_scripts("+trigger", component:entity());
 end
 
 TeleportTouchTrigger.onEndTouch = function(self, component)
-	self:entity():signalAllScripts("-trigger", component:entity());
+	self:entity():signal_all_scripts("-trigger", component:entity());
 end
 
 Teleport.init = function(self, options)
