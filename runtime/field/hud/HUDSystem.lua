@@ -12,7 +12,7 @@ HUDSystem.getHUD = function(self)
 	return self._hud;
 end
 
-HUDSystem.afterScripts = function(self, dt)
+HUDSystem.after_scripts = function(self, dt)
 	local width, height = self._viewport:getRenderSize();
 	self._hud:updateTree(dt, width, height);
 end

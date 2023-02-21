@@ -8,7 +8,7 @@ MovementControlsSystem.init = function(self)
 	self._withLocomotion = self:add_query({ InputListener, Locomotion, MovementControls });
 end
 
-MovementControlsSystem.beforeScripts = function(self, dt)
+MovementControlsSystem.before_scripts = function(self, dt)
 	local entities = self._withLocomotion:entities();
 	for entity in pairs(entities) do
 		local inputListener = entity:component(InputListener);

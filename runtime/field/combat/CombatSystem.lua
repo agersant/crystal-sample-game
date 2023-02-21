@@ -16,7 +16,7 @@ CombatSystem.init = function(self)
 	self._inputQuery = self:add_query({ CombatData, InputListener });
 end
 
-CombatSystem.beforeScripts = function(self, dt)
+CombatSystem.before_scripts = function(self, dt)
 	local entities = self._locomotionQuery:entities();
 	for entity in pairs(entities) do
 		local actor = entity:component(Actor);
@@ -29,7 +29,7 @@ CombatSystem.beforeScripts = function(self, dt)
 	end
 end
 
-CombatSystem.duringScripts = function(self, dt)
+CombatSystem.during_scripts = function(self, dt)
 	local hitEvents = self:ecs():events(HitEvent);
 	for _, hitEvent in ipairs(hitEvents) do
 		local attacker = hitEvent:entity();
