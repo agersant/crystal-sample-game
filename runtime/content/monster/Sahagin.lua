@@ -5,7 +5,7 @@ local FlinchEffect = require("field/combat/hit-reactions/FlinchEffect");
 local Sahagin = Class("Sahagin", crystal.Entity);
 
 local attack = function(self)
-	self:end_on("disrupted");
+	self:stop_on("disrupted");
 	self:setMovementAngle(nil);
 	self:resetMultiHitTracking();
 	local onHitEffects = { FlinchEffect:new() };
@@ -14,8 +14,8 @@ local attack = function(self)
 end
 
 local reachAndAttack = function(self)
-	self:end_on("disrupted");
-	self:end_on("died");
+	self:stop_on("disrupted");
+	self:stop_on("died");
 
 	local target = self:getNearestEnemy();
 	if not target then

@@ -50,8 +50,8 @@ DialogBox.sayLine = function(self, targetText)
 
 	self:script():signal("sayLine");
 	return self:script():add_thread(function(self)
-		self:end_on("sayLine");
-		self:end_on("skipped");
+		self:stop_on("sayLine");
+		self:stop_on("skipped");
 
 		self:thread(function(self)
 			self:wait_for("fastForward");

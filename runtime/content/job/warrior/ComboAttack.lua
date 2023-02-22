@@ -26,7 +26,7 @@ local getComboSwingAction = function(swingCount)
 end
 
 local performCombo = function(self)
-	self:end_on("disrupted");
+	self:stop_on("disrupted");
 	local comboCounter = 0;
 	while self:isIdle() and comboCounter < 4 do
 		local swing = self:doAction(getComboSwingAction(comboCounter));

@@ -18,7 +18,7 @@ end
 
 local teleportScript = function(self)
 	local teleportEntity = self:entity();
-	self:end_on("teleportActivated");
+	self:stop_on("teleportActivated");
 	while true do
 		local triggeredBy = self:wait_for("+trigger");
 		local watchDirectionThread = self:thread(function(self)
