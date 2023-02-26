@@ -13,11 +13,11 @@ MovementControlsSystem.before_run_scripts = function(self, dt)
 		local movementControls = entity:component(MovementControls);
 		local disabled = movementControls:is_movement_disabled();
 
-		local inputListener = entity:component(crystal.InputListener);
-		local left = inputListener:is_action_input_down("moveLeft");
-		local right = inputListener:is_action_input_down("moveRight");
-		local up = inputListener:is_action_input_down("moveUp");
-		local down = inputListener:is_action_input_down("moveDown");
+		local inputPlayer = entity:input_player();
+		local left = inputPlayer:is_action_input_down("moveLeft");
+		local right = inputPlayer:is_action_input_down("moveRight");
+		local up = inputPlayer:is_action_input_down("moveUp");
+		local down = inputPlayer:is_action_input_down("moveDown");
 
 		local x, y;
 		if not disabled then
@@ -36,8 +36,8 @@ MovementControlsSystem.before_run_scripts = function(self, dt)
 				end
 				assert(y);
 			else
-				local stick_x = inputListener:action_axis_value("moveX");
-				local stick_y = inputListener:action_axis_value("moveY");
+				local stick_x = inputPlayer:action_axis_value("moveX");
+				local stick_y = inputPlayer:action_axis_value("moveY");
 				if math.abs(stick_x) < 0.2 then
 					stick_x = 0;
 				end
