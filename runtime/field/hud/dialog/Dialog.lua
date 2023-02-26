@@ -64,6 +64,7 @@ crystal.test.add("Blocks script during dialog", function()
 	local player = scene:spawn(crystal.Entity);
 	player:add_component(crystal.InputListener, device);
 	player:add_component(crystal.ScriptRunner);
+	player:add_component("MovementControls");
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
 	local npc = scene:spawn(crystal.Entity);
@@ -108,6 +109,7 @@ crystal.test.add("Can't start concurrent dialogs", function()
 	local player = scene:spawn(crystal.Entity);
 	player:add_component(crystal.InputListener, device);
 	player:add_component(crystal.ScriptRunner);
+	player:add_component("MovementControls");
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
 	local npc = scene:spawn(crystal.Entity);
@@ -149,6 +151,7 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 	local player = scene:spawn(crystal.Entity);
 	player:add_component(crystal.InputListener, device);
 	player:add_component(crystal.ScriptRunner);
+	player:add_component("MovementControls");
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
 	local npc = scene:spawn(crystal.Entity);
