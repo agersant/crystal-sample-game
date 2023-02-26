@@ -29,6 +29,8 @@ crystal.input.player(1):set_bindings({
 	dpright = { "moveRight" },
 	dpup = { "moveUp" },
 	dpdown = { "moveDown" },
+	leftx = { "moveX" },
+	lefty = { "moveY" },
 	pad_a = { "interact", "useSkill1", "advanceDialog" },
 	pad_x = { "useSkill2" },
 	pad_b = { "useSkill3" },

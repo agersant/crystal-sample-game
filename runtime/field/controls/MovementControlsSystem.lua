@@ -14,39 +14,48 @@ MovementControlsSystem.before_run_scripts = function(self, dt)
 		local disabled = movementControls:is_movement_disabled();
 
 		local inputListener = entity:component(crystal.InputListener);
-		local left = inputListener:is_action_input_down("moveLeft") and not disabled;
-		local right = inputListener:is_action_input_down("moveRight") and not disabled;
-		local up = inputListener:is_action_input_down("moveUp") and not disabled;
-		local down = inputListener:is_action_input_down("moveDown") and not disabled;
+		local left = inputListener:is_action_input_down("moveLeft");
+		local right = inputListener:is_action_input_down("moveRight");
+		local up = inputListener:is_action_input_down("moveUp");
+		local down = inputListener:is_action_input_down("moveDown");
 
-		movementControls:setIsInputtingLeft(left);
-		movementControls:setIsInputtingRight(right);
-		movementControls:setIsInputtingUp(up);
-		movementControls:setIsInputtingDown(down);
+		local x, y;
+		if not disabled then
+			if left or right or up or down then
+				if left and right then
+					x = movementControls:getLastXInput() or 0;
+				else
+					x = left and -1 or right and 1 or 0;
+				end
+				assert(x);
 
-		local locomotion = entity:component(Locomotion);
-
-		if left or right or up or down then
-			local xDir, yDir;
-
-			if left and right then
-				xDir = movementControls:getLastXInput() or 0;
+				if up and down then
+					y = movementControls:getLastYInput() or 0;
+				else
+					y = up and -1 or down and 1 or 0;
+				end
+				assert(y);
 			else
-				xDir = left and -1 or right and 1 or 0;
+				local stick_x = inputListener:action_axis_value("moveX");
+				local stick_y = inputListener:action_axis_value("moveY");
+				if math.abs(stick_x) < 0.2 then
+					stick_x = 0;
+				end
+				if math.abs(stick_y) < 0.2 then
+					stick_y = 0;
+				end
+				if math.abs(stick_x) > 0.5 or math.abs(stick_y) > 0.5 then
+					x = stick_x;
+					y = stick_y;
+				end
 			end
-			assert(xDir);
+		end
 
-			if up and down then
-				yDir = movementControls:getLastYInput() or 0;
-			else
-				yDir = up and -1 or down and 1 or 0;
-			end
-			assert(yDir);
-
-			local angle = math.atan2(yDir, xDir);
-			locomotion:setMovementAngle(angle);
+		if x and y then
+			local angle = math.atan2(y, x);
+			entity:setMovementAngle(angle);
 		else
-			locomotion:setMovementAngle(nil);
+			entity:setMovementAngle(nil);
 		end
 	end
 end
