@@ -51,18 +51,18 @@ end
 --#region Tests
 
 local MapScene = require("mapscene/MapScene");
-local InputDevice = require("modules/input/input_device");
+local InputPlayer = require("modules/input/input_player");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local DialogBox = require("field/hud/dialog/DialogBox");
 
 crystal.test.add("Blocks script during dialog", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 	local dialogBox = DialogBox:new();
-	local device = InputDevice:new(1);
-	device:set_bindings({ q = { "advanceDialog" } });
+	local player = InputPlayer:new(1);
+	player:set_bindings({ q = { "advanceDialog" } });
 
 	local player = scene:spawn(crystal.Entity);
-	player:add_component(crystal.InputListener, device);
+	player:add_component(crystal.InputListener, player);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component("MovementControls");
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
@@ -82,19 +82,19 @@ crystal.test.add("Blocks script during dialog", function()
 	local frame = function(self)
 		scene:update(0);
 		dialogBox:update(0);
-		device:flush_events();
+		player:flush_events();
 	end
 
 	frame();
 	assert(a == 1);
 
-	device:key_pressed("q");
+	player:key_pressed("q");
 	frame();
-	device:key_released("q");
+	player:key_released("q");
 	frame();
-	device:key_pressed("q");
+	player:key_pressed("q");
 	frame();
-	device:key_released("q");
+	player:key_released("q");
 	frame();
 
 	assert(a == 2);
@@ -103,11 +103,11 @@ end);
 crystal.test.add("Can't start concurrent dialogs", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 	local dialogBox = DialogBox:new();
-	local device = InputDevice:new(1);
-	device:set_bindings({ q = { "advanceDialog" } });
+	local player = InputPlayer:new(1);
+	player:set_bindings({ q = { "advanceDialog" } });
 
 	local player = scene:spawn(crystal.Entity);
-	player:add_component(crystal.InputListener, device);
+	player:add_component(crystal.InputListener, player);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component("MovementControls");
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
@@ -122,22 +122,22 @@ crystal.test.add("Can't start concurrent dialogs", function()
 		self:endDialog();
 	end);
 
-	local device = player:input_device();
+	local player = player:input_player();
 	local frame = function(self)
 		scene:update(0);
 		dialogBox:update(0);
-		device:flush_events();
+		player:flush_events();
 	end
 
 	frame();
 	assert(not Dialog:new(dialogBox):beginDialog(player));
-	device:key_pressed("q");
+	player:key_pressed("q");
 	frame();
-	device:key_released("q");
+	player:key_released("q");
 	frame();
-	device:key_pressed("q");
+	player:key_pressed("q");
 	frame();
-	device:key_released("q");
+	player:key_released("q");
 	frame();
 	assert(Dialog:new(dialogBox):beginDialog(player));
 end);
@@ -145,11 +145,11 @@ end);
 crystal.test.add("Dialog is cleaned up if entity despawns while speaking", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
 	local dialogBox = DialogBox:new();
-	local device = InputDevice:new(1);
-	device:set_bindings({ q = { "advanceDialog" } });
+	local player = InputPlayer:new(1);
+	player:set_bindings({ q = { "advanceDialog" } });
 
 	local player = scene:spawn(crystal.Entity);
-	player:add_component(crystal.InputListener, device);
+	player:add_component(crystal.InputListener, player);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component("MovementControls");
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
@@ -163,11 +163,11 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 		self:join(self:sayLine("Test dialog."));
 	end);
 
-	local device = player:input_device();
+	local player = player:input_player();
 	local frame = function(self)
 		scene:update(0);
 		dialogBox:update(0);
-		device:flush_events();
+		player:flush_events();
 	end
 
 	frame();

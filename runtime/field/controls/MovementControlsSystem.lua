@@ -14,10 +14,10 @@ MovementControlsSystem.before_run_scripts = function(self, dt)
 		local disabled = movementControls:is_movement_disabled();
 
 		local inputListener = entity:component(crystal.InputListener);
-		local left = inputListener:is_input_down("moveLeft") and not disabled;
-		local right = inputListener:is_input_down("moveRight") and not disabled;
-		local up = inputListener:is_input_down("moveUp") and not disabled;
-		local down = inputListener:is_input_down("moveDown") and not disabled;
+		local left = inputListener:is_action_input_down("moveLeft") and not disabled;
+		local right = inputListener:is_action_input_down("moveRight") and not disabled;
+		local up = inputListener:is_action_input_down("moveUp") and not disabled;
+		local down = inputListener:is_action_input_down("moveDown") and not disabled;
 
 		movementControls:setIsInputtingLeft(left);
 		movementControls:setIsInputtingRight(right);

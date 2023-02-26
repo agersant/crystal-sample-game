@@ -14,7 +14,8 @@ FONTS = Fonts:new({
 	fat = "assets/font/karenfat.ttf",
 });
 
-crystal.input.device(1):set_bindings({
+crystal.input.player(1):set_bindings({
+	-- Keyboard
 	left = { "moveLeft" },
 	right = { "moveRight" },
 	up = { "moveUp" },
@@ -23,6 +24,15 @@ crystal.input.device(1):set_bindings({
 	w = { "useSkill2" },
 	e = { "useSkill3" },
 	r = { "useSkill4" },
+	-- Gamepad
+	dpleft = { "moveLeft" },
+	dpright = { "moveRight" },
+	dpup = { "moveUp" },
+	dpdown = { "moveDown" },
+	pad_a = { "interact", "useSkill1", "advanceDialog" },
+	pad_x = { "useSkill2" },
+	pad_b = { "useSkill3" },
+	pad_y = { "useSkill4" },
 });
 
 crystal.developer_start = function()
