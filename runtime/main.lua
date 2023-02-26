@@ -24,3 +24,7 @@ crystal.input.device(1):set_bindings({
 	e = { "useSkill3" },
 	r = { "useSkill4" },
 });
+
+crystal.developer_start = function()
+	crystal.cmd.run("loadmap dev2");
+end
