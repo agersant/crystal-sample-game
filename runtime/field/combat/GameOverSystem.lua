@@ -8,7 +8,7 @@ GameOverSystem.init = function(self)
 	self._query = self:add_query({ CombatData, PartyMember });
 end
 
-GameOverSystem.after_scripts = function(self)
+GameOverSystem.after_run_scripts = function(self)
 	local entities = self._query:entities();
 	for entity in pairs(entities) do
 		local combatData = entity:component(CombatData);

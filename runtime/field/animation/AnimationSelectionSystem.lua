@@ -15,7 +15,7 @@ AnimationSelectionSystem.init = function(self)
 	self._flinches = self:add_query({ SpriteAnimator, PhysicsBody, Flinch, FlinchAnimation });
 end
 
-AnimationSelectionSystem.after_scripts = function(self)
+AnimationSelectionSystem.after_run_scripts = function(self)
 	local walkEntities = self._walks:entities();
 	local idleEntities = self._idles:entities();
 	local flinchEntities = self._flinches:entities();
