@@ -1,5 +1,4 @@
 local PartyMember = require("persistence/party/PartyMember");
-local InputListener = require("mapscene/behavior/InputListener");
 
 local PartyMemberData = Class("PartyMemberData");
 
@@ -34,11 +33,11 @@ end
 PartyMemberData.fromEntity = function(self, entity)
 	local className = entity:getClassName();
 	assert(entity:component(PartyMember));
-	local inputListener = entity:component(InputListener);
+	local inputListener = entity:component(crystal.InputListener);
 
 	local partyMemberData = PartyMemberData:new(className);
 	if inputListener then
-		PartyMemberData:setAssignedPlayer(inputListener:getInputDevice():getIndex());
+		PartyMemberData:setAssignedPlayer(inputListener:input_device():index());
 	end
 	return partyMemberData;
 end

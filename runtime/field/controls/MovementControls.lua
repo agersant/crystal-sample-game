@@ -7,7 +7,7 @@ MovementControls.init = function(self)
 	self._isInputtingDown = false;
 	self._lastXInput = nil;
 	self._lastYInput = nil;
-	self._disabledTokens = {};
+	self._disabledCount = 0;
 end
 
 MovementControls.getLastXInput = function(self)
@@ -44,6 +44,22 @@ MovementControls.setIsInputtingDown = function(self, inputting)
 		self._lastYInput = 1;
 	end
 	self._isInputtingDown = inputting;
+end
+
+MovementControls.is_movement_disabled = function(self)
+	return self._disabledCount > 0;
+end
+
+MovementControls.push_movement_disable = function(self)
+	self._disabledCount = self._disabledCount + 1;
+	return function()
+		self:pop_movement_disable();
+	end
+end
+
+MovementControls.pop_movement_disable = function(self)
+	assert(self._disabledCount > 0);
+	self._disabledCount = self._disabledCount - 1;
 end
 
 return MovementControls;

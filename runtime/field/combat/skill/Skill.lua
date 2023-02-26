@@ -5,18 +5,29 @@ Skill.init = function(self, skillSlot, scriptContent)
 	assert(scriptContent);
 	Skill.super.init(self, scriptContent);
 
-	local command = "useSkill" .. skillSlot
+	local input_on = "+useSkill" .. skillSlot;
+	local input_off = "-useSkill" .. skillSlot;
 
-	self._script:add_thread(function(self)
+	self:script():add_thread(function(self)
+		self:defer(self:add_input_handler(function(input)
+			if input == input_on or input == input_off then
+				self:signal(input);
+				return true;
+			end
+		end));
+		self:hang();
+	end);
+
+	self:script():add_thread(function(self)
 		while true do
-			self:wait_for("+" .. command);
+			self:wait_for(input_on);
 			self:signal("+useSkill");
 		end
 	end);
 
-	self._script:add_thread(function(self)
+	self:script():add_thread(function(self)
 		while true do
-			self:wait_for("-" .. command);
+			self:wait_for(input_off);
 			self:signal("-useSkill");
 		end
 	end);

@@ -44,7 +44,6 @@ end
 
 DialogBox.sayLine = function(self, targetText)
 	assert(targetText);
-	crystal.log.info("Displaying dialogbox: " .. targetText);
 
 	local duration = #targetText / self._textSpeed;
 

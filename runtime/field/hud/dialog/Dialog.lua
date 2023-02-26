@@ -1,32 +1,27 @@
-local InputListener = require("mapscene/behavior/InputListener");
-
 local Dialog = Class("Dialog", crystal.Behavior);
 
 Dialog.init = function(self, dialogBox)
 	Dialog.super.init(self);
 	assert(dialogBox);
 	self._dialogBox = dialogBox;
-	self._inputListener = nil;
-	self._inputContext = nil;
-
-	local dialog = self;
-	self:script():add_thread(function(self)
-		self:defer(function()
-			dialog:cleanup();
-		end);
-		self:hang();
-	end);
 end
 
 Dialog.beginDialog = function(self, player)
 	assert(player);
 	assert(player:is_instance_of(crystal.Entity));
-	assert(player:component(InputListener));
-	assert(not self._inputListener);
-	assert(not self._inputContext);
-	if self._dialogBox:open() then
-		self._inputListener = player:component(InputListener);
-		self._inputContext = self._inputListener:pushContext(self:script());
+	local dialog_box = self._dialogBox;
+	if dialog_box:open() then
+		self:script():run_thread(function(self)
+			self:defer(function()
+				dialog_box:close();
+			end);
+			self:defer(player:push_movement_disable());
+			self:defer(player:add_input_handler(function(input)
+				self:signal(input);
+				return true;
+			end));
+			self:hang();
+		end);
 		return true;
 	end
 	return false;
@@ -34,66 +29,40 @@ end
 
 Dialog.sayLine = function(self, text)
 	assert(text);
-	assert(self._inputListener);
-	assert(self._inputContext);
-
-	local inputListener = self._inputListener;
-	local inputContext = self._inputContext;
 	local dialogBox = self._dialogBox;
-
-	local waitForInput = function(self)
-		if inputListener:isCommandActive("advanceDialog", inputContext) then
-			self:wait_for("-advanceDialog");
-		end
-		self:wait_for("+advanceDialog");
-	end
-
 	local lineDelivery = self:script():run_thread(function(self)
-		self:thread(function()
-			waitForInput(self);
+		self:thread(function(self)
+			self:wait_frame();
+			self:wait_for("+advanceDialog");
 			dialogBox:fastForward(text);
 		end);
 
 		self:join(dialogBox:sayLine(text));
-		waitForInput(self);
+		self:wait_for("+advanceDialog");
 	end);
-
 	return lineDelivery;
 end
 
-Dialog.cleanup = function(self)
-	if self._inputListener or self._inputContext then
-		self:endDialog();
-	end
-end
-
 Dialog.endDialog = function(self)
-	assert(self._inputListener);
-	assert(self._inputContext);
 	self._dialogBox:close();
-	self._inputListener:popContext(self._inputContext);
-	self._inputListener = nil;
-	self._inputContext = nil;
+	self:script():stop_all_threads();
 end
 
 --#region Tests
 
 local MapScene = require("mapscene/MapScene");
-local InputDevice = require("input/InputDevice");
+local InputDevice = require("modules/input/input_device");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local DialogBox = require("field/hud/dialog/DialogBox");
 
 crystal.test.add("Blocks script during dialog", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
-
 	local dialogBox = DialogBox:new();
+	local device = InputDevice:new(1);
+	device:set_bindings({ q = { "advanceDialog" } });
 
 	local player = scene:spawn(crystal.Entity);
-
-	local inputDevice = InputDevice:new(1);
-	inputDevice:addBinding("advanceDialog", "q");
-	player:add_component(InputListener, inputDevice);
-
+	player:add_component(crystal.InputListener, device);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
@@ -112,19 +81,19 @@ crystal.test.add("Blocks script during dialog", function()
 	local frame = function(self)
 		scene:update(0);
 		dialogBox:update(0);
-		inputDevice:flushEvents();
+		device:flush_events();
 	end
 
 	frame();
 	assert(a == 1);
 
-	inputDevice:keyPressed("q");
+	device:key_pressed("q");
 	frame();
-	inputDevice:keyReleased("q");
+	device:key_released("q");
 	frame();
-	inputDevice:keyPressed("q");
+	device:key_pressed("q");
 	frame();
-	inputDevice:keyReleased("q");
+	device:key_released("q");
 	frame();
 
 	assert(a == 2);
@@ -132,15 +101,12 @@ end);
 
 crystal.test.add("Can't start concurrent dialogs", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
-
 	local dialogBox = DialogBox:new();
+	local device = InputDevice:new(1);
+	device:set_bindings({ q = { "advanceDialog" } });
 
 	local player = scene:spawn(crystal.Entity);
-
-	local inputDevice = InputDevice:new(1);
-	inputDevice:addBinding("advanceDialog", "q");
-	player:add_component(InputListener, inputDevice);
-
+	player:add_component(crystal.InputListener, device);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
@@ -154,37 +120,34 @@ crystal.test.add("Can't start concurrent dialogs", function()
 		self:endDialog();
 	end);
 
-	local inputDevice = player:getInputDevice();
+	local device = player:input_device();
 	local frame = function(self)
 		scene:update(0);
 		dialogBox:update(0);
-		inputDevice:flushEvents();
+		device:flush_events();
 	end
 
 	frame();
 	assert(not Dialog:new(dialogBox):beginDialog(player));
-	inputDevice:keyPressed("q");
+	device:key_pressed("q");
 	frame();
-	inputDevice:keyReleased("q");
+	device:key_released("q");
 	frame();
-	inputDevice:keyPressed("q");
+	device:key_pressed("q");
 	frame();
-	inputDevice:keyReleased("q");
+	device:key_released("q");
 	frame();
 	assert(Dialog:new(dialogBox):beginDialog(player));
 end);
 
 crystal.test.add("Dialog is cleaned up if entity despawns while speaking", function()
 	local scene = MapScene:new("test-data/empty_map.lua");
-
 	local dialogBox = DialogBox:new();
+	local device = InputDevice:new(1);
+	device:set_bindings({ q = { "advanceDialog" } });
 
 	local player = scene:spawn(crystal.Entity);
-
-	local inputDevice = InputDevice:new(1);
-	inputDevice:addBinding("advanceDialog", "q");
-	player:add_component(InputListener, inputDevice);
-
+	player:add_component(crystal.InputListener, device);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component(PhysicsBody, scene:getPhysicsWorld());
 
@@ -197,11 +160,11 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 		self:join(self:sayLine("Test dialog."));
 	end);
 
-	local inputDevice = player:getInputDevice();
+	local device = player:input_device();
 	local frame = function(self)
 		scene:update(0);
 		dialogBox:update(0);
-		inputDevice:flushEvents();
+		device:flush_events();
 	end
 
 	frame();

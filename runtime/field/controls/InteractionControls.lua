@@ -1,23 +1,18 @@
 local Actor = require("mapscene/behavior/Actor");
-local InputListener = require("mapscene/behavior/InputListener");
 local Collision = require("mapscene/physics/Collision");
 
 local InteractionControls = Class("InteractionControls", crystal.Behavior);
 
 local scriptFunction = function(self)
+	self:defer(self:add_input_handler(function(input)
+		if input == "+interact" then
+			self:signal(input);
+			return true;
+		end
+	end));
+
 	while true do
-		local inputListener = self:component(InputListener);
-		if not inputListener then
-			self:wait_frame();
-		end
-		local inputDevice = inputListener:getInputDevice();
-		assert(inputDevice);
-
-		if inputDevice:isCommandActive("interact") then
-			self:wait_for("-interact");
-		end
 		self:wait_for("+interact");
-
 		local actor = self:component(Actor);
 		if not actor or actor:isIdle() then
 			local collision = self:component(Collision);

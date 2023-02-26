@@ -1,23 +1,24 @@
 local MovementControls = require("field/controls/MovementControls");
-local InputListener = require("mapscene/behavior/InputListener");
 local Locomotion = require("mapscene/physics/Locomotion");
 
 local MovementControlsSystem = Class("MovementControlsSystem", crystal.System);
 
 MovementControlsSystem.init = function(self)
-	self._withLocomotion = self:add_query({ InputListener, Locomotion, MovementControls });
+	self._withLocomotion = self:add_query({ crystal.InputListener, Locomotion, MovementControls });
 end
 
 MovementControlsSystem.before_scripts = function(self, dt)
 	local entities = self._withLocomotion:entities();
 	for entity in pairs(entities) do
-		local inputListener = entity:component(InputListener);
-		local left = inputListener:isCommandActive("moveLeft");
-		local right = inputListener:isCommandActive("moveRight");
-		local up = inputListener:isCommandActive("moveUp");
-		local down = inputListener:isCommandActive("moveDown");
-
 		local movementControls = entity:component(MovementControls);
+		local disabled = movementControls:is_movement_disabled();
+
+		local inputListener = entity:component(crystal.InputListener);
+		local left = inputListener:is_input_down("moveLeft") and not disabled;
+		local right = inputListener:is_input_down("moveRight") and not disabled;
+		local up = inputListener:is_input_down("moveUp") and not disabled;
+		local down = inputListener:is_input_down("moveDown") and not disabled;
+
 		movementControls:setIsInputtingLeft(left);
 		movementControls:setIsInputtingRight(right);
 		movementControls:setIsInputtingUp(up);
