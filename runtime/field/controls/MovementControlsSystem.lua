@@ -36,8 +36,8 @@ MovementControlsSystem.before_run_scripts = function(self, dt)
 				end
 				assert(y);
 			else
-				local stick_x = inputPlayer:action_axis_value("moveX");
-				local stick_y = inputPlayer:action_axis_value("moveY");
+				local stick_x = inputPlayer:axis_action_value("moveX");
+				local stick_y = inputPlayer:axis_action_value("moveY");
 				if math.abs(stick_x) < 0.2 then
 					stick_x = 0;
 				end

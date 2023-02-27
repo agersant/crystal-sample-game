@@ -44,7 +44,7 @@ crystal.input.configure_autorepeat({
 	uiDown = { initial_delay = 0.5, period = 0.1 },
 });
 
-crystal.input.map_axis_to_binary_actions({
+crystal.input.map_axis_to_actions({
 	uiX = {
 		uiLeft = { pressed_range = { -1.0, -0.9 }, released_range = { -0.2, 1.0 } },
 		uiRight = { pressed_range = { 0.9, 1.0 }, released_range = { -1.0, 0.2 } },
