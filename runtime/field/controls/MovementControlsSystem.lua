@@ -14,10 +14,10 @@ MovementControlsSystem.before_run_scripts = function(self, dt)
 		local disabled = movementControls:is_movement_disabled();
 
 		local inputPlayer = entity:input_player();
-		local left = inputPlayer:is_action_input_down("moveLeft");
-		local right = inputPlayer:is_action_input_down("moveRight");
-		local up = inputPlayer:is_action_input_down("moveUp");
-		local down = inputPlayer:is_action_input_down("moveDown");
+		local left = inputPlayer:is_action_active("moveLeft");
+		local right = inputPlayer:is_action_active("moveRight");
+		local up = inputPlayer:is_action_active("moveUp");
+		local down = inputPlayer:is_action_active("moveDown");
 
 		local x, y;
 		if not disabled then
