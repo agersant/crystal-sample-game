@@ -16,25 +16,43 @@ FONTS = Fonts:new({
 
 crystal.input.player(1):set_bindings({
 	-- Keyboard
-	left = { "moveLeft" },
-	right = { "moveRight" },
-	up = { "moveUp" },
-	down = { "moveDown" },
+	left = { "moveLeft", "uiLeft" },
+	right = { "moveRight", "uiRight" },
+	up = { "moveUp", "uiUp" },
+	down = { "moveDown", "uiDown" },
 	q = { "interact", "useSkill1", "advanceDialog" },
 	w = { "useSkill2" },
 	e = { "useSkill3" },
 	r = { "useSkill4" },
 	-- Gamepad
-	dpleft = { "moveLeft" },
-	dpright = { "moveRight" },
-	dpup = { "moveUp" },
-	dpdown = { "moveDown" },
-	leftx = { "moveX" },
-	lefty = { "moveY" },
+	dpleft = { "moveLeft", "uiLeft" },
+	dpright = { "moveRight", "uiRight" },
+	dpup = { "moveUp", "uiUp" },
+	dpdown = { "moveDown", "uiDown" },
+	leftx = { "moveX", "uiX" },
+	lefty = { "moveY", "uiY" },
 	pad_a = { "interact", "useSkill1", "advanceDialog" },
 	pad_x = { "useSkill2" },
 	pad_b = { "useSkill3" },
 	pad_y = { "useSkill4" },
+});
+
+-- crystal.input.configure_autorepeat({
+-- 	uiLeft = { initial_delay: 0.2, delay: 0.05 },
+-- 	uiRight = { initial_delay: 0.2, delay: 0.05 },
+-- 	uiUp = { initial_delay: 0.2, delay: 0.05 },
+-- 	uiDown = { initial_delay: 0.2, delay: 0.05 },
+-- });
+
+crystal.input.map_axis_to_binary_actions({
+	uiX = {
+		uiLeft = { pressed_range = { -1.0, -0.9 }, released_range = { -0.2, 1.0 } },
+		uiRight = { pressed_range = { 0.9, 1.0 }, released_range = { -1.0, 0.2 } },
+	},
+	uiY = {
+		uiUp = { pressed_range = { -1.0, -0.9 }, released_range = { -0.2, 1.0 } },
+		uiDown = { pressed_range = { 0.9, 1.0 }, released_range = { -1.0, 0.2 } },
+	},
 });
 
 crystal.developer_start = function()
