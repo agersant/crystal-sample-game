@@ -37,12 +37,12 @@ crystal.input.player(1):set_bindings({
 	pad_y = { "useSkill4" },
 });
 
--- crystal.input.configure_autorepeat({
--- 	uiLeft = { initial_delay: 0.2, delay: 0.05 },
--- 	uiRight = { initial_delay: 0.2, delay: 0.05 },
--- 	uiUp = { initial_delay: 0.2, delay: 0.05 },
--- 	uiDown = { initial_delay: 0.2, delay: 0.05 },
--- });
+crystal.input.configure_autorepeat({
+	uiLeft = { initial_delay = 0.5, period = 0.1 },
+	uiRight = { initial_delay = 0.5, period = 0.1 },
+	uiUp = { initial_delay = 0.5, period = 0.1 },
+	uiDown = { initial_delay = 0.5, period = 0.1 },
+});
 
 crystal.input.map_axis_to_binary_actions({
 	uiX = {
