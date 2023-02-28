@@ -15,7 +15,7 @@ Dialog.beginDialog = function(self, player)
 			self:defer(function()
 				dialog_box:close();
 			end);
-			self:defer(player:push_movement_disable());
+			self:defer(player:disableLocomotion());
 			self:defer(player:add_input_handler(function(input)
 				self:signal(input);
 				return true;

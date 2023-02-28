@@ -38,7 +38,7 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 	-- WALK
 	for entity in pairs(walkEntities) do
 		local locomotion = entity:component(Locomotion);
-		if locomotion:getMovementAngle() then
+		if locomotion:getMovementAngle() and locomotion:isEnabled() then
 			local actor = entity:component("Actor");
 			local walkAnimation = entity:component(WalkAnimation);
 			if not actor or actor:isIdle() then
