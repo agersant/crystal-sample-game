@@ -31,10 +31,10 @@ crystal.input.player(1):set_bindings({
 	dpdown = { "moveDown", "uiDown" },
 	leftx = { "moveX", "uiX" },
 	lefty = { "moveY", "uiY" },
-	pad_a = { "interact", "useSkill1", "advanceDialog" },
-	pad_x = { "useSkill2" },
-	pad_b = { "useSkill3" },
-	pad_y = { "useSkill4" },
+	btna = { "interact", "useSkill1", "advanceDialog" },
+	btnx = { "useSkill2" },
+	btnb = { "useSkill3" },
+	btny = { "useSkill4" },
 });
 
 crystal.input.configure_autorepeat({
