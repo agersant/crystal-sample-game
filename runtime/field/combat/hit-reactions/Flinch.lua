@@ -1,7 +1,6 @@
 local FlinchAmounts = require("field/combat/hit-reactions/FlinchAmounts");
 local Collision = require("mapscene/physics/Collision");
 local CollisionFilters = require("mapscene/physics/CollisionFilters");
-local Actor = require("mapscene/behavior/Actor");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local Locomotion = require("mapscene/physics/Locomotion");
 
@@ -70,7 +69,7 @@ Flinch.beginFlinch = function(self, direction, amount)
 	end
 
 	local entity = self:entity();
-	assert(entity:component(Actor));
+	assert(entity:component("Actor"));
 	assert(entity:component(PhysicsBody));
 
 	if entity:isIdle() or self._flinchAmount then

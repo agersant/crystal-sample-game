@@ -4,7 +4,6 @@ local DamageIntent = require("field/combat/damage/DamageIntent");
 local DeathEvent = require("field/combat/damage/DeathEvent");
 local HitEvent = require("field/combat/HitEvent");
 local Teams = require("field/combat/Teams");
-local Actor = require("mapscene/behavior/Actor");
 local Locomotion = require("mapscene/physics/Locomotion");
 
 local CombatSystem = Class("CombatSystem", crystal.System);
@@ -17,7 +16,7 @@ end
 CombatSystem.before_run_scripts = function(self, dt)
 	local entities = self._locomotionQuery:entities();
 	for entity in pairs(entities) do
-		local actor = entity:component(Actor);
+		local actor = entity:component("Actor");
 		if not actor or actor:isIdle() then
 			local locomotion = entity:component(Locomotion);
 			local combatData = entity:component(CombatData);

@@ -1,4 +1,3 @@
-local Actor = require("mapscene/behavior/Actor");
 local Collision = require("mapscene/physics/Collision");
 
 local InteractionControls = Class("InteractionControls", crystal.Behavior);
@@ -13,7 +12,7 @@ local scriptFunction = function(self)
 
 	while true do
 		self:wait_for("+interact");
-		local actor = self:component(Actor);
+		local actor = self:component("Actor");
 		if not actor or actor:isIdle() then
 			local collision = self:component(Collision);
 			if collision then

@@ -2,7 +2,6 @@ local FlinchAnimation = require("field/animation/FlinchAnimation");
 local IdleAnimation = require("field/animation/IdleAnimation");
 local WalkAnimation = require("field/animation/WalkAnimation");
 local Flinch = require("field/combat/hit-reactions/Flinch");
-local Actor = require("mapscene/behavior/Actor");
 local SpriteAnimator = require("mapscene/display/SpriteAnimator");
 local Locomotion = require("mapscene/physics/Locomotion");
 local PhysicsBody = require("mapscene/physics/PhysicsBody");
@@ -40,7 +39,7 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 	for entity in pairs(walkEntities) do
 		local locomotion = entity:component(Locomotion);
 		if locomotion:getMovementAngle() then
-			local actor = entity:component(Actor);
+			local actor = entity:component("Actor");
 			local walkAnimation = entity:component(WalkAnimation);
 			if not actor or actor:isIdle() then
 				local animation = walkAnimation:getWalkAnimation();
@@ -56,7 +55,7 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 
 	-- IDLE
 	for entity in pairs(idleEntities) do
-		local actor = entity:component(Actor);
+		local actor = entity:component("Actor");
 		local idleAnimation = entity:component(IdleAnimation);
 		if not actor or actor:isIdle() then
 			local animation = idleAnimation:getIdleAnimation();
