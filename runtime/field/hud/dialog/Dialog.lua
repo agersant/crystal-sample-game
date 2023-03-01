@@ -8,7 +8,7 @@ end
 
 Dialog.beginDialog = function(self, player)
 	assert(player);
-	assert(player:is_instance_of(crystal.Entity));
+	assert(player:inherits_from(crystal.Entity));
 	local dialog_box = self._dialogBox;
 	if dialog_box:open() then
 		self:script():run_thread(function(self)

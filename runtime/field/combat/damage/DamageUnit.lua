@@ -40,7 +40,7 @@ end
 DamageUnit.setScalingAmount = function(self, ratio, damageScalingSource)
 	assert(ratio);
 	assert(damageScalingSource);
-	assert(damageScalingSource:is_instance_of(DamageScalingSource));
+	assert(damageScalingSource:inherits_from(DamageScalingSource));
 	self._scalingRatio = ratio;
 	self._damageScalingSource = damageScalingSource;
 end

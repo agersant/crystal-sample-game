@@ -50,7 +50,7 @@ end
 SaveData.save = function(self, scene)
 	SaveData.super.save(self);
 
-	if scene:is_instance_of(Field) then
+	if scene:inherits_from(Field) then
 		local partyEntities = scene:ecs():entities_with(PartyMember);
 
 		local partyLeader;
