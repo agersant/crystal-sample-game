@@ -18,7 +18,7 @@ local spawnParty = function(self, x, y, startAngle)
 	for i, partyMemberData in ipairs(partyData:getMembers()) do
 		local assignedPlayerIndex = partyMemberData:getAssignedPlayer();
 		local className = partyMemberData:getInstanceClass();
-		local class = Class:get_by_name(className);
+		local class = Class:by_name(className);
 		assert(class);
 
 		local entity = self:spawn(class, {});
