@@ -86,10 +86,10 @@ Sahagin.init = function(self)
 	self:add_component("ScriptRunner");
 	self:add_component("Actor");
 
-	local physics_body = self:add_component(crystal.PhysicsBody, scene:physics_world(), "dynamic");
+	local body = self:add_component(crystal.Body, scene:physics_world(), "dynamic");
 	self:add_component(crystal.Movement);
 	self:add_component("Navigation");
-	local collider = self:add_component(crystal.Collider, physics_body, love.physics.newCircleShape(4));
+	local collider = self:add_component(crystal.Collider, body, love.physics.newCircleShape(4));
 	collider:set_categories("solid");
 	collider:enable_collision_with("solid");
 

@@ -55,11 +55,11 @@ local isNotSelf = function(self, target)
 end
 
 local rankByDistance = function(self, target)
-	local physics_body = self:entity():component(crystal.PhysicsBody);
-	if not physics_body then
+	local body = self:entity():component(crystal.Body);
+	if not body then
 		return -math.huge;
 	end
-	return -physics_body:distance_squared_to_entity(target);
+	return -body:distance_squared_to_entity(target);
 end
 
 local isAlive = function(self, target)
@@ -100,7 +100,7 @@ crystal.test.add("Get Nearest Enemy", function()
 	local enemyA = scene:spawn(crystal.Entity);
 	local enemyB = scene:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friend, enemyA, enemyB }) do
-		entity:add_component(crystal.PhysicsBody, scene:physics_world());
+		entity:add_component(crystal.Body, scene:physics_world());
 		entity:add_component(CombatData);
 		entity:add_component(TargetSelector);
 	end
@@ -128,7 +128,7 @@ crystal.test.add("Get Nearest Ally", function()
 	local friendB = scene:spawn(crystal.Entity);
 	local enemy = scene:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friendA, friendB, enemy }) do
-		entity:add_component(crystal.PhysicsBody, scene:physics_world());
+		entity:add_component(crystal.Body, scene:physics_world());
 		entity:add_component(CombatData);
 		entity:add_component(TargetSelector);
 	end

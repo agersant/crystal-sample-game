@@ -46,8 +46,8 @@ local teleportScript = function(self)
 	end
 end
 
-TeleportTouchTrigger.init = function(self, physics_body, shape)
-	TeleportTouchTrigger.super.init(self, physics_body, shape);
+TeleportTouchTrigger.init = function(self, body, shape)
+	TeleportTouchTrigger.super.init(self, body, shape);
 	self:set_categories("trigger");
 	self:enable_activation_by("solid");
 end
@@ -66,8 +66,8 @@ Teleport.init = function(self, options)
 	assert(options.targetX);
 	assert(options.targetY);
 
-	local physics_body = self:add_component(crystal.PhysicsBody, scene:physics_world());
-	self:add_component(TeleportTouchTrigger, physics_body, options.shape);
+	local body = self:add_component(crystal.Body, scene:physics_world());
+	self:add_component(TeleportTouchTrigger, body, options.shape);
 	self:add_component("ScriptRunner");
 	self:add_script(teleportScript);
 

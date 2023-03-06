@@ -66,7 +66,7 @@ Flinch.beginFlinch = function(self, direction, amount)
 
 	local entity = self:entity();
 	assert(entity:component("Actor"));
-	assert(entity:component(crystal.PhysicsBody));
+	assert(entity:component(crystal.Body));
 
 	if entity:isIdle() or self._flinchAmount then
 		entity:stopAction();
