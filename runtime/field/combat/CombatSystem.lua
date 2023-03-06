@@ -4,24 +4,49 @@ local DamageIntent = require("field/combat/damage/DamageIntent");
 local DeathEvent = require("field/combat/damage/DeathEvent");
 local HitEvent = require("field/combat/HitEvent");
 local Teams = require("field/combat/Teams");
-local Locomotion = require("mapscene/physics/Locomotion");
 
 local CombatSystem = Class("CombatSystem", crystal.System);
 
 CombatSystem.init = function(self)
 	self._scriptRunnerQuery = self:add_query({ crystal.ScriptRunner });
-	self._locomotionQuery = self:add_query({ CombatData, Locomotion });
+	self._movementQuery = self:add_query({ CombatData, crystal.Movement });
+	self.with_animated_hitbox = self:add_query({ crystal.PhysicsBody, "SpriteAnimator" });
+	self.with_animated_weakbox = self:add_query({ crystal.PhysicsBody, "SpriteAnimator" });
+end
+
+CombatSystem.after_run_scripts = function(self, dt)
+	local entities = self.with_animated_hitbox:entities();
+	for entity in pairs(entities) do
+		if entity:is_valid() then
+			for hitbox in pairs(entity:components("Hitbox")) do
+				entity:remove_component(hitbox);
+			end
+			for weakbox in pairs(entity:components("Weakbox")) do
+				entity:remove_component(weakbox);
+			end
+
+			local animator = entity:component("SpriteAnimator");
+			local shape = animator:getTagShape("hit");
+			if shape then
+				entity:add_component("Hitbox", entity:component(crystal.PhysicsBody), shape);
+			end
+			local shape = animator:getTagShape("weak");
+			if shape then
+				entity:add_component("Weakbox", entity:component(crystal.PhysicsBody), shape);
+			end
+		end
+	end
 end
 
 CombatSystem.before_run_scripts = function(self, dt)
-	local entities = self._locomotionQuery:entities();
+	local entities = self._movementQuery:entities();
 	for entity in pairs(entities) do
 		local actor = entity:component("Actor");
 		if not actor or actor:isIdle() then
-			local locomotion = entity:component(Locomotion);
+			local movement = entity:component(crystal.Movement);
 			local combatData = entity:component(CombatData);
 			local speed = combatData:getMovementSpeed();
-			locomotion:setSpeed(speed);
+			movement:set_speed(speed);
 		end
 	end
 end
@@ -36,7 +61,10 @@ CombatSystem.run_scripts = function(self, dt)
 			local attackerCombatData = attacker:component(CombatData);
 			local victimCombatData = victim:component(CombatData);
 			if damageIntent and attackerCombatData and victimCombatData then
-				attackerCombatData:inflictDamage(damageIntent, victimCombatData);
+				if not damageIntent:wasEntityHit(victim) then
+					damageIntent:registerHit(victim);
+					attackerCombatData:inflictDamage(damageIntent, victimCombatData);
+				end
 			end
 		end
 	end

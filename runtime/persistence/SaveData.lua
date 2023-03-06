@@ -71,7 +71,7 @@ SaveData.save = function(self, scene)
 		self:setParty(party);
 
 		assert(partyLeader);
-		local x, y = partyLeader:getPosition();
+		local x, y = partyLeader:position();
 		assert(x);
 		assert(y);
 		self:setLocation(scene:getMap():getName(), x, y);

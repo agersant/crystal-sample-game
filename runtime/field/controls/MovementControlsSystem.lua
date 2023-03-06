@@ -1,14 +1,13 @@
 local MovementControls = require("field/controls/MovementControls");
-local Locomotion = require("mapscene/physics/Locomotion");
 
 local MovementControlsSystem = Class("MovementControlsSystem", crystal.System);
 
 MovementControlsSystem.init = function(self)
-	self._withLocomotion = self:add_query({ crystal.InputListener, Locomotion, MovementControls });
+	self._withMovement = self:add_query({ crystal.InputListener, crystal.Movement, MovementControls });
 end
 
 MovementControlsSystem.before_run_scripts = function(self, dt)
-	local entities = self._withLocomotion:entities();
+	local entities = self._withMovement:entities();
 	for entity in pairs(entities) do
 		local movementControls = entity:component(MovementControls);
 
@@ -50,9 +49,9 @@ MovementControlsSystem.before_run_scripts = function(self, dt)
 
 		if x and y then
 			local angle = math.atan2(y, x);
-			entity:setMovementAngle(angle);
+			entity:set_heading(angle);
 		else
-			entity:setMovementAngle(nil);
+			entity:set_heading(nil);
 		end
 	end
 end

@@ -29,8 +29,8 @@ local spawnParty = function(self, x, y, startAngle)
 			entity:add_component(InteractionControls);
 		end
 		entity:setTeam(Teams.party);
-		entity:setPosition(x, y);
-		entity:setAngle(startAngle);
+		entity:set_position(x, y);
+		entity:set_angle(startAngle);
 	end
 end
 

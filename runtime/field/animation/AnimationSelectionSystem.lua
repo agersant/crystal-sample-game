@@ -3,15 +3,13 @@ local IdleAnimation = require("field/animation/IdleAnimation");
 local WalkAnimation = require("field/animation/WalkAnimation");
 local Flinch = require("field/combat/hit-reactions/Flinch");
 local SpriteAnimator = require("mapscene/display/SpriteAnimator");
-local Locomotion = require("mapscene/physics/Locomotion");
-local PhysicsBody = require("mapscene/physics/PhysicsBody");
 
 local AnimationSelectionSystem = Class("AnimationSelectionSystem", crystal.System);
 
 AnimationSelectionSystem.init = function(self)
-	self._idles = self:add_query({ SpriteAnimator, PhysicsBody, IdleAnimation });
-	self._walks = self:add_query({ SpriteAnimator, PhysicsBody, Locomotion, WalkAnimation });
-	self._flinches = self:add_query({ SpriteAnimator, PhysicsBody, Flinch, FlinchAnimation });
+	self._idles = self:add_query({ SpriteAnimator, crystal.PhysicsBody, IdleAnimation });
+	self._walks = self:add_query({ SpriteAnimator, crystal.PhysicsBody, crystal.Movement, WalkAnimation });
+	self._flinches = self:add_query({ SpriteAnimator, crystal.PhysicsBody, Flinch, FlinchAnimation });
 end
 
 AnimationSelectionSystem.after_run_scripts = function(self)
@@ -27,8 +25,8 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 			local animation = flinchAnimation:getFlinchAnimation();
 			if animation then
 				local animator = entity:component(SpriteAnimator);
-				local physicsBody = entity:component(PhysicsBody);
-				animator:setAnimation(animation, physicsBody:getAngle4());
+				local physics_body = entity:component(crystal.PhysicsBody);
+				animator:setAnimation(animation, physics_body:angle4());
 				walkEntities[entity] = nil;
 				idleEntities[entity] = nil;
 			end
@@ -37,16 +35,16 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 
 	-- WALK
 	for entity in pairs(walkEntities) do
-		local locomotion = entity:component(Locomotion);
-		if locomotion:getMovementAngle() and locomotion:isEnabled() then
+		local movement = entity:component(crystal.Movement);
+		if movement:heading() and movement:is_enabled() then
 			local actor = entity:component("Actor");
 			local walkAnimation = entity:component(WalkAnimation);
 			if not actor or actor:isIdle() then
 				local animation = walkAnimation:getWalkAnimation();
 				if animation then
 					local animator = entity:component(SpriteAnimator);
-					local physicsBody = entity:component(PhysicsBody);
-					animator:setAnimation(animation, physicsBody:getAngle4());
+					local physics_body = entity:component(crystal.PhysicsBody);
+					animator:setAnimation(animation, physics_body:angle4());
 					idleEntities[entity] = nil;
 				end
 			end
@@ -61,8 +59,8 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 			local animation = idleAnimation:getIdleAnimation();
 			if animation then
 				local animator = entity:component(SpriteAnimator);
-				local physicsBody = entity:component(PhysicsBody);
-				animator:setAnimation(animation, physicsBody:getAngle4());
+				local physics_body = entity:component(crystal.PhysicsBody);
+				animator:setAnimation(animation, physics_body:angle4());
 			end
 		end
 	end

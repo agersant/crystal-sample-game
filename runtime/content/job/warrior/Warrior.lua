@@ -20,18 +20,19 @@ Warrior.init = function(self)
 	self:add_component("FlinchAnimation", "knockback");
 	self:add_component("IdleAnimation", "idle");
 	self:add_component("WalkAnimation", "walk");
+	self:add_component("Altitude");
 
 	self:add_component("ScriptRunner");
 	self:add_component("Actor");
 
-	local physicsBody = self:add_component("PhysicsBody", scene:getPhysicsWorld(), "dynamic");
-	self:add_component("Locomotion");
-	self:add_component("Collision", physicsBody, 6);
+	local physics_body = self:add_component(crystal.PhysicsBody, scene:physics_world(), "dynamic");
+	self:add_component(crystal.Movement);
+	local collider = self:add_component(crystal.Collider, physics_body, love.physics.newCircleShape(6));
+	collider:set_categories("solid");
+	collider:enable_collision_with("solid", "trigger");
 
 	self:add_component("CombatData");
 	self:add_component("DamageIntent");
-	self:add_component("CombatHitbox", physicsBody);
-	self:add_component("Weakbox", physicsBody);
 
 	self:add_component("HitBlink");
 	self:add_component("Flinch");

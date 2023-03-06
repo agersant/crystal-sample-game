@@ -19,8 +19,11 @@ NPC.init = function(self)
 	self:add_component("SpriteAnimator", sprite, sheet);
 	self:add_component("IdleAnimation", "idle");
 
-	local physicsBody = self:add_component("PhysicsBody", scene:getPhysicsWorld());
-	self:add_component("Collision", physicsBody, 4);
+	local physics_body = self:add_component(crystal.PhysicsBody, scene:physics_world());
+	local collider = self:add_component(crystal.Collider, physics_body, love.physics.newCircleShape(4));
+	collider:set_categories("solid");
+	collider:enable_collision_with("solid");
+
 	self:add_component("ScriptRunner");
 	self:add_component("Dialog", scene:getHUD():getDialogBox());
 	self:add_script(npc_script);

@@ -1,5 +1,3 @@
-local Collision = require("mapscene/physics/Collision");
-
 local InteractionControls = Class("InteractionControls", crystal.Behavior);
 
 local scriptFunction = function(self)
@@ -14,9 +12,9 @@ local scriptFunction = function(self)
 		self:wait_for("+interact");
 		local actor = self:component("Actor");
 		if not actor or actor:isIdle() then
-			local collision = self:component(Collision);
-			if collision then
-				for entity in pairs(collision:getContactEntities()) do
+			local collider = self:component(crystal.Collider);
+			if collider then
+				for _, entity in pairs(collider:active_contacts()) do
 					local scriptRunner = entity:component(crystal.ScriptRunner);
 					if scriptRunner then
 						scriptRunner:signal_all_scripts("interact", self:entity());

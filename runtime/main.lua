@@ -2,6 +2,7 @@ love.filesystem.setIdentity("crystal-sample-game");
 
 crystal.configure({
 	assetsDirectories = { "assets/", "test-data/" },
+	physicsCategories = { "solid", "trigger", "hitbox", "weakbox" },
 	mapDirectory = "assets/map/",
 	mapSceneClass = "Field",
 	saveDataClass = "SaveData",

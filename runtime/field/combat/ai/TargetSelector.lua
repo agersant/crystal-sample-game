@@ -1,6 +1,5 @@
 local CombatData = require("field/combat/CombatData");
 local Teams = require("field/combat/Teams");
-local PhysicsBody = require("mapscene/physics/PhysicsBody");
 
 local TargetSelector = Class("TargetSelector", crystal.Component);
 
@@ -56,11 +55,11 @@ local isNotSelf = function(self, target)
 end
 
 local rankByDistance = function(self, target)
-	local physicsBody = self:entity():component(PhysicsBody);
-	if not physicsBody then
+	local physics_body = self:entity():component(crystal.PhysicsBody);
+	if not physics_body then
 		return -math.huge;
 	end
-	return -physicsBody:distance2ToEntity(target);
+	return -physics_body:distance_squared_to_entity(target);
 end
 
 local isAlive = function(self, target)
@@ -101,7 +100,7 @@ crystal.test.add("Get Nearest Enemy", function()
 	local enemyA = scene:spawn(crystal.Entity);
 	local enemyB = scene:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friend, enemyA, enemyB }) do
-		entity:add_component(PhysicsBody, scene:getPhysicsWorld());
+		entity:add_component(crystal.PhysicsBody, scene:physics_world());
 		entity:add_component(CombatData);
 		entity:add_component(TargetSelector);
 	end
@@ -111,10 +110,10 @@ crystal.test.add("Get Nearest Enemy", function()
 	enemyA:setTeam(Teams.wild);
 	enemyB:setTeam(Teams.wild);
 
-	me:setPosition(10, 10);
-	friend:setPosition(8, 8);
-	enemyA:setPosition(100, 100);
-	enemyB:setPosition(15, 5);
+	me:set_position(10, 10);
+	friend:set_position(8, 8);
+	enemyA:set_position(100, 100);
+	enemyB:set_position(15, 5);
 
 	scene:update(0);
 	local nearest = me:getNearestEnemy();
@@ -129,7 +128,7 @@ crystal.test.add("Get Nearest Ally", function()
 	local friendB = scene:spawn(crystal.Entity);
 	local enemy = scene:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friendA, friendB, enemy }) do
-		entity:add_component(PhysicsBody, scene:getPhysicsWorld());
+		entity:add_component(crystal.PhysicsBody, scene:physics_world());
 		entity:add_component(CombatData);
 		entity:add_component(TargetSelector);
 	end
@@ -139,10 +138,10 @@ crystal.test.add("Get Nearest Ally", function()
 	friendB:setTeam(Teams.wild);
 	enemy:setTeam(Teams.party);
 
-	me:setPosition(10, 10);
-	friendA:setPosition(100, 100);
-	friendB:setPosition(8, 8);
-	enemy:setPosition(15, 5);
+	me:set_position(10, 10);
+	friendA:set_position(100, 100);
+	friendB:set_position(8, 8);
+	enemy:set_position(15, 5);
 
 	scene:update(0);
 	local nearest = me:getNearestAlly();

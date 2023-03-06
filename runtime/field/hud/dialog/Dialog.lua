@@ -15,7 +15,7 @@ Dialog.beginDialog = function(self, player)
 			self:defer(function()
 				dialog_box:close();
 			end);
-			self:defer(player:disableLocomotion());
+			self:defer(player:disable_movement());
 			self:defer(player:add_input_handler(function(input)
 				self:signal(input);
 				return true;
@@ -52,7 +52,6 @@ end
 
 local MapScene = require("mapscene/MapScene");
 local InputPlayer = require("modules/input/input_player");
-local PhysicsBody = require("mapscene/physics/PhysicsBody");
 local DialogBox = require("field/hud/dialog/DialogBox");
 
 crystal.test.add("Blocks script during dialog", function()
@@ -64,8 +63,8 @@ crystal.test.add("Blocks script during dialog", function()
 	local player = scene:spawn(crystal.Entity);
 	player:add_component(crystal.InputListener, player);
 	player:add_component(crystal.ScriptRunner);
-	player:add_component("MovementControls");
-	player:add_component(PhysicsBody, scene:getPhysicsWorld());
+	player:add_component(crystal.Movement);
+	player:add_component(crystal.PhysicsBody, scene:physics_world());
 
 	local npc = scene:spawn(crystal.Entity);
 	npc:add_component(crystal.ScriptRunner);
@@ -109,8 +108,8 @@ crystal.test.add("Can't start concurrent dialogs", function()
 	local player = scene:spawn(crystal.Entity);
 	player:add_component(crystal.InputListener, player);
 	player:add_component(crystal.ScriptRunner);
-	player:add_component("MovementControls");
-	player:add_component(PhysicsBody, scene:getPhysicsWorld());
+	player:add_component(crystal.Movement);
+	player:add_component(crystal.PhysicsBody, scene:physics_world());
 
 	local npc = scene:spawn(crystal.Entity);
 	npc:add_component(crystal.ScriptRunner);
@@ -151,8 +150,8 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 	local player = scene:spawn(crystal.Entity);
 	player:add_component(crystal.InputListener, player);
 	player:add_component(crystal.ScriptRunner);
-	player:add_component("MovementControls");
-	player:add_component(PhysicsBody, scene:getPhysicsWorld());
+	player:add_component(crystal.Movement);
+	player:add_component(crystal.PhysicsBody, scene:physics_world());
 
 	local npc = scene:spawn(crystal.Entity);
 	npc:add_component(crystal.ScriptRunner);

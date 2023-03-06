@@ -1,18 +1,17 @@
 local PartyMember = require("persistence/party/PartyMember");
 local MapSystem = require("mapscene/MapSystem");
-local TouchTrigger = require("mapscene/physics/TouchTrigger");
 local StringUtils = require("utils/StringUtils");
 local Field = require("field/Field");
 
 local Teleport = Class("Teleport", crystal.Entity);
-local TeleportTouchTrigger = Class("TeleportTouchTrigger", TouchTrigger);
+local TeleportTouchTrigger = Class("TeleportTouchTrigger", crystal.Sensor);
 
 local doTeleport = function(self, triggeredBy)
 	local teleportEntity = self:entity();
 	local finalX, finalY = teleportEntity._targetX, teleportEntity._targetY;
 
 	local targetMap = StringUtils.mergePaths(crystal.conf.mapDirectory, teleportEntity._targetMap);
-	local newScene = Field:new(targetMap, finalX, finalY, self:getAngle());
+	local newScene = Field:new(targetMap, finalX, finalY, self:angle());
 	ENGINE:loadScene(newScene);
 end
 
@@ -25,8 +24,8 @@ local teleportScript = function(self)
 			while true do
 				self:wait_frame();
 				if triggeredBy:component(PartyMember) then
-					local teleportAngle = teleportEntity:getAngle();
-					local entityAngle = triggeredBy:getAngle();
+					local teleportAngle = teleportEntity:angle();
+					local entityAngle = triggeredBy:angle();
 					local correctDirection = math.abs(teleportAngle - entityAngle) < math.pi / 2;
 					if correctDirection then
 						doTeleport(self, triggeredBy);
@@ -47,15 +46,17 @@ local teleportScript = function(self)
 	end
 end
 
-TeleportTouchTrigger.init = function(self, physicsBody, shape)
-	TeleportTouchTrigger.super.init(self, physicsBody, shape);
+TeleportTouchTrigger.init = function(self, physics_body, shape)
+	TeleportTouchTrigger.super.init(self, physics_body, shape);
+	self:set_categories("trigger");
+	self:enable_activation_by("solid");
 end
 
-TeleportTouchTrigger.onBeginTouch = function(self, component)
+TeleportTouchTrigger.on_begin_contact = function(self, component)
 	self:entity():signal_all_scripts("+trigger", component:entity());
 end
 
-TeleportTouchTrigger.onEndTouch = function(self, component)
+TeleportTouchTrigger.on_end_contact = function(self, component)
 	self:entity():signal_all_scripts("-trigger", component:entity());
 end
 
@@ -65,8 +66,8 @@ Teleport.init = function(self, options)
 	assert(options.targetX);
 	assert(options.targetY);
 
-	local physicsBody = self:add_component("PhysicsBody", scene:getPhysicsWorld());
-	self:add_component(TeleportTouchTrigger, physicsBody, options.shape);
+	local physics_body = self:add_component(crystal.PhysicsBody, scene:physics_world());
+	self:add_component(TeleportTouchTrigger, physics_body, options.shape);
 	self:add_component("ScriptRunner");
 	self:add_script(teleportScript);
 
@@ -87,15 +88,15 @@ Teleport.init = function(self, options)
 
 	if dx < dy then
 		if left < right then
-			self:setAngle(math.pi);
+			self:set_angle(math.pi);
 		else
-			self:setAngle(0);
+			self:set_angle(0);
 		end
 	else
 		if top < bottom then
-			self:setAngle( -math.pi / 2);
+			self:set_angle(-math.pi / 2);
 		else
-			self:setAngle(math.pi / 2);
+			self:set_angle(math.pi / 2);
 		end
 	end
 end

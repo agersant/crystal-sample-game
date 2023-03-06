@@ -5,6 +5,7 @@ local DamageIntent = Class("DamageIntent", crystal.Component);
 DamageIntent.init = function(self)
 	self._units = {};
 	self._onHitEffects = {};
+	self._targetsHit = {};
 end
 
 DamageIntent.setDamagePayload = function(self, units, onHitEffects)
@@ -23,6 +24,18 @@ end
 
 DamageIntent.getOnHitEffects = function(self)
 	return TableUtils.shallowCopy(self._onHitEffects);
+end
+
+DamageIntent.resetMultiHitTracking = function(self)
+	self._targetsHit = {};
+end
+
+DamageIntent.registerHit = function(self, entity)
+	self._targetsHit[entity] = true;
+end
+
+DamageIntent.wasEntityHit = function(self, entity)
+	return self._targetsHit[entity];
 end
 
 return DamageIntent;

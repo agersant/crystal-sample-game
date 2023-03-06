@@ -6,11 +6,11 @@ local Sahagin = Class("Sahagin", crystal.Entity);
 
 local attack = function(self)
 	self:stop_on("disrupted");
-	self:setMovementAngle(nil);
+	self:set_heading(nil);
 	self:resetMultiHitTracking();
 	local onHitEffects = { FlinchEffect:new() };
 	self:setDamagePayload({ DamageUnit:new(2) }, onHitEffects);
-	self:join(self:playAnimation("attack", self:getAngle4(), true));
+	self:join(self:playAnimation("attack", self:angle4(), true));
 end
 
 local reachAndAttack = function(self)
@@ -31,9 +31,9 @@ local reachAndAttack = function(self)
 		return;
 	end
 
-	self:lookAt(target:getPosition());
+	self:look_at(target:position());
 	self:wait(0.2);
-	self:lookAt(target:getPosition());
+	self:look_at(target:position());
 
 	if not self:isIdle() then
 		return;
@@ -81,19 +81,20 @@ Sahagin.init = function(self)
 	self:add_component("FlinchAnimation", "knockback");
 	self:add_component("IdleAnimation", "idle");
 	self:add_component("WalkAnimation", "walk");
+	self:add_component("Altitude");
 
 	self:add_component("ScriptRunner");
 	self:add_component("Actor");
 
-	local physicsBody = self:add_component("PhysicsBody", scene:getPhysicsWorld(), "dynamic");
-	self:add_component("Locomotion");
+	local physics_body = self:add_component(crystal.PhysicsBody, scene:physics_world(), "dynamic");
+	self:add_component(crystal.Movement);
 	self:add_component("Navigation");
-	self:add_component("Collision", physicsBody, 4);
+	local collider = self:add_component(crystal.Collider, physics_body, love.physics.newCircleShape(4));
+	collider:set_categories("solid");
+	collider:enable_collision_with("solid");
 
 	self:add_component("CombatData");
 	self:add_component("DamageIntent");
-	self:add_component("CombatHitbox", physicsBody);
-	self:add_component("Weakbox", physicsBody);
 	self:add_component("TargetSelector");
 
 	self:add_component("Flinch");

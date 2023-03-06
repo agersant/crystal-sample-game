@@ -9,11 +9,11 @@ local getComboSwingAction = function(swingCount)
 	return function(self)
 		if swingCount == 1 or swingCount == 3 then
 			self:tween(200, 0, 0.20, "inQuadratic", function(speed)
-				self:setMovementAngle(self:getAngle());
-				self:setSpeed(speed);
+				self:set_heading(self:angle());
+				self:set_speed(speed);
 			end);
 		else
-			self:setSpeed(0);
+			self:set_speed(0);
 		end
 
 		self:resetMultiHitTracking();
@@ -21,7 +21,7 @@ local getComboSwingAction = function(swingCount)
 		local onHitEffects = { FlinchEffect:new(flinchAmount) };
 		self:setDamagePayload({ DamageUnit:new(1) }, onHitEffects);
 
-		self:join(self:playAnimation("attack_" .. swingCount, self:getAngle4(), true));
+		self:join(self:playAnimation("attack_" .. swingCount, self:angle4(), true));
 	end
 end
 
