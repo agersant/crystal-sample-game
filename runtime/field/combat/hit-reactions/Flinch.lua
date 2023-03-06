@@ -11,13 +11,14 @@ local smallFlinch = function(self, direction)
 		self:set_altitude(0);
 	end);
 	self:disable_movement();
+	self:set_velocity(0, 0);
 	self:set_damping(20);
 	self:disable_collision_with("solid");
 	self:set_restitution(0.4);
 
 	local dx = math.cos(direction);
 	local dy = math.sin(direction);
-	self:body():applyLinearImpulse(300 * dx, 300 * dy);
+	self:apply_linear_impulse(300 * dx, 300 * dy);
 
 	self:wait_tween(0, 6, 0.1, "outCubic", self.set_altitude, self);
 	self:wait_tween(6, 0, 0.1, "inCubic", self.set_altitude, self);
@@ -34,6 +35,7 @@ local largeFlinch = function(self, direction)
 		self:set_altitude(0);
 	end);
 	self:disable_movement();
+	self:set_velocity(0, 0);
 	self:set_damping(4);
 	self:disable_collision_with("solid");
 	self:set_restitution(0.4);
@@ -43,7 +45,7 @@ local largeFlinch = function(self, direction)
 	local dx = math.cos(direction);
 	local dy = math.sin(direction);
 
-	self:body():applyLinearImpulse(400 * dx, 400 * dy);
+	self:apply_linear_impulse(400 * dx, 400 * dy);
 
 	self:wait_tween(0, 16, 0.15, "outQuadratic", self.set_altitude, self);
 	self:wait_tween(16, 0, 0.15, "inQuadratic", self.set_altitude, self);
