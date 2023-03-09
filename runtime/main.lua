@@ -47,12 +47,12 @@ crystal.input.configure_autorepeat({
 
 crystal.input.map_axis_to_actions({
 	uiX = {
-		uiLeft = { pressed_range = { -1.0, -0.9 }, released_range = { -0.2, 1.0 } },
-		uiRight = { pressed_range = { 0.9, 1.0 }, released_range = { -1.0, 0.2 } },
+		uiLeft = { pressed_range = { -1.0, -0.9 }, stickiness = 0.7 },
+		uiRight = { pressed_range = { 0.9, 1.0 }, stickiness = 0.7 },
 	},
 	uiY = {
-		uiUp = { pressed_range = { -1.0, -0.9 }, released_range = { -0.2, 1.0 } },
-		uiDown = { pressed_range = { 0.9, 1.0 }, released_range = { -1.0, 0.2 } },
+		uiUp = { pressed_range = { -1.0, -0.9 }, stickiness = 0.7 },
+		uiDown = { pressed_range = { 0.9, 1.0 }, stickiness = 0.7 },
 	},
 });
 
