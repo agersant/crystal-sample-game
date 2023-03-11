@@ -14,7 +14,7 @@ local scriptFunction = function(self)
 		if not actor or actor:isIdle() then
 			local collider = self:component(crystal.Collider);
 			if collider then
-				for _, entity in pairs(collider:active_contacts()) do
+				for _, entity in pairs(collider:collisions()) do
 					local scriptRunner = entity:component(crystal.ScriptRunner);
 					if scriptRunner then
 						scriptRunner:signal_all_scripts("interact", self:entity());
