@@ -36,7 +36,7 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 	-- WALK
 	for entity in pairs(walkEntities) do
 		local movement = entity:component(crystal.Movement);
-		if movement:heading() and movement:is_enabled() then
+		if movement:heading() and movement:is_movement_enabled() then
 			local actor = entity:component("Actor");
 			local walkAnimation = entity:component(WalkAnimation);
 			if not actor or actor:isIdle() then
