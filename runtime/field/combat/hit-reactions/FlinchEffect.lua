@@ -14,7 +14,7 @@ FlinchEffect.apply = function(self, attacker, victim, damage)
 	local victim = victim:entity();
 	local flinch = victim:component(Flinch);
 	if flinch then
-		flinch:beginFlinch(attacker:angle(), self._amount);
+		flinch:beginFlinch(attacker:rotation(), self._amount);
 	end
 end
 

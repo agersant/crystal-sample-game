@@ -30,7 +30,7 @@ local spawnParty = function(self, x, y, startAngle)
 		end
 		entity:setTeam(Teams.party);
 		entity:set_position(x, y);
-		entity:set_angle(startAngle);
+		entity:set_rotation(startAngle);
 	end
 end
 

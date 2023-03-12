@@ -21,9 +21,9 @@ local action = function(self)
 
 	self:setAnimation("dash", self:angle4());
 
-	local angle = self:angle();
-	local dx = math.cos(angle);
-	local dy = math.sin(angle);
+	local rotation = self:rotation();
+	local dx = math.cos(rotation);
+	local dy = math.sin(rotation);
 
 	self:wait_tween(buildupPeakSpeed, 0, buildupDuration, "outCubic", function(speed)
 		self:set_velocity(-dx * speed, -dy * speed);

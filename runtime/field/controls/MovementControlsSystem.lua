@@ -48,8 +48,8 @@ MovementControlsSystem.before_run_scripts = function(self, dt)
 		end
 
 		if x and y then
-			local angle = math.atan2(y, x);
-			entity:set_heading(angle);
+			local rotation = math.atan2(y, x);
+			entity:set_heading(rotation);
 		else
 			entity:set_heading(nil);
 		end

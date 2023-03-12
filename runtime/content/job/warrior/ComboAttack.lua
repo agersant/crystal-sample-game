@@ -9,7 +9,7 @@ local getComboSwingAction = function(swingCount)
 	return function(self)
 		if swingCount == 1 or swingCount == 3 then
 			self:tween(200, 0, 0.20, "inQuadratic", function(speed)
-				self:set_heading(self:angle());
+				self:set_heading(self:rotation());
 				self:set_speed(speed);
 			end);
 		else

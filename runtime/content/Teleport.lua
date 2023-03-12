@@ -11,7 +11,7 @@ local doTeleport = function(self, triggeredBy)
 	local finalX, finalY = teleportEntity._targetX, teleportEntity._targetY;
 
 	local targetMap = StringUtils.mergePaths(crystal.conf.mapDirectory, teleportEntity._targetMap);
-	local newScene = Field:new(targetMap, finalX, finalY, self:angle());
+	local newScene = Field:new(targetMap, finalX, finalY, self:rotation());
 	ENGINE:loadScene(newScene);
 end
 
@@ -24,8 +24,8 @@ local teleportScript = function(self)
 			while true do
 				self:wait_frame();
 				if triggeredBy:component(PartyMember) then
-					local teleportAngle = teleportEntity:angle();
-					local entityAngle = triggeredBy:angle();
+					local teleportAngle = teleportEntity:rotation();
+					local entityAngle = triggeredBy:rotation();
 					local correctDirection = math.abs(teleportAngle - entityAngle) < math.pi / 2;
 					if correctDirection then
 						doTeleport(self, triggeredBy);
@@ -88,15 +88,15 @@ Teleport.init = function(self, options)
 
 	if dx < dy then
 		if left < right then
-			self:set_angle(math.pi);
+			self:set_rotation(math.pi);
 		else
-			self:set_angle(0);
+			self:set_rotation(0);
 		end
 	else
 		if top < bottom then
-			self:set_angle(-math.pi / 2);
+			self:set_rotation(-math.pi / 2);
 		else
-			self:set_angle(math.pi / 2);
+			self:set_rotation(math.pi / 2);
 		end
 	end
 end
