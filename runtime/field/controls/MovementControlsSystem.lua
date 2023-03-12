@@ -20,14 +20,14 @@ MovementControlsSystem.before_run_scripts = function(self, dt)
 		local x, y;
 		if left or right or up or down then
 			if left and right then
-				x = movementControls:getLastXInput() or 0;
+				x = 0;
 			else
 				x = left and -1 or right and 1 or 0;
 			end
 			assert(x);
 
 			if up and down then
-				y = movementControls:getLastYInput() or 0;
+				y = 0;
 			else
 				y = up and -1 or down and 1 or 0;
 			end
