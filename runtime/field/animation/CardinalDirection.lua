@@ -45,4 +45,26 @@ CardinalDirection.update_cardinal_direction = function(self, rotation)
 	self.dir8_y = dir8_y;
 end
 
+--#region Tests
+
+crystal.test.add("Direction is preserved when switching to adjacent diagonal", function()
+	local ecs = crystal.ECS:new();
+	local entity = ecs:spawn(crystal.Entity);
+	local cardinal = entity:add_component(CardinalDirection);
+
+	cardinal:update_cardinal_direction(0.25 * math.pi);
+	assert(entity:cardinal_direction() == 0);
+
+	entity:set_rotation(-0.25 * math.pi);
+	assert(entity:cardinal_direction() == 0);
+
+	entity:set_rotation(-0.75 * math.pi);
+	assert(entity:cardinal_direction() == -0.5 * math.pi);
+
+	entity:set_rotation(-0.25 * math.pi);
+	assert(entity:cardinal_direction() == -0.5 * math.pi);
+end);
+
+--#endregion
+
 return CardinalDirection;
