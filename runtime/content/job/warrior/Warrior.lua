@@ -17,6 +17,7 @@ Warrior.init = function(self)
 	local sprite = self:add_component("Sprite");
 	self:add_component("SpriteAnimator", sprite, sheet);
 	self:add_component("CommonShader");
+	self:add_component("CardinalDirection");
 	self:add_component("FlinchAnimation", "knockback");
 	self:add_component("IdleAnimation", "idle");
 	self:add_component("WalkAnimation", "walk");

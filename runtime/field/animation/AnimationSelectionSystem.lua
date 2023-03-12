@@ -7,6 +7,7 @@ local SpriteAnimator = require("mapscene/display/SpriteAnimator");
 local AnimationSelectionSystem = Class("AnimationSelectionSystem", crystal.System);
 
 AnimationSelectionSystem.init = function(self)
+	self._cardinals = self:add_query({ "CardinalDirection" });
 	self._idles = self:add_query({ SpriteAnimator, crystal.Body, IdleAnimation });
 	self._walks = self:add_query({ SpriteAnimator, crystal.Body, crystal.Movement, WalkAnimation });
 	self._flinches = self:add_query({ SpriteAnimator, crystal.Body, Flinch, FlinchAnimation });
@@ -17,6 +18,14 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 	local idleEntities = self._idles:entities();
 	local flinchEntities = self._flinches:entities();
 
+	local rotations = {};
+	for entity in pairs(self._cardinals:entities()) do
+		local cardinal = entity:component("CardinalDirection");
+		local body = entity:component(crystal.Body);
+		cardinal:update_cardinal_direction(body:rotation());
+		rotations[entity] = cardinal:cardinal_direction();
+	end
+
 	-- FLINCH
 	for entity in pairs(flinchEntities) do
 		local flinch = entity:component(Flinch);
@@ -26,7 +35,7 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 			if animation then
 				local animator = entity:component(SpriteAnimator);
 				local body = entity:component(crystal.Body);
-				animator:setAnimation(animation, body:angle4());
+				animator:setAnimation(animation, rotations[entity] or body:rotation());
 				walkEntities[entity] = nil;
 				idleEntities[entity] = nil;
 			end
@@ -44,7 +53,7 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 				if animation then
 					local animator = entity:component(SpriteAnimator);
 					local body = entity:component(crystal.Body);
-					animator:setAnimation(animation, body:angle4());
+					animator:setAnimation(animation, rotations[entity] or body:rotation());
 					idleEntities[entity] = nil;
 				end
 			end
@@ -60,7 +69,7 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 			if animation then
 				local animator = entity:component(SpriteAnimator);
 				local body = entity:component(crystal.Body);
-				animator:setAnimation(animation, body:angle4());
+				animator:setAnimation(animation, rotations[entity] or body:rotation());
 			end
 		end
 	end
