@@ -19,8 +19,8 @@ NPC.init = function(self)
 	self:add_component("SpriteAnimator", sprite, sheet);
 	self:add_component("IdleAnimation", "idle");
 
-	local body = self:add_component(crystal.Body, scene:physics_world());
-	local collider = self:add_component(crystal.Collider, body, love.physics.newCircleShape(4));
+	self:add_component(crystal.Body, scene:physics_world());
+	local collider = self:add_component(crystal.Collider, love.physics.newCircleShape(4));
 	collider:set_categories("solid");
 	collider:enable_collision_with("solid");
 

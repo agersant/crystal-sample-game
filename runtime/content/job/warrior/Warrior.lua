@@ -26,8 +26,8 @@ Warrior.init = function(self)
 	self:add_component("ScriptRunner");
 	self:add_component("Actor");
 
-	local body = self:add_component(crystal.Body, scene:physics_world(), "dynamic");
-	local collider = self:add_component(crystal.Collider, body, love.physics.newCircleShape(6));
+	self:add_component(crystal.Body, scene:physics_world(), "dynamic");
+	local collider = self:add_component(crystal.Collider, love.physics.newCircleShape(6));
 	collider:set_categories("solid");
 	collider:enable_collision_with("solid", "trigger");
 	self:add_component(crystal.Movement);

@@ -28,11 +28,11 @@ CombatSystem.after_run_scripts = function(self, dt)
 			local animator = entity:component("SpriteAnimator");
 			local shape = animator:getTagShape("hit");
 			if shape then
-				entity:add_component("Hitbox", entity:component(crystal.Body), shape);
+				entity:add_component("Hitbox", shape);
 			end
 			local shape = animator:getTagShape("weak");
 			if shape then
-				entity:add_component("Weakbox", entity:component(crystal.Body), shape);
+				entity:add_component("Weakbox", shape);
 			end
 		end
 	end

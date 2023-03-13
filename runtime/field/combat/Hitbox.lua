@@ -2,8 +2,8 @@ local HitEvent = require("field/combat/HitEvent");
 
 local Hitbox = Class("Hitbox", crystal.Sensor);
 
-Hitbox.init = function(self, body, shape)
-	Hitbox.super.init(self, body, shape);
+Hitbox.init = function(self, shape)
+	Hitbox.super.init(self, shape);
 	self:set_categories("hitbox");
 	self:enable_activation_by("weakbox");
 end
