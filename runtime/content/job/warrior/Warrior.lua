@@ -12,7 +12,6 @@ local hitReactions = function(self)
 end
 
 Warrior.init = function(self)
-	local scene = self:ecs();
 	local sheet = ASSETS:getSpritesheet("assets/spritesheet/duran.lua");
 	local sprite = self:add_component("Sprite");
 	self:add_component("SpriteAnimator", sprite, sheet);
@@ -26,7 +25,7 @@ Warrior.init = function(self)
 	self:add_component("ScriptRunner");
 	self:add_component("Actor");
 
-	self:add_component(crystal.Body, scene:physics_world(), "dynamic");
+	self:add_component(crystal.Body, "dynamic");
 	local collider = self:add_component(crystal.Collider, love.physics.newCircleShape(6));
 	collider:set_categories("solid");
 	collider:enable_collision_with("solid", "trigger");

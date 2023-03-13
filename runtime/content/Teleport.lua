@@ -66,7 +66,7 @@ Teleport.init = function(self, options)
 	assert(options.targetX);
 	assert(options.targetY);
 
-	self:add_component(crystal.Body, scene:physics_world());
+	self:add_component(crystal.Body);
 	self:add_component(TeleportTouchTrigger, options.shape);
 	self:add_component("ScriptRunner");
 	self:add_script(teleportScript);

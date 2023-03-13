@@ -86,7 +86,7 @@ Sahagin.init = function(self)
 	self:add_component("ScriptRunner");
 	self:add_component("Actor");
 
-	self:add_component(crystal.Body, scene:physics_world(), "dynamic");
+	self:add_component(crystal.Body, "dynamic");
 	local collider = self:add_component(crystal.Collider, love.physics.newCircleShape(4));
 	collider:set_categories("solid");
 	collider:enable_collision_with("solid");
