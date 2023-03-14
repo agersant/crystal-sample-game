@@ -18,7 +18,7 @@ local smallFlinch = function(self, direction)
 
 	local dx = math.cos(direction);
 	local dy = math.sin(direction);
-	self:apply_linear_impulse(300 * dx, 300 * dy);
+	self:apply_impulse(300 * dx, 300 * dy);
 
 	self:wait_tween(0, 6, 0.1, "outCubic", self.set_altitude, self);
 	self:wait_tween(6, 0, 0.1, "inCubic", self.set_altitude, self);
@@ -45,7 +45,7 @@ local largeFlinch = function(self, direction)
 	local dx = math.cos(direction);
 	local dy = math.sin(direction);
 
-	self:apply_linear_impulse(400 * dx, 400 * dy);
+	self:apply_impulse(400 * dx, 400 * dy);
 
 	self:wait_tween(0, 16, 0.15, "outQuadratic", self.set_altitude, self);
 	self:wait_tween(16, 0, 0.15, "inQuadratic", self.set_altitude, self);
