@@ -7,7 +7,7 @@ HitWidgetEntity.init = function(self, victim, amount)
 	assert(amount);
 	local scene = self:ecs();
 	local hitWidget = HitWidget:new(amount);
-	self:add_component(crystal.Body, "dynamic");
+	self:add_component(crystal.Body);
 	self:add_component(WorldWidget, hitWidget);
 	self:add_component(crystal.ScriptRunner);
 	self:attach_to(victim);
