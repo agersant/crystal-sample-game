@@ -5,7 +5,6 @@ crystal.configure({
 	physics_categories = { "solid", "trigger", "hitbox", "weakbox" },
 	mapDirectory = "assets/map/",
 	mapSceneClass = "Field",
-	saveDataClass = "SaveData",
 });
 
 local Fonts = require("resources/Fonts");

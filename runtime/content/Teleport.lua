@@ -1,4 +1,3 @@
-local PartyMember = require("persistence/party/PartyMember");
 local MapSystem = require("mapscene/MapSystem");
 local StringUtils = require("utils/StringUtils");
 local Field = require("field/Field");
@@ -23,7 +22,7 @@ local teleportScript = function(self)
 		local watchDirectionThread = self:thread(function(self)
 			while true do
 				self:wait_frame();
-				if triggeredBy:component(PartyMember) then
+				if triggeredBy:component("PartyMember") then
 					local teleportAngle = teleportEntity:rotation();
 					local entityAngle = triggeredBy:rotation();
 					local correctDirection = math.abs(teleportAngle - entityAngle) < math.pi / 2;

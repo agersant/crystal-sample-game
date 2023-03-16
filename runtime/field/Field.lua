@@ -7,31 +7,21 @@ local MovementControlsSystem = require("field/controls/MovementControlsSystem");
 local Teams = require("field/combat/Teams");
 local DamageNumbersSystem = require("field/hud/damage/DamageNumbersSystem");
 local HUDSystem = require("field/hud/HUDSystem");
-local PartyMember = require("persistence/party/PartyMember");
 local MapScene = require("mapscene/MapScene");
 
 local Field = Class("Field", MapScene);
 
-local spawnParty = function(self, x, y, startAngle)
-	local partyData = PERSISTENCE:getSaveData():getParty();
-	assert(partyData);
-	for i, partyMemberData in ipairs(partyData:getMembers()) do
-		local assignedPlayerIndex = partyMemberData:getAssignedPlayer();
-		local className = partyMemberData:getInstanceClass();
-		local class = Class:by_name(className);
-		assert(class);
+local PartyMember = Class("PartyMember", crystal.Component);
 
-		local entity = self:spawn(class, {});
-		entity:add_component(PartyMember);
-		if assignedPlayerIndex then
-			entity:add_component(crystal.InputListener, assignedPlayerIndex);
-			entity:add_component(MovementControls);
-			entity:add_component(InteractionControls);
-		end
-		entity:setTeam(Teams.party);
-		entity:set_position(x, y);
-		entity:set_rotation(startAngle);
-	end
+local spawnParty = function(self, x, y, startAngle)
+	local entity = self:spawn("Warrior", {});
+	entity:add_component("PartyMember");
+	entity:add_component(crystal.InputListener, 1);
+	entity:add_component(MovementControls);
+	entity:add_component(InteractionControls);
+	entity:setTeam(Teams.party);
+	entity:set_position(x, y);
+	entity:set_rotation(startAngle);
 end
 
 Field.init = function(self, mapName, startX, startY, startAngle)
