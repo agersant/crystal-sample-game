@@ -1,5 +1,4 @@
 local MapSystem = require("mapscene/MapSystem");
-local StringUtils = require("utils/StringUtils");
 local Field = require("field/Field");
 
 local Teleport = Class("Teleport", crystal.Entity);
@@ -9,7 +8,7 @@ local doTeleport = function(self, triggeredBy)
 	local teleportEntity = self:entity();
 	local finalX, finalY = teleportEntity._targetX, teleportEntity._targetY;
 
-	local targetMap = StringUtils.mergePaths(crystal.conf.mapDirectory, teleportEntity._targetMap);
+	local targetMap = string.merge_paths(crystal.conf.mapDirectory, teleportEntity._targetMap);
 	local newScene = Field:new(targetMap, finalX, finalY, self:rotation());
 	ENGINE:loadScene(newScene);
 end
