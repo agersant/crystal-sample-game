@@ -1,5 +1,3 @@
-local TableUtils = require("utils/TableUtils");
-
 local DamageIntent = Class("DamageIntent", crystal.Component);
 
 DamageIntent.init = function(self)
@@ -23,7 +21,7 @@ DamageIntent.getDamageUnits = function(self)
 end
 
 DamageIntent.getOnHitEffects = function(self)
-	return TableUtils.shallowCopy(self._onHitEffects);
+	return table.copy(self._onHitEffects);
 end
 
 DamageIntent.resetMultiHitTracking = function(self)

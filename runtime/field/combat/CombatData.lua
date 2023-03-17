@@ -8,7 +8,6 @@ local DamageTypes = require("field/combat/damage/DamageTypes");
 local Elements = require("field/combat/damage/Elements");
 local ScalingSources = require("field/combat/stats/ScalingSources");
 local Teams = require("field/combat/Teams");
-local TableUtils = require("utils/TableUtils");
 
 local CombatData = Class("CombatData", crystal.Component);
 
@@ -22,7 +21,7 @@ local evaluateStatInternal = function(self, statObject, guards)
 	assert(stat);
 
 	local guards = guards or {};
-	local newGuards = TableUtils.shallowCopy(guards);
+	local newGuards = table.copy(guards);
 	newGuards[stat] = true;
 
 	for modifier in pairs(self._statModifiers[stat]) do
@@ -415,14 +414,14 @@ crystal.test.add("Swap offense and defense", function()
 	ecs:update(0);
 
 	local offenseNullify = StatModifier:new(Stats.OFFENSE_PHYSICAL, 0);
-	offenseNullify:setScalingAmount( -1, ScalingSources.OFFENSE_PHYSICAL);
+	offenseNullify:setScalingAmount(-1, ScalingSources.OFFENSE_PHYSICAL);
 	local offenseSwap = StatModifier:new(Stats.OFFENSE_PHYSICAL, 0);
 	offenseSwap:setScalingAmount(1, ScalingSources.DEFENSE_PHYSICAL);
 	entity:addStatModifier(offenseNullify);
 	entity:addStatModifier(offenseSwap);
 
 	local defenseNullify = StatModifier:new(Stats.DEFENSE_PHYSICAL, 0);
-	defenseNullify:setScalingAmount( -1, ScalingSources.DEFENSE_PHYSICAL);
+	defenseNullify:setScalingAmount(-1, ScalingSources.DEFENSE_PHYSICAL);
 	local defenseSwap = StatModifier:new(Stats.DEFENSE_PHYSICAL, 0);
 	defenseSwap:setScalingAmount(1, ScalingSources.OFFENSE_PHYSICAL);
 	entity:addStatModifier(defenseNullify);
