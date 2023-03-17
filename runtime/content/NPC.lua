@@ -19,10 +19,10 @@ NPC.init = function(self)
 	self:add_component("SpriteAnimator", sprite, sheet);
 	self:add_component("IdleAnimation", "idle");
 
-	self:add_component(crystal.Body);
-	local collider = self:add_component(crystal.Collider, love.physics.newCircleShape(4));
-	collider:set_categories("solid");
-	collider:enable_collision_with("solid");
+	self:add_component(crystal.Body, "static");
+	self:add_component(crystal.Collider, love.physics.newCircleShape(4));
+	self:set_categories("solid");
+	self:enable_collision_with("solid");
 
 	self:add_component("ScriptRunner");
 	self:add_component("Dialog", scene:getHUD():getDialogBox());
