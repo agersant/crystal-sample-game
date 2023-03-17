@@ -178,10 +178,10 @@ CombatData.inflictDamage = function(self, intent, target)
 	local damage = computeDamage(self, intent, target);
 	local onHitEffects = {};
 	for _, onHitEffect in ipairs(intent:getOnHitEffects()) do
-		table.insert(onHitEffects, onHitEffect);
+		table.push(onHitEffects, onHitEffect);
 	end
 	for onHitEffect in pairs(self._onHitEffects) do
-		table.insert(onHitEffects, onHitEffect);
+		table.push(onHitEffects, onHitEffect);
 	end
 	target:receiveDamage(self, damage, onHitEffects);
 end

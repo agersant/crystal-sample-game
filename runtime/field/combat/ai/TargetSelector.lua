@@ -21,7 +21,7 @@ local getAll = function(self, filters)
 	local out = {};
 	for target in pairs(getAllPossibleTargets(self)) do
 		if passesFilters(self, filters, target) then
-			table.insert(out, target);
+			table.push(out, target);
 		end
 	end
 	return out;
