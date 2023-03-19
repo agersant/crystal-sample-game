@@ -1,5 +1,5 @@
 {
-  "version": "Tiger5",
+  "version": "1.0.0",
   "sheet": {
     "frames": [
       {
@@ -3391,8 +3391,8 @@
     "export_settings": {
       "Template": {
         "template_file": "../crystal.template",
-        "atlas_image_file": "../../../runtime/assets/texture/sprite/duran.png",
-        "metadata_file": "../../../runtime/assets/spritesheet/duran.lua",
+        "atlas_image_file": "../../../runtime/assets/sprite/duran.png",
+        "metadata_file": "../../../runtime/assets/sprite/duran.lua",
         "metadata_paths_root": "../../../runtime"
       }
     }

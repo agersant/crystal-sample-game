@@ -1,0 +1,65 @@
+{
+    "automappingRulesFile": "",
+    "commands": [
+    ],
+    "compatibilityVersion": 1100,
+    "extensionsPath": "extensions",
+    "folders": [
+        "."
+    ],
+    "propertyTypes": [
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 3,
+            "members": [
+            ],
+            "name": "NPC",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object"
+            ]
+        },
+        {
+            "color": "#ffff0000",
+            "drawFill": true,
+            "id": 1,
+            "members": [
+            ],
+            "name": "Sahagin",
+            "type": "class",
+            "useAs": [
+                "object"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 2,
+            "members": [
+                {
+                    "name": "target_map",
+                    "type": "string",
+                    "value": "map/destination.lua"
+                },
+                {
+                    "name": "target_x",
+                    "type": "int",
+                    "value": 0
+                },
+                {
+                    "name": "target_y",
+                    "type": "int",
+                    "value": 0
+                }
+            ],
+            "name": "Teleport",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object"
+            ]
+        }
+    ]
+}

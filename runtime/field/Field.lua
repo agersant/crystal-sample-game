@@ -28,8 +28,8 @@ Field.init = function(self, mapName, startX, startY, startAngle)
 	Field.super.init(self, mapName);
 
 	local map = self:getMap();
-	local mapWidth = map:getWidthInPixels();
-	local mapHeight = map:getHeightInPixels();
+	local mapWidth = map:pixel_width();
+	local mapHeight = map:pixel_height();
 	startX = startX or mapWidth / 2;
 	startY = startY or mapHeight / 2;
 	startAngle = startAngle or 0;

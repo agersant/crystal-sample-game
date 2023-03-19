@@ -33,7 +33,7 @@ end
 local MapScene = require("mapscene/MapScene");
 
 crystal.test.add("Is idle after completing action", function()
-	local scene = MapScene:new("test-data/empty_map.lua");
+	local scene = MapScene:new("test-data/empty.lua");
 
 	local entity = scene:spawn(crystal.Entity);
 	entity:add_component(crystal.ScriptRunner);
@@ -55,7 +55,7 @@ crystal.test.add("Is idle after completing action", function()
 end);
 
 crystal.test.add("Can stop action", function()
-	local scene = MapScene:new("test-data/empty_map.lua");
+	local scene = MapScene:new("test-data/empty.lua");
 
 	local entity = scene:spawn(crystal.Entity);
 	entity:add_component(crystal.ScriptRunner);

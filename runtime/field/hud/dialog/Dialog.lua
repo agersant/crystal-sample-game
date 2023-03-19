@@ -55,7 +55,7 @@ local InputPlayer = require("modules/input/input_player");
 local DialogBox = require("field/hud/dialog/DialogBox");
 
 crystal.test.add("Blocks script during dialog", function()
-	local scene = MapScene:new("test-data/empty_map.lua");
+	local scene = MapScene:new("test-data/empty.lua");
 	local dialogBox = DialogBox:new();
 	local player = InputPlayer:new(1);
 	player:set_bindings({ q = { "advanceDialog" } });
@@ -100,7 +100,7 @@ crystal.test.add("Blocks script during dialog", function()
 end);
 
 crystal.test.add("Can't start concurrent dialogs", function()
-	local scene = MapScene:new("test-data/empty_map.lua");
+	local scene = MapScene:new("test-data/empty.lua");
 	local dialogBox = DialogBox:new();
 	local player = InputPlayer:new(1);
 	player:set_bindings({ q = { "advanceDialog" } });
@@ -142,7 +142,7 @@ crystal.test.add("Can't start concurrent dialogs", function()
 end);
 
 crystal.test.add("Dialog is cleaned up if entity despawns while speaking", function()
-	local scene = MapScene:new("test-data/empty_map.lua");
+	local scene = MapScene:new("test-data/empty.lua");
 	local dialogBox = DialogBox:new();
 	local player = InputPlayer:new(1);
 	player:set_bindings({ q = { "advanceDialog" } });

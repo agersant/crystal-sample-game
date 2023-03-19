@@ -12,7 +12,7 @@ local hitReactions = function(self)
 end
 
 Warrior.init = function(self)
-	local sheet = ASSETS:getSpritesheet("assets/spritesheet/duran.lua");
+	local sheet = crystal.assets.get("assets/sprite/duran.lua");
 	local sprite = self:add_component("Sprite");
 	self:add_component("SpriteAnimator", sprite, sheet);
 	self:add_component("CommonShader");

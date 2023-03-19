@@ -6,10 +6,10 @@ local TeleportTouchTrigger = Class("TeleportTouchTrigger", crystal.Sensor);
 
 local doTeleport = function(self, triggeredBy)
 	local teleportEntity = self:entity();
-	local finalX, finalY = teleportEntity._targetX, teleportEntity._targetY;
+	local finalX, finalY = teleportEntity._target_x, teleportEntity._target_y;
 
-	local targetMap = string.merge_paths(crystal.conf.mapDirectory, teleportEntity._targetMap);
-	local newScene = Field:new(targetMap, finalX, finalY, self:rotation());
+	local target_map = string.merge_paths(crystal.conf.mapDirectory, teleportEntity._target_map);
+	local newScene = Field:new(target_map, finalX, finalY, self:rotation());
 	ENGINE:loadScene(newScene);
 end
 
@@ -60,22 +60,22 @@ end
 
 Teleport.init = function(self, options)
 	local scene = self:ecs();
-	assert(options.targetMap);
-	assert(options.targetX);
-	assert(options.targetY);
+	assert(options.target_map);
+	assert(options.target_x);
+	assert(options.target_y);
 
 	self:add_component(crystal.Body);
 	self:add_component(TeleportTouchTrigger, options.shape);
 	self:add_component("ScriptRunner");
 	self:add_script(teleportScript);
 
-	self._targetMap = options.targetMap;
-	self._targetX = options.targetX;
-	self._targetY = options.targetY;
+	self._target_map = options.target_map;
+	self._target_x = options.target_x;
+	self._target_y = options.target_y;
 
 	local map = scene:getMap();
-	local mapWidth = map:getWidthInPixels();
-	local mapHeight = map:getHeightInPixels();
+	local mapWidth = map:pixel_width();
+	local mapHeight = map:pixel_height();
 
 	local left = math.abs(options.x);
 	local top = math.abs(options.y);

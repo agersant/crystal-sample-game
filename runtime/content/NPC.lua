@@ -14,7 +14,7 @@ end
 
 NPC.init = function(self)
 	local scene = self:ecs();
-	local sheet = ASSETS:getSpritesheet("assets/spritesheet/sahagin.lua");
+	local sheet = crystal.assets.get("assets/sprite/sahagin.lua");
 	local sprite = self:add_component("Sprite");
 	self:add_component("SpriteAnimator", sprite, sheet);
 	self:add_component("IdleAnimation", "idle");

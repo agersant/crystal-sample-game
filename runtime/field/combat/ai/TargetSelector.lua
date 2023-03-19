@@ -93,7 +93,7 @@ end
 local MapScene = require("mapscene/MapScene");
 
 crystal.test.add("Get Nearest Enemy", function()
-	local scene = MapScene:new("test-data/empty_map.lua");
+	local scene = MapScene:new("test-data/empty.lua");
 
 	local me = scene:spawn(crystal.Entity);
 	local friend = scene:spawn(crystal.Entity);
@@ -121,7 +121,7 @@ crystal.test.add("Get Nearest Enemy", function()
 end);
 
 crystal.test.add("Get Nearest Ally", function()
-	local scene = MapScene:new("test-data/empty_map.lua");
+	local scene = MapScene:new("test-data/empty.lua");
 
 	local me = scene:spawn(crystal.Entity);
 	local friendA = scene:spawn(crystal.Entity);

@@ -4,7 +4,7 @@ local Palette = require("graphics/Palette");
 local CommonShader = Class("CommonShader", Shader);
 
 CommonShader.init = function(self)
-	CommonShader.super.init(self, ASSETS:getShader("assets/shader/common.glsl"));
+	CommonShader.super.init(self, crystal.assets.get("assets/shader/common.glsl"));
 	self:setHighlightColor();
 end
 
