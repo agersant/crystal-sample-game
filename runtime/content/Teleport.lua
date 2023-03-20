@@ -59,7 +59,6 @@ TeleportTouchTrigger.on_end_contact = function(self, component)
 end
 
 Teleport.init = function(self, options)
-	local scene = self:ecs();
 	assert(options.target_map);
 	assert(options.target_x);
 	assert(options.target_y);
@@ -73,7 +72,7 @@ Teleport.init = function(self, options)
 	self._target_x = options.target_x;
 	self._target_y = options.target_y;
 
-	local map = scene:getMap();
+	local map = self:ecs():system(MapSystem):map();
 	local mapWidth = map:pixel_width();
 	local mapHeight = map:pixel_height();
 
