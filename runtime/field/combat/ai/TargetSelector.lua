@@ -100,7 +100,7 @@ crystal.test.add("Get Nearest Enemy", function()
 	local enemyA = scene:spawn(crystal.Entity);
 	local enemyB = scene:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friend, enemyA, enemyB }) do
-		entity:add_component(crystal.Body, scene:physics_world());
+		entity:add_component(crystal.Body);
 		entity:add_component(CombatData);
 		entity:add_component(TargetSelector);
 	end
@@ -128,7 +128,7 @@ crystal.test.add("Get Nearest Ally", function()
 	local friendB = scene:spawn(crystal.Entity);
 	local enemy = scene:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friendA, friendB, enemy }) do
-		entity:add_component(crystal.Body, scene:physics_world());
+		entity:add_component(crystal.Body);
 		entity:add_component(CombatData);
 		entity:add_component(TargetSelector);
 	end
