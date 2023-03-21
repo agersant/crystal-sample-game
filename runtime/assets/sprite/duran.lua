@@ -107,29 +107,29 @@ return {
 			sequences = {
 				{
 					direction = "East",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_32", duration = 0.16, ox = 31.0, oy = 27.0,
-							tags = {
+							frame = "frame_32", duration = 0.16, x = -31, y = -27,
+							hitboxes = {
 								["weak"] = { rect = { x = -11, y = -21, w = 9, h = 17 } },
 							},
 						},
 						{
-							id = "frame_33", duration = 0.06, ox = 14.0, oy = 43.0,
-							tags = {
+							frame = "frame_33", duration = 0.06, x = -14, y = -43,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -22, w = 10, h = 16 } },
 							},
 						},
 						{
-							id = "frame_34", duration = 0.06, ox = 8.0, oy = 43.0,
-							tags = {
+							frame = "frame_34", duration = 0.06, x = -8, y = -43,
+							hitboxes = {
 								["hit"] = { rect = { x = 10, y = -35, w = 20, h = 39 } },
 								["weak"] = { rect = { x = -1, y = -16, w = 18, h = 11 } },
 							},
 						},
 						{
-							id = "frame_35", duration = 0.15, ox = 8.0, oy = 25.0,
-							tags = {
+							frame = "frame_35", duration = 0.15, x = -8, y = -25,
+							hitboxes = {
 								["weak"] = { rect = { x = 1, y = -14, w = 15, h = 9 } },
 							},
 						},
@@ -137,29 +137,29 @@ return {
 				},
 				{
 					direction = "North",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_48", duration = 0.16, ox = 12.0, oy = 29.0,
-							tags = {
+							frame = "frame_48", duration = 0.16, x = -12, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = 0, y = -20, w = 10, h = 13 } },
 							},
 						},
 						{
-							id = "frame_49", duration = 0.06, ox = 17.0, oy = 42.0,
-							tags = {
+							frame = "frame_49", duration = 0.06, x = -17, y = -42,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -23, w = 12, h = 14 } },
 							},
 						},
 						{
-							id = "frame_50", duration = 0.06, ox = 6.0, oy = 30.0,
-							tags = {
+							frame = "frame_50", duration = 0.06, x = -6, y = -30,
+							hitboxes = {
 								["hit"] = { rect = { x = -8, y = -30, w = 33, h = 31 } },
 								["weak"] = { rect = { x = 5, y = -20, w = 12, h = 14 } },
 							},
 						},
 						{
-							id = "frame_51", duration = 0.15, ox = 6.0, oy = 22.0,
-							tags = {
+							frame = "frame_51", duration = 0.15, x = -6, y = -22,
+							hitboxes = {
 								["weak"] = { rect = { x = 3, y = -18, w = 14, h = 12 } },
 							},
 						},
@@ -167,28 +167,28 @@ return {
 				},
 				{
 					direction = "West",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_16", duration = 0.16, ox = 13.0, oy = 28.0,
-							tags = {
+							frame = "frame_16", duration = 0.16, x = -13, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = 1, y = -21, w = 10, h = 17 } },
 							},
 						},
 						{
-							id = "frame_17", duration = 0.06, ox = 18.0, oy = 43.0,
-							tags = {
+							frame = "frame_17", duration = 0.06, x = -18, y = -43,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -21, w = 11, h = 16 } },
 							},
 						},
 						{
-							id = "frame_18", duration = 0.06, ox = 29.0, oy = 43.0,
-							tags = {
+							frame = "frame_18", duration = 0.06, x = -29, y = -43,
+							hitboxes = {
 								["hit"] = { rect = { x = -35, y = -36, w = 25, h = 39 } },
 							},
 						},
 						{
-							id = "frame_19", duration = 0.15, ox = 29.0, oy = 25.0,
-							tags = {
+							frame = "frame_19", duration = 0.15, x = -29, y = -25,
+							hitboxes = {
 								["weak"] = { rect = { x = -17, y = -18, w = 13, h = 13 } },
 							},
 						},
@@ -196,29 +196,29 @@ return {
 				},
 				{
 					direction = "South",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_0", duration = 0.16, ox = 8.0, oy = 26.0,
-							tags = {
+							frame = "frame_0", duration = 0.16, x = -8, y = -26,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -19, w = 16, h = 14 } },
 							},
 						},
 						{
-							id = "frame_1", duration = 0.06, ox = 8.0, oy = 42.0,
-							tags = {
+							frame = "frame_1", duration = 0.06, x = -8, y = -42,
+							hitboxes = {
 								["weak"] = { rect = { x = -1, y = -22, w = 14, h = 20 } },
 							},
 						},
 						{
-							id = "frame_2", duration = 0.06, ox = 6.0, oy = 25.0,
-							tags = {
+							frame = "frame_2", duration = 0.06, x = -6, y = -25,
+							hitboxes = {
 								["hit"] = { rect = { x = -10, y = -10, w = 42, h = 21 } },
 								["weak"] = { rect = { x = -2, y = -17, w = 20, h = 14 } },
 							},
 						},
 						{
-							id = "frame_3", duration = 0.15, ox = 6.0, oy = 22.0,
-							tags = {
+							frame = "frame_3", duration = 0.15, x = -6, y = -22,
+							hitboxes = {
 								["weak"] = { rect = { x = -2, y = -16, w = 21, h = 14 } },
 							},
 						},
@@ -231,29 +231,29 @@ return {
 			sequences = {
 				{
 					direction = "East",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_36", duration = 0.16, ox = 10.0, oy = 24.0,
-							tags = {
+							frame = "frame_36", duration = 0.16, x = -10, y = -24,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -17, w = 10, h = 12 } },
 							},
 						},
 						{
-							id = "frame_37", duration = 0.06, ox = 12.0, oy = 25.0,
-							tags = {
+							frame = "frame_37", duration = 0.06, x = -12, y = -25,
+							hitboxes = {
 								["weak"] = { rect = { x = -2, y = -18, w = 14, h = 14 } },
 							},
 						},
 						{
-							id = "frame_38", duration = 0.06, ox = 12.0, oy = 27.0,
-							tags = {
+							frame = "frame_38", duration = 0.06, x = -12, y = -27,
+							hitboxes = {
 								["hit"] = { rect = { x = 10, y = -16, w = 26, h = 16 } },
 								["weak"] = { rect = { x = 0, y = -20, w = 12, h = 16 } },
 							},
 						},
 						{
-							id = "frame_39", duration = 0.15, ox = 12.0, oy = 27.0,
-							tags = {
+							frame = "frame_39", duration = 0.15, x = -12, y = -27,
+							hitboxes = {
 								["weak"] = { rect = { x = 0, y = -19, w = 12, h = 14 } },
 							},
 						},
@@ -261,29 +261,29 @@ return {
 				},
 				{
 					direction = "North",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_52", duration = 0.16, ox = 15.0, oy = 26.0,
-							tags = {
+							frame = "frame_52", duration = 0.16, x = -15, y = -26,
+							hitboxes = {
 								["weak"] = { rect = { x = -3, y = -18, w = 11, h = 14 } },
 							},
 						},
 						{
-							id = "frame_53", duration = 0.06, ox = 13.0, oy = 30.0,
-							tags = {
+							frame = "frame_53", duration = 0.06, x = -13, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -20, w = 10, h = 13 } },
 							},
 						},
 						{
-							id = "frame_54", duration = 0.06, ox = 11.0, oy = 49.0,
-							tags = {
+							frame = "frame_54", duration = 0.06, x = -11, y = -49,
+							hitboxes = {
 								["hit"] = { rect = { x = -8, y = -51, w = 13, h = 27 } },
 								["weak"] = { rect = { x = -6, y = -28, w = 11, h = 19 } },
 							},
 						},
 						{
-							id = "frame_55", duration = 0.15, ox = 10.0, oy = 51.0,
-							tags = {
+							frame = "frame_55", duration = 0.15, x = -10, y = -51,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -27, w = 12, h = 20 } },
 							},
 						},
@@ -291,29 +291,29 @@ return {
 				},
 				{
 					direction = "West",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_20", duration = 0.16, ox = 12.0, oy = 23.0,
-							tags = {
+							frame = "frame_20", duration = 0.16, x = -12, y = -23,
+							hitboxes = {
 								["weak"] = { rect = { x = -8, y = -18, w = 14, h = 15 } },
 							},
 						},
 						{
-							id = "frame_21", duration = 0.06, ox = 26.0, oy = 24.0,
-							tags = {
+							frame = "frame_21", duration = 0.06, x = -26, y = -24,
+							hitboxes = {
 								["weak"] = { rect = { x = -16, y = -17, w = 15, h = 16 } },
 							},
 						},
 						{
-							id = "frame_22", duration = 0.06, ox = 39.0, oy = 26.0,
-							tags = {
+							frame = "frame_22", duration = 0.06, x = -39, y = -26,
+							hitboxes = {
 								["hit"] = { rect = { x = -42, y = -15, w = 30, h = 17 } },
 								["weak"] = { rect = { x = -16, y = -19, w = 15, h = 16 } },
 							},
 						},
 						{
-							id = "frame_23", duration = 0.15, ox = 40.0, oy = 26.0,
-							tags = {
+							frame = "frame_23", duration = 0.15, x = -40, y = -26,
+							hitboxes = {
 								["weak"] = { rect = { x = -17, y = -17, w = 15, h = 14 } },
 							},
 						},
@@ -321,29 +321,29 @@ return {
 				},
 				{
 					direction = "South",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_5", duration = 0.16, ox = 8.0, oy = 23.0,
-							tags = {
+							frame = "frame_5", duration = 0.16, x = -8, y = -23,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -13, w = 13, h = 14 } },
 							},
 						},
 						{
-							id = "frame_4", duration = 0.06, ox = 14.0, oy = 27.0,
-							tags = {
+							frame = "frame_4", duration = 0.06, x = -14, y = -27,
+							hitboxes = {
 								["weak"] = { rect = { x = -3, y = -19, w = 11, h = 15 } },
 							},
 						},
 						{
-							id = "frame_6", duration = 0.06, ox = 9.0, oy = 21.0,
-							tags = {
+							frame = "frame_6", duration = 0.06, x = -9, y = -21,
+							hitboxes = {
 								["hit"] = { rect = { x = -7, y = -2, w = 12, h = 26 } },
 								["weak"] = { rect = { x = -7, y = -11, w = 16, h = 11 } },
 							},
 						},
 						{
-							id = "frame_7", duration = 0.15, ox = 9.0, oy = 22.0,
-							tags = {
+							frame = "frame_7", duration = 0.15, x = -9, y = -22,
+							hitboxes = {
 								["weak"] = { rect = { x = -7, y = -10, w = 15, h = 10 } },
 							},
 						},
@@ -356,29 +356,29 @@ return {
 			sequences = {
 				{
 					direction = "East",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_40", duration = 0.16, ox = 27.0, oy = 30.0,
-							tags = {
+							frame = "frame_40", duration = 0.16, x = -27, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = -9, y = -21, w = 10, h = 15 } },
 							},
 						},
 						{
-							id = "frame_41", duration = 0.06, ox = 13.0, oy = 39.0,
-							tags = {
+							frame = "frame_41", duration = 0.06, x = -13, y = -39,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -21, w = 13, h = 14 } },
 							},
 						},
 						{
-							id = "frame_42", duration = 0.06, ox = 12.0, oy = 25.0,
-							tags = {
+							frame = "frame_42", duration = 0.06, x = -12, y = -25,
+							hitboxes = {
 								["hit"] = { rect = { x = 6, y = -34, w = 25, h = 35 } },
 								["weak"] = { rect = { x = -3, y = -16, w = 14, h = 11 } },
 							},
 						},
 						{
-							id = "frame_43", duration = 0.15, ox = 12.0, oy = 25.0,
-							tags = {
+							frame = "frame_43", duration = 0.15, x = -12, y = -25,
+							hitboxes = {
 								["weak"] = { rect = { x = -3, y = -15, w = 14, h = 10 } },
 							},
 						},
@@ -386,29 +386,29 @@ return {
 				},
 				{
 					direction = "North",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_56", duration = 0.16, ox = 5.0, oy = 31.0,
-							tags = {
+							frame = "frame_56", duration = 0.16, x = -5, y = -31,
+							hitboxes = {
 								["weak"] = { rect = { x = -1, y = -24, w = 9, h = 19 } },
 							},
 						},
 						{
-							id = "frame_57", duration = 0.06, ox = 22.0, oy = 42.0,
-							tags = {
+							frame = "frame_57", duration = 0.06, x = -22, y = -42,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -20, w = 11, h = 15 } },
 							},
 						},
 						{
-							id = "frame_58", duration = 0.06, ox = 21.0, oy = 30.0,
-							tags = {
+							frame = "frame_58", duration = 0.06, x = -21, y = -30,
+							hitboxes = {
 								["hit"] = { rect = { x = -23, y = -35, w = 24, h = 31 } },
 								["weak"] = { rect = { x = -4, y = -18, w = 11, h = 13 } },
 							},
 						},
 						{
-							id = "frame_59", duration = 0.15, ox = 15.0, oy = 30.0,
-							tags = {
+							frame = "frame_59", duration = 0.15, x = -15, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -20, w = 11, h = 13 } },
 							},
 						},
@@ -416,29 +416,29 @@ return {
 				},
 				{
 					direction = "West",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_24", duration = 0.16, ox = 13.0, oy = 29.0,
-							tags = {
+							frame = "frame_24", duration = 0.16, x = -13, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -21, w = 12, h = 17 } },
 							},
 						},
 						{
-							id = "frame_25", duration = 0.06, ox = 32.0, oy = 38.0,
-							tags = {
+							frame = "frame_25", duration = 0.06, x = -32, y = -38,
+							hitboxes = {
 								["weak"] = { rect = { x = -13, y = -21, w = 14, h = 18 } },
 							},
 						},
 						{
-							id = "frame_26", duration = 0.06, ox = 32.0, oy = 25.0,
-							tags = {
+							frame = "frame_26", duration = 0.06, x = -32, y = -25,
+							hitboxes = {
 								["hit"] = { rect = { x = -35, y = -33, w = 24, h = 34 } },
 								["weak"] = { rect = { x = -15, y = -16, w = 16, h = 13 } },
 							},
 						},
 						{
-							id = "frame_27", duration = 0.15, ox = 25.0, oy = 24.0,
-							tags = {
+							frame = "frame_27", duration = 0.15, x = -25, y = -24,
+							hitboxes = {
 								["weak"] = { rect = { x = -15, y = -14, w = 18, h = 11 } },
 							},
 						},
@@ -446,29 +446,29 @@ return {
 				},
 				{
 					direction = "South",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_8", duration = 0.16, ox = 5.0, oy = 34.0,
-							tags = {
+							frame = "frame_8", duration = 0.16, x = -5, y = -34,
+							hitboxes = {
 								["weak"] = { rect = { x = -2, y = -24, w = 9, h = 20 } },
 							},
 						},
 						{
-							id = "frame_9", duration = 0.06, ox = 8.0, oy = 29.0,
-							tags = {
+							frame = "frame_9", duration = 0.06, x = -8, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -3, y = -19, w = 11, h = 16 } },
 							},
 						},
 						{
-							id = "frame_10", duration = 0.06, ox = 15.0, oy = 29.0,
-							tags = {
+							frame = "frame_10", duration = 0.06, x = -15, y = -29,
+							hitboxes = {
 								["hit"] = { rect = { x = -16, y = -16, w = 27, h = 30 } },
 								["weak"] = { rect = { x = -5, y = -20, w = 13, h = 17 } },
 							},
 						},
 						{
-							id = "frame_11", duration = 0.15, ox = 17.0, oy = 29.0,
-							tags = {
+							frame = "frame_11", duration = 0.15, x = -17, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -20, w = 11, h = 16 } },
 							},
 						},
@@ -481,29 +481,29 @@ return {
 			sequences = {
 				{
 					direction = "East",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_44", duration = 0.16, ox = 12.0, oy = 25.0,
-							tags = {
+							frame = "frame_44", duration = 0.16, x = -12, y = -25,
+							hitboxes = {
 								["weak"] = { rect = { x = -2, y = -17, w = 14, h = 12 } },
 							},
 						},
 						{
-							id = "frame_45", duration = 0.06, ox = 12.0, oy = 27.0,
-							tags = {
+							frame = "frame_45", duration = 0.06, x = -12, y = -27,
+							hitboxes = {
 								["weak"] = { rect = { x = 1, y = -18, w = 12, h = 11 } },
 							},
 						},
 						{
-							id = "frame_46", duration = 0.06, ox = 10.0, oy = 25.0,
-							tags = {
+							frame = "frame_46", duration = 0.06, x = -10, y = -25,
+							hitboxes = {
 								["hit"] = { rect = { x = 8, y = -26, w = 26, h = 27 } },
 								["weak"] = { rect = { x = -3, y = -18, w = 11, h = 13 } },
 							},
 						},
 						{
-							id = "frame_47", duration = 0.15, ox = 11.0, oy = 30.0,
-							tags = {
+							frame = "frame_47", duration = 0.15, x = -11, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -17, w = 14, h = 11 } },
 							},
 						},
@@ -511,29 +511,29 @@ return {
 				},
 				{
 					direction = "North",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_60", duration = 0.16, ox = 31.0, oy = 27.0,
-							tags = {
+							frame = "frame_60", duration = 0.16, x = -31, y = -27,
+							hitboxes = {
 								["weak"] = { rect = { x = -10, y = -19, w = 11, h = 12 } },
 							},
 						},
 						{
-							id = "frame_61", duration = 0.06, ox = 19.0, oy = 43.0,
-							tags = {
+							frame = "frame_61", duration = 0.06, x = -19, y = -43,
+							hitboxes = {
 								["weak"] = { rect = { x = -7, y = -25, w = 11, h = 16 } },
 							},
 						},
 						{
-							id = "frame_62", duration = 0.06, ox = 11.0, oy = 44.0,
-							tags = {
+							frame = "frame_62", duration = 0.06, x = -11, y = -44,
+							hitboxes = {
 								["hit"] = { rect = { x = -22, y = -46, w = 52, h = 33 } },
 								["weak"] = { rect = { x = -6, y = -21, w = 11, h = 12 } },
 							},
 						},
 						{
-							id = "frame_63", duration = 0.15, ox = 8.0, oy = 28.0,
-							tags = {
+							frame = "frame_63", duration = 0.15, x = -8, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -21, w = 9, h = 13 } },
 							},
 						},
@@ -541,29 +541,29 @@ return {
 				},
 				{
 					direction = "West",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_28", duration = 0.16, ox = 15.0, oy = 24.0,
-							tags = {
+							frame = "frame_28", duration = 0.16, x = -15, y = -24,
+							hitboxes = {
 								["weak"] = { rect = { x = -12, y = -15, w = 14, h = 14 } },
 							},
 						},
 						{
-							id = "frame_29", duration = 0.06, ox = 39.0, oy = 26.0,
-							tags = {
+							frame = "frame_29", duration = 0.06, x = -39, y = -26,
+							hitboxes = {
 								["weak"] = { rect = { x = -16, y = -17, w = 13, h = 14 } },
 							},
 						},
 						{
-							id = "frame_30", duration = 0.06, ox = 34.0, oy = 26.0,
-							tags = {
+							frame = "frame_30", duration = 0.06, x = -34, y = -26,
+							hitboxes = {
 								["hit"] = { rect = { x = -36, y = -28, w = 26, h = 29 } },
 								["weak"] = { rect = { x = -9, y = -20, w = 12, h = 16 } },
 							},
 						},
 						{
-							id = "frame_31", duration = 0.15, ox = 12.0, oy = 31.0,
-							tags = {
+							frame = "frame_31", duration = 0.15, x = -12, y = -31,
+							hitboxes = {
 								["weak"] = { rect = { x = -9, y = -19, w = 13, h = 13 } },
 							},
 						},
@@ -571,29 +571,29 @@ return {
 				},
 				{
 					direction = "South",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_12", duration = 0.16, ox = 13.0, oy = 28.0,
-							tags = {
+							frame = "frame_12", duration = 0.16, x = -13, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -18, w = 11, h = 15 } },
 							},
 						},
 						{
-							id = "frame_13", duration = 0.06, ox = 19.0, oy = 22.0,
-							tags = {
+							frame = "frame_13", duration = 0.06, x = -19, y = -22,
+							hitboxes = {
 								["weak"] = { rect = { x = -8, y = -15, w = 16, h = 8 } },
 							},
 						},
 						{
-							id = "frame_14", duration = 0.06, ox = 7.0, oy = 29.0,
-							tags = {
+							frame = "frame_14", duration = 0.06, x = -7, y = -29,
+							hitboxes = {
 								["hit"] = { rect = { x = -21, y = -11, w = 55, h = 32 } },
 								["weak"] = { rect = { x = -1, y = -20, w = 14, h = 17 } },
 							},
 						},
 						{
-							id = "frame_15", duration = 0.15, ox = 4.0, oy = 30.0,
-							tags = {
+							frame = "frame_15", duration = 0.15, x = -4, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = 2, y = -19, w = 12, h = 15 } },
 							},
 						},
@@ -606,29 +606,29 @@ return {
 			sequences = {
 				{
 					direction = "East",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_36", duration = 0.25, ox = 11.0, oy = 24.0,
-							tags = {
+							frame = "frame_36", duration = 0.25, x = -11, y = -24,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -17, w = 10, h = 12 } },
 							},
 						},
 						{
-							id = "frame_37", duration = 0.06, ox = 12.0, oy = 25.0,
-							tags = {
+							frame = "frame_37", duration = 0.06, x = -12, y = -25,
+							hitboxes = {
 								["weak"] = { rect = { x = -2, y = -18, w = 14, h = 14 } },
 							},
 						},
 						{
-							id = "frame_38", duration = 0.06, ox = 12.0, oy = 27.0,
-							tags = {
+							frame = "frame_38", duration = 0.06, x = -12, y = -27,
+							hitboxes = {
 								["hit"] = { rect = { x = 10, y = -16, w = 26, h = 16 } },
 								["weak"] = { rect = { x = 0, y = -20, w = 12, h = 16 } },
 							},
 						},
 						{
-							id = "frame_39", duration = 0.08, ox = 12.0, oy = 27.0,
-							tags = {
+							frame = "frame_39", duration = 0.08, x = -12, y = -27,
+							hitboxes = {
 								["weak"] = { rect = { x = 0, y = -19, w = 12, h = 14 } },
 							},
 						},
@@ -636,29 +636,29 @@ return {
 				},
 				{
 					direction = "North",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_52", duration = 0.25, ox = 16.0, oy = 27.0,
-							tags = {
+							frame = "frame_52", duration = 0.25, x = -16, y = -27,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -19, w = 11, h = 14 } },
 							},
 						},
 						{
-							id = "frame_53", duration = 0.06, ox = 14.0, oy = 31.0,
-							tags = {
+							frame = "frame_53", duration = 0.06, x = -14, y = -31,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -21, w = 10, h = 13 } },
 							},
 						},
 						{
-							id = "frame_54", duration = 0.06, ox = 8.0, oy = 49.0,
-							tags = {
+							frame = "frame_54", duration = 0.06, x = -8, y = -49,
+							hitboxes = {
 								["hit"] = { rect = { x = -5, y = -51, w = 13, h = 27 } },
 								["weak"] = { rect = { x = -3, y = -28, w = 11, h = 19 } },
 							},
 						},
 						{
-							id = "frame_55", duration = 0.08, ox = 7.0, oy = 51.0,
-							tags = {
+							frame = "frame_55", duration = 0.08, x = -7, y = -51,
+							hitboxes = {
 								["weak"] = { rect = { x = -3, y = -27, w = 12, h = 20 } },
 							},
 						},
@@ -666,29 +666,29 @@ return {
 				},
 				{
 					direction = "West",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_20", duration = 0.25, ox = 12.0, oy = 23.0,
-							tags = {
+							frame = "frame_20", duration = 0.25, x = -12, y = -23,
+							hitboxes = {
 								["weak"] = { rect = { x = -8, y = -18, w = 14, h = 15 } },
 							},
 						},
 						{
-							id = "frame_21", duration = 0.06, ox = 25.0, oy = 24.0,
-							tags = {
+							frame = "frame_21", duration = 0.06, x = -25, y = -24,
+							hitboxes = {
 								["weak"] = { rect = { x = -15, y = -17, w = 15, h = 16 } },
 							},
 						},
 						{
-							id = "frame_22", duration = 0.06, ox = 38.0, oy = 26.0,
-							tags = {
+							frame = "frame_22", duration = 0.06, x = -38, y = -26,
+							hitboxes = {
 								["hit"] = { rect = { x = -41, y = -15, w = 30, h = 17 } },
 								["weak"] = { rect = { x = -15, y = -19, w = 15, h = 16 } },
 							},
 						},
 						{
-							id = "frame_23", duration = 0.08, ox = 39.0, oy = 26.0,
-							tags = {
+							frame = "frame_23", duration = 0.08, x = -39, y = -26,
+							hitboxes = {
 								["weak"] = { rect = { x = -16, y = -17, w = 15, h = 14 } },
 							},
 						},
@@ -696,29 +696,29 @@ return {
 				},
 				{
 					direction = "South",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_4", duration = 0.25, ox = 14.0, oy = 27.0,
-							tags = {
+							frame = "frame_4", duration = 0.25, x = -14, y = -27,
+							hitboxes = {
 								["weak"] = { rect = { x = -3, y = -19, w = 11, h = 15 } },
 							},
 						},
 						{
-							id = "frame_5", duration = 0.06, ox = 8.0, oy = 24.0,
-							tags = {
+							frame = "frame_5", duration = 0.06, x = -8, y = -24,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -14, w = 13, h = 14 } },
 							},
 						},
 						{
-							id = "frame_6", duration = 0.06, ox = 9.0, oy = 23.0,
-							tags = {
+							frame = "frame_6", duration = 0.06, x = -9, y = -23,
+							hitboxes = {
 								["hit"] = { rect = { x = -7, y = -4, w = 12, h = 26 } },
 								["weak"] = { rect = { x = -7, y = -13, w = 16, h = 11 } },
 							},
 						},
 						{
-							id = "frame_7", duration = 0.08, ox = 9.0, oy = 24.0,
-							tags = {
+							frame = "frame_7", duration = 0.08, x = -9, y = -24,
+							hitboxes = {
 								["weak"] = { rect = { x = -7, y = -12, w = 15, h = 10 } },
 							},
 						},
@@ -731,12 +731,12 @@ return {
 			sequences = {
 				{
 					direction = "North",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_64", duration = 0.196, ox = 14.0, oy = 24.0,
+							frame = "frame_64", duration = 0.196, x = -14, y = -24,
 						},
 						{
-							id = "frame_65", duration = 0.303, ox = 17.0, oy = 20.0,
+							frame = "frame_65", duration = 0.303, x = -17, y = -20,
 						},
 					},
 				},
@@ -747,10 +747,10 @@ return {
 			sequences = {
 				{
 					direction = "East",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_68", duration = 0.1, ox = 10.0, oy = 29.0,
-							tags = {
+							frame = "frame_68", duration = 0.1, x = -10, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -8, y = -24, w = 12, h = 22 } },
 							},
 						},
@@ -758,10 +758,10 @@ return {
 				},
 				{
 					direction = "North",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_69", duration = 0.1, ox = 10.0, oy = 29.0,
-							tags = {
+							frame = "frame_69", duration = 0.1, x = -10, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -23, w = 12, h = 22 } },
 							},
 						},
@@ -769,10 +769,10 @@ return {
 				},
 				{
 					direction = "West",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_67", duration = 0.1, ox = 7.0, oy = 29.0,
-							tags = {
+							frame = "frame_67", duration = 0.1, x = -7, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -22, w = 11, h = 20 } },
 							},
 						},
@@ -780,10 +780,10 @@ return {
 				},
 				{
 					direction = "South",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_66", duration = 0.1, ox = 9.0, oy = 29.0,
-							tags = {
+							frame = "frame_66", duration = 0.1, x = -9, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -21, w = 11, h = 19 } },
 							},
 						},
@@ -796,33 +796,33 @@ return {
 			sequences = {
 				{
 					direction = "East",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_72", duration = 0.1, ox = 18.0, oy = 28.0,
+							frame = "frame_72", duration = 0.1, x = -18, y = -28,
 						},
 					},
 				},
 				{
 					direction = "North",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_73", duration = 0.1, ox = 12.0, oy = 29.0,
+							frame = "frame_73", duration = 0.1, x = -12, y = -29,
 						},
 					},
 				},
 				{
 					direction = "West",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_71", duration = 0.1, ox = 5.0, oy = 28.0,
+							frame = "frame_71", duration = 0.1, x = -5, y = -28,
 						},
 					},
 				},
 				{
 					direction = "South",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_70", duration = 0.1, ox = 15.0, oy = 31.0,
+							frame = "frame_70", duration = 0.1, x = -15, y = -31,
 						},
 					},
 				},
@@ -833,40 +833,40 @@ return {
 			sequences = {
 				{
 					direction = "East",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_86", duration = 0.15, ox = 8.0, oy = 30.0,
-							tags = {
+							frame = "frame_86", duration = 0.15, x = -8, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = -2, y = -20, w = 11, h = 15 } },
 							},
 						},
 						{
-							id = "frame_87", duration = 0.15, ox = 9.0, oy = 30.0,
-							tags = {
+							frame = "frame_87", duration = 0.15, x = -9, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -20, w = 12, h = 14 } },
 							},
 						},
 						{
-							id = "frame_88", duration = 0.15, ox = 12.0, oy = 29.0,
-							tags = {
+							frame = "frame_88", duration = 0.15, x = -12, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -17, w = 12, h = 13 } },
 							},
 						},
 						{
-							id = "frame_89", duration = 0.15, ox = 9.0, oy = 29.0,
-							tags = {
+							frame = "frame_89", duration = 0.15, x = -9, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -18, w = 11, h = 14 } },
 							},
 						},
 						{
-							id = "frame_90", duration = 0.15, ox = 7.0, oy = 30.0,
-							tags = {
+							frame = "frame_90", duration = 0.15, x = -7, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -20, w = 12, h = 15 } },
 							},
 						},
 						{
-							id = "frame_91", duration = 0.15, ox = 11.0, oy = 28.0,
-							tags = {
+							frame = "frame_91", duration = 0.15, x = -11, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -17, w = 12, h = 13 } },
 							},
 						},
@@ -874,40 +874,40 @@ return {
 				},
 				{
 					direction = "North",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_92", duration = 0.15, ox = 12.0, oy = 28.0,
-							tags = {
+							frame = "frame_92", duration = 0.15, x = -12, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -19, w = 9, h = 15 } },
 							},
 						},
 						{
-							id = "frame_93", duration = 0.15, ox = 9.0, oy = 28.0,
-							tags = {
+							frame = "frame_93", duration = 0.15, x = -9, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -18, w = 10, h = 15 } },
 							},
 						},
 						{
-							id = "frame_94", duration = 0.15, ox = 6.0, oy = 28.0,
-							tags = {
+							frame = "frame_94", duration = 0.15, x = -6, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -2, y = -18, w = 9, h = 15 } },
 							},
 						},
 						{
-							id = "frame_95", duration = 0.15, ox = 9.0, oy = 28.0,
-							tags = {
+							frame = "frame_95", duration = 0.15, x = -9, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -19, w = 10, h = 15 } },
 							},
 						},
 						{
-							id = "frame_96", duration = 0.15, ox = 12.0, oy = 28.0,
-							tags = {
+							frame = "frame_96", duration = 0.15, x = -12, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -19, w = 11, h = 15 } },
 							},
 						},
 						{
-							id = "frame_97", duration = 0.15, ox = 12.0, oy = 28.0,
-							tags = {
+							frame = "frame_97", duration = 0.15, x = -12, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -7, y = -19, w = 10, h = 16 } },
 							},
 						},
@@ -915,40 +915,40 @@ return {
 				},
 				{
 					direction = "West",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_81", duration = 0.15, ox = 9.0, oy = 29.0,
-							tags = {
+							frame = "frame_81", duration = 0.15, x = -9, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -19, w = 12, h = 15 } },
 							},
 						},
 						{
-							id = "frame_82", duration = 0.15, ox = 12.0, oy = 29.0,
-							tags = {
+							frame = "frame_82", duration = 0.15, x = -12, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -7, y = -18, w = 13, h = 14 } },
 							},
 						},
 						{
-							id = "frame_83", duration = 0.15, ox = 9.0, oy = 29.0,
-							tags = {
+							frame = "frame_83", duration = 0.15, x = -9, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -18, w = 11, h = 15 } },
 							},
 						},
 						{
-							id = "frame_84", duration = 0.15, ox = 12.0, oy = 30.0,
-							tags = {
+							frame = "frame_84", duration = 0.15, x = -12, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = -7, y = -19, w = 12, h = 15 } },
 							},
 						},
 						{
-							id = "frame_85", duration = 0.15, ox = 13.0, oy = 28.0,
-							tags = {
+							frame = "frame_85", duration = 0.15, x = -13, y = -28,
+							hitboxes = {
 								["weak"] = { rect = { x = -7, y = -17, w = 13, h = 13 } },
 							},
 						},
 						{
-							id = "frame_80", duration = 0.15, ox = 13.0, oy = 30.0,
-							tags = {
+							frame = "frame_80", duration = 0.15, x = -13, y = -30,
+							hitboxes = {
 								["weak"] = { rect = { x = -8, y = -20, w = 11, h = 16 } },
 							},
 						},
@@ -956,40 +956,40 @@ return {
 				},
 				{
 					direction = "South",
-					frames = {
+					keyframes = {
 						{
-							id = "frame_74", duration = 0.15, ox = 10.0, oy = 29.0,
-							tags = {
+							frame = "frame_74", duration = 0.15, x = -10, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -21, w = 10, h = 16 } },
 							},
 						},
 						{
-							id = "frame_75", duration = 0.15, ox = 10.0, oy = 29.0,
-							tags = {
+							frame = "frame_75", duration = 0.15, x = -10, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -5, y = -22, w = 10, h = 18 } },
 							},
 						},
 						{
-							id = "frame_76", duration = 0.15, ox = 11.0, oy = 29.0,
-							tags = {
+							frame = "frame_76", duration = 0.15, x = -11, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -6, y = -20, w = 11, h = 18 } },
 							},
 						},
 						{
-							id = "frame_77", duration = 0.15, ox = 10.0, oy = 29.0,
-							tags = {
+							frame = "frame_77", duration = 0.15, x = -10, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -20, w = 10, h = 17 } },
 							},
 						},
 						{
-							id = "frame_78", duration = 0.15, ox = 10.0, oy = 29.0,
-							tags = {
+							frame = "frame_78", duration = 0.15, x = -10, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -3, y = -19, w = 9, h = 15 } },
 							},
 						},
 						{
-							id = "frame_79", duration = 0.15, ox = 11.0, oy = 29.0,
-							tags = {
+							frame = "frame_79", duration = 0.15, x = -11, y = -29,
+							hitboxes = {
 								["weak"] = { rect = { x = -4, y = -19, w = 9, h = 16 } },
 							},
 						},
