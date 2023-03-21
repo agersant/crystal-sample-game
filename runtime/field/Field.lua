@@ -8,7 +8,6 @@ local Teams = require("field/combat/Teams");
 local DamageNumbersSystem = require("field/hud/damage/DamageNumbersSystem");
 local HUDSystem = require("field/hud/HUDSystem");
 local MapScene = require("mapscene/MapScene");
-local MapSystem = require("mapscene/MapSystem");
 
 local Field = Class("Field", MapScene);
 
@@ -27,8 +26,7 @@ end
 
 Field.init = function(self, mapName, startX, startY, startAngle)
 	Field.super.init(self, mapName);
-
-	local map = self:ecs():system(MapSystem):map();
+	local map = self._map;
 	local mapWidth = map:pixel_width();
 	local mapHeight = map:pixel_height();
 	startX = startX or mapWidth / 2;
@@ -46,10 +44,7 @@ Field.add_systems = function(self)
 	ecs:add_system(DamageNumbersSystem);
 	ecs:add_system(GameOverSystem);
 	ecs:add_system(HUDSystem, self._renderer:getViewport());
-end
-
-Field.getHUD = function(self)
-	return self._ecs:system(HUDSystem):getHUD();
+	ecs:add_context("hud", ecs:system(HUDSystem):getHUD());
 end
 
 return Field;

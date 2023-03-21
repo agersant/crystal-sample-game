@@ -13,7 +13,6 @@ local npc_script = function(self)
 end
 
 NPC.init = function(self)
-	local scene = self:ecs();
 	local sheet = crystal.assets.get("assets/sprite/sahagin.lua");
 	local sprite = self:add_component("Sprite");
 	self:add_component("SpriteAnimator", sprite, sheet);
@@ -25,7 +24,7 @@ NPC.init = function(self)
 	self:enable_collision_with("solid");
 
 	self:add_component("ScriptRunner");
-	self:add_component("Dialog", scene:getHUD():getDialogBox());
+	self:add_component("Dialog", self:context("hud"):getDialogBox());
 	self:add_script(npc_script);
 end
 

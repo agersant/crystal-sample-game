@@ -1,4 +1,3 @@
-local MapSystem = require("mapscene/MapSystem");
 local Field = require("field/Field");
 
 local Teleport = Class("Teleport", crystal.Entity);
@@ -72,7 +71,7 @@ Teleport.init = function(self, options)
 	self._target_x = options.target_x;
 	self._target_y = options.target_y;
 
-	local map = self:ecs():system(MapSystem):map();
+	local map = self:context("map");
 	local mapWidth = map:pixel_width();
 	local mapHeight = map:pixel_height();
 
