@@ -1,6 +1,7 @@
 local Navigation = require("mapscene/behavior/ai/Navigation");
 local DamageUnit = require("field/combat/damage/DamageUnit");
 local FlinchEffect = require("field/combat/hit-reactions/FlinchEffect");
+local Stats = require("field/combat/stats/Stats");
 
 local Sahagin = Class("Sahagin", crystal.Entity);
 
@@ -95,6 +96,7 @@ Sahagin.init = function(self)
 	self:add_component("Navigation");
 
 	self:add_component("CombatData");
+	self:getStat(Stats.MOVEMENT_SPEED):setBaseValue(75);
 	self:add_component("DamageIntent");
 	self:add_component("TargetSelector");
 
