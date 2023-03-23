@@ -1,5 +1,3 @@
-local MathUtils = require("utils/MathUtils");
-
 local Stat = Class("Stat");
 
 Stat.init = function(self, baseValue, minValue, maxValue)
@@ -12,11 +10,11 @@ end
 
 Stat.setBaseValue = function(self, value)
 	if self._min and self._max then
-		self._value = MathUtils.clamp(self._min, value, self._max);
+		self._value = math.clamp(value, self._min, self._max);
 	elseif self._min then
-		self._value = math.max(self._min, value);
+		self._value = math.max(value, self._min);
 	elseif self._max then
-		self._value = math.min(self._max, value);
+		self._value = math.min(value, self._max);
 	else
 		self._value = value;
 	end

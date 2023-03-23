@@ -1,5 +1,3 @@
-local MathUtils = require("utils/MathUtils");
-
 ---@class CardinalDirection : Component
 ---@field private _cardinal_direction number # in radians
 ---@field private dir8_x number
@@ -21,7 +19,7 @@ end
 ---@param dir8_x number
 ---@param dir8_y number
 CardinalDirection.update_cardinal_direction = function(self, rotation)
-	local dir8_x, dir8_y = MathUtils.angleToDir8(rotation);
+	local dir8_x, dir8_y = math.angle_to_cardinal(rotation);
 	assert(dir8_x == 0 or dir8_x == 1 or dir8_x == -1);
 	assert(dir8_y == 0 or dir8_y == 1 or dir8_y == -1);
 	assert(dir8_x ~= 0 or dir8_y ~= 0);
