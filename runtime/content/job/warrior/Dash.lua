@@ -25,13 +25,13 @@ local action = function(self)
 	local dx = math.cos(rotation);
 	local dy = math.sin(rotation);
 
-	self:wait_tween(buildupPeakSpeed, 0, buildupDuration, "outCubic", function(speed)
+	self:wait_tween(buildupPeakSpeed, 0, buildupDuration, math.ease_out_cubic, function(speed)
 		self:set_velocity(-dx * speed, -dy * speed);
 	end);
-	self:wait_tween(peakSpeed, recoveryBeginSpeed, dashDuration, "outQuartic", function(speed)
+	self:wait_tween(peakSpeed, recoveryBeginSpeed, dashDuration, math.ease_out_quartic, function(speed)
 		self:set_velocity(dx * speed, dy * speed);
 	end);
-	self:wait_tween(recoveryBeginSpeed, 0, recoveryDuration, "outQuadratic", function(speed)
+	self:wait_tween(recoveryBeginSpeed, 0, recoveryDuration, math.ease_out_quadratic, function(speed)
 		self:set_velocity(dx * speed, dy * speed);
 	end);
 end

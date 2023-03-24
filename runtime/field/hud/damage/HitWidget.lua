@@ -32,11 +32,11 @@ HitWidget.animate = function(self)
 	return self:script():add_thread(function(self)
 		self:stop_on("animate");
 		self:tween(0, -8 + 16 * math.random(), .6, "linear", widget.setXTranslation, widget);
-		self:wait_tween(0, -15, .2, "outQuadratic", widget.setYTranslation, widget);
-		self:wait_tween(-15, 0, .4, "outBounce", widget.setYTranslation, widget);
+		self:wait_tween(0, -15, .2, math.ease_out_quadratic, widget.setYTranslation, widget);
+		self:wait_tween(-15, 0, .4, math.ease_out_bounce, widget.setYTranslation, widget);
 		self:wait(0.5);
-		local shrink = self:tween(1, 0, 0.2, "inQuadratic", widget.setXScale, widget);
-		local flyOut = self:tween(0, -15, 0.2, "inQuartic", widget.setYTranslation, widget);
+		local shrink = self:tween(1, 0, 0.2, math.ease_in_quadratic, widget.setXScale, widget);
+		local flyOut = self:tween(0, -15, 0.2, math.ease_in_quartic, widget.setYTranslation, widget);
 		self:join(flyOut);
 		self:join(shrink);
 	end);

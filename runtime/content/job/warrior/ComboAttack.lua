@@ -8,7 +8,7 @@ local ComboAttack = Class("ComboAttack", Skill);
 local getComboSwingAction = function(swingCount)
 	return function(self)
 		if swingCount == 1 or swingCount == 3 then
-			self:tween(200, 0, 0.20, "inQuadratic", function(speed)
+			self:tween(200, 0, 0.20, math.ease_in_quadratic, function(speed)
 				self:set_heading(self:rotation());
 				self:set_speed(speed);
 			end);

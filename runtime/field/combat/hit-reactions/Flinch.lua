@@ -20,8 +20,8 @@ local smallFlinch = function(self, direction)
 	local dy = math.sin(direction);
 	self:apply_impulse(300 * dx, 300 * dy);
 
-	self:wait_tween(0, 6, 0.1, "outCubic", self.set_altitude, self);
-	self:wait_tween(6, 0, 0.1, "inCubic", self.set_altitude, self);
+	self:wait_tween(0, 6, 0.1, math.ease_out_cubic, self.set_altitude, self);
+	self:wait_tween(6, 0, 0.1, math.ease_in_cubic, self.set_altitude, self);
 
 	self:wait(0.1);
 end
@@ -47,12 +47,12 @@ local largeFlinch = function(self, direction)
 
 	self:apply_impulse(400 * dx, 400 * dy);
 
-	self:wait_tween(0, 16, 0.15, "outQuadratic", self.set_altitude, self);
-	self:wait_tween(16, 0, 0.15, "inQuadratic", self.set_altitude, self);
-	self:wait_tween(0, 4, 0.1, "outQuadratic", self.set_altitude, self);
-	self:wait_tween(4, 0, 0.1, "inQuadratic", self.set_altitude, self);
-	self:wait_tween(0, 2, 0.08, "outQuadratic", self.set_altitude, self);
-	self:wait_tween(2, 0, 0.08, "inQuadratic", self.set_altitude, self);
+	self:wait_tween(0, 16, 0.15, math.ease_out_quadratic, self.set_altitude, self);
+	self:wait_tween(16, 0, 0.15, math.ease_in_quadratic, self.set_altitude, self);
+	self:wait_tween(0, 4, 0.1, math.ease_out_quadratic, self.set_altitude, self);
+	self:wait_tween(4, 0, 0.1, math.ease_in_quadratic, self.set_altitude, self);
+	self:wait_tween(0, 2, 0.08, math.ease_out_quadratic, self.set_altitude, self);
+	self:wait_tween(2, 0, 0.08, math.ease_in_quadratic, self.set_altitude, self);
 
 	self:wait(0.6);
 end
