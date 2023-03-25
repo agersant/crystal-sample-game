@@ -59,7 +59,7 @@ DialogBox.sayLine = function(self, targetText)
 		end);
 
 		self:setContent("");
-		self:wait_tween(0, #targetText, duration, "linear", function(numGlyphs)
+		self:wait_tween(0, #targetText, duration, math.ease_linear, function(numGlyphs)
 			local numGlyphs = math.floor(numGlyphs);
 			if numGlyphs > 1 then
 				-- TODO: This assumes each glyph is one byte, not UTF-8 aware (so does the duration calculation above)

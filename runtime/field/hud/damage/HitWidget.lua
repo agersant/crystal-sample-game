@@ -31,7 +31,7 @@ HitWidget.animate = function(self)
 	self:script():signal("animate");
 	return self:script():add_thread(function(self)
 		self:stop_on("animate");
-		self:tween(0, -8 + 16 * math.random(), .6, "linear", widget.setXTranslation, widget);
+		self:tween(0, -8 + 16 * math.random(), .6, math.ease_linear, widget.setXTranslation, widget);
 		self:wait_tween(0, -15, .2, math.ease_out_quadratic, widget.setYTranslation, widget);
 		self:wait_tween(-15, 0, .4, math.ease_out_bounce, widget.setYTranslation, widget);
 		self:wait(0.5);
