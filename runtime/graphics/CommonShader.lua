@@ -14,7 +14,7 @@ CommonShader.setHighlightColor = function(self, color)
 	if color then
 		self:setUniform("highlightColor", color);
 	else
-		self:setUniform("highlightColor", Palette.black);
+		self:setUniform("highlightColor", crystal.Color.black);
 	end
 end
 

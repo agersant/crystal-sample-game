@@ -13,7 +13,7 @@ HitWidget.init = function(self, amount)
 
 	local outline = overlay:addChild(Text:new());
 	outline:setFont(FONTS:get("small", 16));
-	outline:setColor(Palette.black);
+	outline:setColor(crystal.Color.black);
 	outline:setTextAlignment("center");
 	outline:setContent(amount);
 	outline:setLeftPadding(1);
