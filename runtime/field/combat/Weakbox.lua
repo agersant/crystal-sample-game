@@ -1,5 +1,3 @@
-local HitEvent = require("field/combat/HitEvent");
-
 local Weakbox = Class("Weakbox", crystal.Sensor);
 
 Weakbox.init = function(self, shape)

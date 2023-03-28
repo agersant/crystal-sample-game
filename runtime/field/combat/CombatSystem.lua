@@ -13,30 +13,6 @@ CombatSystem.init = function(self)
 	self.with_animated_hitbox = self:add_query({ crystal.Body, crystal.AnimatedSprite });
 end
 
-CombatSystem.after_run_scripts = function(self, dt)
-	local entities = self.with_animated_hitbox:entities();
-	for entity in pairs(entities) do
-		if entity:is_valid() then
-			for hitbox in pairs(entity:components("Hitbox")) do
-				entity:remove_component(hitbox);
-			end
-			for weakbox in pairs(entity:components("Weakbox")) do
-				entity:remove_component(weakbox);
-			end
-
-			local animated_sprite = entity:component("AnimatedSprite");
-			local shape = animated_sprite:sprite_hitbox("hit");
-			if shape then
-				entity:add_component("Hitbox", shape);
-			end
-			local shape = animated_sprite:sprite_hitbox("weak");
-			if shape then
-				entity:add_component("Weakbox", shape);
-			end
-		end
-	end
-end
-
 CombatSystem.before_run_scripts = function(self, dt)
 	local entities = self._movementQuery:entities();
 	for entity in pairs(entities) do
@@ -92,6 +68,30 @@ CombatSystem.run_scripts = function(self, dt)
 		if self._scriptRunnerQuery:contains(victim) then
 			local scriptRunner = victim:component(crystal.ScriptRunner);
 			scriptRunner:signal_all_scripts("died");
+		end
+	end
+end
+
+CombatSystem.after_run_scripts = function(self, dt)
+	local entities = self.with_animated_hitbox:entities();
+	for entity in pairs(entities) do
+		if entity:is_valid() then
+			for hitbox in pairs(entity:components("Hitbox")) do
+				entity:remove_component(hitbox);
+			end
+			for weakbox in pairs(entity:components("Weakbox")) do
+				entity:remove_component(weakbox);
+			end
+
+			local animated_sprite = entity:component("AnimatedSprite");
+			local shape = animated_sprite:sprite_hitbox("hit");
+			if shape then
+				entity:add_component("Hitbox", shape);
+			end
+			local shape = animated_sprite:sprite_hitbox("weak");
+			if shape then
+				entity:add_component("Weakbox", shape);
+			end
 		end
 	end
 end
