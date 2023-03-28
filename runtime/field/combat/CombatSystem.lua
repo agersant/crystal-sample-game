@@ -55,14 +55,16 @@ CombatSystem.run_scripts = function(self, dt)
 	for _, hitEvent in ipairs(hitEvents) do
 		local attacker = hitEvent:entity();
 		local victim = hitEvent:getTargetEntity();
-		if Teams:areEnemies(attacker:getTeam(), victim:getTeam()) then
-			local damageIntent = attacker:component(DamageIntent);
-			local attackerCombatData = attacker:component(CombatData);
-			local victimCombatData = victim:component(CombatData);
-			if damageIntent and attackerCombatData and victimCombatData then
-				if not damageIntent:wasEntityHit(victim) then
-					damageIntent:registerHit(victim);
-					attackerCombatData:inflictDamage(damageIntent, victimCombatData);
+		if attacker:component(CombatData) and victim:component(CombatData) then
+			if Teams:areEnemies(attacker:getTeam(), victim:getTeam()) then
+				local damageIntent = attacker:component(DamageIntent);
+				local attackerCombatData = attacker:component(CombatData);
+				local victimCombatData = victim:component(CombatData);
+				if damageIntent and attackerCombatData and victimCombatData then
+					if not damageIntent:wasEntityHit(victim) then
+						damageIntent:registerHit(victim);
+						attackerCombatData:inflictDamage(damageIntent, victimCombatData);
+					end
 				end
 			end
 		end
