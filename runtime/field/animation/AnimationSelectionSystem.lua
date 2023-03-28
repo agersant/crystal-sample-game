@@ -2,15 +2,14 @@ local FlinchAnimation = require("field/animation/FlinchAnimation");
 local IdleAnimation = require("field/animation/IdleAnimation");
 local WalkAnimation = require("field/animation/WalkAnimation");
 local Flinch = require("field/combat/hit-reactions/Flinch");
-local SpriteAnimator = require("mapscene/display/SpriteAnimator");
 
 local AnimationSelectionSystem = Class("AnimationSelectionSystem", crystal.System);
 
 AnimationSelectionSystem.init = function(self)
 	self._cardinals = self:add_query({ "CardinalDirection" });
-	self._idles = self:add_query({ SpriteAnimator, crystal.Body, IdleAnimation });
-	self._walks = self:add_query({ SpriteAnimator, crystal.Body, crystal.Movement, WalkAnimation });
-	self._flinches = self:add_query({ SpriteAnimator, crystal.Body, Flinch, FlinchAnimation });
+	self._idles = self:add_query({ crystal.AnimatedSprite, crystal.Body, IdleAnimation });
+	self._walks = self:add_query({ crystal.AnimatedSprite, crystal.Body, crystal.Movement, WalkAnimation });
+	self._flinches = self:add_query({ crystal.AnimatedSprite, crystal.Body, Flinch, FlinchAnimation });
 end
 
 AnimationSelectionSystem.after_run_scripts = function(self)
@@ -33,9 +32,9 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 			local flinchAnimation = entity:component(FlinchAnimation);
 			local animation = flinchAnimation:getFlinchAnimation();
 			if animation then
-				local animator = entity:component(SpriteAnimator);
+				local animated_sprite = entity:component(crystal.AnimatedSprite);
 				local body = entity:component(crystal.Body);
-				animator:setAnimation(animation, rotations[entity] or body:rotation());
+				animated_sprite:set_animation(animation, rotations[entity] or body:rotation());
 				walkEntities[entity] = nil;
 				idleEntities[entity] = nil;
 			end
@@ -51,9 +50,9 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 			if not actor or actor:isIdle() then
 				local animation = walkAnimation:getWalkAnimation();
 				if animation then
-					local animator = entity:component(SpriteAnimator);
+					local animated_sprite = entity:component(crystal.AnimatedSprite);
 					local body = entity:component(crystal.Body);
-					animator:setAnimation(animation, rotations[entity] or body:rotation());
+					animated_sprite:set_animation(animation, rotations[entity] or body:rotation());
 					idleEntities[entity] = nil;
 				end
 			end
@@ -67,9 +66,9 @@ AnimationSelectionSystem.after_run_scripts = function(self)
 		if not actor or actor:isIdle() then
 			local animation = idleAnimation:getIdleAnimation();
 			if animation then
-				local animator = entity:component(SpriteAnimator);
+				local animated_sprite = entity:component(crystal.AnimatedSprite);
 				local body = entity:component(crystal.Body);
-				animator:setAnimation(animation, rotations[entity] or body:rotation());
+				animated_sprite:set_animation(animation, rotations[entity] or body:rotation());
 			end
 		end
 	end

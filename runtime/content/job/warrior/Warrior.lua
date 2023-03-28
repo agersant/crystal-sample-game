@@ -5,16 +5,15 @@ local hitReactions = function(self)
 		self:wait_for("died");
 		self:stopAction();
 		self:doAction(function(self)
-			self:setAnimation("death");
+			self:set_animation("death");
 			self:hang();
 		end);
 	end
 end
 
 Warrior.init = function(self)
-	local sheet = crystal.assets.get("assets/sprite/duran.lua");
-	local sprite = self:add_component("Sprite");
-	self:add_component("SpriteAnimator", sprite, sheet);
+	self:add_component(crystal.AnimatedSprite, crystal.assets.get("assets/sprite/duran.lua"));
+	self:add_component("YDrawOrder");
 	self:add_component("CommonShader");
 	self:add_component("CardinalDirection");
 	self:add_component("FlinchAnimation", "knockback");

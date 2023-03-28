@@ -11,7 +11,7 @@ local attack = function(self)
 	self:resetMultiHitTracking();
 	local onHitEffects = { FlinchEffect:new() };
 	self:setDamagePayload({ DamageUnit:new(2) }, onHitEffects);
-	self:join(self:playAnimation("attack", self:rotation(), true));
+	self:join(self:play_animation("attack", self:rotation(), true));
 end
 
 local reachAndAttack = function(self)
@@ -64,7 +64,7 @@ local handleDeath = function(self)
 		self:wait_for("died");
 		self:stopAction();
 		self:doAction(function(self)
-			self:setAnimation("smashed");
+			self:set_animation("smashed");
 			self:wait(2);
 			self:despawn();
 			self:wait_frame();
@@ -75,9 +75,8 @@ end
 Sahagin.init = function(self)
 	local scene = self:ecs();
 
-	local sheet = crystal.assets.get("assets/sprite/sahagin.lua");
-	local sprite = self:add_component("Sprite");
-	self:add_component("SpriteAnimator", sprite, sheet);
+	self:add_component(crystal.AnimatedSprite, crystal.assets.get("assets/sprite/sahagin.lua"));
+	self:add_component("YDrawOrder");
 	self:add_component("CommonShader");
 	self:add_component("FlinchAnimation", "knockback");
 	self:add_component("IdleAnimation", "idle");

@@ -1,6 +1,4 @@
-local DrawEffect = require("mapscene/display/DrawEffect");
-
-local Altitude = Class("Altitude", DrawEffect);
+local Altitude = Class("Altitude", crystal.DrawEffect);
 
 Altitude.init = function(self)
 	self.altitude = 0;

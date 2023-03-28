@@ -10,8 +10,7 @@ local CombatSystem = Class("CombatSystem", crystal.System);
 CombatSystem.init = function(self)
 	self._scriptRunnerQuery = self:add_query({ crystal.ScriptRunner });
 	self._movementQuery = self:add_query({ CombatData, crystal.Movement });
-	self.with_animated_hitbox = self:add_query({ crystal.Body, "SpriteAnimator" });
-	self.with_animated_weakbox = self:add_query({ crystal.Body, "SpriteAnimator" });
+	self.with_animated_hitbox = self:add_query({ crystal.Body, crystal.AnimatedSprite });
 end
 
 CombatSystem.after_run_scripts = function(self, dt)
@@ -25,12 +24,12 @@ CombatSystem.after_run_scripts = function(self, dt)
 				entity:remove_component(weakbox);
 			end
 
-			local animator = entity:component("SpriteAnimator");
-			local shape = animator:getTagShape("hit");
+			local animated_sprite = entity:component("AnimatedSprite");
+			local shape = animated_sprite:sprite_hitbox("hit");
 			if shape then
 				entity:add_component("Hitbox", shape);
 			end
-			local shape = animator:getTagShape("weak");
+			local shape = animated_sprite:sprite_hitbox("weak");
 			if shape then
 				entity:add_component("Weakbox", shape);
 			end

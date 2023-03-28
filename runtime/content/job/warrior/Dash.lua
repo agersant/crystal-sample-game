@@ -19,7 +19,7 @@ local action = function(self)
 	local onHitEffects = { FlinchEffect:new(FlinchAmounts.LARGE) };
 	self:setDamagePayload({ DamageUnit:new(10) }, onHitEffects);
 
-	self:setAnimation("dash", self:cardinal_direction());
+	self:set_animation("dash", self:cardinal_direction());
 
 	local rotation = self:rotation();
 	local dx = math.cos(rotation);

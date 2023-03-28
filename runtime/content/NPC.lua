@@ -13,9 +13,8 @@ local npc_script = function(self)
 end
 
 NPC.init = function(self)
-	local sheet = crystal.assets.get("assets/sprite/sahagin.lua");
-	local sprite = self:add_component("Sprite");
-	self:add_component("SpriteAnimator", sprite, sheet);
+	self:add_component(crystal.AnimatedSprite, crystal.assets.get("assets/sprite/sahagin.lua"));
+	self:add_component("YDrawOrder");
 	self:add_component("IdleAnimation", "idle");
 
 	self:add_component(crystal.Body, "static");

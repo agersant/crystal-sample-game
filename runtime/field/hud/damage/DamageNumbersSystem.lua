@@ -1,5 +1,5 @@
 local DamageEvent = require("field/combat/damage/DamageEvent");
-local HitWidgetEntity = require("field/hud/damage/HitWidgetEntity");
+local HitWidget = require("field/hud/damage/HitWidget");
 
 local DamageNumbersSystem = Class("DamageNumbersSystem", crystal.System);
 
@@ -9,7 +9,14 @@ DamageNumbersSystem.after_run_scripts = function(self, dt)
 		assert(victim);
 		local amount = event:getDamage():getTotal();
 		assert(amount);
-		self:ecs():spawn(HitWidgetEntity, victim, amount);
+
+		local widget = HitWidget:new(amount);
+		local component = victim:add_component(crystal.WorldWidget, widget);
+		component:set_draw_order("replace", math.huge);
+		widget:script():add_thread(function(self)
+			self:join(widget:animate());
+			victim:remove_component(component);
+		end);
 	end
 end
 

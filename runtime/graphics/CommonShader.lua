@@ -1,21 +1,19 @@
-local Shader = require("mapscene/display/Shader");
-local Palette = require("graphics/Palette");
-
-local CommonShader = Class("CommonShader", Shader);
+---@class CommonShader : DrawEffect
+local CommonShader = Class("CommonShader", crystal.DrawEffect);
 
 CommonShader.init = function(self)
-	CommonShader.super.init(self, crystal.assets.get("assets/shader/common.glsl"));
-	self:setHighlightColor();
+	self.shader = crystal.assets.get("assets/shader/common.glsl");
+	self.highlight_color = crystal.Color.black;
 end
 
-CommonShader.setHighlightColor = function(self, color)
-	-- TODO use https://love2d.org/wiki/Shader:sendColor
-	-- And enable gamma correct rendering
-	if color then
-		self:setUniform("highlightColor", color);
-	else
-		self:setUniform("highlightColor", crystal.Color.black);
-	end
+---@param color? crystal.Color
+CommonShader.set_highlight_color = function(self, color)
+	self.highlight_color = color or crystal.Color.black;
+end
+
+CommonShader.pre = function(self)
+	self.shader:sendColor("highlightColor", self.highlight_color);
+	love.graphics.setShader(self.shader);
 end
 
 return CommonShader;
