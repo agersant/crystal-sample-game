@@ -13,8 +13,4 @@ Altitude.pre_draw = function(self)
 	love.graphics.translate(0, -self.altitude);
 end
 
-Altitude.post_draw = function(self)
-	love.graphics.translate(0, self.altitude);
-end
-
 return Altitude;
