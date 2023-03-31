@@ -12,7 +12,7 @@ DamageNumbersSystem.after_run_scripts = function(self, dt)
 
 		local widget = HitWidget:new(amount);
 		local component = victim:add_component(crystal.WorldWidget, widget);
-		component:set_draw_order("replace", math.huge);
+		component:set_draw_order_modifier("replace", math.huge);
 		widget:script():add_thread(function(self)
 			self:join(widget:animate());
 			victim:remove_component(component);

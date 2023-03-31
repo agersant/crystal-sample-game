@@ -9,11 +9,11 @@ Altitude.set_altitude = function(self, altitude)
 	self.altitude = altitude;
 end
 
-Altitude.pre = function(self)
+Altitude.pre_draw = function(self)
 	love.graphics.translate(0, -self.altitude);
 end
 
-Altitude.post = function(self)
+Altitude.post_draw = function(self)
 	love.graphics.translate(0, self.altitude);
 end
 
