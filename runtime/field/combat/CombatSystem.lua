@@ -84,11 +84,11 @@ CombatSystem.after_run_scripts = function(self, dt)
 			end
 
 			local animated_sprite = entity:component("AnimatedSprite");
-			local shape = animated_sprite:sprite_hitbox("hit");
+			local shape = animated_sprite:hitbox("hit");
 			if shape then
 				entity:add_component("Hitbox", shape);
 			end
-			local shape = animated_sprite:sprite_hitbox("weak");
+			local shape = animated_sprite:hitbox("weak");
 			if shape then
 				entity:add_component("Weakbox", shape);
 			end
