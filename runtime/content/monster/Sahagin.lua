@@ -1,4 +1,3 @@
-local Navigation = require("mapscene/behavior/ai/Navigation");
 local DamageUnit = require("field/combat/damage/DamageUnit");
 local FlinchEffect = require("field/combat/hit-reactions/FlinchEffect");
 local Stats = require("field/combat/stats/Stats");
@@ -24,11 +23,11 @@ local reachAndAttack = function(self)
 		return;
 	end
 
-	if not self:join(self:navigateToEntity(target, 30)) then
+	if not self:join(self:navigate_to_entity(target, 30)) then
 		return;
 	end
 
-	if not self:join(self:alignWithEntity(target, 2)) then
+	if not self:join(self:align_with_entity(target, 2)) then
 		return;
 	end
 
@@ -92,7 +91,7 @@ Sahagin.init = function(self)
 	self:enable_collision_with("solid");
 
 	self:add_component(crystal.Movement);
-	self:add_component("Navigation");
+	self:add_component(crystal.Navigation);
 
 	self:add_component("CombatData");
 	self:getStat(Stats.MOVEMENT_SPEED):setBaseValue(75);
