@@ -7,6 +7,7 @@ local MovementControlsSystem = require("field/controls/MovementControlsSystem");
 local Teams = require("field/combat/Teams");
 local DamageNumbersSystem = require("field/hud/damage/DamageNumbersSystem");
 local HUDSystem = require("field/hud/HUDSystem");
+local PlayerCamera = require("field/player_camera");
 local MapScene = require("mapscene/MapScene");
 
 local Field = Class("Field", MapScene);
@@ -22,13 +23,14 @@ local spawnParty = function(self, x, y, startAngle)
 	entity:setTeam(Teams.party);
 	entity:set_position(x, y);
 	entity:set_rotation(startAngle);
+
+	self:camera_controller():cut_to(PlayerCamera:new(entity));
 end
 
 Field.init = function(self, mapName, startX, startY, startAngle)
 	Field.super.init(self, mapName);
 	local map = self._map;
-	local mapWidth = map:pixel_width();
-	local mapHeight = map:pixel_height();
+	local mapWidth, mapHeight = map:pixel_size();
 	startX = startX or mapWidth / 2;
 	startY = startY or mapHeight / 2;
 	startAngle = startAngle or 0;
