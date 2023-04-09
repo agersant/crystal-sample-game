@@ -1,4 +1,11 @@
 love.filesystem.setIdentity("crystal-sample-game");
+love.graphics.setDefaultFilter("nearest", "nearest");
+love.window.setTitle("Crystal Sample Game");
+love.window.setMode(1280, 720, {
+	msaa = 8,
+	resizable = true,
+	vsync = false,
+});
 
 crystal.configure({
 	assetsDirectories = { "assets/", "test-data/" },
@@ -6,6 +13,9 @@ crystal.configure({
 	mapDirectory = "assets/map/",
 	mapSceneClass = "Field",
 });
+
+crystal.window.set_native_height(240);
+crystal.window.set_aspect_ratio_limits(4 / 3, 21 / 9);
 
 local Fonts = require("resources/Fonts");
 FONTS = Fonts:new({

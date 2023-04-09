@@ -43,7 +43,7 @@ Field.add_systems = function(self)
 	ecs:add_system(CombatSystem);
 	ecs:add_system(DamageNumbersSystem);
 	ecs:add_system(GameOverSystem);
-	ecs:add_system(HUDSystem, self._renderer:getViewport());
+	ecs:add_system(HUDSystem);
 	ecs:add_context("hud", ecs:system(HUDSystem):getHUD());
 end
 

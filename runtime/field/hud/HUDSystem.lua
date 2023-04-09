@@ -2,9 +2,7 @@ local HUD = require("field/hud/HUD");
 
 local HUDSystem = Class("HUDSystem", crystal.System);
 
-HUDSystem.init = function(self, viewport)
-	assert(viewport);
-	self._viewport = viewport;
+HUDSystem.init = function(self)
 	self._hud = HUD:new();
 end
 
@@ -13,11 +11,11 @@ HUDSystem.getHUD = function(self)
 end
 
 HUDSystem.after_run_scripts = function(self, dt)
-	local width, height = self._viewport:getRenderSize();
+	local width, height = crystal.window.viewport_size();
 	self._hud:updateTree(dt, width, height);
 end
 
-HUDSystem.drawOverlay = function(self)
+HUDSystem.draw_ui = function(self)
 	self._hud:draw();
 end
 
