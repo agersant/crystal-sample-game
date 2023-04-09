@@ -72,8 +72,7 @@ Teleport.init = function(self, options)
 	self._target_y = options.target_y;
 
 	local map = self:context("map");
-	local mapWidth = map:pixel_width();
-	local mapHeight = map:pixel_height();
+	local mapWidth, mapHeight = map:pixel_size();
 
 	local left = math.abs(options.x);
 	local top = math.abs(options.y);
