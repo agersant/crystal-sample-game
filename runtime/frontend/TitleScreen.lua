@@ -1,10 +1,9 @@
 local Overlay = require("ui/bricks/elements/Overlay");
 local Widget = require("ui/bricks/elements/Widget");
 local Text = require("ui/bricks/elements/Text");
-local UIScene = require("ui/UIScene");
 
 local TitleScreenWidget = Class("TitleScreenWidget", Widget);
-local TitleScreen = Class("TitleScreen", UIScene);
+local TitleScreen = Class("TitleScreen", crystal.UIScene);
 
 TitleScreenWidget.init = function(self)
 	TitleScreenWidget.super.init(self);
