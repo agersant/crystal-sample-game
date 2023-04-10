@@ -18,6 +18,7 @@ PlayerCamera.position = function(self)
 	self.x = math.clamp(self.x, player_x - 32, player_x + 32);
 	self.y = math.clamp(self.y, player_y - 32, player_y + 32);
 
+	local map = self.player:context("map");
 	local map_width, map_height = map:pixel_size();
 	local viewport_width, viewport_height = crystal.window.viewport_size();
 
