@@ -8,9 +8,8 @@ local Teams = require("field/combat/Teams");
 local DamageNumbersSystem = require("field/hud/damage/DamageNumbersSystem");
 local HUDSystem = require("field/hud/HUDSystem");
 local PlayerCamera = require("field/player_camera");
-local MapScene = require("mapscene/MapScene");
 
-local Field = Class("Field", MapScene);
+local Field = Class("Field", crystal.World);
 
 local PartyMember = Class("PartyMember", crystal.Component);
 

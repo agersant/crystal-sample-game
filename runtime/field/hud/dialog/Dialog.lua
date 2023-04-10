@@ -50,23 +50,24 @@ end
 
 --#region Tests
 
-local MapScene = require("mapscene/MapScene");
+-- TODO these tests should not use a map from engine test-data
+
 local InputPlayer = require("modules/input/input_player");
 local DialogBox = require("field/hud/dialog/DialogBox");
 
 crystal.test.add("Blocks script during dialog", function()
-	local scene = MapScene:new("test-data/empty.lua");
+	local world = crystal.World:new("test-data/empty.lua");
 	local dialogBox = DialogBox:new();
 	local player = InputPlayer:new(1);
 	player:set_bindings({ q = { "advanceDialog" } });
 
-	local player = scene:spawn(crystal.Entity);
+	local player = world:spawn(crystal.Entity);
 	player:add_component(crystal.InputListener, player);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component(crystal.Movement);
 	player:add_component(crystal.Body);
 
-	local npc = scene:spawn(crystal.Entity);
+	local npc = world:spawn(crystal.Entity);
 	npc:add_component(crystal.ScriptRunner);
 	npc:add_component(Dialog, dialogBox);
 
@@ -79,7 +80,7 @@ crystal.test.add("Blocks script during dialog", function()
 	end);
 
 	local frame = function(self)
-		scene:update(0);
+		world:update(0);
 		dialogBox:update(0);
 		player:flush_events();
 	end
@@ -100,18 +101,18 @@ crystal.test.add("Blocks script during dialog", function()
 end);
 
 crystal.test.add("Can't start concurrent dialogs", function()
-	local scene = MapScene:new("test-data/empty.lua");
+	local world = crystal.World:new("test-data/empty.lua");
 	local dialogBox = DialogBox:new();
 	local player = InputPlayer:new(1);
 	player:set_bindings({ q = { "advanceDialog" } });
 
-	local player = scene:spawn(crystal.Entity);
+	local player = world:spawn(crystal.Entity);
 	player:add_component(crystal.InputListener, player);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component(crystal.Movement);
 	player:add_component(crystal.Body);
 
-	local npc = scene:spawn(crystal.Entity);
+	local npc = world:spawn(crystal.Entity);
 	npc:add_component(crystal.ScriptRunner);
 	npc:add_component(Dialog, dialogBox);
 
@@ -123,7 +124,7 @@ crystal.test.add("Can't start concurrent dialogs", function()
 
 	local player = player:input_player();
 	local frame = function(self)
-		scene:update(0);
+		world:update(0);
 		dialogBox:update(0);
 		player:flush_events();
 	end
@@ -142,18 +143,18 @@ crystal.test.add("Can't start concurrent dialogs", function()
 end);
 
 crystal.test.add("Dialog is cleaned up if entity despawns while speaking", function()
-	local scene = MapScene:new("test-data/empty.lua");
+	local world = crystal.World:new("test-data/empty.lua");
 	local dialogBox = DialogBox:new();
 	local player = InputPlayer:new(1);
 	player:set_bindings({ q = { "advanceDialog" } });
 
-	local player = scene:spawn(crystal.Entity);
+	local player = world:spawn(crystal.Entity);
 	player:add_component(crystal.InputListener, player);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component(crystal.Movement);
 	player:add_component(crystal.Body);
 
-	local npc = scene:spawn(crystal.Entity);
+	local npc = world:spawn(crystal.Entity);
 	npc:add_component(crystal.ScriptRunner);
 	npc:add_component(Dialog, dialogBox);
 
@@ -164,7 +165,7 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 
 	local player = player:input_player();
 	local frame = function(self)
-		scene:update(0);
+		world:update(0);
 		dialogBox:update(0);
 		player:flush_events();
 	end

@@ -90,15 +90,13 @@ end
 
 -- TODO these tests should not use a map from engine test-data
 
-local MapScene = require("mapscene/MapScene");
-
 crystal.test.add("Get Nearest Enemy", function()
-	local scene = MapScene:new("test-data/empty.lua");
+	local world = crystal.World:new("test-data/empty.lua");
 
-	local me = scene:spawn(crystal.Entity);
-	local friend = scene:spawn(crystal.Entity);
-	local enemyA = scene:spawn(crystal.Entity);
-	local enemyB = scene:spawn(crystal.Entity);
+	local me = world:spawn(crystal.Entity);
+	local friend = world:spawn(crystal.Entity);
+	local enemyA = world:spawn(crystal.Entity);
+	local enemyB = world:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friend, enemyA, enemyB }) do
 		entity:add_component(crystal.Body);
 		entity:add_component(CombatData);
@@ -115,18 +113,18 @@ crystal.test.add("Get Nearest Enemy", function()
 	enemyA:set_position(100, 100);
 	enemyB:set_position(15, 5);
 
-	scene:update(0);
+	world:update(0);
 	local nearest = me:getNearestEnemy();
 	assert(nearest == enemyB);
 end);
 
 crystal.test.add("Get Nearest Ally", function()
-	local scene = MapScene:new("test-data/empty.lua");
+	local world = crystal.World:new("test-data/empty.lua");
 
-	local me = scene:spawn(crystal.Entity);
-	local friendA = scene:spawn(crystal.Entity);
-	local friendB = scene:spawn(crystal.Entity);
-	local enemy = scene:spawn(crystal.Entity);
+	local me = world:spawn(crystal.Entity);
+	local friendA = world:spawn(crystal.Entity);
+	local friendB = world:spawn(crystal.Entity);
+	local enemy = world:spawn(crystal.Entity);
 	for _, entity in ipairs({ me, friendA, friendB, enemy }) do
 		entity:add_component(crystal.Body);
 		entity:add_component(CombatData);
@@ -143,7 +141,7 @@ crystal.test.add("Get Nearest Ally", function()
 	friendB:set_position(8, 8);
 	enemy:set_position(15, 5);
 
-	scene:update(0);
+	world:update(0);
 	local nearest = me:getNearestAlly();
 	assert(nearest == friendB);
 

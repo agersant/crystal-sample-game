@@ -30,24 +30,22 @@ end
 
 --#region Tests
 
-local MapScene = require("mapscene/MapScene");
-
 crystal.test.add("Is idle after completing action", function()
-	local scene = MapScene:new("test-data/empty.lua");
+	local world = crystal.World:new("test-data/empty.lua");
 
-	local entity = scene:spawn(crystal.Entity);
+	local entity = world:spawn(crystal.Entity);
 	entity:add_component(crystal.ScriptRunner);
 	entity:add_component(Actor);
 
 	assert(entity:isIdle());
-	scene:update(0);
+	world:update(0);
 	assert(entity:isIdle());
 
 	entity:doAction(function(self)
 		self:wait_for("s1");
 	end);
 	assert(not entity:isIdle());
-	scene:update(0);
+	world:update(0);
 	assert(not entity:isIdle());
 
 	entity:signal_all_scripts("s1");
@@ -55,15 +53,15 @@ crystal.test.add("Is idle after completing action", function()
 end);
 
 crystal.test.add("Can stop action", function()
-	local scene = MapScene:new("test-data/empty.lua");
+	local world = crystal.World:new("test-data/empty.lua");
 
-	local entity = scene:spawn(crystal.Entity);
+	local entity = world:spawn(crystal.Entity);
 	entity:add_component(crystal.ScriptRunner);
 	entity:add_component(Actor);
 
 	local sentinel = false;
 
-	scene:update(0);
+	world:update(0);
 	entity:doAction(function(self)
 		self:wait_for("s1");
 		sentinel = true;
