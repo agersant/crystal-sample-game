@@ -91,7 +91,7 @@ Sahagin.init = function(self)
 	self:enable_collision_with("solid");
 
 	self:add_component(crystal.Movement);
-	self:add_component(crystal.Navigation);
+	self:add_component(crystal.Navigation, self:context("map"));
 
 	self:add_component("CombatData");
 	self:getStat(Stats.MOVEMENT_SPEED):setBaseValue(75);
