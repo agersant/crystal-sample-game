@@ -26,7 +26,7 @@ CombatSystem.before_run_scripts = function(self, dt)
 	end
 end
 
-CombatSystem.run_scripts = function(self, dt)
+CombatSystem.after_run_scripts = function(self, dt)
 	local hitEvents = self:ecs():events(HitEvent);
 	for _, hitEvent in ipairs(hitEvents) do
 		local attacker = hitEvent:entity();
@@ -70,9 +70,7 @@ CombatSystem.run_scripts = function(self, dt)
 			scriptRunner:signal_all_scripts("died");
 		end
 	end
-end
 
-CombatSystem.after_run_scripts = function(self, dt)
 	local entities = self.with_animated_hitbox:entities();
 	for entity in pairs(entities) do
 		if entity:is_valid() then
