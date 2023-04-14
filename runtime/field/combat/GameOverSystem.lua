@@ -15,7 +15,7 @@ GameOverSystem.after_run_scripts = function(self)
 			return;
 		end
 	end
-	ENGINE:loadScene(TitleScreen:new());
+	crystal.scene.replace(TitleScreen:new());
 end
 
 return GameOverSystem;
