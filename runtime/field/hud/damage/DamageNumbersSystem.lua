@@ -3,7 +3,7 @@ local HitWidget = require("field/hud/damage/HitWidget");
 
 local DamageNumbersSystem = Class("DamageNumbersSystem", crystal.System);
 
-DamageNumbersSystem.after_run_scripts = function(self, dt)
+DamageNumbersSystem.update = function(self)
 	for _, event in pairs(self:ecs():events(DamageEvent)) do
 		local victim = event:entity();
 		assert(victim);

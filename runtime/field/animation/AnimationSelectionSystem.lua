@@ -12,7 +12,7 @@ AnimationSelectionSystem.init = function(self)
 	self._flinches = self:add_query({ crystal.AnimatedSprite, crystal.Body, Flinch, FlinchAnimation });
 end
 
-AnimationSelectionSystem.after_run_scripts = function(self)
+AnimationSelectionSystem.select_animations = function(self)
 	local walkEntities = self._walks:entities();
 	local idleEntities = self._idles:entities();
 	local flinchEntities = self._flinches:entities();

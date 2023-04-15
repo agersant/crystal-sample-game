@@ -13,7 +13,7 @@ CombatSystem.init = function(self)
 	self.with_animated_hitbox = self:add_query({ crystal.Body, crystal.AnimatedSprite });
 end
 
-CombatSystem.before_run_scripts = function(self, dt)
+CombatSystem.apply_movement_speed = function(self, dt)
 	local entities = self._movementQuery:entities();
 	for entity in pairs(entities) do
 		local actor = entity:component("Actor");
@@ -26,7 +26,7 @@ CombatSystem.before_run_scripts = function(self, dt)
 	end
 end
 
-CombatSystem.after_run_scripts = function(self, dt)
+CombatSystem.run_combat_logic = function(self, dt)
 	local hitEvents = self:ecs():events(HitEvent);
 	for _, hitEvent in ipairs(hitEvents) do
 		local attacker = hitEvent:entity();

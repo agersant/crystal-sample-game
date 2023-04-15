@@ -88,10 +88,8 @@ end
 
 --#region Tests
 
--- TODO these tests should not use a map from engine test-data
-
 crystal.test.add("Get Nearest Enemy", function()
-	local world = crystal.World:new("test-data/empty.lua");
+	local world = require("field/Field"):new("assets/map/empty_map.lua");
 
 	local me = world:spawn(crystal.Entity);
 	local friend = world:spawn(crystal.Entity);
@@ -119,7 +117,7 @@ crystal.test.add("Get Nearest Enemy", function()
 end);
 
 crystal.test.add("Get Nearest Ally", function()
-	local world = crystal.World:new("test-data/empty.lua");
+	local world = require("field/Field"):new("assets/map/empty_map.lua");
 
 	local me = world:spawn(crystal.Entity);
 	local friendA = world:spawn(crystal.Entity);

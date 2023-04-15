@@ -10,7 +10,7 @@ HUDSystem.getHUD = function(self)
 	return self._hud;
 end
 
-HUDSystem.after_run_scripts = function(self, dt)
+HUDSystem.update = function(self, dt)
 	local width, height = crystal.window.viewport_size();
 	self._hud:updateTree(dt, width, height);
 end

@@ -6,7 +6,7 @@ MovementControlsSystem.init = function(self)
 	self._withMovement = self:add_query({ crystal.InputListener, crystal.Movement, MovementControls });
 end
 
-MovementControlsSystem.before_run_scripts = function(self, dt)
+MovementControlsSystem.apply_movement_controls = function(self, dt)
 	local entities = self._withMovement:entities();
 	for entity in pairs(entities) do
 		local movementControls = entity:component(MovementControls);

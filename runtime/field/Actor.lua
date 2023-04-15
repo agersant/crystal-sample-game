@@ -31,7 +31,7 @@ end
 --#region Tests
 
 crystal.test.add("Is idle after completing action", function()
-	local world = crystal.World:new("test-data/empty.lua");
+	local world = require("field/Field"):new("assets/map/empty_map.lua");
 
 	local entity = world:spawn(crystal.Entity);
 	entity:add_component(crystal.ScriptRunner);
@@ -53,7 +53,7 @@ crystal.test.add("Is idle after completing action", function()
 end);
 
 crystal.test.add("Can stop action", function()
-	local world = crystal.World:new("test-data/empty.lua");
+	local world = require("field/Field"):new("assets/map/empty_map.lua");
 
 	local entity = world:spawn(crystal.Entity);
 	entity:add_component(crystal.ScriptRunner);

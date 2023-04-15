@@ -53,13 +53,13 @@ crystal.test.add("Direction is preserved when switching to adjacent diagonal", f
 	cardinal:update_cardinal_direction(0.25 * math.pi);
 	assert(entity:cardinal_direction() == 0);
 
-	entity:set_rotation(-0.25 * math.pi);
+	entity:update_cardinal_direction(-0.25 * math.pi);
 	assert(entity:cardinal_direction() == 0);
 
-	entity:set_rotation(-0.75 * math.pi);
+	entity:update_cardinal_direction(-0.75 * math.pi);
 	assert(entity:cardinal_direction() == -0.5 * math.pi);
 
-	entity:set_rotation(-0.25 * math.pi);
+	entity:update_cardinal_direction(-0.25 * math.pi);
 	assert(entity:cardinal_direction() == -0.5 * math.pi);
 end);
 
