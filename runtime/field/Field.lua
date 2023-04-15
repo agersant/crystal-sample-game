@@ -32,6 +32,8 @@ Field.init = function(self, map_name, start_x, start_y, start_rotation)
 	self.ecs = crystal.ECS:new();
 
 	self.camera_controller = crystal.CameraController:new();
+	self.ecs:add_context("camera_controller", self.camera_controller);
+
 	self.map = crystal.assets.get(map_name);
 	self.ecs:add_context("map", self.map);
 
@@ -63,6 +65,7 @@ Field.update = function(self, dt)
 	self.physics_system:simulate_physics(dt);
 	self.movement_controls_sytem:apply_movement_controls();
 	self.combat_system:apply_movement_speed();
+	self.camera_controller:update(dt);
 	self.script_system:run_scripts(dt);
 	self.input_system:handle_inputs();
 	self.ai_system:update_ai(dt);
@@ -76,12 +79,13 @@ end
 
 Field.draw = function(self)
 	crystal.window.draw_native(function()
-		love.graphics.translate(self.camera_controller:draw_offset());
-		self.draw_system:draw_entities();
+		self.camera_controller:draw(function()
+			self.draw_system:draw_entities();
+		end);
 	end);
 
 	love.graphics.push();
-	love.graphics.translate(self.camera_controller:draw_offset());
+	love.graphics.translate(self.camera_controller:offset());
 	self.ecs:notify_systems("draw_debug");
 	love.graphics.pop();
 
@@ -90,8 +94,8 @@ Field.draw = function(self)
 	end);
 end
 
-Field.spawn = function(self, ...)
-	return self.ecs:spawn(...);
+Field.spawn = function(self, class, ...)
+	return self.ecs:spawn(class, ...);
 end
 
 ---@param class string
