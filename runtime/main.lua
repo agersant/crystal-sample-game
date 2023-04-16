@@ -10,7 +10,6 @@ love.window.setMode(1280, 720, {
 crystal.configure({
 	assetsDirectories = { "assets/", "test-data/" },
 	physics_categories = { "solid", "trigger", "hitbox", "weakbox" },
-	mapDirectory = "assets/map/",
 	fonts = {
 		small = love.graphics.newFont("assets/font/16bfZX.ttf", 16),
 		body = love.graphics.newFont("assets/font/karen2black.ttf", 16),

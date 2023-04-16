@@ -7,7 +7,7 @@ local doTeleport = function(self, triggeredBy)
 	local teleport_entity = self:entity();
 	local final_x, final_y = teleport_entity._target_x, teleport_entity._target_y;
 
-	local target_map = string.merge_paths(crystal.conf.mapDirectory, teleport_entity._target_map);
+	local target_map = string.merge_paths("assets/map", teleport_entity._target_map);
 	local new_scene = Field:new(target_map, final_x, final_y, self:rotation());
 	crystal.scene.replace(new_scene, crystal.Transition.FadeToBlack:new(), crystal.Transition.FadeFromBlack:new());
 end

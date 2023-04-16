@@ -128,7 +128,7 @@ Field.spawn_near_player = function(self, class)
 end
 
 crystal.cmd.add("loadMap mapName:string", function(map_name)
-	local map_path = string.merge_paths(crystal.conf.mapDirectory, map_name .. ".lua");
+	local map_path = string.merge_paths("assets/map", map_name .. ".lua");
 	local new_scene = Field:new(map_path);
 	crystal.scene.replace(new_scene);
 end);
