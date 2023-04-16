@@ -11,18 +11,15 @@ crystal.configure({
 	assetsDirectories = { "assets/", "test-data/" },
 	physics_categories = { "solid", "trigger", "hitbox", "weakbox" },
 	mapDirectory = "assets/map/",
-	mapSceneClass = "Field",
+	fonts = {
+		small = love.graphics.newFont("assets/font/16bfZX.ttf", 16),
+		body = love.graphics.newFont("assets/font/karen2black.ttf", 16),
+		fat = love.graphics.newFont("assets/font/karenfat.ttf", 16),
+	},
 });
 
 crystal.window.set_native_height(240);
 crystal.window.set_aspect_ratio_limits(4 / 3, 21 / 9);
-
-local Fonts = require("resources/Fonts");
-FONTS = Fonts:new({
-	small = "assets/font/16bfZX.ttf",
-	body = "assets/font/karen2black.ttf",
-	fat = "assets/font/karenfat.ttf",
-});
 
 crystal.input.player(1):set_bindings({
 	-- Keyboard
