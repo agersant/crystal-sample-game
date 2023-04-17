@@ -50,7 +50,6 @@ end
 
 --#region Tests
 
-local InputPlayer = require("modules/input/input_player");
 local DialogBox = require("field/hud/dialog/DialogBox");
 
 crystal.test.add("Blocks script during dialog", function()
