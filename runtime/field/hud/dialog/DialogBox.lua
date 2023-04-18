@@ -12,13 +12,13 @@ DialogBox.init = function(self)
 	self._owner = nil;
 	self._player = nil;
 
-	self:setAlpha(0);
+	self:set_opacity(0);
 
 	local overlay = self:setRoot(Overlay:new());
 
 	local background = overlay:addChild(Image:new());
-	background:setColor(Palette.black6C);
-	background:setAlpha(.8);
+	background:set_color(Palette.black6C);
+	background:set_opacity(.8);
 	background:setHeight(80);
 	background:setHorizontalAlignment("stretch");
 
@@ -38,7 +38,7 @@ DialogBox.open = function(self)
 		return false;
 	end
 	self._active = true;
-	self:setAlpha(1);
+	self:set_opacity(1);
 	return true;
 end
 
@@ -77,7 +77,7 @@ end
 
 DialogBox.close = function(self)
 	self._active = false;
-	self:setAlpha(0);
+	self:set_opacity(0);
 end
 
 return DialogBox;

@@ -20,7 +20,7 @@ end
 
 TitleScreen.update = function(self, dt)
 	local width, height = crystal.window.viewport_size();
-	self.widget:updateTree(dt, width, height);
+	self.widget:update_tree(dt, width, height);
 end
 
 TitleScreen.draw = function(self)
