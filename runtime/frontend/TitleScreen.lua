@@ -8,7 +8,7 @@ local TitleScreen = Class("TitleScreen", crystal.Scene);
 TitleScreenWidget.init = function(self)
 	TitleScreenWidget.super.init(self);
 	local overlay = self:setRoot(Overlay:new());
-	local text = overlay:addChild(Text:new());
+	local text = overlay:add_child(Text:new());
 	text:setFont(crystal.ui.font("fat"));
 	text:setContent("Project Crystal");
 	text:setAlignment("center", "center");

@@ -16,13 +16,13 @@ DialogBox.init = function(self)
 
 	local overlay = self:setRoot(Overlay:new());
 
-	local background = overlay:addChild(Image:new());
+	local background = overlay:add_child(Image:new());
 	background:set_color(Palette.black6C);
 	background:set_opacity(.8);
 	background:setHeight(80);
 	background:setHorizontalAlignment("stretch");
 
-	self._textWidget = overlay:addChild(Text:new());
+	self._textWidget = overlay:add_child(Text:new());
 	self._textWidget:setFont(crystal.ui.font("body"));
 	self._textWidget:setAllPadding(8);
 	self._textWidget:setLeftPadding(80);
