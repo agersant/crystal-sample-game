@@ -1,4 +1,3 @@
-local Image = require("ui/bricks/elements/Image");
 local Overlay = require("ui/bricks/elements/Overlay");
 local Text = require("ui/bricks/elements/Text");
 local Widget = require("ui/bricks/elements/Widget");
@@ -16,10 +15,10 @@ DialogBox.init = function(self)
 
 	local overlay = self:setRoot(Overlay:new());
 
-	local background = overlay:add_child(Image:new());
+	local background = overlay:add_child(crystal.Image:new());
 	background:set_color(Palette.black6C);
 	background:set_opacity(.8);
-	background:setHeight(80);
+	background:set_image_size(1, 80);
 	background:setHorizontalAlignment("stretch");
 
 	self._textWidget = overlay:add_child(Text:new());
