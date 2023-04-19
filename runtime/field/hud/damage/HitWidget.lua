@@ -16,8 +16,8 @@ HitWidget.init = function(self, amount)
 	outline:set_color(crystal.Color.black);
 	outline:setTextAlignment("center");
 	outline:setContent(amount);
-	outline:setLeftPadding(1);
-	outline:setTopPadding(1);
+	outline:set_padding_left(1);
+	outline:set_padding_top(1);
 
 	self._textWidget = overlay:add_child(Text:new());
 	self._textWidget:setFont(crystal.ui.font("small"));

@@ -10,11 +10,9 @@ HUD.init = function(self)
 	local overlay = self:setRoot(Overlay:new());
 
 	self._dialogBox = overlay:add_child(DialogBox:new());
-	self._dialogBox:setLeftPadding(28);
-	self._dialogBox:setRightPadding(28);
-	self._dialogBox:setBottomPadding(8);
-	self._dialogBox:setHorizontalAlignment("stretch");
-	self._dialogBox:setVerticalAlignment("bottom");
+	self._dialogBox:set_padding_x(28);
+	self._dialogBox:set_padding_bottom(8);
+	self._dialogBox:set_alignment("stretch", "bottom");
 end
 
 HUD.getDialogBox = function(self)

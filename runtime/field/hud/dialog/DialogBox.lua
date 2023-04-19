@@ -19,13 +19,12 @@ DialogBox.init = function(self)
 	background:set_color(Palette.black6C);
 	background:set_opacity(.8);
 	background:set_image_size(1, 80);
-	background:setHorizontalAlignment("stretch");
+	background:set_horizontal_alignment("stretch");
 
 	self._textWidget = overlay:add_child(Text:new());
 	self._textWidget:setFont(crystal.ui.font("body"));
-	self._textWidget:setAllPadding(8);
-	self._textWidget:setLeftPadding(80);
-	self._textWidget:setAlignment("stretch", "stretch");
+	self._textWidget:set_padding(8);
+	self._textWidget:set_alignment("stretch", "stretch");
 end
 
 DialogBox.setContent = function(self, text)
