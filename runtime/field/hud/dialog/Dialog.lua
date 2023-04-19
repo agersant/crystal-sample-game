@@ -37,7 +37,7 @@ Dialog.sayLine = function(self, text)
 			dialogBox:fastForward(text);
 		end);
 
-		self:join(dialogBox:sayLine(text));
+		dialogBox:sayLine(text):block();
 		self:wait_for("+advanceDialog");
 	end);
 	return lineDelivery;
@@ -72,7 +72,7 @@ crystal.test.add("Blocks script during dialog", function()
 	npc:add_script(function(self)
 		a = 1;
 		self:beginDialog(player);
-		self:join(self:sayLine("Test dialog."));
+		self:sayLine("Test dialog."):block();
 		a = 2;
 	end);
 
@@ -115,7 +115,7 @@ crystal.test.add("Can't start concurrent dialogs", function()
 
 	npc:add_script(function(self)
 		self:beginDialog(player);
-		self:join(self:sayLine("Test dialog."));
+		self:sayLine("Test dialog."):block();
 		self:endDialog();
 	end);
 
@@ -156,7 +156,7 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 
 	npc:add_script(function(self)
 		self:beginDialog(player);
-		self:join(self:sayLine("Test dialog."));
+		self:sayLine("Test dialog."):block();
 	end);
 
 	local frame = function(self)

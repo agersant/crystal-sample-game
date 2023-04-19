@@ -37,8 +37,8 @@ HitWidget.animate = function(self)
 		self:wait(0.5);
 		local shrink = self:tween(1, 0, 0.2, math.ease_in_quadratic, widget.set_scale_x, widget);
 		local flyOut = self:tween(0, -15, 0.2, math.ease_in_quartic, widget.set_translation_y, widget);
-		self:join(flyOut);
-		self:join(shrink);
+		flyOut:block();
+		shrink:block();
 	end);
 end
 

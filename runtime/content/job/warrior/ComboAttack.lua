@@ -21,7 +21,7 @@ local getComboSwingAction = function(swingCount)
 		local onHitEffects = { FlinchEffect:new(flinchAmount) };
 		self:setDamagePayload({ DamageUnit:new(1) }, onHitEffects);
 
-		self:join(self:play_animation("attack_" .. swingCount, self:cardinal_direction(), true));
+		self:play_animation("attack_" .. swingCount, self:cardinal_direction(), true):block();
 	end
 end
 
@@ -36,7 +36,7 @@ local performCombo = function(self)
 			self:wait_for("+useSkill");
 			didInputNextMove = true;
 		end);
-		if not self:join(swing) or not self:isIdle() then
+		if not swing:block() or not self:isIdle() then
 			break
 		end
 		if not inputWatch:is_dead() then
@@ -51,8 +51,7 @@ end
 local comboAttackScript = function(self)
 	while true do
 		self:wait_for("+useSkill");
-		local comboThread = self:thread(performCombo);
-		local finished = self:join(comboThread);
+		local finished = self:thread(performCombo):block();
 		if not finished then
 			self:stopAction();
 		end

@@ -10,7 +10,7 @@ local attack = function(self)
 	self:resetMultiHitTracking();
 	local onHitEffects = { FlinchEffect:new() };
 	self:setDamagePayload({ DamageUnit:new(2) }, onHitEffects);
-	self:join(self:play_animation("attack", self:rotation(), true));
+	self:play_animation("attack", self:rotation(), true):block();
 end
 
 local reachAndAttack = function(self)
@@ -23,11 +23,11 @@ local reachAndAttack = function(self)
 		return;
 	end
 
-	if not self:join(self:navigate_to_entity(target, 30)) then
+	if not self:navigate_to_entity(target, 30):block() then
 		return;
 	end
 
-	if not self:join(self:align_with_entity(target, 2)) then
+	if not self:align_with_entity(target, 2):block() then
 		return;
 	end
 
@@ -39,7 +39,7 @@ local reachAndAttack = function(self)
 		return;
 	end
 	local actionThread = self:doAction(attack);
-	if self:join(actionThread) then
+	if actionThread:block() then
 		self:wait(.5 + 2 * math.random());
 	end
 end
@@ -52,8 +52,7 @@ local ai = function(self)
 		if self:isDead() then
 			break
 		end
-		local taskThread = self:thread(reachAndAttack);
-		self:join(taskThread);
+		self:thread(reachAndAttack):block();
 		self:wait_frame();
 	end
 end

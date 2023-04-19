@@ -14,7 +14,7 @@ DamageNumbersSystem.update = function(self)
 		local component = victim:add_component(crystal.WorldWidget, widget);
 		component:set_draw_order_modifier("replace", math.huge);
 		widget:script():add_thread(function(self)
-			self:join(widget:animate());
+			widget:animate():block();
 			victim:remove_component(component);
 		end);
 	end

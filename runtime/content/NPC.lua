@@ -4,9 +4,10 @@ local npc_script = function(self)
 	while true do
 		local player = self:wait_for("interact");
 		if self:beginDialog(player) then
-			self:join(self:sayLine(
-				"The harvest this year was meager, there is no spare bread for a stranger like you. If I cannot feed my children, why would I feed you? Extra lines of text to get to line four, come on just a little more."));
-			self:join(self:sayLine("Now leave this town before things go awry, please."));
+			self:sayLine(
+				"The harvest this year was meager, there is no spare bread for a stranger like you. If I cannot feed my children, why would I feed you? Extra lines of text to get to line four, come on just a little more.")
+				:block();
+			self:sayLine("Now leave this town before things go awry, please."):block();
 			self:endDialog();
 		end
 	end
