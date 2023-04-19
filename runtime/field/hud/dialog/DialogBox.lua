@@ -1,4 +1,3 @@
-local Overlay = require("ui/bricks/elements/Overlay");
 local Text = require("ui/bricks/elements/Text");
 local Widget = require("ui/bricks/elements/Widget");
 local Palette = require("graphics/Palette");
@@ -13,7 +12,7 @@ DialogBox.init = function(self)
 
 	self:set_opacity(0);
 
-	local overlay = self:setRoot(Overlay:new());
+	local overlay = self:setRoot(crystal.Overlay:new());
 
 	local background = overlay:add_child(crystal.Image:new());
 	background:set_color(Palette.black6C);

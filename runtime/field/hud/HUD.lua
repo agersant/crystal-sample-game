@@ -1,5 +1,4 @@
 local DialogBox = require("field/hud/dialog/DialogBox");
-local Overlay = require("ui/bricks/elements/Overlay");
 local Widget = require("ui/bricks/elements/Widget");
 
 local HUD = Class("HUD", Widget);
@@ -7,7 +6,7 @@ local HUD = Class("HUD", Widget);
 HUD.init = function(self)
 	HUD.super.init(self);
 
-	local overlay = self:setRoot(Overlay:new());
+	local overlay = self:setRoot(crystal.Overlay:new());
 
 	self._dialogBox = overlay:add_child(DialogBox:new());
 	self._dialogBox:set_padding_x(28);
