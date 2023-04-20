@@ -10,7 +10,7 @@ HitWidget.init = function(self, amount)
 	local overlay = self:setRoot(crystal.Overlay:new());
 
 	local outline = overlay:add_child(crystal.Text:new());
-	outline:setFont(crystal.ui.font("small"));
+	outline:set_font(crystal.ui.font("small"));
 	outline:set_color(crystal.Color.black);
 	outline:set_text_alignment("center");
 	outline:set_text(amount);
@@ -18,7 +18,7 @@ HitWidget.init = function(self, amount)
 	outline:set_padding_top(1);
 
 	self._textWidget = overlay:add_child(crystal.Text:new());
-	self._textWidget:setFont(crystal.ui.font("small"));
+	self._textWidget:set_font(crystal.ui.font("small"));
 	self._textWidget:set_color(Palette.barbadosCherry);
 	self._textWidget:set_text_alignment("center");
 	self._textWidget:set_text(amount);

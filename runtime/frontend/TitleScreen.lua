@@ -7,7 +7,7 @@ TitleScreenWidget.init = function(self)
 	TitleScreenWidget.super.init(self);
 	local overlay = self:setRoot(crystal.Overlay:new());
 	local text = overlay:add_child(crystal.Text:new());
-	text:setFont(crystal.ui.font("fat"));
+	text:set_font(crystal.ui.font("fat"));
 	text:set_text("Project Crystal");
 	text:set_alignment("center", "center");
 end
