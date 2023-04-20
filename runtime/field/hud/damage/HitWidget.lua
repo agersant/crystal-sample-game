@@ -1,4 +1,3 @@
-local Text = require("ui/bricks/elements/Text");
 local Widget = require("ui/bricks/elements/Widget");
 local Palette = require("graphics/Palette");
 
@@ -10,19 +9,19 @@ HitWidget.init = function(self, amount)
 
 	local overlay = self:setRoot(crystal.Overlay:new());
 
-	local outline = overlay:add_child(Text:new());
+	local outline = overlay:add_child(crystal.Text:new());
 	outline:setFont(crystal.ui.font("small"));
 	outline:set_color(crystal.Color.black);
-	outline:setTextAlignment("center");
-	outline:setContent(amount);
+	outline:set_text_alignment("center");
+	outline:set_text(amount);
 	outline:set_padding_left(1);
 	outline:set_padding_top(1);
 
-	self._textWidget = overlay:add_child(Text:new());
+	self._textWidget = overlay:add_child(crystal.Text:new());
 	self._textWidget:setFont(crystal.ui.font("small"));
 	self._textWidget:set_color(Palette.barbadosCherry);
-	self._textWidget:setTextAlignment("center");
-	self._textWidget:setContent(amount);
+	self._textWidget:set_text_alignment("center");
+	self._textWidget:set_text(amount);
 end
 
 HitWidget.animate = function(self)

@@ -1,5 +1,4 @@
 local Widget = require("ui/bricks/elements/Widget");
-local Text = require("ui/bricks/elements/Text");
 
 local TitleScreenWidget = Class("TitleScreenWidget", Widget);
 local TitleScreen = Class("TitleScreen", crystal.Scene);
@@ -7,9 +6,9 @@ local TitleScreen = Class("TitleScreen", crystal.Scene);
 TitleScreenWidget.init = function(self)
 	TitleScreenWidget.super.init(self);
 	local overlay = self:setRoot(crystal.Overlay:new());
-	local text = overlay:add_child(Text:new());
+	local text = overlay:add_child(crystal.Text:new());
 	text:setFont(crystal.ui.font("fat"));
-	text:setContent("Project Crystal");
+	text:set_text("Project Crystal");
 	text:set_alignment("center", "center");
 end
 

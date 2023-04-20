@@ -1,4 +1,3 @@
-local Text = require("ui/bricks/elements/Text");
 local Widget = require("ui/bricks/elements/Widget");
 local Palette = require("graphics/Palette");
 
@@ -20,14 +19,14 @@ DialogBox.init = function(self)
 	background:set_image_size(1, 80);
 	background:set_horizontal_alignment("stretch");
 
-	self._textWidget = overlay:add_child(Text:new());
+	self._textWidget = overlay:add_child(crystal.Text:new());
 	self._textWidget:setFont(crystal.ui.font("body"));
 	self._textWidget:set_padding(8);
 	self._textWidget:set_alignment("stretch", "stretch");
 end
 
-DialogBox.setContent = function(self, text)
-	self._textWidget:setContent(text);
+DialogBox.set_text = function(self, text)
+	self._textWidget:set_text(text);
 end
 
 DialogBox.open = function(self)
@@ -51,18 +50,18 @@ DialogBox.sayLine = function(self, targetText)
 
 		self:thread(function(self)
 			self:wait_for("fastForward");
-			self:setContent(targetText);
+			self:set_text(targetText);
 			self:signal("skipped");
 		end);
 
-		self:setContent("");
+		self:set_text("");
 		self:wait_tween(0, #targetText, duration, math.ease_linear, function(numGlyphs)
 			local numGlyphs = math.floor(numGlyphs);
 			if numGlyphs > 1 then
 				-- TODO: This assumes each glyph is one byte, not UTF-8 aware (so does the duration calculation above)
-				self:setContent(string.sub(targetText, 1, numGlyphs));
+				self:set_text(string.sub(targetText, 1, numGlyphs));
 			else
-				self:setContent("");
+				self:set_text("");
 			end
 		end);
 	end);
