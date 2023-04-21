@@ -1,13 +1,12 @@
-local Widget = require("ui/bricks/elements/Widget");
 local Palette = require("graphics/Palette");
 
-local HitWidget = Class("HitWidget", Widget);
+local HitWidget = Class("HitWidget", crystal.Widget);
 
 HitWidget.init = function(self, amount)
 	HitWidget.super.init(self);
 	assert(amount);
 
-	local overlay = self:setRoot(crystal.Overlay:new());
+	local overlay = self:set_root(crystal.Overlay:new());
 
 	local outline = overlay:add_child(crystal.Text:new());
 	outline:set_font(crystal.ui.font("small"));

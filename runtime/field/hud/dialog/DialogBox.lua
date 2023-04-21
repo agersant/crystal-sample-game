@@ -1,7 +1,6 @@
-local Widget = require("ui/bricks/elements/Widget");
 local Palette = require("graphics/Palette");
 
-local DialogBox = Class("DialogBox", Widget);
+local DialogBox = Class("DialogBox", crystal.Widget);
 
 DialogBox.init = function(self)
 	DialogBox.super.init(self);
@@ -11,7 +10,7 @@ DialogBox.init = function(self)
 
 	self:set_opacity(0);
 
-	local overlay = self:setRoot(crystal.Overlay:new());
+	local overlay = self:set_root(crystal.Overlay:new());
 
 	local background = overlay:add_child(crystal.Image:new());
 	background:set_color(Palette.black6C);
