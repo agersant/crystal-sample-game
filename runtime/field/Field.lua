@@ -67,7 +67,12 @@ Field.update = function(self, dt)
 	self.combat_system:apply_movement_speed();
 	self.camera_controller:update(dt);
 	self.script_system:run_scripts(dt);
-	self.input_system:handle_inputs();
+	local player_index = 1;
+	for _, input in ipairs(crystal.input.player(player_index):events()) do
+		if not self.hud_system:handle_input(player_index, input) then
+			self.input_system:handle_input(player_index, input);
+		end
+	end
 	self.ai_system:update_ai(dt);
 	self.animation_selection_system:select_animations();
 	self.combat_system:run_combat_logic(dt);

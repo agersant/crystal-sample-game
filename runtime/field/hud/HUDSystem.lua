@@ -15,6 +15,10 @@ HUDSystem.update = function(self, dt)
 	self._hud:update_tree(dt, width, height);
 end
 
+HUDSystem.handle_input = function(self, player_index, input)
+	return self._hud:handle_input(player_index, input);
+end
+
 HUDSystem.draw_ui = function(self)
 	self._hud:draw();
 end

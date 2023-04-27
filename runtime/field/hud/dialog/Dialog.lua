@@ -12,12 +12,9 @@ Dialog.beginDialog = function(self, player)
 	local dialog_box = self._dialogBox;
 	if dialog_box:open() then
 		self:script():run_thread(function(self)
-			self:defer(function()
-				dialog_box:close();
-			end);
+			self:defer(function() dialog_box:close(); end);
 			self:defer(player:disable_movement());
 			self:defer(player:add_input_handler(function(input)
-				self:signal(input);
 				return true;
 			end));
 			self:hang();
@@ -30,21 +27,10 @@ end
 Dialog.sayLine = function(self, text)
 	assert(text);
 	local dialogBox = self._dialogBox;
-	local lineDelivery = self:script():run_thread(function(self)
-		self:thread(function(self)
-			self:wait_frame();
-			self:wait_for("+advanceDialog");
-			dialogBox:fastForward(text);
-		end);
-
-		dialogBox:sayLine(text):block();
-		self:wait_for("+advanceDialog");
-	end);
-	return lineDelivery;
+	return dialogBox:sayLine(text);
 end
 
 Dialog.endDialog = function(self)
-	self._dialogBox:close();
 	self:script():stop_all_threads();
 end
 

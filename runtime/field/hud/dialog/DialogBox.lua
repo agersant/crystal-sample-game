@@ -22,6 +22,13 @@ DialogBox.init = function(self)
 	self._textWidget:set_font(crystal.ui.font("body"));
 	self._textWidget:set_padding(8);
 	self._textWidget:set_alignment("stretch", "stretch");
+
+	self:bind_input("+advanceDialog", "always", nil, function()
+		if self._active then
+			self:script():signal("fastForward");
+			return true;
+		end
+	end);
 end
 
 DialogBox.set_text = function(self, text)
@@ -42,32 +49,26 @@ DialogBox.sayLine = function(self, targetText)
 
 	local duration = #targetText / self._textSpeed;
 
-	self:script():signal("sayLine");
+	self:script():stop_all_threads();
 	return self:script():add_thread(function(self)
-		self:stop_on("sayLine");
-		self:stop_on("skipped");
-
 		self:thread(function(self)
-			self:wait_for("fastForward");
-			self:set_text(targetText);
-			self:signal("skipped");
-		end);
-
-		self:set_text("");
-		self:wait_tween(0, #targetText, duration, math.ease_linear, function(numGlyphs)
-			local numGlyphs = math.floor(numGlyphs);
-			if numGlyphs > 1 then
-				-- TODO: This assumes each glyph is one byte, not UTF-8 aware (so does the duration calculation above)
-				self:set_text(string.sub(targetText, 1, numGlyphs));
-			else
-				self:set_text("");
-			end
-		end);
+			self:stop_on("fastForward");
+			self:defer(function()
+				self:set_text(targetText);
+			end);
+			self:set_text("");
+			self:wait_tween(0, #targetText, duration, math.ease_linear, function(numGlyphs)
+				local numGlyphs = math.floor(numGlyphs);
+				if numGlyphs > 1 then
+					-- TODO: This assumes each glyph is one byte, not UTF-8 aware (so does the duration calculation above)
+					self:set_text(string.sub(targetText, 1, numGlyphs));
+				else
+					self:set_text("");
+				end
+			end);
+		end):block();
+		self:wait_for("fastForward");
 	end);
-end
-
-DialogBox.fastForward = function(self)
-	self:script():signal("fastForward");
 end
 
 DialogBox.close = function(self)
