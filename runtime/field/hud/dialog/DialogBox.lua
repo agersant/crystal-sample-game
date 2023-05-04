@@ -19,7 +19,7 @@ DialogBox.init = function(self)
 	background:set_horizontal_alignment("stretch");
 
 	self._textWidget = overlay:add_child(crystal.Text:new());
-	self._textWidget:set_font(crystal.ui.font("body"));
+	self._textWidget:set_font("body");
 	self._textWidget:set_padding(8);
 	self._textWidget:set_alignment("stretch", "stretch");
 

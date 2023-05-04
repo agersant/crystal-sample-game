@@ -10,15 +10,14 @@ love.window.setMode(1280, 720, {
 crystal.configure({
 	assetsDirectories = { "assets/", "test-data/" },
 	physics_categories = { "solid", "trigger", "hitbox", "weakbox" },
-	fonts = {
-		small = love.graphics.newFont("assets/font/16bfZX.ttf", 16),
-		body = love.graphics.newFont("assets/font/karen2black.ttf", 16),
-		fat = love.graphics.newFont("assets/font/karenfat.ttf", 16),
-	},
 });
 
 crystal.window.set_native_height(240);
 crystal.window.set_aspect_ratio_limits(4 / 3, 21 / 9);
+
+crystal.ui.register_font("small", love.graphics.newFont("assets/font/16bfZX.ttf", 16));
+crystal.ui.register_font("body", love.graphics.newFont("assets/font/karen2black.ttf", 16));
+crystal.ui.register_font("fat", love.graphics.newFont("assets/font/karenfat.ttf", 16));
 
 crystal.input.player(1):set_bindings({
 	-- Keyboard
