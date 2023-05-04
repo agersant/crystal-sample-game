@@ -118,14 +118,11 @@ Field.spawn_near_player = function(self, class)
 	local body = entity:component(crystal.Body);
 	if body and player_body then
 		local x, y = player_body:position();
-		print(x, y);
 		local rotation = 2 * math.pi * math.random();
 		local radius = 40;
 		x = x + radius * math.cos(rotation);
 		y = y + radius * math.sin(rotation);
-		print(x, y);
 		x, y = self.map:nearest_navigable_point(x, y);
-		print(x, y);
 		if x and y then
 			body:set_position(x, y);
 		end
