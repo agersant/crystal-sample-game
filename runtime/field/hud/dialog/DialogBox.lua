@@ -12,11 +12,14 @@ DialogBox.init = function(self)
 
 	local overlay = self:set_root(crystal.Overlay:new());
 
-	local background = overlay:add_child(crystal.Image:new());
+	local rc = overlay:add_child(crystal.RoundedCorners:new());
+	rc:set_radius(8);
+	rc:set_horizontal_alignment("stretch");
+
+	local background = rc:set_child(crystal.Image:new());
 	background:set_color(Palette.black6C);
 	background:set_opacity(.8);
 	background:set_image_size(1, 80);
-	background:set_horizontal_alignment("stretch");
 
 	self._textWidget = overlay:add_child(crystal.Text:new());
 	self._textWidget:set_font("body");

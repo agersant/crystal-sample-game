@@ -21,7 +21,7 @@ TitleScreen.update = function(self, dt)
 end
 
 TitleScreen.draw = function(self)
-	self.widget:draw();
+	self.widget:draw_tree();
 end
 
 return TitleScreen;

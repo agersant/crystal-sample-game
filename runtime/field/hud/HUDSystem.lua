@@ -20,7 +20,7 @@ HUDSystem.handle_input = function(self, player_index, input)
 end
 
 HUDSystem.draw_ui = function(self)
-	self._hud:draw();
+	self._hud:draw_tree();
 end
 
 return HUDSystem;
