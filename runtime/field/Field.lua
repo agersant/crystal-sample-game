@@ -145,7 +145,7 @@ end);
 --#region Tests
 
 crystal.test.add("Can spawn entities", function()
-	local scene = Field:new("test-data/empty.lua");
+	local scene = Field:new("assets/map/empty_map.lua");
 	local Piggy = Class:test("Piggy", crystal.Entity);
 	local piggy = scene.ecs:spawn(Piggy);
 	scene:update(0);
@@ -155,7 +155,7 @@ end);
 crystal.test.add("Can use the `spawn` command", function()
 	local TestSpawnCommand = Class("TestSpawnCommand", crystal.Entity);
 
-	local scene = Field:new("test-data/empty.lua");
+	local scene = Field:new("assets/map/empty_map.lua");
 
 	scene:spawn_near_player(TestSpawnCommand);
 	scene:update(0);
