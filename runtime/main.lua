@@ -1,19 +1,13 @@
-love.filesystem.setIdentity("crystal-sample-game");
-love.graphics.setDefaultFilter("nearest", "nearest");
-love.window.setTitle("Crystal Sample Game");
-love.window.setMode(1280, 720, {
-	msaa = 8,
-	resizable = true,
-	vsync = false,
-});
+require("crystal/runtime");
 
-crystal.configure({
-	assetsDirectories = { "assets/", "test-data/" },
-	physics_categories = { "solid", "trigger", "hitbox", "weakbox" },
-});
+love.graphics.setDefaultFilter("nearest", "nearest");
+
+crystal.assets.set_directories({ "assets/", "test-data/" });
 
 crystal.window.set_native_height(240);
 crystal.window.set_aspect_ratio_limits(4 / 3, 21 / 9);
+
+crystal.physics.define_categories({ "solid", "trigger", "hitbox", "weakbox" });
 
 crystal.ui.register_font("small", love.graphics.newFont("assets/font/16bfZX.ttf", 16));
 crystal.ui.register_font("body", love.graphics.newFont("assets/font/karen2black.ttf", 16));
@@ -59,6 +53,10 @@ crystal.input.map_axis_to_actions({
 		uiDown = { pressed_range = { 0.9, 1.0 }, stickiness = 0.7 },
 	},
 });
+
+crystal.player_start = function()
+	crystal.cmd.run("loadscene TitleScreen");
+end
 
 crystal.developer_start = function()
 	crystal.cmd.run("loadmap dev2");

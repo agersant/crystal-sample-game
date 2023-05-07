@@ -1,9 +1,15 @@
-require("crystal/runtime");
+love.conf = function(t)
+	t.console = not love.filesystem.isFused();
+	t.modules.touch = false;
+	t.modules.video = false;
+	t.modules.thread = false;
 
-love.conf = function(options)
-	options.console = not love.filesystem.isFused();
-	options.modules.audio = not crystal.test.is_running_tests();
-	options.modules.touch = false;
-	options.modules.video = false;
-	options.modules.thread = false;
+	t.identity = "crystal-sample-game";
+
+	t.window.title = "Crystal Sample Game";
+	t.window.width = 1280;
+	t.window.height = 720;
+	t.window.resizable = true;
+	t.window.vsync = false;
+	t.window.msaa = 8;
 end
