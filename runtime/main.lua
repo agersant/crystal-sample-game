@@ -21,21 +21,21 @@ crystal.ui.register_font("fat", love.graphics.newFont("assets/font/karenfat.ttf"
 
 crystal.input.player(1):set_bindings({
 	-- Keyboard
-	left = { "moveLeft", "uiLeft" },
-	right = { "moveRight", "uiRight" },
-	up = { "moveUp", "uiUp" },
-	down = { "moveDown", "uiDown" },
+	left = { "moveLeft", "ui_left" },
+	right = { "moveRight", "ui_right" },
+	up = { "moveUp", "ui_up" },
+	down = { "moveDown", "ui_down" },
 	q = { "interact", "useSkill1", "advanceDialog" },
 	w = { "useSkill2" },
 	e = { "useSkill3" },
 	r = { "useSkill4" },
 	-- Gamepad
-	dpleft = { "moveLeft", "uiLeft" },
-	dpright = { "moveRight", "uiRight" },
-	dpup = { "moveUp", "uiUp" },
-	dpdown = { "moveDown", "uiDown" },
-	leftx = { "moveX", "uiX" },
-	lefty = { "moveY", "uiY" },
+	dpleft = { "moveLeft", "ui_left" },
+	dpright = { "moveRight", "ui_right" },
+	dpup = { "moveUp", "ui_up" },
+	dpdown = { "moveDown", "ui_down" },
+	leftx = { "moveX", "ui_x" },
+	lefty = { "moveY", "ui_y" },
 	btna = { "interact", "useSkill1", "advanceDialog" },
 	btnx = { "useSkill2" },
 	btnb = { "useSkill3" },
@@ -43,18 +43,18 @@ crystal.input.player(1):set_bindings({
 });
 
 crystal.input.configure_autorepeat({
-	uiLeft = { initial_delay = 0.5, period = 0.1 },
-	uiRight = { initial_delay = 0.5, period = 0.1 },
-	uiUp = { initial_delay = 0.5, period = 0.1 },
-	uiDown = { initial_delay = 0.5, period = 0.1 },
+	ui_left = { initial_delay = 0.5, period = 0.1 },
+	ui_right = { initial_delay = 0.5, period = 0.1 },
+	ui_up = { initial_delay = 0.5, period = 0.1 },
+	ui_down = { initial_delay = 0.5, period = 0.1 },
 });
 
 crystal.input.map_axis_to_actions({
-	uiX = {
+	ui_x = {
 		uiLeft = { pressed_range = { -1.0, -0.9 }, stickiness = 0.7 },
 		uiRight = { pressed_range = { 0.9, 1.0 }, stickiness = 0.7 },
 	},
-	uiY = {
+	ui_y = {
 		uiUp = { pressed_range = { -1.0, -0.9 }, stickiness = 0.7 },
 		uiDown = { pressed_range = { 0.9, 1.0 }, stickiness = 0.7 },
 	},
