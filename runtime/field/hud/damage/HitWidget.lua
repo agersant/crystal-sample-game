@@ -6,7 +6,7 @@ HitWidget.init = function(self, amount)
 	HitWidget.super.init(self);
 	assert(amount);
 
-	local overlay = self:set_root(crystal.Overlay:new());
+	local overlay = self:set_child(crystal.Overlay:new());
 
 	local outline = overlay:add_child(crystal.Text:new());
 	outline:set_font("small");

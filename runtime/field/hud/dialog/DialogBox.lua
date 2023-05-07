@@ -10,7 +10,7 @@ DialogBox.init = function(self)
 
 	self:set_opacity(0);
 
-	local overlay = self:set_root(crystal.Overlay:new());
+	local overlay = self:set_child(crystal.Overlay:new());
 
 	local rc = overlay:add_child(crystal.RoundedCorners:new());
 	rc:set_radius(8);
