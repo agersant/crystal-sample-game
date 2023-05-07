@@ -41,11 +41,9 @@ local DialogBox = require("field/hud/dialog/DialogBox");
 crystal.test.add("Blocks script during dialog", function()
 	local world = require("field/Field"):new("assets/map/empty_map.lua");
 	local dialogBox = DialogBox:new();
-	local input_player = crystal.input.player(1);
-	input_player:set_bindings({ q = { "advanceDialog" } });
 
 	local player = world:spawn(crystal.Entity);
-	player:add_component(crystal.InputListener, input_player);
+	player:add_component(crystal.InputListener, 1);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component(crystal.Movement);
 	player:add_component(crystal.Body);
@@ -65,19 +63,18 @@ crystal.test.add("Blocks script during dialog", function()
 	local frame = function(self)
 		world:update(0);
 		dialogBox:update(0);
-		input_player:flush_events();
 	end
 
 	frame();
 	assert(a == 1);
 
-	input_player:key_pressed("q");
+	dialogBox:handle_input(1, "+advanceDialog");
 	frame();
-	input_player:key_released("q");
+	dialogBox:handle_input(1, "+advanceDialog");
 	frame();
-	input_player:key_pressed("q");
+	dialogBox:handle_input(1, "+advanceDialog");
 	frame();
-	input_player:key_released("q");
+	dialogBox:handle_input(1, "+advanceDialog");
 	frame();
 
 	assert(a == 2);
@@ -86,11 +83,9 @@ end);
 crystal.test.add("Can't start concurrent dialogs", function()
 	local world = require("field/Field"):new("assets/map/empty_map.lua");
 	local dialogBox = DialogBox:new();
-	local input_player = crystal.input.player(1);
-	input_player:set_bindings({ q = { "advanceDialog" } });
 
 	local player = world:spawn(crystal.Entity);
-	player:add_component(crystal.InputListener, input_player);
+	player:add_component(crystal.InputListener, 1);
 	player:add_component(crystal.ScriptRunner);
 	player:add_component(crystal.Movement);
 	player:add_component(crystal.Body);
@@ -108,18 +103,17 @@ crystal.test.add("Can't start concurrent dialogs", function()
 	local frame = function(self)
 		world:update(0);
 		dialogBox:update(0);
-		input_player:flush_events();
 	end
 
 	frame();
 	assert(not Dialog:new(dialogBox):beginDialog(player));
-	input_player:key_pressed("q");
+	dialogBox:handle_input(1, "+advanceDialog");
 	frame();
-	input_player:key_released("q");
+	dialogBox:handle_input(1, "+advanceDialog");
 	frame();
-	input_player:key_pressed("q");
+	dialogBox:handle_input(1, "+advanceDialog");
 	frame();
-	input_player:key_released("q");
+	dialogBox:handle_input(1, "+advanceDialog");
 	frame();
 	assert(Dialog:new(dialogBox):beginDialog(player));
 end);
@@ -131,7 +125,7 @@ crystal.test.add("Dialog is cleaned up if entity despawns while speaking", funct
 	input_player:set_bindings({ q = { "advanceDialog" } });
 
 	local player = world:spawn(crystal.Entity);
-	player:add_component(crystal.InputListener, input_player);
+	player:add_component(crystal.InputListener, input_player:index());
 	player:add_component(crystal.ScriptRunner);
 	player:add_component(crystal.Movement);
 	player:add_component(crystal.Body);
