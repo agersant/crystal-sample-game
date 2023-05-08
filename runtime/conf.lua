@@ -9,6 +9,6 @@ love.conf = function(t)
 	t.window.width = 1280;
 	t.window.height = 720;
 	t.window.resizable = true;
-	t.window.vsync = false;
+	t.window.vsync = true;
 	t.window.msaa = 8;
 end
