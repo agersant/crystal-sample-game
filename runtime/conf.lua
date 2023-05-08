@@ -2,7 +2,6 @@ love.conf = function(t)
 	t.console = not love.filesystem.isFused();
 	t.modules.touch = false;
 	t.modules.video = false;
-	t.modules.thread = false;
 
 	t.identity = "crystal-sample-game";
 
