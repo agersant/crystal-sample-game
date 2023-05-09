@@ -1,4 +1,4 @@
-require("crystal/runtime");
+require("crystal");
 
 love.graphics.setDefaultFilter("nearest", "nearest");
 
