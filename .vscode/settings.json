@@ -1,4 +1,4 @@
 {
-  "Lua.runtime.special": [],
+  "Lua.runtime.special": {},
   "Lua.workspace.library": ["${3rd}/love2d/library"]
 }
