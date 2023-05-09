@@ -1,4 +1,7 @@
 {
   "Lua.runtime.special": {},
-  "Lua.workspace.library": ["${3rd}/love2d/library"]
+  "Lua.workspace.library": ["${3rd}/love2d/library"],
+  "search.exclude": {
+    "game/crystal/**": true
+  }
 }
