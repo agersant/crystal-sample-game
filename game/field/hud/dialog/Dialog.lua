@@ -12,6 +12,7 @@ Dialog.beginDialog = function(self, player)
 	local dialog_box = self._dialogBox;
 	if dialog_box:open() then
 		self:script():run_thread(function(self)
+			player:set_velocity(0, 0);
 			self:defer(function() dialog_box:close(); end);
 			self:defer(player:disable_movement());
 			self:defer(player:add_input_handler(function(input)
