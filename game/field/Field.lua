@@ -63,16 +63,11 @@ end
 Field.update = function(self, dt)
 	self.ecs:update();
 	self.physics_system:simulate_physics(dt);
+	self.input_system:update_mouse_target();
 	self.movement_controls_sytem:apply_movement_controls();
 	self.combat_system:apply_movement_speed();
 	self.camera_controller:update(dt);
 	self.script_system:run_scripts(dt);
-	local player_index = 1;
-	for _, input in ipairs(crystal.input.player(player_index):events()) do
-		if not self.hud_system:handle_input(player_index, input) then
-			self.input_system:handle_input(player_index, input);
-		end
-	end
 	self.ai_system:update_ai(dt);
 	self.animation_selection_system:select_animations();
 	self.combat_system:run_combat_logic(dt);
@@ -97,6 +92,30 @@ Field.draw = function(self)
 	crystal.window.draw_native(function()
 		self.hud_system:draw_ui();
 	end);
+end
+
+Field.mouse_moved = function(self, x, y, dx, dy, is_touch)
+	self.input_system:update_mouse_target();
+end
+
+Field.mouse_pressed = function(self, x, y, button, is_touch, presses)
+	self.input_system:mouse_pressed(x, y, button, is_touch, presses);
+end
+
+Field.mouse_released = function(self, x, y, button, is_touch, presses)
+	self.input_system:mouse_released(x, y, button, is_touch, presses);
+end
+
+Field.action_pressed = function(self, player_index, action)
+	if not self.hud_system:action_pressed(player_index, action) then
+		self.input_system:action_pressed(player_index, action);
+	end
+end
+
+Field.action_released = function(self, player_index, action)
+	if not self.hud_system:action_released(player_index, action) then
+		self.input_system:action_released(player_index, action);
+	end
 end
 
 Field.spawn = function(self, class, ...)

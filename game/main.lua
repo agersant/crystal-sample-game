@@ -13,7 +13,7 @@ crystal.ui.register_font("small", love.graphics.newFont("assets/font/16bfZX.ttf"
 crystal.ui.register_font("body", love.graphics.newFont("assets/font/karen2black.ttf", 16));
 crystal.ui.register_font("fat", love.graphics.newFont("assets/font/karenfat.ttf", 16));
 
-crystal.input.player(1):set_bindings({
+crystal.input.set_bindings(1, {
 	-- Keyboard
 	left = { "moveLeft", "ui_left" },
 	right = { "moveRight", "ui_right" },

@@ -11,11 +11,11 @@ MovementControlsSystem.apply_movement_controls = function(self, dt)
 	for entity in pairs(entities) do
 		local movementControls = entity:component(MovementControls);
 
-		local inputPlayer = entity:input_player();
-		local left = inputPlayer:is_action_active("moveLeft");
-		local right = inputPlayer:is_action_active("moveRight");
-		local up = inputPlayer:is_action_active("moveUp");
-		local down = inputPlayer:is_action_active("moveDown");
+		local player_index = entity:player_index();
+		local left = crystal.input.is_action_down(player_index, "moveLeft");
+		local right = crystal.input.is_action_down(player_index, "moveRight");
+		local up = crystal.input.is_action_down(player_index, "moveUp");
+		local down = crystal.input.is_action_down(player_index, "moveDown");
 
 		local x, y;
 		if left or right or up or down then
@@ -33,8 +33,8 @@ MovementControlsSystem.apply_movement_controls = function(self, dt)
 			end
 			assert(y);
 		else
-			local stick_x = inputPlayer:axis_action_value("moveX");
-			local stick_y = inputPlayer:axis_action_value("moveY");
+			local stick_x = crystal.input.axis_action_value(player_index, "moveX");
+			local stick_y = crystal.input.axis_action_value(player_index, "moveY");
 			if math.abs(stick_x) < 0.2 then
 				stick_x = 0;
 			end
