@@ -20,7 +20,7 @@ HUDSystem.action_pressed = function(self, player_index, action)
 end
 
 HUDSystem.action_released = function(self, player_index, action)
-	return self._hud:action_pressed(player_index, action);
+	return self._hud:action_released(player_index, action);
 end
 
 HUDSystem.draw_ui = function(self)
