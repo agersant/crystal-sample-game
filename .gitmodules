@@ -1,3 +1,0 @@
-[submodule "crystal"]
-	path = crystal
-	url = https://github.com/agersant/crystal.git
