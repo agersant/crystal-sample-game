@@ -39,10 +39,14 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
             git-subrepo
+            just
             love
             pkg-config
             rustToolchain
           ];
+          env = {
+            LUA_CPATH = "./crystal/lib/target/release/lib?.so";
+          };
         };
       });
     };
