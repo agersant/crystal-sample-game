@@ -10,3 +10,7 @@ crystal-test: build
 [working-directory: 'crystal/lib']
 build:
     cargo build --release
+
+upstream:
+    git subrepo pull crystal
+    git subrepo push crystal
