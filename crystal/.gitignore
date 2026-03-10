@@ -1,0 +1,9 @@
+luacov.report.out
+luacov.stats.out
+*.tiled-session
+
+.direnv/
+bin/
+release/
+lib/target/
+test-output/

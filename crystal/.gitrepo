@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/agersant/crystal
+	branch = main
+	commit = 46ecbe0c8af20f614757837096ced706290d8f6c
+	parent = fc46f6129ccfc3d656e798770854058752c0b86b
+	method = merge
+	cmdver = 0.4.9
