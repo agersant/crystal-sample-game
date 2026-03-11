@@ -17,10 +17,16 @@ upstream:
     git subrepo pull crystal
     git subrepo push crystal
 
+[linux]
+setup-love:
+    # Included in nix development shell
+
 [windows]
 setup-love:
     #!powershell
     $ErrorActionPreference = 'Stop'
+    Import-Module Microsoft.PowerShell.Utility
+    
     if (Test-Path love) {
         Remove-Item -Path love -Recurse
     }
@@ -38,9 +44,6 @@ setup-love:
     $regexAddPath = [regex]::Escape($love)
     $arrPath = $env:Path -split ';' | Where-Object {$_ -notMatch "^$regexAddPath\\?"}
     $env:Path = ($arrPath + $addPath) -join ';'
-
-[linux]
-setup-love:
 
 [windows]
 package: setup-love build
