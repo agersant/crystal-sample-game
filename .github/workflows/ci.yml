@@ -41,7 +41,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: taiki-e/install-action@just
       - run: just package
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v6
         with:
-          name: packaged-game
+          name: crystal-sample-game-windows
           path: packaged
