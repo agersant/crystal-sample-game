@@ -1,5 +1,12 @@
 set windows-shell := ["pwsh", "-NoLogo", "-NoProfileLoadTime", "-Command"]
 
+path := if os() == 'windows' {
+  env('PATH') + ";" + justfile_directory() + "/love"
+} else {
+  env('PATH')
+}
+export PATH := path
+
 export LUA_CPATH := "./crystal/lib/target/release/lib?.so;./crystal/lib/target/release/?.dll"
 
 run: setup-love build
@@ -42,11 +49,8 @@ setup-love:
     Get-ChildItem -Path $love -Recurse -File | Move-Item -Destination $love
     Get-ChildItem -Path $love -Recurse -Directory | Remove-Item
 
-    $regexAddPath = [regex]::Escape($love)
-    $arrPath = $env:Path -split ';' | Where-Object {$_ -notMatch "^$regexAddPath\\?"}
-    $env:Path = ($arrPath + $addPath) -join ';'
-
 [windows]
+[parallel]
 package: setup-love build
     #!pwsh
     $ErrorActionPreference = 'Stop'
