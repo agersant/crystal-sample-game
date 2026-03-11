@@ -25,19 +25,17 @@ setup-love:
 setup-love:
     #!powershell
     $ErrorActionPreference = 'Stop'
-    Import-Module Microsoft.PowerShell.Utility
-    
+
     if (Test-Path love) {
         Remove-Item -Path love -Recurse
     }
     New-Item -Type dir -Force love | Out-Null
     $love = Resolve-Path love
 
-    $zip = New-TemporaryFile
     $ProgressPreference = 'SilentlyContinue'
-    Invoke-WebRequest -Uri "https://github.com/love2d/love/releases/download/11.5/love-11.5-win64.zip" -OutFile $zip
-    Expand-Archive $zip -DestinationPath $love -Force
-    Remove-Item $zip
+    Invoke-WebRequest -Uri "https://github.com/love2d/love/releases/download/11.5/love-11.5-win64.zip" -OutFile love.zip
+    Expand-Archive love.zip -DestinationPath $love -Force
+    Remove-Item love.zip
     Get-ChildItem -Path $love -Recurse -File | Move-Item -Destination $love
     Get-ChildItem -Path $love -Recurse -Directory | Remove-Item
 
