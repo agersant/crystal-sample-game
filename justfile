@@ -26,6 +26,7 @@ setup-love:
 
 [windows]
 setup-love:
+    #!pwsh
     $ErrorActionPreference = 'Stop'
     if (Test-Path love) {
         Remove-Item -Path love -Recurse
@@ -47,6 +48,7 @@ setup-love:
 
 [windows]
 package: setup-love build
+    #!pwsh
     $ErrorActionPreference = 'Stop'
     if (Test-Path packaged) {
         Remove-Item -Path packaged -Recurse
