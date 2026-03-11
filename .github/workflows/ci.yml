@@ -24,7 +24,7 @@ jobs:
         with:
           pyvista: false
       - uses: taiki-e/install-action@just
-      - name: just test
+      - run: just test
 
   package:
     name: Package
@@ -41,7 +41,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: taiki-e/install-action@just
       - run: just package
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v3
         with:
           name: packaged-game
           path: packaged
