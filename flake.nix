@@ -40,6 +40,7 @@
           packages = with pkgs; [
             git-subrepo
             just
+            just-lsp
             love
             pkg-config
             rustToolchain

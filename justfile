@@ -19,7 +19,8 @@ upstream:
 
 [linux]
 setup-love:
-    # Included in nix development shell
+    @# Included in nix development shell
+    which love
 
 [windows]
 setup-love:
