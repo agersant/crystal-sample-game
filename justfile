@@ -9,14 +9,16 @@ export PATH := path
 
 export LUA_CPATH := "./crystal/lib/target/release/lib?.so;./crystal/lib/target/release/?.dll"
 
+lovec := if os() == 'windows' { "lovec" } else { "love" }
+
 run: setup-love build
     love game
 
 test: setup-love build
-    love game /test
+    {{lovec}} game /test
 
 test-crystal: setup-love build
-    love crystal/runtime /test
+    {{lovec}} crystal/runtime /test
 
 [working-directory: 'crystal/lib']
 build:
