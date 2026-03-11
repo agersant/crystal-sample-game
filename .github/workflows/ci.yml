@@ -17,7 +17,7 @@ jobs:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            lib/target
+            crystal/lib/target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Setup headless display
         uses: pyvista/setup-headless-display-action@v3
@@ -37,7 +37,7 @@ jobs:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            lib/target
+            crystal/lib/target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - uses: taiki-e/install-action@just
       - run: just package
