@@ -20,6 +20,7 @@ upstream:
 [windows]
 setup-love:
     #!powershell
+    $ErrorActionPreference = 'Stop'
     if (Test-Path love) {
         Remove-Item -Path love -Recurse
     }
@@ -44,6 +45,7 @@ setup-love:
 [windows]
 package: setup-love build
     #!powershell
+    $ErrorActionPreference = 'Stop'
     if (Test-Path packaged) {
         Remove-Item -Path packaged -Recurse
     }
