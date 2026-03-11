@@ -44,9 +44,6 @@
             pkg-config
             rustToolchain
           ];
-          env = {
-            LUA_CPATH = "./crystal/lib/target/release/lib?.so";
-          };
         };
       });
     };
