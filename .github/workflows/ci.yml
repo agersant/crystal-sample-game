@@ -43,5 +43,5 @@ jobs:
       - run: just package
       - uses: actions/upload-artifact@v6
         with:
-          name: crystal-sample-game-windows
+          name: crystal-sample-game-windows.zip
           path: packaged
