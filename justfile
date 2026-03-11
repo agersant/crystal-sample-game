@@ -56,5 +56,5 @@ package: setup-love build
     Compress-Archive -Path game/* -DestinationPath packaged/game.love
     Get-Content -AsByteStream love\love.exe, packaged\game.love | Set-Content -AsByteStream packaged\crystal-sample-game.exe
     Remove-Item -Path packaged/game.love
-    Copy-Item love/*.dll, love/license.txt, lib/target/release/*.dll packaged
+    Copy-Item love/*.dll, love/license.txt, crystal/lib/target/release/*.dll packaged
 
