@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/agersant/crystal
 	branch = main
-	commit = d59471daa2d6ceb3e2f2f5c9dbc0be503abe9466
-	parent = 5b3ac5c59aff13684982a6e9e79f9a229d9d1be3
+	commit = 4390923a3a9bc33214134cb1bf78faf674d84ec1
+	parent = df6f532c7ab4a837e77c311d887660b2500bb313
 	method = merge
 	cmdver = 0.4.9
