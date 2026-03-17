@@ -7,6 +7,7 @@ crystal.assets.load("assets/", "preload_whole_game")
 
 crystal.window.set_native_height(240);
 crystal.window.set_aspect_ratio_limits(4 / 3, 21 / 9);
+crystal.window.set_scaling_mode("pixel_perfect");
 
 crystal.input.set_bindings(1, {
 	-- Keyboard
@@ -46,5 +47,5 @@ crystal.player_start = function()
 end
 
 crystal.developer_start = function()
-	crystal.cmd.run("loadscene TitleScreen");
+	crystal.cmd.run("loadscene Arena");
 end
