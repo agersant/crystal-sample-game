@@ -3,6 +3,7 @@ require("crystal");
 love.graphics.setDefaultFilter("nearest", "nearest");
 
 crystal.assets.set_directories({ "assets/", "test-data/" });
+crystal.assets.load("assets/", "preload_whole_game")
 
 crystal.window.set_native_height(240);
 crystal.window.set_aspect_ratio_limits(4 / 3, 21 / 9);
