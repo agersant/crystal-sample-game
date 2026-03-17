@@ -3,7 +3,7 @@ local Player = Class("Player", crystal.Entity);
 Player.init = function(self)
     self:add_component(crystal.Body);
 	self:add_component(crystal.Collider, love.physics.newCircleShape(6));
-	self:set_categories("solid");
+	self:set_categories("player");
 
     self:add_component(crystal.Sprite);
     local texture = crystal.assets.get("assets/player.png");

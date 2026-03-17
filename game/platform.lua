@@ -5,7 +5,7 @@ Platform.init = function(self)
     self:add_component(crystal.Body, "static");
 	self:add_component(crystal.Collider, love.physics.newChainShape(true, -hs, -hs, hs, -hs, hs, hs, -hs, hs));
 	self:set_categories("level");
-    self:enable_collision_with("solid");
+    self:enable_collision_with("player");
 
     self:add_component(crystal.Sprite);
     local texture = crystal.assets.get("assets/platform.png");
