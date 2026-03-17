@@ -6,6 +6,7 @@ Arena.init = function(self)
 
     self.ecs = crystal.ECS:new();
     self.physics_system = self.ecs:add_system(crystal.PhysicsSystem);
+    self.draw_system = self.ecs:add_system(crystal.DrawSystem);
 
     self.player = self.ecs:spawn("Player");
 end
@@ -14,6 +15,7 @@ Arena.update = function(self, dt)
     self.ecs:update();
     self.physics_system:update(dt);
     self.camera_controller:update(dt);
+    self.draw_system:update_drawables(dt);
 end
 
 Arena.draw = function(self)
@@ -21,6 +23,7 @@ Arena.draw = function(self)
     local platform_image = crystal.assets.get("assets/platform.png");
     self.camera_controller:draw(function()
         love.graphics.draw(platform_image, -platform_image:getWidth()/2, -platform_image:getHeight()/2);
+        self.draw_system:draw_entities();
     end);
 
     love.graphics.push();
