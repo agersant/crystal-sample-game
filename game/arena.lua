@@ -6,6 +6,7 @@ Arena.init = function(self)
 
     self.ecs = crystal.ECS:new();
     self.physics_system = self.ecs:add_system(crystal.PhysicsSystem);
+    self.script_system = self.ecs:add_system(crystal.ScriptSystem);
     self.movement_controls_system = self.ecs:add_system("MovementControlsSystem");
     self.draw_system = self.ecs:add_system(crystal.DrawSystem);
 
@@ -18,6 +19,7 @@ Arena.update = function(self, dt)
     self.physics_system:simulate_physics(dt);
     self.movement_controls_system:apply_movement_controls(dt);
     self.camera_controller:update(dt);
+    self.script_system:run_scripts(dt);
     self.draw_system:update_drawables(dt);
 end
 

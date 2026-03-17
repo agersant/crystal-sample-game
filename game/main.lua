@@ -9,7 +9,7 @@ crystal.window.set_native_height(240);
 crystal.window.set_aspect_ratio_limits(4 / 3, 21 / 9);
 crystal.window.set_scaling_mode("pixel_perfect");
 
-crystal.physics.define_categories({ "player" });
+crystal.physics.define_categories({ "player", "enemy" });
 
 crystal.input.set_bindings(1, {
 	-- Keyboard
