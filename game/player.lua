@@ -9,6 +9,7 @@ Player.init = function(self)
     local texture = crystal.assets.get("assets/player.png");
     self:set_texture(texture);
     self:set_draw_offset(-texture:getWidth() / 2, 4 - texture:getHeight());
+    self:set_draw_order_modifier("replace", 1);
 
     self:add_component(crystal.InputListener, 1);
     self:add_component(crystal.Movement);
