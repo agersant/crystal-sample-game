@@ -1,7 +1,7 @@
 local Platform = Class("Platform", crystal.Entity);
 
 Platform.init = function(self)
-    local hs = 24 * 2.5;
+    local hs = 24 * 2.5 + 4;
     self:add_component(crystal.Body, "static");
 	self:add_component(crystal.Collider, love.physics.newChainShape(true, -hs, -hs, hs, -hs, hs, hs, -hs, hs));
 	self:set_categories("level");
