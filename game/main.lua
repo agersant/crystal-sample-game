@@ -13,17 +13,17 @@ crystal.physics.define_categories({ "solid" });
 
 crystal.input.set_bindings(1, {
 	-- Keyboard
-	left = { "moveLeft", "ui_left" },
-	right = { "moveRight", "ui_right" },
-	up = { "moveUp", "ui_up" },
-	down = { "moveDown", "ui_down" },
+	left = { "move_left", "ui_left" },
+	right = { "move_right", "ui_right" },
+	up = { "move_up", "ui_up" },
+	down = { "move_down", "ui_down" },
 	-- Gamepad
-	dpleft = { "moveLeft", "ui_left" },
-	dpright = { "moveRight", "ui_right" },
-	dpup = { "moveUp", "ui_up" },
-	dpdown = { "moveDown", "ui_down" },
-	leftx = { "moveX", "ui_x" },
-	lefty = { "moveY", "ui_y" },
+	dpleft = { "move_left", "ui_left" },
+	dpright = { "move_right", "ui_right" },
+	dpup = { "move_up", "ui_up" },
+	dpdown = { "move_down", "ui_down" },
+	leftx = { "move_x", "ui_x" },
+	lefty = { "move_y", "ui_y" },
 });
 
 crystal.input.configure_autorepeat({
