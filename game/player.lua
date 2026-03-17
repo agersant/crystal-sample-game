@@ -6,7 +6,9 @@ Player.init = function(self)
 	self:set_categories("solid");
 
     self:add_component(crystal.Sprite);
-    self:set_texture(crystal.assets.get("assets/player.png"));
+    local texture = crystal.assets.get("assets/player.png");
+    self:set_texture(texture);
+    self:set_draw_offset(-texture:getWidth()/2, 4 - texture:getHeight());
 end
 
 return Player;
