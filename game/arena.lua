@@ -9,7 +9,7 @@ local level_1 = function(self)
         self:wait(2);
         self:spawn("Fish", "W", 2);
         self:spawn("Fish", "E", 4);
-        self:wait(1);
+        self:wait(1.5);
         self:spawn("Fish", "N", 2);
         self:spawn("Fish", "N", 4);
         self:wait(1);
@@ -22,6 +22,22 @@ local level_1 = function(self)
         self:wait(0.5);
         self:spawn("Fish", "W", 4);
         self:spawn("Fish", "W", 5);
+        self:wait(1.5);
+        self:spawn("Fish", "E", 1);
+        self:spawn("Fish", "W", 2);
+        self:spawn("Fish", "E", 4);
+        self:spawn("Fish", "W", 5);
+        self:wait(0.5);
+        self:spawn("Fish", "N", 2);
+        self:spawn("Fish", "N", 3);
+        self:wait(0.5);
+        self:spawn("Fish", "W", 1);
+        self:spawn("Fish", "W", 4);
+        self:spawn("Fish", "N", 5);
+        self:wait(0.5);
+        self:spawn("Fish", "E", 3);
+        self:spawn("Fish", "E", 4);
+        self:wait(1.5);
     end
 end
 
