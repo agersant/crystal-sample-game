@@ -17,7 +17,7 @@ Fish.init = function(self)
     
     self:add_component(crystal.ScriptRunner);
     self:add_script(function(self)
-        self:wait_tween(0, 10, 0.6, math.ease_out_quadratic, self.set_altitude, self)
+        self:wait_tween(-6, 4, 0.6, math.ease_out_quadratic, self.set_altitude, self)
         
         self:set_heading(math.pi);
         self:wait_tween(10, 20, 0.3, math.ease_in_out_quadratic, self.set_speed, self)
