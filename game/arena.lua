@@ -2,8 +2,25 @@ local Arena = Class("Arena", crystal.Scene);
 
 local level_1 = function(self)
     while true do
+        self:wait(2);
+        self:spawn("Fish", "W", 3);
+        self:wait(3);
+        self:spawn("Fish", "N", 3);
+        self:wait(2);
+        self:spawn("Fish", "W", 2);
+        self:spawn("Fish", "E", 4);
         self:wait(1);
-        self:spawn("Fish");
+        self:spawn("Fish", "N", 2);
+        self:spawn("Fish", "N", 4);
+        self:wait(1);
+        self:spawn("Fish", "E", 3);
+        self:spawn("Fish", "W", 1);
+        self:spawn("Fish", "W", 2);
+        self:wait(1);
+        self:spawn("Fish", "N", 1);
+        self:wait(0.5);
+        self:spawn("Fish", "W", 4);
+        self:spawn("Fish", "W", 5);
     end
 end
 
