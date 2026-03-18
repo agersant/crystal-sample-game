@@ -33,7 +33,7 @@ local pattern_ones_and_threes = function(self)
 end
 
 local pattern_stagger_duos = function(self)
-     self:spawn_fish("E", 3);
+    self:spawn_fish("E", 3);
     self:spawn_fish("W", 1, 2);
     self:wait(1);
     self:spawn_fish("N", 1, 5);
