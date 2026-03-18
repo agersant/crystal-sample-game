@@ -1,61 +1,102 @@
 local Arena = Class("Arena", crystal.Scene);
 
+local pattern_baby = function(self)
+    self:spawn("Fish", "W", 3);
+    self:wait(3);
+    self:spawn("Fish", "N", 3);
+    self:wait(2);
+    self:spawn("Fish", "W", 2);
+    self:spawn("Fish", "E", 4);
+    self:wait(1.5);
+    self:spawn("Fish", "N", 1);
+    self:spawn("Fish", "N", 3);
+    self:spawn("Fish", "N", 5);
+end
+
+local pattern_ones_and_threes = function(self)
+    self:spawn("Fish", "N", 3);
+    self:spawn("Fish", "W", 3);
+    self:spawn("Fish", "E", 5);
+    self:wait(0.4);
+    self:spawn("Fish", "W", 1);
+    self:wait(0.4);
+    self:spawn("Fish", "E", 4);
+    self:wait(0.4);
+    self:spawn("Fish", "N", 1);
+    self:spawn("Fish", "N", 2);
+    self:spawn("Fish", "N", 5);
+    self:wait(0.8);
+    self:spawn("Fish", "E", 3);
+    self:wait(0.4);
+    self:spawn("Fish", "W", 2);
+    self:wait(0.4);
+    self:spawn("Fish", "E", 5);
+    self:spawn("Fish", "N", 2);
+    self:spawn("Fish", "N", 3);
+    self:wait(0.8);
+    self:spawn("Fish", "N", 1);
+    self:spawn("Fish", "N", 5);
+end
+
+local pattern_stagger_duos = function(self)
+     self:spawn("Fish", "E", 3);
+    self:spawn("Fish", "W", 1);
+    self:spawn("Fish", "W", 2);
+    self:wait(1);
+    self:spawn("Fish", "N", 1);
+    self:spawn("Fish", "N", 5);
+    self:wait(0.5);
+    self:spawn("Fish", "W", 4);
+    self:spawn("Fish", "W", 5);
+    self:wait(1.5);
+    self:spawn("Fish", "E", 1);
+    self:spawn("Fish", "W", 2);
+    self:spawn("Fish", "E", 4);
+    self:spawn("Fish", "W", 5);
+    self:wait(0.5);
+    self:spawn("Fish", "N", 2);
+    self:spawn("Fish", "N", 3);
+    self:wait(0.5);
+    self:spawn("Fish", "W", 1);
+    self:spawn("Fish", "W", 4);
+    self:spawn("Fish", "N", 5);
+    self:wait(0.5);
+    self:spawn("Fish", "E", 3);
+    self:spawn("Fish", "E", 4);    
+end
+
+local pattern_full_rotate = function(self)
+     for i = 1,5 do
+        if i ~= 2 then
+            self:spawn("Fish", "W", 6-i);
+        end
+        self:wait(0.2);
+    end
+    for i = 1,5 do
+        if i ~= 4 then
+            self:spawn("Fish", "N", i);
+        end
+        self:wait(0.2);
+    end
+    for i = 1,5 do
+        if i ~= 2 then
+            self:spawn("Fish", "E", i);
+        end
+        self:wait(0.2);
+    end
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
-        self:spawn("Fish", "W", 3);
-        self:wait(3);
-        self:spawn("Fish", "N", 3);
-        self:wait(2);
-        self:spawn("Fish", "W", 2);
-        self:spawn("Fish", "E", 4);
-        self:wait(1.5);
-        self:spawn("Fish", "N", 2);
-        self:spawn("Fish", "N", 4);
-        self:wait(1);
-        self:spawn("Fish", "E", 3);
-        self:spawn("Fish", "W", 1);
-        self:spawn("Fish", "W", 2);
-        self:wait(1);
-        self:spawn("Fish", "N", 1);
-        self:spawn("Fish", "N", 5);
-        self:wait(0.5);
-        self:spawn("Fish", "W", 4);
-        self:spawn("Fish", "W", 5);
-        self:wait(1.5);
-        self:spawn("Fish", "E", 1);
-        self:spawn("Fish", "W", 2);
-        self:spawn("Fish", "E", 4);
-        self:spawn("Fish", "W", 5);
-        self:wait(0.5);
-        self:spawn("Fish", "N", 2);
-        self:spawn("Fish", "N", 3);
-        self:wait(0.5);
-        self:spawn("Fish", "W", 1);
-        self:spawn("Fish", "W", 4);
-        self:spawn("Fish", "N", 5);
-        self:wait(0.5);
-        self:spawn("Fish", "E", 3);
-        self:spawn("Fish", "E", 4);
+        pattern_baby(self);
         self:wait(2.5);
-        for i = 1,5 do
-            if i ~= 2 then
-                self:spawn("Fish", "W", 6-i);
-            end
-            self:wait(0.2);
-        end
-        for i = 1,5 do
-            if i ~= 4 then
-                self:spawn("Fish", "N", i);
-            end
-            self:wait(0.2);
-        end
-        for i = 1,5 do
-            if i ~= 2 then
-                self:spawn("Fish", "E", i);
-            end
-            self:wait(0.2);
-        end
+        pattern_stagger_duos(self);
+        self:wait(2.5);
+        pattern_full_rotate(self);
+        self:wait(2.5);
+        pattern_ones_and_threes(self);
+        self:wait(2.5);
     end
 end
 
