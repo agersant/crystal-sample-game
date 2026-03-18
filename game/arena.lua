@@ -18,6 +18,7 @@ local level_1 = function(self)
         self:spawn("Fish", "W", 2);
         self:wait(1);
         self:spawn("Fish", "N", 1);
+        self:spawn("Fish", "N", 5);
         self:wait(0.5);
         self:spawn("Fish", "W", 4);
         self:spawn("Fish", "W", 5);
