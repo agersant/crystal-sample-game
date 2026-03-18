@@ -51,6 +51,27 @@ local pattern_stagger_duos = function(self)
     self:spawn_fish("E", 3, 4);
 end
 
+local zebulon = function(self)
+    self:spawn_fish("E", 5);
+    self:wait(0.8);
+    self:spawn_fish("W", 4);
+    self:wait(0.8);
+    self:spawn_fish("E", 3);
+    self:wait(0.8);
+    self:spawn_fish("W", 2);
+    self:wait(0.8);
+    self:spawn_fish("E", 1);
+    self:wait(0.8);
+    self:spawn_fish("W", 4);
+    self:spawn_fish("N", 1);
+    self:wait(0.4);
+    self:spawn_fish("N", 3);
+    self:wait(0.4);
+    self:spawn_fish("N", 5);
+    self:wait(0.8);
+    self:spawn_fish("W", 4, 5);
+end
+
 local pattern_full_rotate = function(self)
      for i = 1,5 do
         if i ~= 2 then
@@ -76,6 +97,8 @@ local level_1 = function(self)
     while true do
         self:wait(2);
         pattern_baby(self);
+        self:wait(2.5);
+        zebulon(self);
         self:wait(2.5);
         pattern_stagger_duos(self);
         self:wait(2.5);
