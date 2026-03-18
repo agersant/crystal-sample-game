@@ -1,86 +1,72 @@
 local Arena = Class("Arena", crystal.Scene);
 
 local pattern_baby = function(self)
-    self:spawn("Fish", "W", 3);
+    self:spawn_fish("W", 3);
     self:wait(3);
-    self:spawn("Fish", "N", 3);
+    self:spawn_fish("N", 3);
     self:wait(2);
-    self:spawn("Fish", "W", 2);
-    self:spawn("Fish", "E", 4);
+    self:spawn_fish("W", 2);
+    self:spawn_fish("E", 4);
     self:wait(1.5);
-    self:spawn("Fish", "N", 1);
-    self:spawn("Fish", "N", 3);
-    self:spawn("Fish", "N", 5);
+    self:spawn_fish("N", 1, 3, 5);
 end
 
 local pattern_ones_and_threes = function(self)
-    self:spawn("Fish", "N", 3);
-    self:spawn("Fish", "W", 3);
-    self:spawn("Fish", "E", 5);
+    self:spawn_fish("N", 3);
+    self:spawn_fish("W", 3);
+    self:spawn_fish("E", 5);
     self:wait(0.4);
-    self:spawn("Fish", "W", 1);
+    self:spawn_fish("W", 1);
     self:wait(0.4);
-    self:spawn("Fish", "E", 4);
+    self:spawn_fish("E", 4);
     self:wait(0.4);
-    self:spawn("Fish", "N", 1);
-    self:spawn("Fish", "N", 2);
-    self:spawn("Fish", "N", 5);
+    self:spawn_fish("N", 1, 2, 5);
     self:wait(0.8);
-    self:spawn("Fish", "E", 3);
+    self:spawn_fish("E", 3);
     self:wait(0.4);
-    self:spawn("Fish", "W", 2);
+    self:spawn_fish("W", 2);
     self:wait(0.4);
-    self:spawn("Fish", "E", 5);
-    self:spawn("Fish", "N", 2);
-    self:spawn("Fish", "N", 3);
+    self:spawn_fish("E", 5);
+    self:spawn_fish("N", 2, 3);
     self:wait(0.8);
-    self:spawn("Fish", "N", 1);
-    self:spawn("Fish", "N", 5);
+    self:spawn_fish("N", 1, 5);
 end
 
 local pattern_stagger_duos = function(self)
-     self:spawn("Fish", "E", 3);
-    self:spawn("Fish", "W", 1);
-    self:spawn("Fish", "W", 2);
+     self:spawn_fish("E", 3);
+    self:spawn_fish("W", 1, 2);
     self:wait(1);
-    self:spawn("Fish", "N", 1);
-    self:spawn("Fish", "N", 5);
+    self:spawn_fish("N", 1, 5);
     self:wait(0.5);
-    self:spawn("Fish", "W", 4);
-    self:spawn("Fish", "W", 5);
+    self:spawn_fish("W", 4, 5);
     self:wait(1.5);
-    self:spawn("Fish", "E", 1);
-    self:spawn("Fish", "W", 2);
-    self:spawn("Fish", "E", 4);
-    self:spawn("Fish", "W", 5);
+    self:spawn_fish("E", 1, 4);
+    self:spawn_fish("W", 2, 5);
     self:wait(0.5);
-    self:spawn("Fish", "N", 2);
-    self:spawn("Fish", "N", 3);
+    self:spawn_fish("N", 2, 3);
     self:wait(0.5);
-    self:spawn("Fish", "W", 1);
-    self:spawn("Fish", "W", 4);
-    self:spawn("Fish", "N", 5);
+    self:spawn_fish("W", 1, 4);
+    self:spawn_fish("N", 5);
     self:wait(0.5);
-    self:spawn("Fish", "E", 3);
-    self:spawn("Fish", "E", 4);    
+    self:spawn_fish("E", 3, 4);
 end
 
 local pattern_full_rotate = function(self)
      for i = 1,5 do
         if i ~= 2 then
-            self:spawn("Fish", "W", 6-i);
+            self:spawn_fish("W", 6 - i);
         end
         self:wait(0.2);
     end
     for i = 1,5 do
         if i ~= 4 then
-            self:spawn("Fish", "N", i);
+            self:spawn_fish("N", i);
         end
         self:wait(0.2);
     end
     for i = 1,5 do
         if i ~= 2 then
-            self:spawn("Fish", "E", i);
+            self:spawn_fish("E", i);
         end
         self:wait(0.2);
     end
@@ -139,6 +125,13 @@ Arena.draw = function(self)
 	love.graphics.translate(self.camera_controller:offset());
 	self.ecs:notify_systems("draw_debug");
 	love.graphics.pop();
+end
+
+Arena.spawn_fish = function(self, origin, ...)
+    local lanes = {...};
+    for _, lane in ipairs(lanes) do
+        self:spawn("Fish", origin, lane);    
+    end
 end
 
 return Arena;
