@@ -6,6 +6,13 @@ local forward_from = {
     N = math.pi / 2,
 };
 
+local orientation_from = {
+    W = "E",
+    E = "W",
+    N = "S",
+    S = "N",
+};
+
 Fish.init = function(self, side, lane)
     local forward = forward_from[side];
     local dx, dy = math.angle_to_cardinal(forward);
@@ -18,10 +25,8 @@ Fish.init = function(self, side, lane)
 	self:add_component(crystal.Collider, love.physics.newCircleShape(10, 0, 8));
 	self:set_categories("enemy");
 
-    self:add_component(crystal.Sprite);
-    local texture = crystal.assets.get("assets/fish_e.png");
-    self:set_texture(texture);
-    self:set_draw_offset(-texture:getWidth() / 2, 4 - texture:getHeight());
+    self:add_component(crystal.AnimatedSprite, crystal.assets.get("assets/fish.json"));
+    self:play_animation("swim", orientation_from[side]);
     self:set_draw_order_modifier("replace", 1);
 
     self:add_component("Altitude");
