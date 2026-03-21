@@ -4,6 +4,7 @@ local forward_from = {
     W = 0,
     E = math.pi,
     N = math.pi / 2,
+    S = -math.pi / 2,
 };
 
 local orientation_from = {
