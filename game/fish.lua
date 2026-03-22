@@ -23,7 +23,7 @@ Fish.init = function(self, side, lane)
     self:add_component(crystal.Body);    
     self:set_position(-dx * n*3 + math.abs(dy) * (lane - 3) * n, -dy * n*3 + math.abs(dx) * (lane - 3) * n);
 
-	self:add_component(crystal.Collider, love.physics.newCircleShape(10, 0, 8));
+	self:add_component(crystal.Collider, love.physics.newCircleShape(10*dx, 10*dy, 8));
 	self:set_categories("enemy");
 
     self:add_component(crystal.AnimatedSprite, crystal.assets.get("assets/fish.json"));
