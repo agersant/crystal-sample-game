@@ -31,6 +31,35 @@ local pattern_squares = function(self)
     self:spawn_fish("E", 5);
 end
 
+local pattern_slow_trick = function(self)
+    self:spawn_fish("S", 1, 5);
+    self:wait(0.4);
+    self:spawn_fish("N", 3);
+    self:wait(2);
+    self:spawn_fish("S", 2);
+    self:spawn_fish("N", 4);
+    self:wait(1.5);
+    self:spawn_fish("E", 2, 3);
+    self:spawn_fish("W", 4);
+    self:wait(2);
+    self:spawn_fish("N", 1, 3);
+    self:spawn_fish("E", 2, 5);
+    self:wait(2);
+    
+    self:spawn_fish("E", 1, 5);
+    self:wait(0.4);
+    self:spawn_fish("W", 3);
+    self:wait(2);
+    self:spawn_fish("E", 2);
+    self:spawn_fish("W", 4);
+    self:wait(1.5);
+    self:spawn_fish("S", 2, 3);
+    self:spawn_fish("N", 4);
+    self:wait(2);
+    self:spawn_fish("W", 1, 3);
+    self:spawn_fish("S", 2, 5);
+end
+
 local pattern_blocks = function(self)
     for i = 1, 3 do
         local d = 1.8 - i * 0.3;
@@ -145,11 +174,14 @@ local level_1 = function(self)
         self:wait(2);
 
         -- Easy
+        
         pattern_baby(self);
         self:wait(3);
         pattern_blocks(self);
         self:wait(3);
         pattern_squares(self);
+        self:wait(3);
+        pattern_slow_trick(self);
         self:wait(3);
         pattern_modulo(self);
         self:wait(3);
