@@ -9,6 +9,53 @@ local pattern_baby = function(self)
     self:spawn_fish("E", 4);
     self:wait(1.5);
     self:spawn_fish("N", 1, 3, 5);
+    self:wait(2);
+    self:spawn_fish("S", 2, 4);
+end
+
+local pattern_squares = function(self)
+    self:spawn_fish("W", 3);
+    self:spawn_fish("E", 3);
+    self:spawn_fish("S", 3);
+    self:spawn_fish("N", 3);
+    self:wait(2.2);
+    self:spawn_fish("W", 2);
+    self:spawn_fish("E", 4);
+    self:spawn_fish("S", 2);
+    self:spawn_fish("N", 4);
+    self:wait(2.2);
+    self:spawn_fish("N", 1);
+    self:spawn_fish("S", 5);
+    self:wait(0.5);
+    self:spawn_fish("W", 1);
+    self:spawn_fish("E", 5);
+end
+
+local pattern_blocks = function(self)
+    for i = 1, 3 do
+        local d = 1.8 - i * 0.3;
+        self:spawn_fish("E", 1, 2, 3);
+        self:wait(d);
+        self:spawn_fish("N", 1, 2, 3);
+        self:wait(d);
+        self:spawn_fish("W", 3, 4, 5);
+        self:wait(d);
+        self:spawn_fish("S", 3, 4, 5);
+        self:wait(d);
+    end
+end
+
+local pattern_modulo = function(self)
+    self:thread(function(self)
+        self:wait(5);
+        self:spawn_fish("S", 3);
+        self:wait(3);
+        self:spawn_fish("N", 4);
+    end);
+    for i = 1, 10 do
+        self:spawn_fish("W", 1 + (i*17)%13%5, 1 + (i*11)%12%5);
+        self:wait(1);
+    end
 end
 
 local pattern_ones_and_threes = function(self)
@@ -96,16 +143,26 @@ end
 local level_1 = function(self)
     while true do
         self:wait(2);
+
+        -- Easy
         pattern_baby(self);
-        self:wait(2.5);
+        self:wait(3);
+        pattern_blocks(self);
+        self:wait(3);
+        pattern_squares(self);
+        self:wait(3);
+        pattern_modulo(self);
+        self:wait(3);
+
+        -- Hard
         zebulon(self);
-        self:wait(2.5);
+        self:wait(3);
         pattern_stagger_duos(self);
-        self:wait(2.5);
+        self:wait(3);
         pattern_full_rotate(self);
-        self:wait(2.5);
+        self:wait(3);
         pattern_ones_and_threes(self);
-        self:wait(2.5);
+        self:wait(3);
     end
 end
 
