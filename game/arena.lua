@@ -127,7 +127,7 @@ local pattern_stagger_duos = function(self)
     self:spawn_fish("E", 3, 4);
 end
 
-local zebulon = function(self)
+local pattern_zebulon = function(self)
     self:spawn_fish("E", 5);
     self:wait(0.8);
     self:spawn_fish("W", 4);
@@ -169,6 +169,25 @@ local pattern_full_rotate = function(self)
     end
 end
 
+local pattern_coverage = function(self)
+    self:spawn_fish("E", 1, 2, 5);
+    self:spawn_fish("W", 3, 4);
+    self:wait(2);
+    self:spawn_fish("N", 1);
+    self:spawn_fish("S", 5);
+    self:wait(0.8);
+    self:spawn_fish("N", 3, 4);
+    self:spawn_fish("S", 1, 2);
+    self:wait(0.8);
+    self:spawn_fish("W", 2, 3);
+    self:spawn_fish("E", 5);
+    self:wait(1.5);
+    self:spawn_fish("N", 2);
+    self:spawn_fish("W", 2);
+    self:spawn_fish("S", 4);
+    self:spawn_fish("E", 4);
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
@@ -187,13 +206,15 @@ local level_1 = function(self)
         self:wait(3);
 
         -- Hard
-        zebulon(self);
+        pattern_zebulon(self);
         self:wait(3);
         pattern_stagger_duos(self);
         self:wait(3);
         pattern_full_rotate(self);
         self:wait(3);
         pattern_ones_and_threes(self);
+        self:wait(3);
+        pattern_coverage(self);
         self:wait(3);
     end
 end
