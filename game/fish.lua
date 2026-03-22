@@ -45,8 +45,9 @@ Fish.init = function(self, side, lane)
 
         self:set_heading(forward);
         self:wait_tween(0, 180, 0.2, math.ease_in_quadratic, self.set_speed, self)
-
-        self:wait(3);
+        
+        self:wait(.85);
+        self:wait_tween(4, -6, 0.1, math.ease_in_quadratic, self.set_altitude, self)
         self:despawn();
     end);
 end
