@@ -169,6 +169,25 @@ local pattern_full_rotate = function(self)
     end
 end
 
+local pattern_chaos_engine = function(self)
+    local a = self:thread(function(self)
+        for i = 1, 15 do
+            local d = i%2 == 0 and "E" or "N";
+            self:spawn_fish(d, 1 + (2*i)%5);
+            self:wait(0.7);
+        end
+    end);
+    local b = self:thread(function(self)
+        for i = 1, 10 do
+            local d = i%2 == 0 and "W" or "S";
+            self:spawn_fish(d, 1 + (3 + (2*i))%5);
+            self:wait(0.6);
+        end
+    end);
+    a:block();
+    b:block();
+end
+
 local pattern_coverage = function(self)
     self:spawn_fish("E", 1, 2, 5);
     self:spawn_fish("W", 3, 4);
@@ -215,6 +234,8 @@ local level_1 = function(self)
         pattern_ones_and_threes(self);
         self:wait(3);
         pattern_coverage(self);
+        self:wait(3);
+        pattern_chaos_engine(self);
         self:wait(3);
     end
 end
