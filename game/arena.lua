@@ -188,6 +188,43 @@ local pattern_chaos_engine = function(self)
     b:block();
 end
 
+
+local pattern_sin = function(self)
+    for i = 1, 4 do
+        self:spawn_fish("S", i);
+        self:wait(0.2);
+    end
+    self:wait(1.4);
+    for i = 5, 2, -1 do
+        self:spawn_fish("S", i);
+        self:wait(0.2);
+    end
+    self:wait(1.4);
+
+    self:spawn_fish("S", 1, 3, 5);
+    self:wait(0.7);
+    self:spawn_fish("S", 2);
+    self:wait(0.2);
+    self:spawn_fish("E", 3);
+    self:spawn_fish("W", 1);
+    self:wait(0.2);
+    self:spawn_fish("S", 4);
+    self:wait(1.4);
+
+    for i = 1, 3 do
+        self:spawn_fish("S", i);
+        self:wait(0.1);
+    end
+    self:wait(0.8);
+    for i = 5, 4, -1 do
+        self:spawn_fish("S", i);
+        self:wait(0.1);
+    end
+    self:wait(0.8);
+    self:spawn_fish("N", 1, 5);
+    self:spawn_fish("S", 3);
+end
+
 local pattern_coverage = function(self)
     self:spawn_fish("E", 1, 2, 5);
     self:spawn_fish("W", 3, 4);
@@ -234,6 +271,8 @@ local level_1 = function(self)
         pattern_ones_and_threes(self);
         self:wait(3);
         pattern_coverage(self);
+        self:wait(3);
+        pattern_sin(self);
         self:wait(3);
         pattern_chaos_engine(self);
         self:wait(3);
