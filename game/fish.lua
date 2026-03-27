@@ -54,9 +54,9 @@ FishDefault.init = function(self, side, lane)
         self:wait(0.2);
 
         self:set_heading(forward);
-        self:wait_tween(0, 180, 0.2, math.ease_in_quadratic, self.set_speed, self)
+        self:set_speed(180);
         
-        self:wait(.85);
+        self:wait(1.05);
         self:wait_tween(4, -6, 0.1, math.ease_in_quadratic, self.set_altitude, self)
         self:despawn();
     end);
@@ -67,15 +67,14 @@ FishFast.init = function(self, side, lane)
 
     local forward = self.forward;
     self:add_script(function(self)
-        self:wait_tween(-6, 4, 0.3, math.ease_out_quadratic, self.set_altitude, self)
-        
+        self:set_speed(5);
         self:set_heading(forward + math.pi);
-        self:wait_tween(40, 0, 0.3, math.ease_out_quadratic, self.set_speed, self)
+        self:wait_tween(-6, 4, 0.7, math.ease_out_quadratic, self.set_altitude, self)
         
         self:set_heading(forward);
-        self:set_speed(300);
+        self:set_speed(360);
         
-        self:wait(.45);
+        self:wait(.4);
         self:wait_tween(4, -6, 0.1, math.ease_in_quadratic, self.set_altitude, self)
         self:despawn();
     end);
