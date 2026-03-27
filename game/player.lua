@@ -7,6 +7,7 @@ Player.init = function(self)
 
     self:add_component(crystal.AnimatedSprite, crystal.assets.get("assets/hero.json"));
     self:set_texture(texture);
+    -- TODO fix pivot
     self:set_draw_order_modifier("replace", 1);
 
     self:add_component(crystal.InputListener, 1);
