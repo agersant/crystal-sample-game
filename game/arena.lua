@@ -251,6 +251,14 @@ local pattern_fast_intro = function(self)
     self:wait(2);
     self:spawn_fast("W", 2, 4);
     self:wait(3);
+    self:spawn_fast("W", 1, 2);
+    self:spawn_fast("E", 4, 5);
+    self:wait(1.5);
+    self:spawn_fast("N", 1, 2);
+    self:spawn_fast("S", 4, 5);
+end
+
+local pattern_gaps = function(self)
     for _, i in ipairs({1,2,4,5}) do
         self:spawn_default("N", i);
         self:wait(0.05);
@@ -262,40 +270,72 @@ local pattern_fast_intro = function(self)
     self:spawn_default("E", 4);
 end
 
+local pattern_bomberman = function(self)
+    self:spawn_default("N", 1, 2);
+    self:spawn_default("W", 3);
+    self:spawn_default("E", 1, 4);
+    self:spawn_default("S", 3, 5);
+    self:wait(2);
+    self:spawn_default("N", 2);
+    self:spawn_default("E", 3);
+    self:spawn_default("W", 1, 5);
+    self:spawn_default("S", 1, 4);
+    self:wait(2);
+    self:spawn_default("N", 2, 4, 5);
+    self:spawn_default("E", 1, 5);
+    self:spawn_default("W", 2, 4);
+    self:spawn_default("S", 1);
+    self:wait(2);
+    self:spawn_default("N", 3, 4);
+    self:spawn_default("E", 2, 4, 5);
+    self:spawn_default("W", 3);
+    self:spawn_default("S", 2, 5);
+    self:wait(3);
+    self:spawn_default("N", 1, 3);
+    self:spawn_default("E", 1, 2);
+    self:spawn_default("W", 3, 4);
+    self:spawn_default("S", 2, 4);
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
 
+        -- Easy
+        pattern_baby(self);
+        self:wait(3);
+        pattern_blocks(self);
+        self:wait(3);
+        pattern_squares(self);
+        self:wait(3);
+        pattern_slow_trick(self);
+        self:wait(3);
         pattern_fast_intro(self);
         self:wait(3);
+        
+        -- Medium
+        pattern_gaps(self);
+        self:wait(3);
+        pattern_modulo(self);
+        self:wait(3);
+        pattern_zebulon(self);
+        self:wait(3);
+        pattern_stagger_duos(self);
+        self:wait(3);
+        pattern_full_rotate(self);
+        self:wait(3);
+        pattern_ones_and_threes(self);
+        self:wait(3);
+        pattern_coverage(self);
+        self:wait(3);
+        pattern_sin(self);
+        self:wait(3);
 
-        -- Easy
-        -- pattern_baby(self);
-        -- self:wait(3);
-        -- pattern_blocks(self);
-        -- self:wait(3);
-        -- pattern_squares(self);
-        -- self:wait(3);
-        -- pattern_slow_trick(self);
-        -- self:wait(3);
-        -- pattern_modulo(self);
-        -- self:wait(3);
-
-        -- -- Hard
-        -- pattern_zebulon(self);
-        -- self:wait(3);
-        -- pattern_stagger_duos(self);
-        -- self:wait(3);
-        -- pattern_full_rotate(self);
-        -- self:wait(3);
-        -- pattern_ones_and_threes(self);
-        -- self:wait(3);
-        -- pattern_coverage(self);
-        -- self:wait(3);
-        -- pattern_sin(self);
-        -- self:wait(3);
-        -- pattern_chaos_engine(self);
-        -- self:wait(3);
+        -- Hard
+        pattern_chaos_engine(self);
+        self:wait(3);
+        pattern_bomberman(self);
+        self:wait(3);
     end
 end
 
