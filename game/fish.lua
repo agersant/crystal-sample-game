@@ -1,4 +1,6 @@
 local Fish = Class("Fish", crystal.Entity);
+local FishDefault = Class("FishDefault", Fish);
+local FishFast = Class("FishFast", Fish);
 
 local forward_from = {
     W = 0,
@@ -14,10 +16,12 @@ local orientation_from = {
     S = "N",
 };
 
-Fish.init = function(self, side, lane)
-    local forward = forward_from[side];
-    local dx, dy = math.angle_to_cardinal(forward);
-    assert(forward);
+Fish.init = function(self, side, lane, sheet)
+    assert(sheet);
+
+    self.forward = forward_from[side];
+    assert(self.forward);
+    local dx, dy = math.angle_to_cardinal(self.forward);
 
     local n = 24;
     self:add_component(crystal.Body);    
@@ -26,7 +30,7 @@ Fish.init = function(self, side, lane)
 	self:add_component(crystal.Collider, love.physics.newCircleShape(10*dx, 10*dy, 8));
 	self:set_categories("enemy");
 
-    self:add_component(crystal.AnimatedSprite, crystal.assets.get("assets/fish.json"));
+    self:add_component(crystal.AnimatedSprite, sheet);
     self:play_animation("swim", orientation_from[side]);
     self:set_draw_order_modifier("replace", 1);
 
@@ -35,6 +39,12 @@ Fish.init = function(self, side, lane)
     self:add_component(crystal.Movement);
     
     self:add_component(crystal.ScriptRunner);
+end
+
+FishDefault.init = function(self, side, lane)
+    FishDefault.super.init(self, side, lane, crystal.assets.get("assets/fish.json"));
+    
+    local forward = self.forward;
     self:add_script(function(self)
         self:wait_tween(-6, 4, 0.6, math.ease_out_quadratic, self.set_altitude, self)
         
@@ -52,4 +62,26 @@ Fish.init = function(self, side, lane)
     end);
 end
 
-return Fish;
+FishFast.init = function(self, side, lane)
+    FishDefault.super.init(self, side, lane, crystal.assets.get("assets/fish_fast.json"));
+
+    local forward = self.forward;
+    self:add_script(function(self)
+        self:wait_tween(-6, 4, 0.3, math.ease_out_quadratic, self.set_altitude, self)
+        
+        self:set_heading(forward + math.pi);
+        self:wait_tween(40, 0, 0.3, math.ease_out_quadratic, self.set_speed, self)
+        
+        self:set_heading(forward);
+        self:set_speed(300);
+        
+        self:wait(.45);
+        self:wait_tween(4, -6, 0.1, math.ease_in_quadratic, self.set_altitude, self)
+        self:despawn();
+    end);
+end
+
+return {
+    FishDefault = FishDefault,
+    FishFast = FishFast,
+};
