@@ -259,15 +259,34 @@ local pattern_fast_intro = function(self)
 end
 
 local pattern_gaps = function(self)
-    for _, i in ipairs({1,2,4,5}) do
-        self:spawn_default("N", i);
-        self:wait(0.05);
-    end
-    self:wait(0.5);
+    self:spawn_default("N", 1, 2, 4, 5);
+    self:wait(0.3);
     self:spawn_fast("N", 3);
-    self:wait(0.5);
-    self:spawn_default("W", 2);
-    self:spawn_default("E", 4);
+    self:wait(3);
+    
+    self:spawn_default("N", 2, 3, 4, 5);
+    self:wait(0.3);
+    self:spawn_fast("N", 1);
+    self:wait(3);
+    
+    self:spawn_default("N", 1, 2, 5);
+    self:wait(0.3);
+    self:spawn_fast("N", 3, 4);
+    self:wait(3);
+
+    self:spawn_default("N", 2, 3);
+    self:wait(0.3);
+    self:spawn_fast("N", 1, 4, 5);
+    self:wait(3);
+
+    self:spawn_default("N", 4);
+    self:wait(0.3);
+    self:spawn_fast("N", 1, 2, 3, 5);
+     self:wait(3);
+
+    self:spawn_default("N", 1);
+    self:wait(0.3);
+    self:spawn_fast("N", 2, 3, 4, 5);
 end
 
 local pattern_bomberman = function(self)
