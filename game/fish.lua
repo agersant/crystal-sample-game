@@ -27,9 +27,12 @@ Fish.init = function(self, side, lane, sheet)
     self:add_component(crystal.Body);    
     self:set_position(-dx * n*3 + math.abs(dy) * (lane - 3) * n, -dy * n*3 + math.abs(dx) * (lane - 3) * n);
 
-	self:add_component(crystal.Sensor, love.physics.newCircleShape(10*dx, 10*dy, 8));
-	self:set_categories("enemy");
-	self:enable_activation_by("player");
+	local sensor = self:add_component(crystal.Sensor, love.physics.newCircleShape(10*dx, 10*dy, 8));
+	sensor:set_categories("enemy");
+	sensor:enable_activation_by("player");
+    sensor.on_activate = function(self, other_component, other_entity, contact)
+        self:entity():bonk();
+    end
 
     self:add_component(crystal.AnimatedSprite, sheet);
     self:play_animation("swim", orientation_from[side]);
@@ -42,11 +45,34 @@ Fish.init = function(self, side, lane, sheet)
     self:add_component(crystal.ScriptRunner);
 end
 
+FishDefault.bonk = function(self)
+    local forward = self.forward;
+    self:signal_all_scripts("bonk");
+    self:add_script(function(self)
+        self:set_heading(forward + math.pi);
+        self:set_speed(40);
+        self:wait_tween(0, 35, 0.4, math.ease_out_quadratic, self.set_altitude, self)
+        self:signal_all_scripts("allow_sink")
+        self:wait_tween(35, 0, 0.4, math.ease_in_quadratic, self.set_altitude, self)
+        self:set_speed(20);
+        self:wait_tween(0, 10, 0.2, math.ease_out_quadratic, self.set_altitude, self)
+        self:wait_tween(10, 0, 0.2, math.ease_in_quadratic, self.set_altitude, self)
+        self:set_speed(10);
+        self:wait_tween(0, 4, 0.1, math.ease_out_quadratic, self.set_altitude, self)
+        self:wait_tween(4, 0, 0.1, math.ease_in_quadratic, self.set_altitude, self)
+        self:set_speed(0);
+        self:wait(0.4);
+        self:set_heading(forward);
+        self:set_speed(200);
+    end);
+end
+
 FishDefault.init = function(self, side, lane)
     FishDefault.super.init(self, side, lane, crystal.assets.get("assets/fish.json"));
     
     local forward = self.forward;
     self:add_script(function(self)
+        self:stop_on("bonk");
         self:wait_tween(-6, 4, 0.6, math.ease_out_quadratic, self.set_altitude, self)
         
         self:set_heading(forward + math.pi);
@@ -56,9 +82,26 @@ FishDefault.init = function(self, side, lane)
 
         self:set_heading(forward);
         self:set_speed(180);
-        
-        self:wait(.9);
-        self:wait_tween(4, -6, 0.1, math.ease_in_quadratic, self.set_altitude, self)
+    end);
+
+    self:add_script(function(self)
+        local dx, dy = math.angle_to_cardinal(forward);
+        local can_sink = false;
+        local exit_location = 3.2 * 24;
+        self:thread(function(self)
+            self:wait_for("allow_sink");
+            can_sink = true;
+        end);
+        while true do
+            self:wait_frame();
+            local x, y = self:position();
+            local altitude = self:altitude();
+            local finished_travel = math.max(dx*x, dy*y) > exit_location;
+            local is_on_water = math.max(math.abs(x), math.abs(y)) > exit_location;
+            if altitude < 5 and (finished_travel or (can_sink and is_on_water)) then
+                break;
+            end
+        end
         self:despawn();
     end);
 end
@@ -74,10 +117,6 @@ FishFast.init = function(self, side, lane)
         
         self:set_heading(forward);
         self:set_speed(360);
-        
-        self:wait(.4);
-        self:wait_tween(4, -6, 0.1, math.ease_in_quadratic, self.set_altitude, self)
-        self:despawn();
     end);
 end
 
