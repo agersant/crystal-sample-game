@@ -493,6 +493,42 @@ local pattern_daggers = function(self)
     self:spawn_fast("E", 4);
 end
 
+local pattern_moonglow = function(self)
+    self:spawn_default("N", 1, 2);
+    self:wait(1);
+    self:spawn_fast("S", 4, 5);
+    self:wait(0.2);
+    self:spawn_default("E", 1, 2);
+    self:wait(1.2);
+    self:spawn_fast("S", 2, 3);
+    self:wait(1);
+    self:spawn_default("E", 3, 4);
+    self:spawn_fast("E", 1, 2);
+    self:wait(1);
+    self:spawn_default("W", 5);
+    self:spawn_default("S", 5);
+    self:wait(1);
+    self:spawn_fast("W", 4);
+    self:wait(0.4);
+    self:spawn_fast("W", 3);
+    self:thread(function(self)
+        self:spawn_default("N", 1);
+        self:wait(0.1);
+        self:spawn_default("N", 3);
+        self:wait(0.1);
+        self:spawn_default("N", 4);
+    end);
+    self:wait(1.7);
+    self:thread(function(self)
+        self:wait(0.8);
+        self:spawn_default("E", 3, 5);
+        self:spawn_default("W", 4);
+    end);
+    self:spawn_fast("W", 1, 2);
+    self:wait(0.6);
+    self:spawn_fast("S", 1, 2);
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
@@ -509,7 +545,7 @@ local level_1 = function(self)
         pattern_fast_intro(self);
         self:wait(3);
         
-        -- -- Medium
+        -- Medium
         pattern_rain(self);
         self:wait(3);
         pattern_gaps(self);
@@ -519,6 +555,8 @@ local level_1 = function(self)
         pattern_zebulon(self);
         self:wait(3);
         pattern_stagger_duos(self);
+        self:wait(3);
+        pattern_moonglow(self);
         self:wait(3);
         pattern_full_rotate(self);
         self:wait(3);
