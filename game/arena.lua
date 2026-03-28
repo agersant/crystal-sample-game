@@ -386,7 +386,6 @@ local pattern_frogger = function(self)
     self:spawn_default("E", 3);
 end
 
-
 local pattern_dancehall = function(self)
     self:spawn_default("W", 3, 4, 5);
     self:wait(1.5);
