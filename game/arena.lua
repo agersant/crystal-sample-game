@@ -342,47 +342,69 @@ local pattern_boulder = function(self)
 
 end
 
+local pattern_rain = function(self)
+    local a = self:thread(function(self)
+        for i = 1, 100 do
+            self:spawn_fast("S", 1 + (i*43)%5);
+            self:wait(1);
+        end
+    end);
+
+    for i = 9, 14 do
+        for j = 1, 3 do
+            local d = i%3 == 0 and "E" or i%3 == 1 and "W" or "N";
+            self:spawn_default(d, 1 + (2*i + 17*j)%87%5);
+            self:wait(0.4);
+        end
+        self:wait(2);
+    end
+
+    a:stop();
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
 
-        -- Easy
-        pattern_baby(self);
-        self:wait(3);
-        pattern_blocks(self);
-        self:wait(3);
-        pattern_squares(self);
-        self:wait(3);
-        pattern_slow_trick(self);
-        self:wait(3);
-        pattern_fast_intro(self);
-        self:wait(3);
+        -- -- Easy
+        -- pattern_baby(self);
+        -- self:wait(3);
+        -- pattern_blocks(self);
+        -- self:wait(3);
+        -- pattern_squares(self);
+        -- self:wait(3);
+        -- pattern_slow_trick(self);
+        -- self:wait(3);
+        -- pattern_fast_intro(self);
+        -- self:wait(3);
         
-        -- Medium
-        pattern_gaps(self);
-        self:wait(3);
-        pattern_modulo(self);
-        self:wait(3);
-        pattern_zebulon(self);
-        self:wait(3);
-        pattern_stagger_duos(self);
-        self:wait(3);
-        pattern_full_rotate(self);
-        self:wait(3);
-        pattern_boulder(self);
-        self:wait(3);
-        pattern_ones_and_threes(self);
-        self:wait(3);
-        pattern_coverage(self);
-        self:wait(3);
-        pattern_sin(self);
-        self:wait(3);
+        -- -- Medium
+        -- pattern_rain(self);
+        -- self:wait(3);
+        -- pattern_gaps(self);
+        -- self:wait(3);
+        -- pattern_modulo(self);
+        -- self:wait(3);
+        -- pattern_zebulon(self);
+        -- self:wait(3);
+        -- pattern_stagger_duos(self);
+        -- self:wait(3);
+        -- pattern_full_rotate(self);
+        -- self:wait(3);
+        -- pattern_boulder(self);
+        -- self:wait(3);
+        -- pattern_ones_and_threes(self);
+        -- self:wait(3);
+        -- pattern_coverage(self);
+        -- self:wait(3);
+        -- pattern_sin(self);
+        -- self:wait(3);
 
-        -- Hard
-        pattern_chaos_engine(self);
-        self:wait(3);
-        pattern_bomberman(self);
-        self:wait(3);
+        -- -- Hard
+        -- pattern_chaos_engine(self);
+        -- self:wait(3);
+        -- pattern_bomberman(self);
+        -- self:wait(3);
     end
 end
 
