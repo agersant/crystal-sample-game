@@ -404,6 +404,54 @@ local pattern_dancehall = function(self)
     end
 end
 
+local pattern_zapper = function(self)
+    for i = 5, 1, -1 do
+        if i ~= 3 then
+            self:spawn_default("E", i);
+            self:wait(0.1);
+        end
+    end
+    self:spawn_fast("W", 3);
+    self:wait(2.1);
+    self:spawn_fast("E", 4);
+    self:wait(0.1);
+    self:spawn_fast("S", 4);
+    self:wait(0.1);
+    self:spawn_fast("N", 2);
+    self:wait(0.1);
+    self:spawn_fast("W", 2);
+    self:wait(1);
+    self:thread(function(self)
+        self:wait(0.2);
+        self:spawn_fast("W", 3);
+        self:wait(1);
+        self:spawn_fast("W", 1);
+        self:wait(0.4);
+        self:spawn_fast("W", 2);
+        self:wait(0.4);
+        self:spawn_fast("W", 5);
+    end);
+    self:wait(0.2);
+    self:spawn_default("N", 2, 3, 4);
+    self:spawn_default("E", 5);
+    self:wait(2);
+    self:spawn_default("E", 1, 2);
+    self:spawn_default("W", 3);
+    self:thread(function(self)
+        self:spawn_fast("S", 2);
+        self:wait(0.4);
+        self:spawn_fast("S", 5);
+    end);
+    self:wait(1);
+     self:thread(function(self)
+        self:wait(0.4);
+        self:spawn_fast("N", 2);
+        self:wait(1.4);
+        self:spawn_fast("N", 4);
+    end);
+    self:spawn_default("N", 1, 3, 5);
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
@@ -420,7 +468,7 @@ local level_1 = function(self)
         pattern_fast_intro(self);
         self:wait(3);
         
-        -- Medium
+        -- -- Medium
         pattern_rain(self);
         self:wait(3);
         pattern_gaps(self);
@@ -446,6 +494,8 @@ local level_1 = function(self)
         pattern_dancehall(self);
         self:wait(3);
         pattern_chaos_engine(self);
+        self:wait(3);
+        pattern_zapper(self);
         self:wait(3);
         pattern_bomberman(self);
         self:wait(3);
