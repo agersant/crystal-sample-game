@@ -69,7 +69,7 @@ FishFast.init = function(self, side, lane)
     self:add_script(function(self)
         self:set_speed(5);
         self:set_heading(forward + math.pi);
-        self:wait_tween(-6, 4, 0.7, math.ease_out_quadratic, self.set_altitude, self)
+        self:wait_tween(-6, 4, 0.8, math.ease_out_quadratic, self.set_altitude, self)
         
         self:set_heading(forward);
         self:set_speed(360);
