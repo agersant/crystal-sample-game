@@ -388,7 +388,7 @@ end
 
 
 local pattern_dancehall = function(self)
-    self:spawn_default("W", 3, 4);
+    self:spawn_default("W", 3, 4, 5);
     self:wait(1.5);
 
     local dirs = {"W", "S", "N", "E"};
