@@ -316,6 +316,32 @@ local pattern_bomberman = function(self)
     self:spawn_default("S", 2, 4);
 end
 
+local pattern_boulder = function(self)
+    self:spawn_default("E", 2, 3, 4, 5);
+    self:wait(1.4);
+    for i = 1, 4 do
+        self:spawn_fast("W", i);
+        self:wait(0.35);
+    end
+    
+    self:wait(1.1);
+    self:spawn_default("S", 1, 2, 3, 4);
+    self:wait(1.4);
+    for i = 5, 2, -1 do
+        self:spawn_fast("N", i);
+        self:wait(0.35);
+    end
+
+    self:wait(1.1);
+    self:spawn_default("W", 2, 3, 4, 5);
+    self:wait(1.4);
+     for i = 1, 4 do
+        self:spawn_fast("E", i);
+        self:wait(0.35);
+    end
+
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
@@ -342,6 +368,8 @@ local level_1 = function(self)
         pattern_stagger_duos(self);
         self:wait(3);
         pattern_full_rotate(self);
+        self:wait(3);
+        pattern_boulder(self);
         self:wait(3);
         pattern_ones_and_threes(self);
         self:wait(3);
