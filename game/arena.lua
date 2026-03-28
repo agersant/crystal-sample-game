@@ -641,10 +641,13 @@ local stages = {
 };
 
 local gameflow = function(self)
+    local arena = self:context("scene");
+
     local stage = 1;
     while stage <= #stages do
         local cleared = self:thread(function(self)
             self:stop_on("player_lose");
+            arena.player:reset();
             self:wait(2);
             stages[stage](self);
             self:wait(3);

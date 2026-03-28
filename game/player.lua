@@ -6,7 +6,9 @@ Player.init = function(self)
 	collider:set_categories("player");
 	collider:enable_collision_with("enemy");
     collider.on_collide = function(self, other_component, other_entity, contact)
-        local scene = self:entity():ecs():context("scene");
+        local player = self:entity();
+        local scene = player:ecs():context("scene");
+        player:disable_collision_with("enemy");
         scene:on_player_hit(self:entity(), other_entity);
     end
 
@@ -30,6 +32,10 @@ Player.init = function(self)
             self:wait_frame();
         end
     end);
+end
+
+Player.reset = function(self)
+    self:enable_collision_with("enemy");
 end
 
 return Player;
