@@ -576,61 +576,84 @@ local pattern_whittle = function(self)
     self:spawn_fast("W", 4);
 end
 
-local level_1 = function(self)
-    while true do
-        self:wait(2);
+local stage_1 = function(self)
+    pattern_baby(self);
+    self:wait(3);
+    pattern_blocks(self);
+    self:wait(3);
+    pattern_squares(self);
+    self:wait(3);
+    pattern_slow_trick(self);
+end
 
-        -- Easy
-        pattern_baby(self);
-        self:wait(3);
-        pattern_blocks(self);
-        self:wait(3);
-        pattern_squares(self);
-        self:wait(3);
-        pattern_slow_trick(self);
-        self:wait(3);
-        pattern_fast_intro(self);
-        self:wait(3);
-        
-        -- Medium
-        pattern_whittle(self);
-        self:wait(3);
-        pattern_gaps(self);
-        self:wait(3);
-        pattern_modulo(self);
-        self:wait(3);
-        pattern_zebulon(self);
-        self:wait(3);
-        pattern_rain(self);
-        self:wait(3);
-        pattern_stagger_duos(self);
-        self:wait(3);
-        pattern_moonglow(self);
-        self:wait(3);
-        pattern_full_rotate(self);
-        self:wait(3);
-        pattern_boulder(self);
-        self:wait(3);
-        pattern_daggers(self);
-        self:wait(3);
-        pattern_ones_and_threes(self);
-        self:wait(3);
-        pattern_coverage(self);
-        self:wait(3);
-        pattern_sin(self);
-        self:wait(3);
+local stage_2 = function(self)
+    pattern_fast_intro(self);
+    self:wait(3);
+    pattern_zebulon(self);
+    self:wait(3);
+    pattern_whittle(self);
+    self:wait(3);
+    pattern_gaps(self);
+    self:wait(3);
+    pattern_modulo(self);
+end
 
-        -- Hard
-        pattern_dancehall(self);
-        self:wait(3);
-        pattern_chaos_engine(self);
-        self:wait(3);
-        pattern_zapper(self);
-        self:wait(3);
-        pattern_bomberman(self);
-        self:wait(3);
-        pattern_frogger(self);
-        self:wait(3);
+local stage_3 = function(self)
+    pattern_rain(self);
+    self:wait(3);
+    pattern_stagger_duos(self);
+    self:wait(3);
+    pattern_moonglow(self);
+    self:wait(3);
+    pattern_full_rotate(self);
+    self:wait(3);
+    pattern_boulder(self);
+end
+
+local stage_4 = function(self)
+    pattern_daggers(self);
+    self:wait(3);
+    pattern_ones_and_threes(self);
+    self:wait(3);
+    pattern_coverage(self);
+    self:wait(3);
+    pattern_sin(self);
+end
+
+local stage_5 = function(self)
+    pattern_dancehall(self);
+    self:wait(3);
+    pattern_chaos_engine(self);
+    self:wait(3);
+    pattern_zapper(self);
+    self:wait(3);
+    pattern_bomberman(self);
+    self:wait(3);
+    pattern_frogger(self);
+end
+
+local stages = {
+    stage_1,
+    stage_2,
+    stage_3,
+    stage_4,
+    stage_5,
+};
+
+local gameflow = function(self)
+    local stage = 1;
+    while stage <= #stages do
+        local cleared = self:thread(function(self)
+            self:stop_on("player_lose");
+            self:wait(2);
+            stages[stage](self);
+            self:wait(3);
+        end):block();
+        if cleared then
+            stage = stage + 1;
+        else
+            self:wait(3);
+        end
     end
 end
 
@@ -649,7 +672,7 @@ Arena.init = function(self)
     self.player = self.ecs:spawn("Player");
     self.platform = self.ecs:spawn("Platform");
 
-    self.level_script = crystal.Script:new(level_1);
+    self.level_script = crystal.Script:new(gameflow);
     self.level_script:add_alias(self);
 end
 
