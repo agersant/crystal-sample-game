@@ -117,6 +117,7 @@ FishFast.init = function(self, side, lane)
 
     local forward = self.forward;
     self:add_script(function(self)
+        self:stop_on("bonk");
         self:set_speed(5);
         self:set_heading(forward + math.pi);
         self:wait_tween(-6, 4, 0.8, math.ease_out_quadratic, self.set_altitude, self)
