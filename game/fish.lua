@@ -30,6 +30,7 @@ Fish.init = function(self, side, lane, sheet)
 	local sensor = self:add_component(crystal.Sensor, love.physics.newCircleShape(10*dx, 10*dy, 8));
 	sensor:set_categories("enemy");
 	sensor:enable_activation_by("player");
+    sensor:disable_sensor();
     sensor.on_activate = function(self, other_component, other_entity, contact)
         self:entity():bonk();
     end
@@ -43,9 +44,31 @@ Fish.init = function(self, side, lane, sheet)
     self:add_component(crystal.Movement);
     
     self:add_component(crystal.ScriptRunner);
+
+    local forward = self.forward;
+    self:add_script(function(self)
+        local dx, dy = math.angle_to_cardinal(forward);
+        local can_sink = false;
+        local exit_location = 3.2 * 24;
+        self:thread(function(self)
+            self:wait_for("allow_sink");
+            can_sink = true;
+        end);
+        while true do
+            self:wait_frame();
+            local x, y = self:position();
+            local altitude = self:altitude();
+            local finished_travel = math.max(dx*x, dy*y) > exit_location;
+            local is_on_water = math.max(math.abs(x), math.abs(y)) > exit_location;
+            if altitude < 5 and (finished_travel or (can_sink and is_on_water)) then
+                break;
+            end
+        end
+        self:despawn();
+    end);
 end
 
-FishDefault.bonk = function(self)
+Fish.bonk = function(self)
     local forward = self.forward;
     self:signal_all_scripts("bonk");
     self:add_script(function(self)
@@ -83,29 +106,9 @@ FishDefault.init = function(self, side, lane)
         self:wait_tween(20, 0, 0.4, math.ease_in_out_quartic, self.set_speed, self)
         self:wait(0.2);
 
+        self:enable_sensor();
         self:set_heading(forward);
         self:set_speed(180);
-    end);
-
-    self:add_script(function(self)
-        local dx, dy = math.angle_to_cardinal(forward);
-        local can_sink = false;
-        local exit_location = 3.2 * 24;
-        self:thread(function(self)
-            self:wait_for("allow_sink");
-            can_sink = true;
-        end);
-        while true do
-            self:wait_frame();
-            local x, y = self:position();
-            local altitude = self:altitude();
-            local finished_travel = math.max(dx*x, dy*y) > exit_location;
-            local is_on_water = math.max(math.abs(x), math.abs(y)) > exit_location;
-            if altitude < 5 and (finished_travel or (can_sink and is_on_water)) then
-                break;
-            end
-        end
-        self:despawn();
     end);
 end
 
@@ -118,6 +121,7 @@ FishFast.init = function(self, side, lane)
         self:set_heading(forward + math.pi);
         self:wait_tween(-6, 4, 0.8, math.ease_out_quadratic, self.set_altitude, self)
         
+        self:enable_sensor();
         self:set_heading(forward);
         self:set_speed(360);
     end);
