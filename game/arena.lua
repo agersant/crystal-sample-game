@@ -386,6 +386,25 @@ local pattern_frogger = function(self)
     self:spawn_default("E", 3);
 end
 
+
+local pattern_dancehall = function(self)
+    self:spawn_default("W", 3, 4);
+    self:wait(1.5);
+
+    local dirs = {"W", "S", "N", "E"};
+    for i = 4, 12 do
+        local d = dirs[1 + (math.pow(i, 3)*19)%31%4];
+        for j = 1, 5 do
+            local skip = 1 + (i*62 + j*97)%5;
+            if j ~= skip then
+                self:spawn_fast(d, j);
+            end
+            self:wait(0.1);
+        end
+        self:wait(1.8);
+    end
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
@@ -424,7 +443,9 @@ local level_1 = function(self)
         pattern_sin(self);
         self:wait(3);
 
-        -- Hard
+        -- -- Hard
+        pattern_dancehall(self);
+        self:wait(3);
         pattern_chaos_engine(self);
         self:wait(3);
         pattern_bomberman(self);
