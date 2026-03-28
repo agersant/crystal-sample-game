@@ -1,16 +1,20 @@
 local Altitude = Class("Altitude", crystal.DrawEffect);
 
 Altitude.init = function(self)
-	self.altitude = 0;
+	self._altitude = 0;
+end
+
+Altitude.altitude = function(self)
+	return self._altitude;
 end
 
 Altitude.set_altitude = function(self, altitude)
 	assert(type(altitude) == "number");
-	self.altitude = altitude;
+	self._altitude = altitude;
 end
 
 Altitude.pre_draw = function(self)
-	love.graphics.translate(0, -self.altitude);
+	love.graphics.translate(0, -self._altitude);
 end
 
 return Altitude;
