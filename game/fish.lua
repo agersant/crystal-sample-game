@@ -50,16 +50,19 @@ FishDefault.bonk = function(self)
     self:signal_all_scripts("bonk");
     self:add_script(function(self)
         self:set_heading(forward + math.pi);
-        self:set_speed(40);
-        self:wait_tween(0, 35, 0.4, math.ease_out_quadratic, self.set_altitude, self)
+        self:set_speed(60);
+        self:wait_tween(0, 30, 0.3, math.ease_out_quadratic, self.set_altitude, self)
         self:signal_all_scripts("allow_sink")
-        self:wait_tween(35, 0, 0.4, math.ease_in_quadratic, self.set_altitude, self)
-        self:set_speed(20);
-        self:wait_tween(0, 10, 0.2, math.ease_out_quadratic, self.set_altitude, self)
-        self:wait_tween(10, 0, 0.2, math.ease_in_quadratic, self.set_altitude, self)
-        self:set_speed(10);
+        self:wait_tween(30, 0, 0.3, math.ease_in_quadratic, self.set_altitude, self)
+        self:set_speed(30);
+        self:wait_tween(0, 12, 0.2, math.ease_out_quadratic, self.set_altitude, self)
+        self:wait_tween(12, 0, 0.2, math.ease_in_quadratic, self.set_altitude, self)
+        self:set_speed(15);
         self:wait_tween(0, 4, 0.1, math.ease_out_quadratic, self.set_altitude, self)
         self:wait_tween(4, 0, 0.1, math.ease_in_quadratic, self.set_altitude, self)
+        self:set_speed(8);
+        self:wait_tween(0, 2, 0.1, math.ease_out_quadratic, self.set_altitude, self)
+        self:wait_tween(2, 0, 0.1, math.ease_in_quadratic, self.set_altitude, self)
         self:set_speed(0);
         self:wait(0.4);
         self:set_heading(forward);
