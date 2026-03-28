@@ -362,6 +362,30 @@ local pattern_rain = function(self)
     a:stop();
 end
 
+local pattern_frogger = function(self)
+    self:spawn_default("W", 1, 2, 3, 4);
+    
+    self:wait(1.5);
+    local cars = self:thread(function(self)
+        while true do
+            self:spawn_fast("E", 2, 4);
+            self:spawn_fast("W", 2, 4);
+            self:wait(0.9);
+        end
+    end);
+    
+    self:wait(1);
+    self:spawn_default("W", 1, 5);
+    self:wait(1.8);
+    self:spawn_default("W", 3, 5);
+    self:wait(1.8);
+    self:spawn_default("W", 1, 5);
+    self:wait(1.8);
+
+    cars:stop();
+    self:spawn_default("E", 3);
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
@@ -401,10 +425,12 @@ local level_1 = function(self)
         -- self:wait(3);
 
         -- -- Hard
-        -- pattern_chaos_engine(self);
-        -- self:wait(3);
-        -- pattern_bomberman(self);
-        -- self:wait(3);
+        pattern_chaos_engine(self);
+        self:wait(3);
+        pattern_bomberman(self);
+        self:wait(3);
+        pattern_frogger(self);
+        self:wait(3);
     end
 end
 
