@@ -662,6 +662,7 @@ Arena.init = function(self)
     self.camera_controller:cut_to(crystal.Camera:new());
 
     self.ecs = crystal.ECS:new();
+    self.ecs:add_context("scene", self);
     self:add_alias(self.ecs);
 
     self.physics_system = self.ecs:add_system(crystal.PhysicsSystem);
@@ -672,8 +673,8 @@ Arena.init = function(self)
     self.player = self.ecs:spawn("Player");
     self.platform = self.ecs:spawn("Platform");
 
-    self.level_script = crystal.Script:new(gameflow);
-    self.level_script:add_alias(self);
+    self.script = crystal.Script:new(gameflow);
+    self.script:add_alias(self);
 end
 
 Arena.update = function(self, dt)
@@ -681,7 +682,7 @@ Arena.update = function(self, dt)
     self.physics_system:simulate_physics(dt);
     self.movement_controls_system:apply_movement_controls(dt);
     self.camera_controller:update(dt);
-    self.level_script:update(dt);
+    self.script:update(dt);
     self.script_system:run_scripts(dt);
     self.draw_system:update_drawables(dt);
 end
@@ -710,6 +711,10 @@ Arena.spawn_fast = function(self, origin, ...)
     for _, lane in ipairs(lanes) do
         self:spawn("FishFast", origin, lane);    
     end
+end
+
+Arena.on_player_hit = function(self, player, enemy)
+    self.script:signal("player_lose");
 end
 
 return Arena;

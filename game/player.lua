@@ -2,8 +2,13 @@ local Player = Class("Player", crystal.Entity);
 
 Player.init = function(self)
     self:add_component(crystal.Body);
-	self:add_component(crystal.Collider, love.physics.newCircleShape(6));
-	self:set_categories("player");
+	local collider = self:add_component(crystal.Collider, love.physics.newCircleShape(6));
+	collider:set_categories("player");
+	collider:enable_collision_with("enemy");
+    collider.on_collide = function(self, other_component, other_entity, contact)
+        local scene = self:entity():ecs():context("scene");
+        scene:on_player_hit(self:entity(), other_entity);
+    end
 
     self:add_component(crystal.AnimatedSprite, crystal.assets.get("assets/hero.json"));
     self:set_texture(texture);

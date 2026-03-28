@@ -27,8 +27,9 @@ Fish.init = function(self, side, lane, sheet)
     self:add_component(crystal.Body);    
     self:set_position(-dx * n*3 + math.abs(dy) * (lane - 3) * n, -dy * n*3 + math.abs(dx) * (lane - 3) * n);
 
-	self:add_component(crystal.Collider, love.physics.newCircleShape(10*dx, 10*dy, 8));
+	self:add_component(crystal.Sensor, love.physics.newCircleShape(10*dx, 10*dy, 8));
 	self:set_categories("enemy");
+	self:enable_activation_by("player");
 
     self:add_component(crystal.AnimatedSprite, sheet);
     self:play_animation("swim", orientation_from[side]);
