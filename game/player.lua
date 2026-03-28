@@ -6,6 +6,9 @@ Player.init = function(self)
 	collider:set_categories("player");
 	collider:enable_collision_with("enemy");
     collider.on_collide = function(self, other_component, other_entity, contact)
+        if not other_entity:inherits_from("Fish") then
+            return;
+        end
         local player = self:entity();
         local scene = player:ecs():context("scene");
         player:disable_collision_with("enemy");
