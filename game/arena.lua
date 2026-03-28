@@ -529,6 +529,53 @@ local pattern_moonglow = function(self)
     self:spawn_fast("S", 1, 2);
 end
 
+local pattern_whittle = function(self)
+    self:spawn_fast("W", 2, 4);
+    self:wait(1);
+    self:spawn_fast("W", 1, 3, 5);
+    self:wait(1);
+    self:spawn_fast("W", 2, 4);
+    self:spawn_fast("E", 1, 5);
+    self:wait(.9);
+    self:spawn_fast("S", 1, 5);
+    self:spawn_fast("N", 3);
+    self:wait(.9);
+    self:spawn_fast("S", 2, 4);
+    self:spawn_fast("N", 1, 5);
+    self:wait(.9);
+    self:spawn_fast("S", 1, 3, 5);
+    self:wait(.8);
+    self:spawn_fast("W", 1, 4);
+    self:spawn_fast("E", 2, 5);
+    self:wait(.8);
+    self:spawn_fast("N", 1, 3, 5);
+    self:wait(.8);
+    self:spawn_fast("E", 2, 4);
+    self:spawn_fast("W", 1, 5);
+    self:wait(.8);
+    self:spawn_fast("W", 1, 3, 5);
+    self:wait(.8);
+    self:spawn_fast("N", 2, 4);
+    self:spawn_fast("S", 1, 5);
+    self:wait(.7);
+    self:spawn_fast("E", 1, 3, 5);
+    self:wait(.7);
+    self:spawn_fast("S", 1, 3, 5);
+    self:wait(.7);
+    self:spawn_fast("S", 1, 3, 5);
+    self:wait(.7);
+    self:spawn_fast("W", 1, 5);
+    self:spawn_fast("E", 2, 4);
+    self:wait(.7);
+    self:spawn_fast("N", 2, 4);
+    self:spawn_fast("S", 1, 5);
+    self:wait(.7);
+    self:spawn_fast("N", 2);
+    self:spawn_fast("S", 4);
+    self:spawn_fast("E", 2);
+    self:spawn_fast("W", 4);
+end
+
 local level_1 = function(self)
     while true do
         self:wait(2);
@@ -546,13 +593,15 @@ local level_1 = function(self)
         self:wait(3);
         
         -- Medium
-        pattern_rain(self);
+        pattern_whittle(self);
         self:wait(3);
         pattern_gaps(self);
         self:wait(3);
         pattern_modulo(self);
         self:wait(3);
         pattern_zebulon(self);
+        self:wait(3);
+        pattern_rain(self);
         self:wait(3);
         pattern_stagger_duos(self);
         self:wait(3);
