@@ -45,7 +45,7 @@ crystal.input.map_axis_to_actions({
 });
 
 crystal.player_start = function()
-	crystal.cmd.run("loadscene TitleScreen");
+	crystal.scene.replace(Class:by_name("TitleScreen"):new());
 end
 
 crystal.developer_start = function()
