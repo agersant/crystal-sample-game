@@ -642,13 +642,19 @@ local stages = {
 
 local gameflow = function(self)
     local arena = self:context("scene");
+    local hud = self:context("hud");
 
     local stage = 1;
     while stage <= #stages do
+        local intro = hud:add_hud_widget(Class:by_name("StageIntro"):new(stage));
+        intro:set_alignment("center", "center");
+        intro:set_padding_bottom(80.5);
+        self:wait(2);
+        intro:remove_from_parent();
+
         local cleared = self:thread(function(self)
             self:stop_on("player_lose");
             arena.player:reset();
-            self:wait(2);
             stages[stage](self);
             self:wait(3);
         end):block();
@@ -672,6 +678,8 @@ Arena.init = function(self)
     self.script_system = self.ecs:add_system(crystal.ScriptSystem);
     self.movement_controls_system = self.ecs:add_system("MovementControlsSystem");
     self.draw_system = self.ecs:add_system(crystal.DrawSystem);
+    self.hud_system = self.ecs:add_system("HUDSystem");
+	self.ecs:add_context("hud", self.hud_system:getHUD());
 
     self.player = self.ecs:spawn("Player");
     self.platform = self.ecs:spawn("Platform");
@@ -687,6 +695,7 @@ Arena.update = function(self, dt)
     self.camera_controller:update(dt);
     self.script:update(dt);
     self.script_system:run_scripts(dt);
+    self.hud_system:update(dt);
     self.draw_system:update_drawables(dt);
 end
 
@@ -700,6 +709,10 @@ Arena.draw = function(self)
 	love.graphics.translate(self.camera_controller:offset());
 	self.ecs:notify_systems("draw_debug");
 	love.graphics.pop();
+
+    crystal.window.draw_native(function()
+		self.hud_system:draw_ui();
+	end);
 end
 
 Arena.spawn_default = function(self, origin, ...)
