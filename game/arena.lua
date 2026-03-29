@@ -644,6 +644,8 @@ local gameflow = function(self)
     local arena = self:context("scene");
     local hud = self:context("hud");
 
+    self:wait(2);
+    
     local stage = 1;
     while stage <= #stages do
         local intro = hud:add_hud_widget(Class:by_name("StageIntro"):new(stage));
