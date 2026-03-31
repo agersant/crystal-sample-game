@@ -318,26 +318,26 @@ end
 
 local pattern_boulder = function(self)
     self:spawn_default("E", 2, 3, 4, 5);
-    self:wait(1.4);
+    self:wait(1.45);
     for i = 1, 4 do
         self:spawn_fast("W", i);
-        self:wait(0.35);
+        self:wait(0.37);
     end
     
     self:wait(1.1);
     self:spawn_default("S", 1, 2, 3, 4);
-    self:wait(1.4);
+    self:wait(1.45);
     for i = 5, 2, -1 do
         self:spawn_fast("N", i);
-        self:wait(0.35);
+        self:wait(0.37);
     end
 
     self:wait(1.1);
     self:spawn_default("W", 2, 3, 4, 5);
-    self:wait(1.4);
+    self:wait(1.45);
      for i = 1, 4 do
         self:spawn_fast("E", i);
-        self:wait(0.35);
+        self:wait(0.37);
     end
 
 end
