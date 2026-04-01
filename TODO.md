@@ -2,7 +2,8 @@
 
 - [] Fish shadows
 - [] Bonus stage?
-- [] Win sequence?
+- [] Win sequence
+- [] Rainbow trails?
 
 ## UI
 
