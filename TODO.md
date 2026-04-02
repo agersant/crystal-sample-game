@@ -32,10 +32,10 @@
 - [] Fish bonk animation
 
 - [x] Fast fish left/right base pose
-- [] Fast fish up base pose
-- [] Fast fish down base pose
+- [x] Fast fish up base pose
+- [x] Fast fish down base pose
 - [] Fast fish swim left/right animation
-- [] Fast fish swim up animation
+- [x] Fast fish swim up animation
 - [] Fast fish swim down animation
 - [] Fast fish intro animation + VFX
 - [] Fast fish outro animation + VFX
