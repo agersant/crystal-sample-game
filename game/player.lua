@@ -15,10 +15,11 @@ Player.init = function(self)
         scene:on_player_hit(self:entity(), other_entity);
     end
 
+    self:add_component("YDrawOrder");
+
     self:add_component(crystal.AnimatedSprite, crystal.assets.get("assets/hero.json"));
     self:set_texture(texture);
     self:set_draw_offset(0, -10);
-    self:set_draw_order_modifier("replace", 1);
 
     self:add_component(crystal.InputListener, 1);
     self:add_component(crystal.Movement);

@@ -37,9 +37,9 @@ Fish.init = function(self, side, lane, sheet)
 
     self:add_component(crystal.AnimatedSprite, sheet);
     self:play_animation("swim", orientation_from[side]);
-    self:set_draw_order_modifier("replace", 1);
 
     self:add_component("Altitude");
+    self:add_component("YDrawOrder");
 
     self:add_component(crystal.Movement);
     

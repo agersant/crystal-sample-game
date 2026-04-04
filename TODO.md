@@ -1,9 +1,11 @@
 ## Features
 
+- [x] Z-sorting
 - [] Fish shadows
 - [] Bonus stage?
 - [] Win sequence
 - [] Rainbow trails?
+- [] Tutorial?
 
 ## UI
 
@@ -54,7 +56,7 @@
 - [] Stage music
 - [] Bonus stage music?
 - [] Win music
-- [] Fish intro splash SFX
+- [] Title screen confirm jingle
 - [] Fish intro splash SFX
 - [] Fish outro splash SFX
 - [] Fish bonk SFX

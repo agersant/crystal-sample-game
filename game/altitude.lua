@@ -17,4 +17,9 @@ Altitude.pre_draw = function(self)
 	love.graphics.translate(0, -self._altitude);
 end
 
-return Altitude;
+local YDrawOrder = Class("YDrawOrder", crystal.DrawOrder);
+
+YDrawOrder.draw_order = function(self)
+  local x, y = self:entity():position();
+  return 1000 + y;
+end
