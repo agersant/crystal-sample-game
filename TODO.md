@@ -28,7 +28,7 @@
 - [x] Fish down base pose
 - [] Fish swim left/right animation
 - [x] Fish swim up animation
-- [] Fish swim down animation
+- [x] Fish swim down animation
 - [] Fish intro animation + VFX
 - [] Fish outro animation + VFX
 - [] Fish bonk animation
